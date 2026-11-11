@@ -1,0 +1,298 @@
+{
+  "recordedAt": "2026-11-11T08:29:52.478Z",
+  "productCommit": "66c24c706ace849b2922ddf4d8695cd45e963bd0",
+  "actions": "https://github.com/dnfl1999/memediff/actions/runs/42986914277",
+  "jobs": {
+    "verify": "success",
+    "deploy": "success",
+    "public-qa": "success"
+  },
+  "unitTests": {
+    "passed": 31,
+    "failed": 0
+  },
+  "browserStats": {
+    "initialLocalMock": {
+      "startTime": "2026-11-11T08:20:32.064Z",
+      "duration": 99217.969,
+      "expected": 48,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "finalLocalMock": {
+      "startTime": "2026-11-11T08:23:39.318Z",
+      "duration": 84585.09199999999,
+      "expected": 50,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "linuxBuildMock": {
+      "startTime": "2026-11-11T08:25:58.344Z",
+      "duration": 43903.424,
+      "expected": 50,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "linuxPublicMock": {
+      "startTime": "2026-11-11T08:27:28.067Z",
+      "duration": 42526.85400000001,
+      "expected": 50,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "linuxPublicLive": {
+      "startTime": "2026-11-11T08:28:11.410Z",
+      "duration": 4440.344,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "liveEvidence": [
+    {
+      "test": "LIVE public GitHub query and both downloads without mocks or credentials",
+      "name": "LIVE-api-evidence",
+      "data": {
+        "mocked": false,
+        "authenticated": false,
+        "responses": [
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff",
+            "status": 200,
+            "remaining": "47",
+            "reset": "1794385694"
+          },
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-12T08:28:12.057Z&until=2026-11-11T08:28:12.057Z&per_page=100&page=1",
+            "status": 200,
+            "remaining": "46",
+            "reset": "1794385694"
+          },
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+            "status": 200,
+            "remaining": "45",
+            "reset": "1794385694"
+          }
+        ]
+      }
+    },
+    {
+      "test": "LIVE public GitHub query and both downloads without mocks or credentials",
+      "name": "browser-diagnostics",
+      "data": {
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failures": [],
+        "responses": [],
+        "expectedStatuses": [],
+        "allowApiAbort": false
+      }
+    },
+    {
+      "test": "LIVE repository name search and dated official CA index",
+      "name": "LIVE-search-evidence",
+      "data": {
+        "mocked": false,
+        "responses": [
+          {
+            "url": "https://api.github.com/search/repositories?q=memediff%20in%3Aname%20is%3Apublic&per_page=10",
+            "status": 200,
+            "remaining": "9"
+          }
+        ]
+      }
+    },
+    {
+      "test": "LIVE repository name search and dated official CA index",
+      "name": "browser-diagnostics",
+      "data": {
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failures": [],
+        "responses": [],
+        "expectedStatuses": [],
+        "allowApiAbort": false
+      }
+    }
+  ],
+  "lighthouse": {
+    "local": {
+      "version": "13.6.0",
+      "checkedAt": "2026-11-11T08:23:00.734Z",
+      "url": "http://127.0.0.1:4173/",
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "value": 1544,
+          "display": "1.5 s"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "display": "0"
+        },
+        "total-blocking-time": {
+          "value": 162,
+          "display": "160 ms"
+        }
+      }
+    },
+    "public": {
+      "version": "13.6.0",
+      "checkedAt": "2026-11-11T08:27:39.399Z",
+      "url": "https://dnfl1999.github.io/memediff/",
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "largest-contentful-paint": {
+          "value": 983.6885,
+          "display": "1.0 s"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "display": "0"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        }
+      }
+    }
+  },
+  "publicFiles": {
+    "checkedAt": "2026-11-11T08:27:30.620Z",
+    "url": "https://dnfl1999.github.io/memediff/",
+    "files": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 14610,
+        "sha256": "d66f2776fa021d5721e53a8f7e57b71be77de0238db7707e9c5f1e11011c7b2b",
+        "koreanLiterals": false
+      },
+      {
+        "file": "style.css",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 20288,
+        "sha256": "1fccfc5097fe60566e613265d6748687408acdd9621c1907f3d81cd71477fd01",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/app.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 9861,
+        "sha256": "22592f037a51763ed30a6409356fefe545b3c1d33218ffb2f9b26ead51058bbe",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/core.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 3476,
+        "sha256": "ecd723f3df1979fb3bb142127281751b63897089c22679f0d9dbdbebaa18cd02",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/discovery-ui.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 4035,
+        "sha256": "88a713e667c08976bc2df1fe1740e9e7f11810a9829f4c0a0a083f51afd95fed",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/discovery.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 3837,
+        "sha256": "f83cf277dce19fbc287e6bda138c5ace28b6f10609a697db0ca360921f2d085c",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/format.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 574,
+        "sha256": "bba9184c7cb43d21bcf107dcfe375c4902af6752b0b6490dd361044bb4b44ef2",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/github.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 4647,
+        "sha256": "ec36d6a590154ae331a83ea01ab9ecb7edfd47ed9818d6993dc4ac2c40540f4f",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/receipt.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 5297,
+        "sha256": "47aac8204158907d6c53974fd74504dc4e7092e50fae3e6dabb8856b642812d1",
+        "koreanLiterals": false
+      },
+      {
+        "file": "src/token.js",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 549,
+        "sha256": "a317edb68389b95eafebaf9fc65e4b670fdf317332d113ea329b36e3aed3543f",
+        "koreanLiterals": false
+      },
+      {
+        "file": "assets/memediff-logo.jpg",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 62327,
+        "sha256": "1bc7d9de5ccf4156a72a9fb88b1c2130d668579c8e575e41e2f4dc0db9212642"
+      },
+      {
+        "file": "assets/favicon.png",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 8788,
+        "sha256": "675a7e54657d10528cb46b614d5e125a348c8d8aa268c19d789afe383f8796b5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "assets/social-preview.png",
+        "status": 200,
+        "matchesLocal": true,
+        "bytes": 200094,
+        "sha256": "97a247c1a48132161a88f1f4697b30824116ed5dd7fc38ad078ff33942dc018a",
+        "width": 1200,
+        "height": 630
+      }
+    ]
+  },
+  "notes": [
+    "Official 512x512 logo preserved byte-for-byte; header, hero and token card reuse one self-hosted JPEG.",
+    "Initial 2 failures were outdated token-title assertions. Updated wording and reran all 50 tests.",
+    "Lighthouse scores are single mobile lab runs, not a before/after comparison or guaranteed field performance.",
+    "Original analysis, search, CA, snapshot storage and JSON schema are unchanged. Receipt presentation colors only were updated.",
+    "No wallet, token issuance, SOL, trade or other project changes."
+  ]
+}
