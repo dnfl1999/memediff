@@ -1,0 +1,30 @@
+{
+  "verifiedAt": "2026-11-11T04:52:25Z",
+  "testedCommit": "b6b959c7317c07108896a6d3cd3bc40cf584e109",
+  "workflowRun": "https://github.com/dnfl1999/memediff/actions/runs/42961852898",
+  "site": "https://dnfl1999.github.io/memediff/",
+  "browser": "Playwright 1.65.0 Chromium 158.0.8127.18",
+  "results": [
+    { "environment": "Windows local build", "api": "mock", "passed": 24, "failed": 0, "skipped": 0 },
+    { "environment": "Windows public Pages", "api": "mock", "passed": 24, "failed": 0, "skipped": 0 },
+    { "environment": "Windows public Pages", "api": "live unauthenticated", "passed": 0, "failed": 0, "skipped": 1, "reason": "GitHub HTTP 403; remaining=0; reset=1794374486; no retry" },
+    { "environment": "Linux local build", "api": "mock", "passed": 24, "failed": 0, "skipped": 0 },
+    { "environment": "Linux public Pages", "api": "mock", "passed": 24, "failed": 0, "skipped": 0 },
+    { "environment": "Linux public Pages", "api": "live unauthenticated", "passed": 1, "failed": 0, "skipped": 0 }
+  ],
+  "liveEvidence": {
+    "mocked": false,
+    "authenticated": false,
+    "fetchedAt": "2026-11-11T04:52:24.305Z",
+    "responses": [
+      { "endpoint": "/repos/dnfl1999/memediff", "status": 200, "remaining": 59 },
+      { "endpoint": "/repos/dnfl1999/memediff/commits", "status": 200, "remaining": 58 },
+      { "endpoint": "/repos/dnfl1999/memediff/releases", "status": 200, "remaining": 57 }
+    ],
+    "json": { "schema": 1, "source": "github-live", "repo": "dnfl1999/memediff", "commits30d": 5, "releases30d": 0, "contributors30d": 1, "complete": true, "warnings": [] },
+    "png": { "decoded": true, "crcChecked": true, "width": 1400, "height": 1020, "nonBlank": true, "visuallyReviewed": true },
+    "pageErrors": [], "consoleErrors": [], "networkFailures": [], "unexpectedHttpErrors": []
+  },
+  "artifacts": { "build": 13828409975, "public": 13829476720, "retentionDays": 14 },
+  "limits": ["Mobile is Chromium Pixel 7 emulation, not physical device certification.", "Original browser connection host was not repaired; independent Chromium was used with explicit user authorization.", "Counts reflect the timestamped observation, not ongoing activity guarantees."]
+}

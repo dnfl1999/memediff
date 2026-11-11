@@ -22,7 +22,24 @@
 | 기존 핵심 테스트 | 단위 테스트 | 20/20 passed |
 | 전체 npm audit | 개발 의존성 포함 | 0 vulnerabilities |
 
-Linux Actions 결과는 실행 완료 후 추가합니다.
+## Linux Actions 결과 및 최종 판정
+
+[Actions 실행 42961852898](https://github.com/dnfl1999/memediff/actions/runs/42961852898), 검증 커밋 `b6b959c7317c07108896a6d3cd3bc40cf584e109`.
+
+| 대상 | 결과 |
+| --- | --- |
+| Linux 빌드 결과의 desktop + mobile, 모의 API | 24 passed / 0 failed / 0 skipped |
+| Linux에서 공개 Pages의 desktop + mobile, 모의 API | 24 passed / 0 failed / 0 skipped |
+| Linux에서 공개 Pages + 실제 비인증 GitHub API + JSON/PNG | **1 passed / 0 failed / 0 skipped** |
+| Pages 배포 | success |
+
+Windows/Linux와 로컬/공개 대상을 합한 브라우저 실행 결과는 **97 passed, 0 failed, 1 skipped**입니다. 이는 동일 시나리오의 환경별 반복 실행을 포함합니다. Windows의 실제 API 403 한 건은 skipped로 유지하며 Linux 성공으로 덮어쓰지 않습니다.
+
+실제 Linux 조회 시각은 2026-11-11 13:52 KST였습니다. 저장소 메타데이터·커밋·릴리스 API가 모두 HTTP 200, 잔여 요청 59→58→57을 반환했습니다. 다운로드 JSON은 `github-live`, `dnfl1999/memediff`, 커밋 5개·릴리스 0개·연결 기여자 1명, 수집 완료·경고 없음이었습니다. 이는 당시 관측치이며 이후 수치와 다를 수 있습니다. PNG 1400×1020 디코딩과 한글 표시도 확인했습니다.
+
+실제 브라우저 진단은 pageErrors/consoleErrors/request failures/unexpected HTTP errors 모두 빈 배열이었습니다. 기존 연결 호스트가 복구된 것은 아니지만, 독립 Playwright 방식으로 남은 필수 QA는 완료했습니다. 사용자 조치나 로그인은 필요하지 않습니다.
+
+재현 가능한 테스트 소스는 `e2e/`, 요약 증거는 [qa-evidence.json](qa-evidence.json)에 있습니다. 전체 HTML 보고서·PNG/JSON·스크린샷은 위 Actions의 `browser-qa-build`, `browser-qa-public` 아티팩트에 14일 보관됩니다.
 
 ## 24개 기능 테스트 범위
 

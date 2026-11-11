@@ -2,9 +2,13 @@
 
 기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
-## 최신 상태 — 독립 Playwright 검증 진행
+## 최신 상태 — 독립 Playwright 검증 완료
 
-사용자가 독립 Playwright 사용을 명시적으로 요청하여 이전 연결 도구 장애를 우회했습니다. Windows Chromium에서 로컬 모의 API E2E 24/24, 공개 사이트 모의 API E2E 24/24 통과. 실제 JSON 다운로드와 PNG CRC/픽셀 디코딩 검증을 완료했습니다. 공개 실제 GitHub API 1건은 403 제한으로 skipped이며 성공으로 집계하지 않습니다. Linux Actions에서 동일 E2E와 실제 API 확인을 추가 진행합니다. 상세: [docs/BROWSER_QA.md](docs/BROWSER_QA.md).
+사용자가 독립 Playwright 사용을 명시적으로 요청하여 이전 연결 도구 장애를 우회했습니다. Windows Chromium에서 로컬 모의 API E2E 24/24, 공개 사이트 모의 API E2E 24/24 통과. Linux Chromium에서도 빌드 결과 24/24, 공개 사이트 24/24, **실제 비인증 GitHub API 및 JSON/PNG 다운로드 1/1 통과**했습니다. 환경별 반복 실행을 합해 **97 passed / 0 failed / 1 skipped**입니다. Windows 실제 API 1건의 403 제한은 skipped로 별도 보존했습니다. 기존 단위 테스트 20/20과 npm audit 0 vulnerabilities도 확인했습니다.
+
+검증 및 Pages 배포 완료: [Actions 42961852898](https://github.com/dnfl1999/memediff/actions/runs/42961852898). 검증 커밋 `b6b959c7317c07108896a6d3cd3bc40cf584e109`. 제품 기능은 보존했고 새 제품 결함은 발견되지 않았습니다. 테스트 러너 범위를 분리하고 자동 E2E/아티팩트 보관을 추가했습니다. 상세 결과·한계·재현 명령: [docs/BROWSER_QA.md](docs/BROWSER_QA.md).
+
+남은 필수 QA 없음. 기존 브라우저 연결 호스트의 내부 장애는 복구하지 않았으나 독립 환경에서 요구 기능을 검증했습니다. 모바일 검증은 Chromium 에뮬레이션이며 실제 휴대전화 기종 전체에 대한 보증은 아닙니다. 사용자에게 필요한 로그인·권한 변경·수동 조치는 없습니다. 지갑·서명·결제·발행은 여전히 실행하지 않았습니다.
 
 아래의 브라우저 차단/미검증 표기는 이전 단계의 이력입니다. 최신 검증 결과는 위 문서를 우선합니다.
 
