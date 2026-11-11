@@ -1,0 +1,151 @@
+{
+  "checkedAt": "2026-11-11T09:15:01.245Z",
+  "requests": [
+    {
+      "url": "https://forks.wiki/api/tokens/recent",
+      "status": 200,
+      "cors": null,
+      "keys": [
+        "ok",
+        "tokens"
+      ],
+      "count": 20,
+      "mints": [
+        "9mZzwbrnj1KRQrGK15AHjjp1ZpPPFuJuFrv6i2s7fork",
+        "33WrSZ8awdKpszxp5RVkMa2e1J8u2oBnk1ybYjXcfork",
+        "CUNn25A9Z2ZrRuPBaEr9A5JeGTf6YPg9YGAXb3izfork",
+        "RxN5a96pFYoucfQAgXjYyLLjYsWXw9Qk552xX4Vfork",
+        "9MiipyHGbQ5taxU8zytvt8xZdstC53MEGG4MNduzfork",
+        "5wC3wtdKpodE6S7qVogfgBDpWWLDPKkeYMjskqdSfork",
+        "5vH6N1mqDeKjQ36GFHffAT9qHssyUE3AVtwMKxJqfork",
+        "ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+        "8fHg42GVN1RzEAdxoPYC5GnztawPPxtCV4ZN76uGfork",
+        "G9MRRqsBTbR9tZxnZdGGcBoVn8BB57ReK6vygN4fork",
+        "2V1c5qbiAham4ta2cfVN1ybaTKrXsvZxmuAfBvF9fork",
+        "BUzZYFR3FdR1sRRHoyV1AoghvevbqTqLP8ZxeKhXfork",
+        "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+        "G6s4yZggZMeaVi7XMne5knfLDaAnWY2JhBh6D9DZfork",
+        "3rmLijDYmPozApV7bcvmtHCho1yViokEzN3RGfPQfork",
+        "Cy9Bm7T43AXSuiSmLoTZ6hSXt5fyNEfUxZxFj3iRfork",
+        "BXCbQfinWZnHndLmctJTG8cWRcGNUVkJXdXmxHrWfork",
+        "7x7CkVeH4qaW4XojMtP4pQucWEGA1Z89gmuUohtDfork",
+        "6gDN69quxsiQE7QGfPS1xcmT4WBETRnxoqt52U7ufork",
+        "71aXKTbmGxqj6Y4bNsK3NZqCVzfDiPDZMzN9xu8Sfork"
+      ]
+    },
+    {
+      "url": "https://forks.wiki/api/tokens/recent?page=2",
+      "status": 200,
+      "cors": null,
+      "keys": [
+        "ok",
+        "tokens"
+      ],
+      "count": 20,
+      "mints": [
+        "9mZzwbrnj1KRQrGK15AHjjp1ZpPPFuJuFrv6i2s7fork",
+        "33WrSZ8awdKpszxp5RVkMa2e1J8u2oBnk1ybYjXcfork",
+        "CUNn25A9Z2ZrRuPBaEr9A5JeGTf6YPg9YGAXb3izfork",
+        "RxN5a96pFYoucfQAgXjYyLLjYsWXw9Qk552xX4Vfork",
+        "9MiipyHGbQ5taxU8zytvt8xZdstC53MEGG4MNduzfork",
+        "5wC3wtdKpodE6S7qVogfgBDpWWLDPKkeYMjskqdSfork",
+        "5vH6N1mqDeKjQ36GFHffAT9qHssyUE3AVtwMKxJqfork",
+        "ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+        "8fHg42GVN1RzEAdxoPYC5GnztawPPxtCV4ZN76uGfork",
+        "G9MRRqsBTbR9tZxnZdGGcBoVn8BB57ReK6vygN4fork",
+        "2V1c5qbiAham4ta2cfVN1ybaTKrXsvZxmuAfBvF9fork",
+        "BUzZYFR3FdR1sRRHoyV1AoghvevbqTqLP8ZxeKhXfork",
+        "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+        "G6s4yZggZMeaVi7XMne5knfLDaAnWY2JhBh6D9DZfork",
+        "3rmLijDYmPozApV7bcvmtHCho1yViokEzN3RGfPQfork",
+        "Cy9Bm7T43AXSuiSmLoTZ6hSXt5fyNEfUxZxFj3iRfork",
+        "BXCbQfinWZnHndLmctJTG8cWRcGNUVkJXdXmxHrWfork",
+        "7x7CkVeH4qaW4XojMtP4pQucWEGA1Z89gmuUohtDfork",
+        "6gDN69quxsiQE7QGfPS1xcmT4WBETRnxoqt52U7ufork",
+        "71aXKTbmGxqj6Y4bNsK3NZqCVzfDiPDZMzN9xu8Sfork"
+      ]
+    },
+    {
+      "url": "https://forks.wiki/api/tokens/recent?limit=100&offset=20",
+      "status": 200,
+      "cors": null,
+      "keys": [
+        "ok",
+        "tokens"
+      ],
+      "count": 20,
+      "mints": [
+        "9mZzwbrnj1KRQrGK15AHjjp1ZpPPFuJuFrv6i2s7fork",
+        "33WrSZ8awdKpszxp5RVkMa2e1J8u2oBnk1ybYjXcfork",
+        "CUNn25A9Z2ZrRuPBaEr9A5JeGTf6YPg9YGAXb3izfork",
+        "RxN5a96pFYoucfQAgXjYyLLjYsWXw9Qk552xX4Vfork",
+        "9MiipyHGbQ5taxU8zytvt8xZdstC53MEGG4MNduzfork",
+        "5wC3wtdKpodE6S7qVogfgBDpWWLDPKkeYMjskqdSfork",
+        "5vH6N1mqDeKjQ36GFHffAT9qHssyUE3AVtwMKxJqfork",
+        "ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+        "8fHg42GVN1RzEAdxoPYC5GnztawPPxtCV4ZN76uGfork",
+        "G9MRRqsBTbR9tZxnZdGGcBoVn8BB57ReK6vygN4fork",
+        "2V1c5qbiAham4ta2cfVN1ybaTKrXsvZxmuAfBvF9fork",
+        "BUzZYFR3FdR1sRRHoyV1AoghvevbqTqLP8ZxeKhXfork",
+        "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+        "G6s4yZggZMeaVi7XMne5knfLDaAnWY2JhBh6D9DZfork",
+        "3rmLijDYmPozApV7bcvmtHCho1yViokEzN3RGfPQfork",
+        "Cy9Bm7T43AXSuiSmLoTZ6hSXt5fyNEfUxZxFj3iRfork",
+        "BXCbQfinWZnHndLmctJTG8cWRcGNUVkJXdXmxHrWfork",
+        "7x7CkVeH4qaW4XojMtP4pQucWEGA1Z89gmuUohtDfork",
+        "6gDN69quxsiQE7QGfPS1xcmT4WBETRnxoqt52U7ufork",
+        "71aXKTbmGxqj6Y4bNsK3NZqCVzfDiPDZMzN9xu8Sfork"
+      ]
+    },
+    {
+      "url": "https://forks.wiki/api/coin?mint=DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "status": 200,
+      "cors": null,
+      "keys": [
+        "ok",
+        "coin",
+        "market",
+        "sol",
+        "decimals",
+        "supply",
+        "program",
+        "curve",
+        "quote",
+        "trading",
+        "fee"
+      ],
+      "coin": {
+        "kind": "forks",
+        "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+        "repo": "dnfl1999/memediff"
+      }
+    }
+  ],
+  "browserProbe": {
+    "origin": "https://dnfl1999.github.io",
+    "note": "Isolated diagnostic document on Pages origin without the app CSP, to distinguish CORS from CSP.",
+    "results": [
+      {
+        "url": "https://forks.wiki/api/coin?mint=DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+        "readable": false,
+        "error": "Failed to fetch"
+      },
+      {
+        "url": "https://api.dexscreener.com/tokens/v1/solana/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+        "status": 200,
+        "readable": true,
+        "summary": [
+          {
+            "chainId": "solana",
+            "baseToken": {
+              "address": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+              "name": "MemeDiff",
+              "symbol": "MEMEDIFF"
+            },
+            "pairAddress": "GJhnfPkf1mNw1jaoZBmQKi4jT41vhi6XQgSQxx7C9kh4"
+          }
+        ]
+      }
+    ]
+  }
+}

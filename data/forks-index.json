@@ -1,91 +1,266 @@
 {
-  "schema": 1,
-  "checkedAt": "2026-11-11T08:04:43.762Z",
-  "scope": "Recent Forks API listings plus the official MemeDiff repository; not a complete token directory.",
+  "schema": 2,
+  "checkedAt": "2026-11-11T09:17:07.714Z",
+  "complete": false,
+  "scope": "Recent official listings plus previously observed CA history; each entry rechecked with /api/coin. Not a complete registry.",
   "sources": [
     "https://forks.wiki/api/tokens/recent",
-    "https://forks.wiki/api/tokens?repos=dnfl1999%2Fmemediff"
+    "https://forks.wiki/api/coin?mint={CA}"
   ],
+  "coverage": {
+    "recentCount": 20,
+    "candidateCount": 27,
+    "attempted": 27,
+    "verified": 27,
+    "cap": 200,
+    "capped": false,
+    "pagination": "Unconfirmed: tested page/limit/offset returned the same 20 records."
+  },
+  "warnings": [],
+  "failures": [],
   "entries": [
     {
-      "mint": "ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
-      "repo": "riansj2290/remote-ikan"
-    },
-    {
-      "mint": "8fHg42GVN1RzEAdxoPYC5GnztawPPxtCV4ZN76uGfork",
-      "repo": "sindresorhus/awesome"
-    },
-    {
-      "mint": "G9MRRqsBTbR9tZxnZdGGcBoVn8BB57ReK6vygN4fork",
-      "repo": "nektos/act"
-    },
-    {
       "mint": "2V1c5qbiAham4ta2cfVN1ybaTKrXsvZxmuAfBvF9fork",
-      "repo": "cedd017/pekpek"
+      "repo": "cedd017/pekpek",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:05.945Z",
+      "source": "https://forks.wiki/api/coin?mint=2V1c5qbiAham4ta2cfVN1ybaTKrXsvZxmuAfBvF9fork",
+      "name": "PEKPEK",
+      "symbol": "PEKPEK"
     },
     {
-      "mint": "BUzZYFR3FdR1sRRHoyV1AoghvevbqTqLP8ZxeKhXfork",
-      "repo": "romanslack/jev-drone"
-    },
-    {
-      "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
-      "repo": "dnfl1999/memediff"
-    },
-    {
-      "mint": "G6s4yZggZMeaVi7XMne5knfLDaAnWY2JhBh6D9DZfork",
-      "repo": "foostan/crkbd"
+      "mint": "33WrSZ8awdKpszxp5RVkMa2e1J8u2oBnk1ybYjXcfork",
+      "repo": "521xueweihan/hellogithub",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:03.914Z",
+      "source": "https://forks.wiki/api/coin?mint=33WrSZ8awdKpszxp5RVkMa2e1J8u2oBnk1ybYjXcfork",
+      "name": "interesting",
+      "symbol": "INT"
     },
     {
       "mint": "3rmLijDYmPozApV7bcvmtHCho1yViokEzN3RGfPQfork",
-      "repo": "googlefonts/gftools"
-    },
-    {
-      "mint": "Cy9Bm7T43AXSuiSmLoTZ6hSXt5fyNEfUxZxFj3iRfork",
-      "repo": "trimstray/the-book-of-secret-knowledge"
-    },
-    {
-      "mint": "BXCbQfinWZnHndLmctJTG8cWRcGNUVkJXdXmxHrWfork",
-      "repo": "chatgptnextweb/nextchat"
-    },
-    {
-      "mint": "7x7CkVeH4qaW4XojMtP4pQucWEGA1Z89gmuUohtDfork",
-      "repo": "typicode/json-server"
-    },
-    {
-      "mint": "6gDN69quxsiQE7QGfPS1xcmT4WBETRnxoqt52U7ufork",
-      "repo": "louislam/uptime-kuma"
-    },
-    {
-      "mint": "71aXKTbmGxqj6Y4bNsK3NZqCVzfDiPDZMzN9xu8Sfork",
-      "repo": "ubuwaits/beautiful-web-type"
-    },
-    {
-      "mint": "DmYbxVcAcLHg9gsoCKAftZWQU7Z2LyrSSYsAfxoVfork",
-      "repo": "vercel/next.js"
-    },
-    {
-      "mint": "7qjTV9PtdffEfUUc1dhL67nRMMoBLR1o4vPAd9Vtfork",
-      "repo": "endless-sky/endless-sky"
+      "repo": "googlefonts/gftools",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:05.879Z",
+      "source": "https://forks.wiki/api/coin?mint=3rmLijDYmPozApV7bcvmtHCho1yViokEzN3RGfPQfork",
+      "name": "GG",
+      "symbol": "GG"
     },
     {
       "mint": "5oZC6U6D5kvJA7LpqM7Qgv1HVsJ8xdGozqdQvzGjfork",
-      "repo": "laion-ai/open-assistant"
+      "repo": "laion-ai/open-assistant",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.982Z",
+      "source": "https://forks.wiki/api/coin?mint=5oZC6U6D5kvJA7LpqM7Qgv1HVsJ8xdGozqdQvzGjfork",
+      "name": "RepositoryCat",
+      "symbol": "REPOCAT"
     },
     {
-      "mint": "G5QGCiJxPxN6UF5f9bM2agJzdzjjPZREY1K1PP5ifork",
-      "repo": "ethereum/mist"
+      "mint": "5vH6N1mqDeKjQ36GFHffAT9qHssyUE3AVtwMKxJqfork",
+      "repo": "kirochen/kirochen.github.io",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:04.783Z",
+      "source": "https://forks.wiki/api/coin?mint=5vH6N1mqDeKjQ36GFHffAT9qHssyUE3AVtwMKxJqfork",
+      "name": "You might go for it even then.",
+      "symbol": "EVEN"
+    },
+    {
+      "mint": "5wC3wtdKpodE6S7qVogfgBDpWWLDPKkeYMjskqdSfork",
+      "repo": "0x55611/forkline",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:04.705Z",
+      "source": "https://forks.wiki/api/coin?mint=5wC3wtdKpodE6S7qVogfgBDpWWLDPKkeYMjskqdSfork",
+      "name": "Lineage",
+      "symbol": "LNE"
+    },
+    {
+      "mint": "6gDN69quxsiQE7QGfPS1xcmT4WBETRnxoqt52U7ufork",
+      "repo": "louislam/uptime-kuma",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.457Z",
+      "source": "https://forks.wiki/api/coin?mint=6gDN69quxsiQE7QGfPS1xcmT4WBETRnxoqt52U7ufork",
+      "name": "Samurai Coin",
+      "symbol": "SAMURAI"
+    },
+    {
+      "mint": "71aXKTbmGxqj6Y4bNsK3NZqCVzfDiPDZMzN9xu8Sfork",
+      "repo": "ubuwaits/beautiful-web-type",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.587Z",
+      "source": "https://forks.wiki/api/coin?mint=71aXKTbmGxqj6Y4bNsK3NZqCVzfDiPDZMzN9xu8Sfork",
+      "name": "SEND IT",
+      "symbol": "SI"
+    },
+    {
+      "mint": "7qjTV9PtdffEfUUc1dhL67nRMMoBLR1o4vPAd9Vtfork",
+      "repo": "endless-sky/endless-sky",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.812Z",
+      "source": "https://forks.wiki/api/coin?mint=7qjTV9PtdffEfUUc1dhL67nRMMoBLR1o4vPAd9Vtfork",
+      "name": "sky",
+      "symbol": "SKY"
+    },
+    {
+      "mint": "7x7CkVeH4qaW4XojMtP4pQucWEGA1Z89gmuUohtDfork",
+      "repo": "typicode/json-server",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.412Z",
+      "source": "https://forks.wiki/api/coin?mint=7x7CkVeH4qaW4XojMtP4pQucWEGA1Z89gmuUohtDfork",
+      "name": "ZERO",
+      "symbol": "ZERO"
+    },
+    {
+      "mint": "8fHg42GVN1RzEAdxoPYC5GnztawPPxtCV4ZN76uGfork",
+      "repo": "sindresorhus/awesome",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:05.097Z",
+      "source": "https://forks.wiki/api/coin?mint=8fHg42GVN1RzEAdxoPYC5GnztawPPxtCV4ZN76uGfork",
+      "name": "Awesome",
+      "symbol": "AWSM"
     },
     {
       "mint": "8S8w98uhwkPRwJCF8o43UQko5xFspLunBk8bDBoYfork",
-      "repo": "dotboris/vuejs-serverside-template-xss"
+      "repo": "dotboris/vuejs-serverside-template-xss",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:07.253Z",
+      "source": "https://forks.wiki/api/coin?mint=8S8w98uhwkPRwJCF8o43UQko5xFspLunBk8bDBoYfork",
+      "name": "Vue XSS",
+      "symbol": "XSS"
+    },
+    {
+      "mint": "9MiipyHGbQ5taxU8zytvt8xZdstC53MEGG4MNduzfork",
+      "repo": "significant-gravitas/autogpt",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:04.469Z",
+      "source": "https://forks.wiki/api/coin?mint=9MiipyHGbQ5taxU8zytvt8xZdstC53MEGG4MNduzfork",
+      "name": "AutoGPT",
+      "symbol": "AGPT"
+    },
+    {
+      "mint": "9mZzwbrnj1KRQrGK15AHjjp1ZpPPFuJuFrv6i2s7fork",
+      "repo": "xai-org/grok-1",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:03.977Z",
+      "source": "https://forks.wiki/api/coin?mint=9mZzwbrnj1KRQrGK15AHjjp1ZpPPFuJuFrv6i2s7fork",
+      "name": "The Smug Eye",
+      "symbol": "GROKEYE"
     },
     {
       "mint": "A9Zbz9uJvcjnqQhxT1RWY5YX1yRpQZSnFgwUbRjnfork",
-      "repo": "prefix-dev/pixi"
+      "repo": "prefix-dev/pixi",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:07.392Z",
+      "source": "https://forks.wiki/api/coin?mint=A9Zbz9uJvcjnqQhxT1RWY5YX1yRpQZSnFgwUbRjnfork",
+      "name": "Package Management Made Easy",
+      "symbol": "PIXI"
+    },
+    {
+      "mint": "BUzZYFR3FdR1sRRHoyV1AoghvevbqTqLP8ZxeKhXfork",
+      "repo": "romanslack/jev-drone",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:05.525Z",
+      "source": "https://forks.wiki/api/coin?mint=BUzZYFR3FdR1sRRHoyV1AoghvevbqTqLP8ZxeKhXfork",
+      "name": "OWB COIN",
+      "symbol": "OWB"
+    },
+    {
+      "mint": "BXCbQfinWZnHndLmctJTG8cWRcGNUVkJXdXmxHrWfork",
+      "repo": "chatgptnextweb/nextchat",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.245Z",
+      "source": "https://forks.wiki/api/coin?mint=BXCbQfinWZnHndLmctJTG8cWRcGNUVkJXdXmxHrWfork",
+      "name": "KEY",
+      "symbol": "KEY"
+    },
+    {
+      "mint": "CUNn25A9Z2ZrRuPBaEr9A5JeGTf6YPg9YGAXb3izfork",
+      "repo": "anomalyco/opencode",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:04.295Z",
+      "source": "https://forks.wiki/api/coin?mint=CUNn25A9Z2ZrRuPBaEr9A5JeGTf6YPg9YGAXb3izfork",
+      "name": "opencode",
+      "symbol": "CODE"
+    },
+    {
+      "mint": "Cy9Bm7T43AXSuiSmLoTZ6hSXt5fyNEfUxZxFj3iRfork",
+      "repo": "trimstray/the-book-of-secret-knowledge",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.108Z",
+      "source": "https://forks.wiki/api/coin?mint=Cy9Bm7T43AXSuiSmLoTZ6hSXt5fyNEfUxZxFj3iRfork",
+      "name": "SouthMusk",
+      "symbol": "SOUTHMUSK"
+    },
+    {
+      "mint": "DmYbxVcAcLHg9gsoCKAftZWQU7Z2LyrSSYsAfxoVfork",
+      "repo": "vercel/next.js",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:06.796Z",
+      "source": "https://forks.wiki/api/coin?mint=DmYbxVcAcLHg9gsoCKAftZWQU7Z2LyrSSYsAfxoVfork",
+      "name": "frok",
+      "symbol": "FROK"
+    },
+    {
+      "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "repo": "dnfl1999/memediff",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:03.835Z",
+      "source": "https://forks.wiki/api/coin?mint=DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "name": "MemeDiff",
+      "symbol": "MEMEDIFF"
+    },
+    {
+      "mint": "ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+      "repo": "riansj2290/remote-ikan",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:04.996Z",
+      "source": "https://forks.wiki/api/coin?mint=ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+      "name": "riancoin",
+      "symbol": "RIAN"
     },
     {
       "mint": "F6Cr7TngB953QFvqs6wQNcqZkw9iQskWsdWmPAW2fork",
-      "repo": "veloren/veloren"
+      "repo": "veloren/veloren",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:07.706Z",
+      "source": "https://forks.wiki/api/coin?mint=F6Cr7TngB953QFvqs6wQNcqZkw9iQskWsdWmPAW2fork",
+      "name": "VELCOIN",
+      "symbol": "VLOX"
+    },
+    {
+      "mint": "G5QGCiJxPxN6UF5f9bM2agJzdzjjPZREY1K1PP5ifork",
+      "repo": "ethereum/mist",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:07.254Z",
+      "source": "https://forks.wiki/api/coin?mint=G5QGCiJxPxN6UF5f9bM2agJzdzjjPZREY1K1PP5ifork",
+      "name": "NILA",
+      "symbol": "NILA"
+    },
+    {
+      "mint": "G6s4yZggZMeaVi7XMne5knfLDaAnWY2JhBh6D9DZfork",
+      "repo": "foostan/crkbd",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:05.704Z",
+      "source": "https://forks.wiki/api/coin?mint=G6s4yZggZMeaVi7XMne5knfLDaAnWY2JhBh6D9DZfork",
+      "name": "rinia",
+      "symbol": "RINA"
+    },
+    {
+      "mint": "G9MRRqsBTbR9tZxnZdGGcBoVn8BB57ReK6vygN4fork",
+      "repo": "nektos/act",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:05.158Z",
+      "source": "https://forks.wiki/api/coin?mint=G9MRRqsBTbR9tZxnZdGGcBoVn8BB57ReK6vygN4fork",
+      "name": "CONSO LABS",
+      "symbol": "CONSO"
+    },
+    {
+      "mint": "RxN5a96pFYoucfQAgXjYyLLjYsWXw9Qk552xX4Vfork",
+      "repo": "chenxiaoer/chenxiaoer.github.io",
+      "kind": "forks",
+      "checkedAt": "2026-11-11T09:17:04.329Z",
+      "source": "https://forks.wiki/api/coin?mint=RxN5a96pFYoucfQAgXjYyLLjYsWXw9Qk552xX4Vfork",
+      "name": "Ballot Escape Velocity",
+      "symbol": "COPE"
     }
   ]
 }

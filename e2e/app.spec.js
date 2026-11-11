@@ -1,3 +1,4 @@
+import { openAdvanced } from './helpers.js';
 import { test, expect, mockGitHub, analyze, downloadReport } from './helpers.js';
 
 test('page loads, JavaScript executes, and keyboard navigation works', async ({ page }) => {
@@ -6,7 +7,7 @@ test('page loads, JavaScript executes, and keyboard navigation works', async ({ 
   await expect(page).toHaveTitle(/MemeDiff/);
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Skip to main content' })).toBeFocused();
-  await page.locator('#repo').focus();
+  await openAdvanced(page); await page.locator('#repo').focus();
   await page.keyboard.type('fixture/project');
   await page.keyboard.press('Tab');
   await expect(page.locator('#token')).toBeFocused();
@@ -56,18 +57,18 @@ test('baseline persists, requery finds new SHA, and deletion removes it', async 
 
 test('invalid repository and Solana addresses fail before any API request', async ({ page }) => {
   const api = await mockGitHub(page); await page.goto('./');
-  await page.locator('#repo').fill('https://github.com.evil.test/a/b'); await page.locator('#analyze').click();
+  await openAdvanced(page); await page.locator('#repo').fill('https://github.com.evil.test/a/b'); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toHaveClass('error');
-  await page.locator('#repo').fill('fixture/project'); await page.locator('#token').fill('0'.repeat(32)); await page.locator('#analyze').click();
+  await openAdvanced(page); await page.locator('#repo').fill('fixture/project'); await openAdvanced(page); await page.locator('#token').fill('0'.repeat(32)); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toContainText('Base58');
-  await page.locator('#token').fill('1'.repeat(33)); await page.locator('#analyze').click();
+  await openAdvanced(page); await page.locator('#token').fill('1'.repeat(33)); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toContainText('32 bytes');
   expect(api.requests).toHaveLength(0);
 });
 
 test('JSON download validates data and PNG download decodes to a real image', async ({ page }, testInfo) => {
   await mockGitHub(page); await page.goto('./');
-  await page.locator('#token').fill('11111111111111111111111111111111');
+  await openAdvanced(page); await page.locator('#token').fill('11111111111111111111111111111111');
   await analyze(page); await page.locator('[data-days="7"]').click();
   const data = await downloadReport(page, 'json', testInfo);
   expect(data.schema).toBe(1); expect(data.repo).toBe('fixture/project'); expect(data.selectedDays).toBe(7);
@@ -80,7 +81,7 @@ test('JSON download validates data and PNG download decodes to a real image', as
 
 for (const status of [403, 404, 429]) test(`GitHub ${status} displays actionable error`, async ({ page, diagnostics }) => {
   diagnostics.expectedStatuses = [status]; await mockGitHub(page, { error: status }); await page.goto('./');
-  await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
+  await openAdvanced(page); await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toContainText(String(status));
   await expect(page.locator('#status')).toHaveClass('error'); await expect(page.locator('#report')).toBeHidden();
   await expect(page.locator('#analyze')).toBeEnabled();
@@ -88,7 +89,7 @@ for (const status of [403, 404, 429]) test(`GitHub ${status} displays actionable
 
 test('network failure displays recovery message', async ({ page, diagnostics }) => {
   diagnostics.allowApiAbort = true; await mockGitHub(page, { offline: true }); await page.goto('./');
-  await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
+  await openAdvanced(page); await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toContainText('network'); await expect(page.locator('#analyze')).toBeEnabled();
 });
 
@@ -109,7 +110,7 @@ test('cancel stops a pending query and restores controls', async ({ page, diagno
   diagnostics.allowApiAbort = true;
   let release; const gate = new Promise(resolve => { release = resolve; });
   await page.route('https://api.github.com/**', async route => { await gate; await route.abort().catch(() => {}); });
-  await page.goto('./'); await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
+  await page.goto('./'); await openAdvanced(page); await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
   await page.locator('#cancel').click();
   await expect(page.locator('#status')).toContainText('canceled'); release();
   await expect(page.locator('#analyze')).toBeEnabled(); await expect(page.locator('#repo')).toBeEnabled();

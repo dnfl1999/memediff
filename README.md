@@ -10,20 +10,19 @@ The interface uses the official MemeDiff hooded mascot with a near-black, neon l
 
 ## How to use
 
-**New here? Select Try Live Demo** to analyze this repository using real GitHub data. It uses the same analyzer, limits and exports as any other repository; no sample statistics are substituted.
+1. Paste a **Solana Token CA** and select **Analyze Token**. You do not need a GitHub URL. **Try Live Demo** runs this flow for the official MEMEDIFF CA.
+2. Read the separate token-information panel: name/ticker, exact CA, USD price, FDV, market cap, one pool's liquidity and 24-hour volume, source links and observation time. Missing data is **Unknown**; failed sources are **Unavailable**, never fabricated zeros.
+3. A fresh, exact CA association verified from the official Forks `/api/coin` response automatically starts GitHub analysis. No repository selection or second Analyze click is required. Read the association's separate verification time and source.
+4. Select **7 days** or **30 days**, inspect original commit/release evidence, then export **PNG Receipt** and **JSON**. **Save baseline** and **Clear this project baseline** retain their existing behavior. Exports are development observations, available only after GitHub analysis succeeds.
+5. If no fresh verified mapping is available, token information remains visible with **No verified GitHub repository found.** This is a coverage limitation, not a token safety assessment or proof that no repository exists.
 
-Open **Find a repository by project name or token CA** to search public GitHub repository names (up to 10 matches per submission), then select a result and choose **Analyze**. A name match is not proof of token association. Searches have a separate API rate limit and do not run on each keystroke.
+**Advanced Search — GitHub repository** keeps direct GitHub URL / `owner/repo` analysis, the optional recorded token address, and repository-name search. A manually entered address does not verify a token relationship.
 
-CA lookup uses exact associations collected from the official Forks Wiki API at deployment time. Forks does not currently allow cross-origin browser reads, so Pages serves a dated index of recent listings plus MemeDiff, not a live or complete directory. Each match shows its observation time and links to Forks for rechecking. Missing or ambiguous matches are not guessed; the repository URL input remains available. Selecting a CA match fills both fields, while the report and its JSON schema remain unchanged and do not certify token ownership or safety. See [discovery sources and limitations](docs/DISCOVERY.md).
+Forks currently blocks cross-origin browser reads. A limited index is refreshed on deployment and scheduled every six hours by GitHub Actions. Recent listings and previously observed CA history are individually rechecked against `coin.mint`, `coin.kind=forks` and explicit `coin.repo`; associations older than 48 hours are not auto-used. Neither full-list pagination nor exhaustive coverage is confirmed. No name/ticker matching is used. See [data flow, evidence and limitations](docs/DISCOVERY.md).
 
-1. Enter a public GitHub repository URL or `owner/repo` and select **Analyze**. A Solana mint address is optional; only its format is checked, not its existence or repository association.
-2. Select **7 days** or **30 days** to view commits, public releases and observed contributors. Read collection warnings and follow original evidence links.
-3. Select **Save baseline** to save this observation in your browser. Analyze the same repository, branch and optional token combination later to compare SHA observations. Use **Clear this project baseline** to remove it.
-4. Select **PNG Receipt** for a shareable summary with the observation time, exact UTC window, collection status and source evidence. Export **JSON** alongside it for all collected data, evidence URLs, warnings and comparison results. URLs printed in PNG are not clickable.
+The public app uses no wallet, paid API or login. An optional restrictive [read-only Worker design](serverless/README.md) is supplied for future arbitrary live Forks lookups, but is **not deployed or called by this site**. External account connection and deployment require owner approval.
 
-The interface and generated guidance are English. Dates use UTC and numbers use English (US) formatting; original repository descriptions, commit messages and release names retain their source language. Existing local baselines remain compatible. JSON retains schema version 1, ISO timestamps and numeric values; human-readable messages are now English.
-
-No wallet, token ownership, login or API key is required. Receipts are locally generated and editable, not signed certificates. There is no JSON import, hosted report upload or automatic social posting.
+The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. No JSON import or automatic social posting exists.
 
 ## What the comparison means
 
@@ -90,7 +89,7 @@ The repository administration helper checks the authenticated account is `dnfl19
 
 ## Privacy and security
 
-GitHub receives repository paths and the visitor IP; optional Solana addresses are not sent to GitHub. The app has no analysis backend, trackers, external fonts, API-key input or wallet connection. The Pages host may keep normal access logs. Reports retain public GitHub logins, not original author names or email addresses. Baselines are saved only after an explicit click; exports include the entered token address.
+GitHub receives repository paths and the visitor IP; Solana addresses are not sent to GitHub. CA queries are sent directly to DexScreener, which also sees the visitor IP. Forks association lookups read this site’s static index; following an evidence link visits the external source. The app has no analysis backend, trackers, external fonts, API-key input or wallet connection. The Pages host may keep normal access logs. Reports retain public GitHub logins, not original author names or email addresses. Baselines are saved only after an explicit click; exports include the entered token address.
 
 User and repository text is rendered as text, not HTML. Source links are restricted to allowed HTTPS hosts and CSP restricts scripts and network connections. Local storage and exports are editable observations, not trusted attestations.
 

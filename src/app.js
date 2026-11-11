@@ -4,6 +4,8 @@ import { parseRepo, parseToken, compareSnapshots, inWindow, safeLink, DAY } from
 import { fetchReport } from './github.js';
 const $ = id => document.getElementById(id);
 let report = null, comparison = null, days = 30, controller = null;
+let externalLock = false;
+export function lockAnalysis(value) { externalLock = value; for (const id of ['analyze','repo','token']) $(id).disabled = value || Boolean(controller); }
 function el(tag, text, className) { const n = document.createElement(tag); if (text != null) n.textContent = text; if (className) n.className = className; return n; }
 function link(text, url) { const a = el('a', text); const safe = safeLink(url); if (safe) { a.href = safe; a.target = '_blank'; a.rel = 'noopener noreferrer'; } return a; }
 function key() { return `memediff:v1:${report.repo}:${report.branch}:${report.token}`; }
@@ -58,18 +60,20 @@ function render() {
   $('sources').replaceChildren(...report.evidence.map(url => { const li = el('li'); li.append(link(url, url)); return li; }));
   renderComparison();
 }
-$('query').addEventListener('submit', async event => {
-  event.preventDefault();
+export function clearReport() { report = null; comparison = null; $('report').hidden = true; $('empty').hidden = true; }
+export function cancelAnalysis() { controller?.abort(); }
+export async function analyzeRepository(repoInput, tokenInput = '') {
   let repo, token;
-  try { repo = parseRepo($('repo').value); token = parseToken($('token').value); } catch(e) { status(e.message, true); return; }
+  try { repo = parseRepo(repoInput); token = parseToken(tokenInput); } catch(e) { status(e.message, true); return false; }
   if (controller) return;
   controller = new AbortController(); const timer = setTimeout(() => controller?.abort(), 45000);
   $('analyze').disabled = true; $('cancel').hidden = false; $('repo').disabled = true; $('token').disabled = true;
   $('report').hidden = true; status('Collecting public GitHub evidence…');
-  try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); }
-  catch(e) { report = null; $('empty').hidden = false; status(e.message, true); }
-  finally { clearTimeout(timer); controller = null; $('analyze').disabled = false; $('cancel').hidden = true; $('repo').disabled = false; $('token').disabled = false; }
-});
+  try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); return true; }
+  catch(e) { report = null; $('empty').hidden = false; status(e.message, true); return false; }
+  finally { clearTimeout(timer); controller = null; lockAnalysis(externalLock); $('cancel').hidden = true; }
+}
+$('query').addEventListener('submit', async event => { event.preventDefault(); if(externalLock)return; $('token-result').hidden = true; await analyzeRepository($('repo').value, $('token').value); });
 $('cancel').addEventListener('click', () => controller?.abort());
 document.querySelectorAll('[data-days]').forEach(b => b.addEventListener('click', () => { days = Number(b.dataset.days); document.querySelectorAll('[data-days]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); if (report) render(); }));
 $('save').addEventListener('click', () => { if (!report) return; try { localStorage.setItem(key(), JSON.stringify(report)); loadBaseline(); renderComparison(); status('Report saved as the baseline in this browser. It will be used for the next query.'); } catch { status('Could not save the baseline. Check browser storage and privacy settings.', true); } });

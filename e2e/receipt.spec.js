@@ -1,3 +1,4 @@
+import { openAdvanced } from './helpers.js';
 import { test, expect, mockGitHub, analyze, downloadReport } from './helpers.js';
 
 async function recordCanvasText(page) {

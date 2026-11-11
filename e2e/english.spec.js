@@ -1,3 +1,4 @@
+import { openAdvanced } from './helpers.js';
 import { test, expect, mockGitHub, analyze, downloadReport } from './helpers.js';
 
 // The interface must stay English even on a Korean-language device.
@@ -8,7 +9,7 @@ test('English metadata, UI, validation and UTC dates on a non-English device', a
   await expect(page.locator('html')).toHaveAttribute('lang','en');
   await expect(page).toHaveTitle('MemeDiff — Less Hype. More Evidence.');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Track real GitHub activity/);
-  await page.locator('#analyze').click();
+  await openAdvanced(page); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toContainText('Enter a GitHub repository URL');
   expect(api.requests).toHaveLength(0);
   await analyze(page); await page.locator('#save').click();

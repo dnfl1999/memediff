@@ -2,7 +2,17 @@
 
 기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
-## 최신 상태 — 공식 로고 브랜드 리디자인 (2026-11-11)
+## 최신 상태 — CA 단독 분석 (2026-11-11)
+
+CA 입력 한 번으로 DexScreener의 정확한 Solana base-token 시장 정보와 공식 Forks 인덱스를 조회하고, 검증된 저장소를 기존 GitHub 분석 엔진으로 자동 분석합니다. Advanced Search에 기존 GitHub 직접 입력과 이름 검색을 보존했습니다. schema-1 JSON·저장 키·SHA 비교·PNG·브랜드 자산은 유지합니다. 시장 수치와 개발 증거를 분리하며 누락 값은 Unknown/Unavailable입니다.
+
+공식 API 최근 목록의 page/offset/limit 실험은 동일한 20개를 반환해 전체 조회 지원은 확인되지 않았습니다. 최근 목록과 기존 관측 이력을 합쳐 27개 CA를 `/api/coin`으로 재검증했습니다. 6시간 주기 Actions, 후보 최대 200개, 48시간 이상 연결 자동 사용 중단, 데이터 불완전성 표시를 구현했습니다. Forks 브라우저 CORS 제약은 별도 Chromium probe로 확인했습니다. 선택적 읽기 전용 Worker 구현은 단위 검증만 했으며 외부 계정 생성이나 배포는 하지 않았습니다. 자세한 근거는 [DISCOVERY](docs/DISCOVERY.md)와 [API 관측](docs/ca-api-research.json)에 있습니다.
+
+로컬 최종 단위 39/39, PC·모바일 모의 E2E 66/66 통과. 최초 모의 62통과/4실패는 Advanced Search를 열지 않는 기존 테스트 절차를 수정한 뒤 해소했습니다. 실제 로컬 API는 1통과/3건너뜀: BONK 시장 조회 성공, GitHub API 제한에 따른 반복 요청 중단. PNG 실제 디코딩·JSON·기존 스냅샷·영어·모바일 검증 포함. 인증 계정 dnfl1999 및 origin/main 동일 상태를 확인했습니다.
+
+다음 단계: 제품 커밋을 main에 게시하고 Actions verify/deploy/public-qa 결과 및 공개 CA 단독 입력 검증 결과를 이 문서에 추가합니다. 재개 명령: `npm.cmd test`, `npm.cmd run build`, `npm.cmd run test:e2e`, `npm.cmd run test:e2e:live` (실제 API 제한이면 같은 환경에서 재시도하지 않음).
+
+## 이전 상태 — 공식 로고 브랜드 리디자인 (2026-11-11)
 
 발행 감사에 보존된 공식 라임 후드 로고 `.local/audit/token-image.png`를 재사용했습니다. 실제 형식은 JPEG이므로 내용 변경 없이 `assets/memediff-logo.jpg`로 복사하고 헤더·hero·토큰 카드에 적용했습니다. 라임/cyan/coral·near-black 테마, hero의 분석/실제 데모 CTA, 분석 패널·차트·토큰 CA/외부 링크 카드, favicon·1200×630 소셜 미리보기를 정비했습니다. 원본 로고 62,327 bytes, 외부 폰트·애니메이션 라이브러리 없음. 이미지 크기를 명시하고 토큰 로고는 lazy-load, reduced-motion을 지원합니다. [자산 출처](assets/README.md).
 

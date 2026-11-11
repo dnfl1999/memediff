@@ -1,32 +1,25 @@
-# Try MemeDiff in a few steps
+# Analyze a Solana token
 
-Open **https://dnfl1999.github.io/memediff/**. The tool is free; no wallet, token ownership, GitHub login or API key is required. The public interface is English. Dates use UTC and numbers use English (US) formatting.
+Open [MemeDiff](https://dnfl1999.github.io/memediff/). Paste a full Solana CA into **Solana Token CA** and select **Analyze Token** once. No GitHub address, wallet, SOL, login or API key is needed. **Try Live Demo** uses the official MEMEDIFF CA.
 
-## First report
+## Read the two kinds of evidence separately
 
-1. In **GitHub repository**, enter a public URL such as `https://github.com/dnfl1999/memediff`, or `dnfl1999/memediff`.
-2. Leave **Solana token address** empty for a first try. It is an optional note, not a token verification request.
-3. Select **Analyze**. Wait for the result or read the error message; do not repeatedly submit during an API rate limit.
-4. Choose **7 days** or **30 days**. Read collection warnings before interpreting the commit, release and contributor counts. A `+` means incomplete collection, not an exact total.
-5. Follow a source link to inspect the original GitHub item. An activity count does not show how much useful work was done.
+**Token information** shows public market observations matched to Solana and the exact base-token CA. FDV and market cap are separate; liquidity and volume refer to one selected pool, not a sum. Missing fields say Unknown. Failed APIs say Unavailable with the cause. Each observation has a time and original source.
 
-## Share a Development Receipt
+**GitHub development** starts automatically if a fresh official Forks association is available. The app verifies an exact mint, `coin.kind=forks` and explicit repository in its dated API index. A repository association does not prove endorsement, safety or returns. If no fresh verified mapping is available, token information remains visible and the app says **No verified GitHub repository found.** It does not invent a repository from the token name.
 
-Select **PNG Receipt** to download the English summary card. It includes the observation time, exact UTC period, collection status and a source item when one was observed. Export **JSON** too if you need all collected evidence URLs and errors. Inspect both before sharing: user-entered token addresses and public GitHub account names may appear in exports.
+## Compare and share development observations
 
-PNG links are printed text, not clickable. The app does not upload the card or post to X. Receipts are locally generated, editable snapshots—not signed certificates or proof of token safety.
+Choose **7 days** or **30 days**. Review warnings before interpreting counts; **+** marks incomplete collection. Follow original evidence links. Select **Save baseline**, then analyze the same CA/repository/branch combination later to compare observed SHA values. Comparisons remain 30-day even on a 7-day card. **Clear this project baseline** removes only that local baseline.
 
-**See a real example:** [dated receipt walkthrough, PNG and original JSON](examples/README.md). It is a historical observation of MemeDiff itself, not simulated data and not a current activity claim. Your numbers may differ.
+Select **PNG Receipt** and **JSON** after GitHub analysis succeeds. JSON retains schema 1 and all collected development evidence; it does not include the separate market panel. PNG links are printed text, not clickable. No repository match means no development receipt, not zero development. [Historical real example](examples/README.md) remains unchanged and is not current market data.
 
-## Compare later observations
+## Analyze a repository directly
 
-1. Select **Save baseline** (save comparison baseline).
-2. Later, analyze the same repository, default branch and optional token combination in the same browser/profile.
-3. Read the comparison. It compares the 30-day SHA observations even when the selected metric card is 7 days. Newly observed SHA does not necessarily mean newly performed work; no longer observed SHA is not proof of deletion.
-4. **Clear this project baseline** clears that local baseline. Browser storage clearing or a different device/profile also removes access to it.
+Expand **Advanced Search — GitHub repository**, enter a public URL or `owner/repo`, optionally record a token address, and select **Analyze**. This preserves the original flow and existing saved baselines. Name search can help locate a repository but does not verify a token connection. Clearing browser storage or changing devices loses access to local baselines; JSON import is not implemented.
 
-The app does not import JSON reports or share baselines across devices. Exported JSON is for inspection and evidence; do not assume an import feature exists.
+## Limits and help
 
-## If something is unclear
+The Forks index is limited and dated. Scheduled refresh is attempted every six hours; GitHub may delay or disable scheduled runs. Associations older than 48 hours are not automatically used. A missing entry does not prove no relationship exists. Source errors, throttling and timeout are shown without automatic retries. Browser JavaScript cannot reliably distinguish a CORS denial from a general network failure; that ambiguity is stated.
 
-Read the [FAQ](FAQ.md), then use [GitHub Issues](https://github.com/dnfl1999/memediff/issues/new/choose) for a reproducible bug or usability problem. GitHub requires sign-in to submit. English and Korean are welcome. Do not post secrets or unnecessary personal data. Feedback guides maintenance; it does not guarantee new features.
+Read [FAQ](FAQ.md) and [data sources](DISCOVERY.md). Report reproducible bugs through [GitHub Issues](https://github.com/dnfl1999/memediff/issues/new/choose); remove secrets and unnecessary personal data. The app does not trade, connect wallets, claim fees or publish to X.

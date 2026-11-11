@@ -28,9 +28,29 @@ The selected period controls metric counts and receipt evidence. Baseline compar
 
 The baseline is stored in this browser/profile under the repository, branch and optional token combination. It is not synced or hosted. Storage restrictions, clearing browser data or using another device can make it unavailable. JSON import is not implemented.
 
-### Does an optional Solana address verify the token or its relationship to a repository?
+### Can I start with just a Solana CA?
 
-No. It is format-checked and recorded as user input. The separately maintained official MemeDiff token section links the project's dated audit; that does not turn arbitrary report inputs into verified token relationships. [Official identity and audit](../POST_LAUNCH_AUDIT.md).
+Yes. **Analyze Token** validates a 32-byte Base58 address, loads exact-CA public market data, and automatically analyzes GitHub when a fresh official Forks mapping exists. No second Analyze click is required. The mapping is a dated API observation, not a repository-owner endorsement, mint-account audit or safety guarantee.
+
+### What if no GitHub association is available?
+
+The token panel stays visible. Available market information appears; missing values are Unknown and API failures are Unavailable. **No verified GitHub repository found.** means no usable verified mapping in the available data, not that no repository exists or that the coin is unsafe. Development receipts are unavailable until a GitHub analysis succeeds.
+
+### Does the optional address in Advanced Search verify a relationship?
+
+No. It remains format-checked, recorded user input. Manually supplying a repository does not create an official token association. Existing JSON schema and storage keys remain unchanged. The separately maintained [official identity and audit](../POST_LAUNCH_AUDIT.md) remain historical evidence.
+
+### Is the Forks lookup live and complete?
+
+No. The official API currently blocks cross-origin browser reads. Actions rechecks recent and previously observed CAs every six hours using the official coin endpoint. The index is capped at 200 candidates, marks incomplete coverage, and excludes ambiguous/missing responses. Entries older than 48 hours are not auto-used. Scheduled runs can be delayed or disabled. An optional live serverless design is not deployed.
+
+### How are market figures selected?
+
+DexScreener responses must match `chainId=solana` and the exact base-token CA. Among matching pools, the highest reported USD liquidity is selected (then volume, then address for ties). Price, FDV, market cap, liquidity and 24-hour volume describe that selected pool response; values are not summed. Missing liquidity is Unknown, not zero; FDV is not market cap. Data may lag and does not establish tradability or safety.
+
+### Why does a network error mention CORS?
+
+Browsers deliberately expose both network and CORS failures as a generic failed fetch. MemeDiff does not pretend it can distinguish them from that exception. Known Forks CORS restrictions are handled through the static index; 403, 429, timeout, malformed data and missing data have separate messages.
 
 ### Is a Development Receipt proof of work, safety or returns?
 

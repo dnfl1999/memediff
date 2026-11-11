@@ -1,47 +1,30 @@
-import { test, expect, analyze, downloadReport } from './helpers.js';
-
-test('LIVE public GitHub query and both downloads without mocks or credentials', async ({ page, diagnostics }, testInfo) => {
-  const apiResponses = [];
-  page.on('response', r => { if (r.url().startsWith('https://api.github.com/')) apiResponses.push(r); });
-  await page.goto('./');
-  await expect(page).toHaveTitle(/MemeDiff/);
-  await page.getByRole('button', { name: 'Try Live Demo', exact: true }).click();
-  await expect(page.locator('#analyze')).toBeEnabled({ timeout: 50000 });
-  const responses = await Promise.all(apiResponses.map(async r => ({ url: r.url(), status: r.status(), remaining: r.headers()['x-ratelimit-remaining'], reset: r.headers()['x-ratelimit-reset'], retryAfter: r.headers()['retry-after'] })));
-  await testInfo.attach('LIVE-api-evidence', { body: JSON.stringify({ mocked: false, authenticated: false, responses }, null, 2), contentType: 'application/json' });
-  const limited = responses.find(r => [403, 429].includes(r.status));
-  if (limited) {
-    diagnostics.expectedStatuses = [403, 429];
-    testInfo.annotations.push({ type: 'API_LIMIT', description: JSON.stringify(limited) });
-    test.skip(true, 'Actual GitHub API limited: evidence attached; no automatic retry.');
-  }
-  await expect(page.locator('#report')).toBeVisible();
-  await expect(page.locator('#report-title')).toHaveText('dnfl1999/memediff');
-  const data = await downloadReport(page, 'json', testInfo);
-  expect(data.source).toBe('github-live'); expect(data.repo).toBe('dnfl1999/memediff');
-  expect(data.coverage).toMatchObject({ commits: true, releases: true }); expect(data.warnings).toEqual([]);
-  expect(responses.length).toBeGreaterThanOrEqual(3);
-  expect(responses.every(r => r.status === 200)).toBe(true);
-  expect(data.commits.every(c => /^[a-f0-9]{40}$/.test(c.sha))).toBe(true);
-  await page.locator('[data-days="7"]').click(); await expect(page.locator('[data-days="7"]')).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('#save').click(); await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');
-  await page.locator('#clear').click();
-  await downloadReport(page, 'png', testInfo);
-  await page.screenshot({ path: testInfo.outputPath('LIVE-report.png'), fullPage: true });
+import {test,expect,downloadReport,openAdvanced} from './helpers.js';
+test.setTimeout(70000);
+const official='DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork';
+let githubLimited=false;
+function capture(page){const responses=[];page.on('response',r=>{if(/^https:\/\/(api.github.com|api.dexscreener.com)\//.test(r.url()))responses.push(r);});return responses;}
+async function evidence(responses,diagnostics,info){
+ const data=responses.map(r=>({url:r.url(),status:r.status(),remaining:r.headers()['x-ratelimit-remaining'],reset:r.headers()['x-ratelimit-reset']}));
+ await info.attach('LIVE-api-evidence',{body:JSON.stringify({mocked:false,authenticated:false,observedAt:new Date().toISOString(),responses:data}),contentType:'application/json'});
+ const limited=data.filter(r=>[403,429].includes(r.status));
+ if(limited.length){diagnostics.expectedStatuses=[403,429];diagnostics.expectedURLs=['https://api.dexscreener.com/'];if(limited.some(r=>r.url.includes('api.github.com/')))githubLimited=true;test.skip(true,'Real API limited; evidence attached, no retry.');}
+ expect(data.every(r=>r.status===200)).toBe(true);return data;
+}
+for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['another Forks coin','ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork','riansj2290/remote-ikan']])test(`LIVE CA-only ${name} auto-analysis and development exports`,async({page,diagnostics},info)=>{
+ test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');
+ const responses=capture(page);await page.goto('./');await expect(page.locator('#repo')).toBeHidden();
+ await page.locator('#token-ca').fill(mint);await page.locator('#analyze-token').click();await expect(page.locator('#analyze-token')).toBeEnabled({timeout:55000});
+ await evidence(responses,diagnostics,info);await expect(page.locator('#report-title')).toHaveText(repo);await expect(page.locator('#association')).toContainText('Exact CA');await expect(page.locator('#token-result')).toBeVisible();
+ const data=await downloadReport(page,'json',info);expect(data.schema).toBe(1);expect(data.token).toBe(mint);expect(data.repo.toLowerCase()).toBe(repo);expect(data.source).toBe('github-live');expect(data.coverage).toMatchObject({commits:true,releases:true});
+ await page.locator('[data-days="7"]').click();await page.locator('#save').click();await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');await page.locator('#clear').click();await downloadReport(page,'png',info);
+ await page.screenshot({path:info.outputPath('LIVE-ca-linked.png'),fullPage:true});
 });
-
-test('LIVE repository name search and dated official CA index', async ({page,diagnostics},testInfo)=>{
-  const responses=[];
-  page.on('response',r=>{if(r.url().startsWith('https://api.github.com/search/'))responses.push(r);});
-  await page.goto('./');await page.locator('.discovery summary').click();
-  await page.locator('#search-mint').fill('DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork');await page.locator('#mint-submit').click();
-  await expect(page.getByRole('button',{name:'Use dnfl1999/memediff',exact:true})).toBeVisible();
-  await page.getByRole('button',{name:'Use dnfl1999/memediff',exact:true}).click();await expect(page.locator('#repo')).toHaveValue('dnfl1999/memediff');
-  await page.locator('#search-name').fill('memediff');await page.locator('#search-submit').click();await expect(page.locator('#search-submit')).toBeEnabled({timeout:20000});
-  const evidence=responses.map(r=>({url:r.url(),status:r.status(),remaining:r.headers()['x-ratelimit-remaining']}));
-  await testInfo.attach('LIVE-search-evidence',{body:JSON.stringify({mocked:false,responses:evidence}),contentType:'application/json'});
-  if(evidence.some(r=>[403,429].includes(r.status))){diagnostics.expectedStatuses=[403,429];test.skip(true,'Live GitHub search limited; no retry. CA index selection passed before search.');}
-  expect(evidence).toHaveLength(1);expect(evidence[0].status).toBe(200);
-  await expect(page.locator('#discovery-results button').first()).toBeVisible();
-  await page.screenshot({path:testInfo.outputPath('LIVE-discovery.png'),fullPage:true});
+test('LIVE general Solana meme token shows exact-CA market information without invented repository',async({page,diagnostics},info)=>{
+ const mint='DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',responses=capture(page);await page.goto('./');await page.locator('#token-ca').fill(mint);await page.locator('#analyze-token').click();await expect(page.locator('#analyze-token')).toBeEnabled({timeout:20000});const observed=await evidence(responses,diagnostics,info);
+ expect(observed.some(r=>r.url.includes('api.github.com/'))).toBe(false);await expect(page.locator('#association')).toContainText('No verified GitHub repository found.');await expect(page.locator('#observed-ca')).toContainText(mint);await expect(page.locator('#token-result-title')).toContainText(/bonk/i);await expect(page.locator('#market-status')).toContainText('Market data observed');await expect(page.locator('#report')).toBeHidden();
+ await page.screenshot({path:info.outputPath('LIVE-ca-unlinked.png'),fullPage:true});
+});
+test('LIVE Advanced Search preserves direct GitHub and name search',async({page,diagnostics},info)=>{
+ test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');const responses=capture(page);await page.goto('./');await openAdvanced(page);await page.locator('#repo').fill('dnfl1999/memediff');await page.locator('#analyze').click();await expect(page.locator('#analyze')).toBeEnabled({timeout:50000});await evidence(responses,diagnostics,info);await expect(page.locator('#report-title')).toHaveText('dnfl1999/memediff');
+ await page.locator('#advanced details > summary').click();await page.locator('#search-name').fill('memediff');await page.locator('#search-submit').click();await expect(page.locator('#search-submit')).toBeEnabled({timeout:20000});await evidence(responses,diagnostics,info);await expect(page.locator('#discovery-results button').first()).toBeVisible();
 });
