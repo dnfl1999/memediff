@@ -4,11 +4,13 @@ const official='DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork';
 let githubLimited=false;
 function capture(page){const responses=[];page.on('response',r=>{if(/^https:\/\/(api.github.com|api.dexscreener.com)\//.test(r.url()))responses.push(r);});return responses;}
 async function evidence(responses,diagnostics,info){
- const data=responses.map(r=>({url:r.url(),status:r.status(),remaining:r.headers()['x-ratelimit-remaining'],reset:r.headers()['x-ratelimit-reset']}));
+ const data=await Promise.all(responses.map(async r=>({url:r.url(),status:r.status(),remaining:r.headers()['x-ratelimit-remaining'],reset:r.headers()['x-ratelimit-reset'],...(r.status()===409?{message:(await r.json()).message}:{})})));
  await info.attach('LIVE-api-evidence',{body:JSON.stringify({mocked:false,authenticated:false,observedAt:new Date().toISOString(),responses:data}),contentType:'application/json'});
  const limited=data.filter(r=>[403,429].includes(r.status));
  if(limited.length){diagnostics.expectedStatuses=[403,429];diagnostics.expectedURLs=['https://api.dexscreener.com/'];if(limited.some(r=>r.url.includes('api.github.com/')))githubLimited=true;test.skip(true,'Real API limited; evidence attached, no retry.');}
- expect(data.every(r=>r.status===200)).toBe(true);return data;
+ const empty=r=>r.status===409&&/^https:\/\/api.github.com\/repos\/[^/]+\/[^/]+\/commits\?/.test(r.url)&&/^Git Repository is empty\.?$/i.test(r.message||'');
+ if(data.some(empty))diagnostics.expectedStatuses=[409];
+ expect(data.every(r=>r.status===200||empty(r))).toBe(true);return data;
 }
 for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['another Forks coin','ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork','riansj2290/remote-ikan']])test(`LIVE CA-only ${name} auto-analysis and development exports`,async({page,diagnostics},info)=>{
  test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');
