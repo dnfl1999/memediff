@@ -1,3 +1,4 @@
+import { formatDate } from './format.js';
 import { parseRepo, parseToken, summarize, inWindow, DAY } from './core.js';
 const API = 'https://api.github.com';
 export async function fetchReport(repoInput, tokenInput = '', { fetcher = fetch, now = Date.now(), signal } = {}) {
@@ -9,22 +10,22 @@ export async function fetchReport(repoInput, tokenInput = '', { fetcher = fetch,
     evidence.push(url);
     let r;
     try { r = await fetcher(url, { headers: { Accept: 'application/vnd.github+json' }, signal, credentials: 'omit', referrerPolicy: 'no-referrer' }); }
-    catch (e) { if (signal?.aborted) throw new Error('조회가 취소되었거나 45초 제한을 초과했습니다.'); throw new Error('GitHub에 연결하지 못했습니다. 네트워크를 확인하세요.'); }
+    catch (e) { if (signal?.aborted) throw new Error('The query was canceled or exceeded the 45-second timeout.'); throw new Error('Could not connect to GitHub. Check your network connection.'); }
     remaining = r.headers.get('x-ratelimit-remaining') ?? remaining;
     if (!r.ok) {
       if (r.status === 403 || r.status === 429) {
         const reset = Number(r.headers.get('x-ratelimit-reset'));
         const retry = r.headers.get('retry-after');
-        throw new Error(`GitHub API 제한 또는 접근 거부 (${r.status}). ${retry ? `${retry}초 뒤 재시도.` : reset ? `${new Date(reset * 1000).toLocaleString()} 이후 재시도.` : '잠시 후 재시도하세요.'}`);
+        throw new Error(`GitHub API rate limit or access denied (${r.status}). ${retry ? `Retry after ${retry} seconds.` : reset ? `Retry after ${formatDate(reset * 1000)}.` : 'Please try again later.'}`);
       }
-      if (r.status === 404) throw new Error('공개 저장소를 찾을 수 없습니다 (404). 주소·공개 여부를 확인하세요.');
+      if (r.status === 404) throw new Error('Public repository not found (404). Check the address and whether the repository is public.');
       if (r.status === 409 && allowEmptyRepository) return { data: [], next: false, empty: true };
-      throw new Error(`GitHub 응답 오류 (${r.status}). 잠시 후 재시도하세요.`);
+      throw new Error(`GitHub response error (${r.status}). Please try again later.`);
     }
     return { data: await r.json(), next: /rel="next"/.test(r.headers.get('link') || '') };
   }
   const { data: info } = await request(`/repos/${requested}`);
-  if (!info.full_name || info.private) throw new Error('공개 저장소 메타데이터가 유효하지 않습니다.');
+  if (!info.full_name || info.private) throw new Error('Invalid public repository metadata.');
   const repo = parseRepo(info.full_name);
   const branch = info.default_branch;
   const until = new Date(now).toISOString(), since = new Date(now - 30 * DAY).toISOString();
@@ -33,7 +34,7 @@ export async function fetchReport(repoInput, tokenInput = '', { fetcher = fetch,
     for (let page = 1; page <= limit; page++) {
       try {
         const r = await request(`${path}${path.includes('?') ? '&' : '?'}per_page=100&page=${page}`, allowEmptyRepository);
-        if (!Array.isArray(r.data)) throw new Error('예상하지 못한 GitHub 목록 응답입니다.');
+        if (!Array.isArray(r.data)) throw new Error('Unexpected GitHub list response.');
         data.push(...r.data);
         if (!r.next) return { data, complete: true };
       } catch (e) {
@@ -51,7 +52,7 @@ export async function fetchReport(repoInput, tokenInput = '', { fetcher = fetch,
     .filter(r => !r.draft && inWindow(r.published_at, now, 30))
     .map(r => ({ id: r.id, name: String(r.name || r.tag_name).slice(0,180), date: r.published_at, prerelease: r.prerelease, url: r.html_url }))
     .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-  if (!cs.complete) warnings.push('커밋 수집이 불완전합니다. 최대 1,000개 또는 API 오류까지의 관측치만 표시합니다.');
-  if (!rs.complete) warnings.push('릴리스 수집이 불완전합니다. 최대 500개 조회 범위 내의 관측치만 표시합니다.');
-  return { schema: 1, source: 'github-live', repo, token, branch, fetchedAt: until, since, description: String(info.description || '').slice(0,400), fork: Boolean(info.fork), parent: info.parent?.full_name || null, archived: Boolean(info.archived), commits, releases, metrics: summarize(commits, releases, now), coverage: { commits: cs.complete, releases: rs.complete, maxCommits: 1000, maxReleases: 500 }, remaining, evidence, warnings, methodology: '기본 브랜치의 committer timestamp 기준, 조회 시각에 끝나는 7/30일 구간. 기여자는 연결된 GitHub author 계정 수(봇 포함), 미연결 작성자는 제외. 공개 릴리스는 published_at 기준이며 사전 릴리스 포함. 코드 품질·독창성·실제 작업 시점·토큰 연관성을 검증하지 않음.' };
+  if (!cs.complete) warnings.push('Commit collection is incomplete. Showing observations up to the 1,000-commit cap or API error.');
+  if (!rs.complete) warnings.push('Release collection is incomplete. Showing observations within the 500-release cap.');
+  return { schema: 1, source: 'github-live', repo, token, branch, fetchedAt: until, since, description: String(info.description || '').slice(0,400), fork: Boolean(info.fork), parent: info.parent?.full_name || null, archived: Boolean(info.archived), commits, releases, metrics: summarize(commits, releases, now), coverage: { commits: cs.complete, releases: rs.complete, maxCommits: 1000, maxReleases: 500 }, remaining, evidence, warnings, methodology: 'Rolling 7/30-day windows ending at the observation time, using default-branch committer timestamps. Contributors are linked GitHub author accounts, including bots and excluding unlinked authors. Public releases use published_at and include prereleases. Code quality, originality, actual work time and token association are not verified.' };
 }

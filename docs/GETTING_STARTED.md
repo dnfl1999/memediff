@@ -1,12 +1,12 @@
 # Try MemeDiff in a few steps
 
-Open **https://dnfl1999.github.io/memediff/**. The tool is free; no wallet, token ownership, GitHub login or API key is required. The report UI is mainly Korean, with an English quick start and bilingual primary controls.
+Open **https://dnfl1999.github.io/memediff/**. The tool is free; no wallet, token ownership, GitHub login or API key is required. The public interface is English. Dates use UTC and numbers use English (US) formatting.
 
 ## First report
 
-1. In **GitHub 저장소 / Repository**, enter a public URL such as `https://github.com/dnfl1999/memediff`, or `dnfl1999/memediff`.
-2. Leave **Solana 토큰 주소 / Token** empty for a first try. It is an optional note, not a token verification request.
-3. Select **활동 분석하기 / Analyze**. Wait for the result or read the error message; do not repeatedly submit during an API rate limit.
+1. In **GitHub repository**, enter a public URL such as `https://github.com/dnfl1999/memediff`, or `dnfl1999/memediff`.
+2. Leave **Solana token address** empty for a first try. It is an optional note, not a token verification request.
+3. Select **Analyze**. Wait for the result or read the error message; do not repeatedly submit during an API rate limit.
 4. Choose **7 days** or **30 days**. Read collection warnings before interpreting the commit, release and contributor counts. A `+` means incomplete collection, not an exact total.
 5. Follow a source link to inspect the original GitHub item. An activity count does not show how much useful work was done.
 
@@ -20,10 +20,10 @@ PNG links are printed text, not clickable. The app does not upload the card or p
 
 ## Compare later observations
 
-1. Select **비교 기준 저장** (save comparison baseline).
+1. Select **Save baseline** (save comparison baseline).
 2. Later, analyze the same repository, default branch and optional token combination in the same browser/profile.
 3. Read the comparison. It compares the 30-day SHA observations even when the selected metric card is 7 days. Newly observed SHA does not necessarily mean newly performed work; no longer observed SHA is not proof of deletion.
-4. **이 프로젝트의 비교 기준 지우기** clears that local baseline. Browser storage clearing or a different device/profile also removes access to it.
+4. **Clear this project baseline** clears that local baseline. Browser storage clearing or a different device/profile also removes access to it.
 
 The app does not import JSON reports or share baselines across devices. Exported JSON is for inspection and evidence; do not assume an import feature exists.
 

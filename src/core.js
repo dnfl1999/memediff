@@ -3,26 +3,26 @@ export function parseRepo(value) {
   let input = String(value).trim();
   if (input.startsWith('https://')) {
     let u;
-    try { u = new URL(input); } catch { throw new Error('올바른 GitHub 저장소 URL을 입력하세요.'); }
-    if (u.hostname !== 'github.com' || u.port || u.username || u.password || u.search || u.hash) throw new Error('https://github.com/owner/repo 형식만 허용합니다.');
+    try { u = new URL(input); } catch { throw new Error('Enter a valid GitHub repository URL.'); }
+    if (u.hostname !== 'github.com' || u.port || u.username || u.password || u.search || u.hash) throw new Error('Use https://github.com/owner/repo without credentials, query parameters or fragments.');
     input = u.pathname.replace(/^\//, '').replace(/\/$/, '');
   }
   input = input.replace(/\.git$/, '');
   const parts = input.split('/');
-  if (parts.length !== 2 || !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$/.test(parts[0]) || !/^[a-zA-Z0-9_.-]{1,100}$/.test(parts[1]) || /^\.{1,2}$/.test(parts[1])) throw new Error('GitHub URL 또는 owner/repo를 입력하세요. 하위 경로는 허용하지 않습니다.');
+  if (parts.length !== 2 || !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$/.test(parts[0]) || !/^[a-zA-Z0-9_.-]{1,100}$/.test(parts[1]) || /^\.{1,2}$/.test(parts[1])) throw new Error('Enter a GitHub repository URL or owner/repo. Subpaths are not supported.');
   return parts.join('/').toLowerCase();
 }
 export function parseToken(value) {
   const s = String(value).trim();
   if (!s) return '';
-  if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(s)) throw new Error('Solana 주소는 Base58로 인코딩된 32바이트 공개키여야 합니다.');
+  if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(s)) throw new Error('A Solana address must be a Base58-encoded 32-byte public key.');
   const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
   let n = 0n;
   for (const c of s) n = n * 58n + BigInt(alphabet.indexOf(c));
   let length = 0;
   while (n > 0n) { length++; n >>= 8n; }
   length += s.match(/^1*/)[0].length;
-  if (length !== 32) throw new Error('Solana 주소의 디코딩 길이가 32바이트가 아닙니다.');
+  if (length !== 32) throw new Error('The Solana address does not decode to 32 bytes.');
   return s;
 }
 export function inWindow(date, now, days) {
@@ -49,7 +49,7 @@ export function compareSnapshots(previous, current) {
     missing: previous.commits.filter(x => Date.parse(x.date) >= start && !fresh.has(x.sha)).map(x => x.sha),
     commitDelta: current.metrics[30].commits - previous.metrics[30].commits,
     partial: !current.coverage.commits || !previous.coverage?.commits,
-    note: '새로 관측된 SHA는 신규 개발의 증명이 아닙니다. 조회 기간 이동·히스토리 변경·지연 반영·수집 한계가 차이에 영향을 줍니다. 미관측 SHA는 삭제 또는 조작의 증거가 아닙니다.'
+    note: 'Newly observed SHA values do not prove new work. Rolling windows, history changes, delayed updates and collection limits affect differences. Missing observations do not prove deletion or manipulation.'
   };
 }
 export function safeLink(value) {

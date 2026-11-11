@@ -10,7 +10,7 @@ Public default-branch commits using their committer timestamps, public releases 
 
 ### Why are my counts different from GitHub Pulse or another dashboard?
 
-Compare the branch, date field, exact rolling 7/30-day UTC window, pagination limits and account attribution rules. Separate API requests are not one atomic snapshot. A later query can return different data. See [methodology](../README.md#측정-방법과-한계).
+Compare the branch, date field, exact rolling 7/30-day UTC window, pagination limits and account attribution rules. Separate API requests are not one atomic snapshot. A later query can return different data. See [methodology](../README.md#methodology-and-limitations).
 
 ### What does `+` or “PARTIAL OBSERVATION” mean?
 
@@ -51,3 +51,7 @@ Use the [issue chooser](https://github.com/dnfl1999/memediff/issues/new/choose).
 ### Where do token balances, fees and $FORK rewards belong?
 
 They are separate from software activity. Use the [read-only operations guide](TOKEN_OPERATIONS.md) and its exact CA and sources. Dated snapshots are not live balances. Pending fees are not guaranteed claim quotes, and a pending $FORK allocation is not a token payout. This task does not perform claims, signatures, trades or wallet linking.
+
+### Why might source text be in another language?
+
+The interface is English, with UTC dates and English (US) numbers. Repository descriptions, commit messages and release names are original GitHub evidence and are not translated. Older saved baselines remain usable without migration; their historical text is preserved in storage.

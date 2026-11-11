@@ -2,7 +2,15 @@
 
 기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
-## 최신 상태 — 신규 사용자 안내 및 피드백 운영 준비 (2026-11-11)
+## 최신 상태 — 공개 사이트 영어화 (2026-11-11)
+
+공개 UI 전체를 영어로 전환했습니다. `lang=en`, SEO·브랜드 문구, 오류·상태·접근성 문구, UTC/en-US 표시, 영문 README·사용 안내·FAQ를 적용했습니다. 기존 README는 `README.ko.md`에 보존했습니다. 원본 GitHub 설명·커밋·릴리스 텍스트와 과거 감사 자료는 번역하지 않았습니다. 저장 키와 JSON schema 1, 공식 CA, 분석·SHA 비교·내보내기 기능은 유지합니다.
+
+로컬 단위 27/27, Chromium PC·모바일 모의 API E2E 38/38 통과. 한국어 기기 설정의 영어/UTC 표시, 예전 한국어 baseline 무변경 호환, 360/768/1024/1440px 레이아웃, 실제 PNG 디코딩·JSON 구조·CA 복사·콘솔/네트워크 오류를 확인했습니다. 앱 자체 표시 소스 한국어 잔존 0건. 로컬 실제 API 검사는 07:56 UTC GitHub 403/remaining=0으로 1건 skipped, 반복하지 않았습니다. 외부 링크 7개 중 GitHub/Forks 5개 HTTP 200, pump.fun/Solscan 2개 HTTP 403으로 접근 검증 제한. CA 링크는 변경하지 않았습니다. 문서 내부 파일 링크 누락 0건.
+
+dnfl1999 인증 및 push 권한, 원격 main과 일치를 확인했습니다. 다음 단계: 변경 커밋·push 후 Actions verify/deploy/public-qa 확인, 공개 사이트 영어 표시 및 실제 API 결과를 기록합니다. 재개 명령: `npm.cmd test`, `npm.cmd run build`, `npm.cmd run test:e2e` (독립 Chromium 경로는 `.local/pw-browsers`). 실제 API는 제한이 해제된 환경에서만 1회 실행합니다. 테스트 결과는 `qa-results/english-local/`, 제한 증거는 `qa-results/english-local-live/`에 있습니다.
+
+## 이전 상태 — 신규 사용자 안내 및 피드백 운영 준비 (2026-11-11)
 
 현재 앱 코드·기능을 보존했습니다. GitHub API에서 `has_issues=true`, `archived=false`, 접수 이슈 0건을 확인했고, 공개 사이트 HTTP 200 및 기존 Issues 링크를 확인했습니다. 사용자 피드백 없이 새로운 기능을 추가하지 않았습니다.
 

@@ -1,4 +1,5 @@
 import { DAY, inWindow, safeLink } from './core.js';
+import { formatNumber } from './format.js';
 
 // Reuses the observed report. This is a shareable summary, not a new data source.
 export function receiptData(report, days, comparison) {
@@ -12,9 +13,9 @@ export function receiptData(report, days, comparison) {
     repo: report.repo, observedAt: report.fetchedAt,
     windowStart: new Date(now - days * DAY).toISOString(), windowEnd: report.fetchedAt, days,
     branch: report.branch || '(none)', fork: report.fork, archived: report.archived,
-    counts: [String(m.commits) + (report.coverage.commits ? '' : '+'),
-      String(m.releases) + (report.coverage.releases ? '' : '+'),
-      String(m.contributors) + (report.coverage.commits ? '' : '+')],
+    counts: [formatNumber(m.commits) + (report.coverage.commits ? '' : '+'),
+      formatNumber(m.releases) + (report.coverage.releases ? '' : '+'),
+      formatNumber(m.contributors) + (report.coverage.commits ? '' : '+')],
     complete: report.coverage.commits && report.coverage.releases,
     coverage: `Commits: ${report.coverage.commits ? 'complete' : 'INCOMPLETE'} | Releases: ${report.coverage.releases ? 'complete' : 'INCOMPLETE'} | Unlinked-author commits: ${m.unattributed}`,
     baseline: comparison ? `30-day baseline: ${comparison.previousAt}` : '30-day baseline: not saved',

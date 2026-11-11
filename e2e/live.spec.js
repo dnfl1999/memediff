@@ -25,7 +25,7 @@ test('LIVE public GitHub query and both downloads without mocks or credentials',
   expect(responses.every(r => r.status === 200)).toBe(true);
   expect(data.commits.every(c => /^[a-f0-9]{40}$/.test(c.sha))).toBe(true);
   await page.locator('[data-days="7"]').click(); await expect(page.locator('[data-days="7"]')).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('#save').click(); await expect(page.locator('#comparison strong')).toHaveText('0개 새로 관측');
+  await page.locator('#save').click(); await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');
   await page.locator('#clear').click();
   await downloadReport(page, 'png', testInfo);
   await page.screenshot({ path: testInfo.outputPath('LIVE-report.png'), fullPage: true });

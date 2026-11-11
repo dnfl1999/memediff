@@ -13,7 +13,7 @@ async function recordCanvasText(page) {
 
 test('receipt PNG reflects selected UTC period and original evidence for sharing', async ({ page }, testInfo) => {
   await mockGitHub(page); await page.goto('./');
-  await page.getByText('English quick start — share a Development Receipt', { exact: true }).click();
+  await page.getByText('Quick start — share a Development Receipt', { exact: true }).click();
   await expect(page.getByText('Image links are printed text, not clickable.', { exact: false })).toBeVisible();
   await analyze(page); await recordCanvasText(page);
   for (const days of [7, 30]) {

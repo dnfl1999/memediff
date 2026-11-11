@@ -1,19 +1,38 @@
 # ± MemeDiff
 
-## Share a Development Receipt
+**Less Hype. More Evidence.**
 
-MemeDiff turns a public GitHub activity observation into an English PNG card with an observation timestamp, exact UTC window, collection status and source evidence. It reuses the existing PNG export; there is no separate service or account to create.
+Track real GitHub activity behind crypto projects. MemeDiff is a free, open-source web tool for inspecting public repository activity, comparing observed SHA values, and sharing evidence with a Development Receipt.
 
-1. Open [MemeDiff](https://dnfl1999.github.io/memediff/) and enter a public GitHub URL or `owner/repo`. The optional Solana address is recorded, not verified.
-2. Select **Analyze**, then **7 days** or **30 days**. Review partial-data warnings before interpreting counts.
-3. Select **PNG Receipt** and export **JSON** alongside it for all API evidence, limits and errors. URLs printed in a PNG are not clickable.
-4. Save a local baseline with **비교 기준 저장**, then analyze again. SHA comparisons use the 30-day observation window even when the card displays 7-day metrics.
+[Open MemeDiff](https://dnfl1999.github.io/memediff/) · [GitHub](https://github.com/dnfl1999/memediff) · [Quick start](docs/GETTING_STARTED.md) · [FAQ](docs/FAQ.md) · [Real historical example](docs/examples/README.md)
 
-Receipts are locally generated and editable, not signed certificates. Activity does not prove work performed, quality, token safety or returns. No wallet, token ownership, login, automatic social posting or hosted report is required. The main report UI remains primarily Korean, with an English quick start and bilingual primary controls.
+## How to use
 
-[Source repository](https://github.com/dnfl1999/memediff) · [Dated operations snapshot and product comparison](docs/OPERATIONS_UPDATE.md)
+1. Enter a public GitHub repository URL or `owner/repo` and select **Analyze**. A Solana mint address is optional; only its format is checked, not its existence or repository association.
+2. Select **7 days** or **30 days** to view commits, public releases and observed contributors. Read collection warnings and follow original evidence links.
+3. Select **Save baseline** to save this observation in your browser. Analyze the same repository, branch and optional token combination later to compare SHA observations. Use **Clear this project baseline** to remove it.
+4. Select **PNG Receipt** for a shareable summary with the observation time, exact UTC window, collection status and source evidence. Export **JSON** alongside it for all collected data, evidence URLs, warnings and comparison results. URLs printed in PNG are not clickable.
 
-New here? [Step-by-step guide](docs/GETTING_STARTED.md) · [Real historical receipt example](docs/examples/README.md) · [FAQ](docs/FAQ.md) · [Report a bug or suggest an improvement](https://github.com/dnfl1999/memediff/issues/new/choose). English and Korean feedback are welcome. [Contribution and privacy guidance](CONTRIBUTING.md).
+The interface and generated guidance are English. Dates use UTC and numbers use English (US) formatting; original repository descriptions, commit messages and release names retain their source language. Existing local baselines remain compatible. JSON retains schema version 1, ISO timestamps and numeric values; human-readable messages are now English.
+
+No wallet, token ownership, login or API key is required. Receipts are locally generated and editable, not signed certificates. There is no JSON import, hosted report upload or automatic social posting.
+
+## What the comparison means
+
+MemeDiff compares SHA sets across observations instead of assigning a development or investment score. It shows newly observed SHA values, values no longer observed in the overlapping window, the change in 30-day commit counts, and incomplete collection. Baseline comparisons always use the 30-day dataset, even on a 7-day receipt. Commits that naturally fall outside the rolling window are excluded from missing observations.
+
+New SHA values do not prove new work. Missing observations do not prove deletion or manipulation. Activity does not establish quality, originality, token safety or returns.
+
+## Methodology and limitations
+
+- The product uses real public GitHub REST API responses. Synthetic fixtures exist only in automated tests. Dated examples are clearly identified as historical observations.
+- Rolling 7×24-hour and 30×24-hour windows end at query time and use default-branch `committer.date`. Git timestamps can be modified and do not prove when work happened.
+- Collection uses 100 items per page, up to 10 commit pages and 5 release pages. Further pages or errors produce an incomplete observation marked **+**, not an exact total.
+- Contributors are distinct linked `author.login` accounts in observed commits, including bots and excluding unlinked authors. Co-author metadata is not analyzed. This is not the complete project contributor count.
+- Public releases use `published_at`, include prereleases and exclude drafts. API ordering and collection caps may limit coverage.
+- Fork status comes from GitHub metadata; it does not establish originality, work performed or token ownership.
+- Unauthenticated GitHub access typically permits 60 requests per hour per IP. An analysis can use 3–16 requests. Errors, limits and empty repositories are distinguished; queries support cancellation and a 45-second timeout.
+- Separate API calls are not an atomic snapshot. Repositories, releases and account attribution may change during or after observation.
 
 ## Official project token — Solana Mainnet
 
@@ -31,71 +50,48 @@ MEMEDIFF is the project-associated meme token launched through Forks Wiki for th
 
 Creator-fee shares: launcher 50%, GitHub owner dnfl1999 30%, Forks 20%. These are fee shares, not token allocations. The on-chain sharing config has its admin revoked. The immutable IPFS metadata contains Forks' generic non-endorsement wording and links its website field to the Forks coin page; this README identifies the project-maintained website separately. See the audit for evidence and limitations.
 
+## Run locally and test
 
-**코드의 변화를, 근거로.** 무료 오픈소스 밈코인 개발활동 분석 도구입니다. 입력한 공개 GitHub 저장소를 브라우저에서 직접 조회합니다. 투자 점수, 가짜 통계, 토큰 안전성 보장은 제공하지 않습니다.
-
-웹사이트: **https://dnfl1999.github.io/memediff/** · [검증 결과와 제한](PROGRESS.md)
-
-## 사용법
-
-1. GitHub 저장소 URL 또는 `owner/repo`를 입력합니다.
-2. 선택적으로 Solana 토큰 mint 주소를 입력합니다. Base58 32바이트 형식만 검사하며 mint 존재 및 저장소와의 공식 연관성은 검증하지 않습니다.
-3. **활동 분석하기**를 누르고 최근 7일/30일 커밋·릴리스·기여자와 원본 링크를 확인합니다.
-4. **비교 기준 저장**을 누르면 이 브라우저에만 현재 보고서가 저장됩니다. 다시 조회하면 SHA 단위 관측 차이가 표시됩니다. 같은 저장소·브랜치·토큰 조합만 비교합니다.
-5. **JSON / PNG**로 보고서를 내보냅니다. JSON에는 전체 수집 데이터·API 증거 URL·수집 범위·비교 결과가 포함됩니다. PNG는 요약 보고서입니다.
-
-## 차별화: 관측 증거의 변화
-
-단순 커밋 수 순위 대신 이전 조회와 현재 조회의 SHA 집합을 비교합니다. 새로 관측된 SHA, 두 조회의 겹치는 기간에서 미관측된 SHA, 30일 관측치 변화, 수집 불완전성을 함께 표시합니다. 새 SHA가 새로운 개발의 증거이거나 사라진 SHA가 삭제·조작의 증거라고 단정하지 않습니다. 이동하는 기간에서 자연스럽게 제외된 과거 커밋은 미관측 집계에서 제외합니다.
-
-## 측정 방법과 한계
-
-- 실제 공개 GitHub REST API만 사용합니다. 제품에는 예시 통계를 표시하지 않습니다. 자동 테스트의 합성 데이터는 테스트 파일에만 있습니다.
-- 기본 브랜치의 `committer.date`를 기준으로 조회 시각 직전 7×24시간/30×24시간을 집계합니다. Git timestamp는 변경 가능하며 실제 작업 시점을 보장하지 않습니다.
-- 페이지당 100개, 커밋 최대 10페이지/릴리스 최대 5페이지를 조회합니다. 다음 페이지가 남거나 오류가 발생하면 불완전 수집으로 표시합니다. 숫자의 `+`는 불완전 관측치라는 의미이며 정확한 총계가 아닙니다.
-- 기여자는 관측 커밋의 GitHub 연결 `author.login` 고유 개수입니다. 봇 포함, 미연결 계정 제외, 공동 작성자 메타데이터 미분석입니다. 전체 프로젝트 기여자 수가 아닙니다.
-- 공개 릴리스의 `published_at`을 사용하며 사전 릴리스를 포함합니다. draft는 제외합니다. GitHub 페이지 정렬 특성상 조회 상한에 도달하면 모든 기간의 완전성을 보장하지 않습니다.
-- Fork 여부는 GitHub 메타데이터입니다. 코드 독창성·실질 개발량·품질·토큰의 소유 관계를 증명하지 않습니다.
-- 비인증 API는 일반적으로 IP당 시간당 60회 요청입니다. 분석 1회에 3~16회 요청을 사용할 수 있습니다. 실패·제한·빈 저장소를 구분하고 취소/45초 타임아웃을 지원합니다.
-- 여러 API 요청은 원자적 스냅샷이 아니므로 조회 도중 저장소가 바뀔 수 있습니다. 릴리스·계정 연결도 사후 수정될 수 있습니다.
-
-## 로컬 실행 및 테스트
-
-Node.js 22 이상. 서비스 런타임은 외부 패키지 없이 동작합니다. 브라우저 QA에는 개발 전용 Playwright와 pngjs를 사용합니다.
+Node.js 22 or later. The website has no runtime package dependencies. Playwright and pngjs are development-only QA tools.
 
 ```sh
+npm ci
 npm test
 npm run build
 npm start
 ```
 
-브라우저 E2E (독립 Chromium, 기존 사용자 브라우저/로그인 프로필 미사용):
+Open http://127.0.0.1:4173. On Windows, use `npm.cmd` if PowerShell execution policy blocks `npm`.
 
 ```sh
-npm ci
 npx playwright install chromium
 npm run build
 npm run test:e2e
+npm run test:e2e:live
 ```
 
-`test:e2e`는 모의 GitHub 응답 및 정적 UI를 검증하는 데스크톱·모바일 32개 테스트입니다. Development Receipt의 실제 PNG 디코딩·기간·증거·부분 수집 문구와 공식 CA 복사도 포함합니다. 실제 API 테스트는 별도로 `npm run test:e2e:live`를 실행합니다. 공개 사이트 대상은 `E2E_BASE_URL=https://dnfl1999.github.io/memediff/`를 설정합니다. Windows 설치 경로 예시 및 결과 해석은 [브라우저 QA 기록](docs/BROWSER_QA.md)을 참고하세요.
+The desktop/mobile suite uses explicitly mocked GitHub responses to test behavior, downloads, English wording, accessibility labels and layout. The live project separately queries the real GitHub API. PNG downloads are decoded with CRC validation; JSON structure and values are checked. Browsers are independent Chromium instances without personal login profiles.
 
-http://127.0.0.1:4173 에서 확인합니다. Windows PowerShell 실행 정책 때문에 `npm`이 막히면 `npm.cmd`를 사용하세요. Node 24 샌드박스에서 자식 프로세스가 제한되면 `node --test --test-isolation=none`으로 핵심 테스트를 실행할 수 있습니다.
+To test the public site, set `E2E_BASE_URL=https://dnfl1999.github.io/memediff/`. A real API 403/429 is recorded as skipped, with no automatic retry. A mocked API test passing is not evidence that the live API passed. See [QA background](docs/BROWSER_QA.md) and [work log](PROGRESS.md).
 
-## 배포
+## Deployment
 
-GitHub Settings → Pages → Source를 GitHub Actions로 설정합니다. `.github/workflows/pages.yml`은 main/PR에서 핵심 테스트와 Linux Chromium E2E를 통과한 뒤 main에서만 정적 `dist/`를 Pages로 배포합니다. 배포 후 공개 URL의 모의 API E2E와 실제 GitHub API 검사를 따로 실행하며 보고서·다운로드·스크린샷을 Actions 아티팩트로 14일 보관합니다. 실제 API의 403/429는 증거를 남기고 skipped로 구분하며 재시도하지 않습니다. PR에는 배포 권한이 없습니다. 다른 정적 호스트에도 `dist/`를 게시할 수 있으며 상대 경로를 사용합니다.
+GitHub Pages uses GitHub Actions. [pages.yml](.github/workflows/pages.yml) runs unit tests and Linux Chromium desktop/mobile tests before deploying `dist/` from main. After deployment it separately runs mocked and live API tests against the public URL. Reports, downloads and screenshots are retained as Actions artifacts for 14 days. Pull requests cannot deploy. Relative asset paths also support other static hosts.
 
-`scripts/github-admin.ps1`은 기존 Git credential을 메모리에서만 사용하고 매번 `dnfl1999`를 확인합니다. 기본은 읽기 전용 `inspect`입니다. `create`, `pages`, `status` 작업을 지원하며 로그인/토큰 생성은 하지 않습니다. 다른 계정·저장소에는 사용할 수 없습니다.
+The repository administration helper checks the authenticated account is `dnfl1999`. Its default `inspect` action is read-only. It uses existing Git credentials in memory and does not create login sessions or tokens.
 
-## 개인정보와 보안
+## Privacy and security
 
-GitHub API로 저장소 경로와 접속 IP가 전달됩니다. Solana 주소는 GitHub 요청에 포함되지 않습니다. API 키·지갑 연결·분석 서버·외부 폰트·추적기가 없습니다. Pages 호스트에는 통상적인 접속 기록이 남을 수 있습니다. 커밋의 원본 작성자 이름·이메일을 저장하지 않으며 공개 GitHub login만 사용합니다. 기준 저장은 명시적인 버튼 동작에만 이뤄집니다. 내보낸 파일에는 토큰 주소가 포함됩니다.
+GitHub receives repository paths and the visitor IP; optional Solana addresses are not sent to GitHub. The app has no analysis backend, trackers, external fonts, API-key input or wallet connection. The Pages host may keep normal access logs. Reports retain public GitHub logins, not original author names or email addresses. Baselines are saved only after an explicit click; exports include the entered token address.
 
-사용자/저장소 텍스트는 `textContent`로 렌더링하고 URL은 HTTPS 허용 호스트만 링크합니다. CSP로 스크립트·연결 대상을 제한합니다. 로컬 저장소는 사용자가 수정할 수 있으므로 신뢰 가능한 증명서가 아닙니다. 서명된 감사 보고서가 아닌 재확인 가능한 관측 기록입니다.
+User and repository text is rendered as text, not HTML. Source links are restricted to allowed HTTPS hosts and CSP restricts scripts and network connections. Local storage and exports are editable observations, not trusted attestations.
 
-## 독립성과 라이선스
+## Feedback and contributions
 
-빈 MemeDiff 폴더에서 독립 구현했습니다. 다른 프로젝트의 소스나 작업 대기열을 재사용하지 않았습니다. 서비스 런타임 의존성은 0개입니다. 개발 전용 직접 의존성은 Playwright(Apache-2.0)와 pngjs(MIT)이며 버전을 lockfile로 고정합니다. 이 도구와 Chromium은 공개 사이트에 포함되지 않습니다. [MIT](LICENSE).
+[Report a bug or suggest an improvement](https://github.com/dnfl1999/memediff/issues/new/choose). English and Korean feedback are welcome. Please include reproduction steps and remove secrets or unnecessary personal data. See [contribution guidance](CONTRIBUTING.md) and the [roadmap](ROADMAP.md).
 
-관련 도구와의 기능 비교 및 출처는 [docs/RESEARCH.md](docs/RESEARCH.md), Forks Wiki 준비 상태는 [docs/FORKS_WIKI.md](docs/FORKS_WIKI.md), 검증 기록 및 남은 작업은 [PROGRESS.md](PROGRESS.md)를 참고하세요.
+## Independence and license
+
+MemeDiff was independently implemented in its own workspace. It does not reuse other project source or work queues. Runtime dependencies: none. Development dependencies are pinned: Playwright (Apache-2.0) and pngjs (MIT); neither is shipped to the website. Licensed under [MIT](LICENSE).
+
+[Related-tool research](docs/RESEARCH.md) · [Dated operations comparison](docs/OPERATIONS_UPDATE.md) · [Archived Korean README](README.ko.md)

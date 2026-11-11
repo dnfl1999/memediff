@@ -5,7 +5,7 @@ test('page loads, JavaScript executes, and keyboard navigation works', async ({ 
   await page.goto('./');
   await expect(page).toHaveTitle(/MemeDiff/);
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('link', { name: '본문으로 건너뛰기' })).toBeFocused();
+  await expect(page.getByRole('link', { name: 'Skip to main content' })).toBeFocused();
   await page.locator('#repo').focus();
   await page.keyboard.type('fixture/project');
   await page.keyboard.press('Tab');
@@ -22,10 +22,10 @@ test('analysis, 7/30-day switching, safe text and responsive layout', async ({ p
   await page.goto('./');
   await analyze(page);
   await expect(page.locator('#metrics strong')).toHaveText(['3', '2', '2']);
-  await page.getByRole('button', { name: '최근 7일 / 7 days', exact: true }).click();
+  await page.getByRole('button', { name: '7 days', exact: true }).click();
   await expect(page.locator('#metrics strong')).toHaveText(['2', '1', '1']);
   await expect(page.locator('[data-days="7"]')).toHaveAttribute('aria-pressed', 'true');
-  await page.getByRole('button', { name: '최근 30일 / 30 days', exact: true }).click();
+  await page.getByRole('button', { name: '30 days', exact: true }).click();
   await expect(page.locator('#metrics strong')).toHaveText(['3', '2', '2']);
   await expect(page.locator('#description')).toContainText('<img');
   await expect(page.locator('#description img, #commits img')).toHaveCount(0);
@@ -46,11 +46,11 @@ test('baseline persists, requery finds new SHA, and deletion removes it', async 
   await page.locator('#save').click();
   api.revision = 1;
   await analyze(page);
-  await expect(page.locator('#comparison strong')).toHaveText('1개 새로 관측');
+  await expect(page.locator('#comparison strong')).toHaveText('1 newly observed');
   await page.reload(); await analyze(page);
-  await expect(page.locator('#comparison strong')).toHaveText('1개 새로 관측');
+  await expect(page.locator('#comparison strong')).toHaveText('1 newly observed');
   await page.locator('#clear').click();
-  await expect(page.locator('#comparison')).toContainText('아직 저장된 비교 기준이 없습니다');
+  await expect(page.locator('#comparison')).toContainText('No saved baseline yet');
   expect(await page.evaluate(() => localStorage.length)).toBe(0);
 });
 
@@ -61,7 +61,7 @@ test('invalid repository and Solana addresses fail before any API request', asyn
   await page.locator('#repo').fill('fixture/project'); await page.locator('#token').fill('0'.repeat(32)); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toContainText('Base58');
   await page.locator('#token').fill('1'.repeat(33)); await page.locator('#analyze').click();
-  await expect(page.locator('#status')).toContainText('32바이트');
+  await expect(page.locator('#status')).toContainText('32 bytes');
   expect(api.requests).toHaveLength(0);
 });
 
@@ -89,20 +89,20 @@ for (const status of [403, 404, 429]) test(`GitHub ${status} displays actionable
 test('network failure displays recovery message', async ({ page, diagnostics }) => {
   diagnostics.allowApiAbort = true; await mockGitHub(page, { offline: true }); await page.goto('./');
   await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
-  await expect(page.locator('#status')).toContainText('네트워크'); await expect(page.locator('#analyze')).toBeEnabled();
+  await expect(page.locator('#status')).toContainText('network'); await expect(page.locator('#analyze')).toBeEnabled();
 });
 
 test('partial API failure is labeled incomplete, not zero activity', async ({ page, diagnostics }) => {
   diagnostics.expectedStatuses = [500]; await mockGitHub(page, { commitError: 500 }); await page.goto('./'); await analyze(page);
-  await expect(page.locator('#warnings')).toContainText('커밋 수집이 불완전');
+  await expect(page.locator('#warnings')).toContainText('Commit collection is incomplete');
   await expect(page.locator('#metrics strong')).toHaveText(['0+', '2', '0+']);
 });
 
 test('empty repository renders explicit empty states', async ({ page }) => {
   await mockGitHub(page, { empty: true }); await page.goto('./'); await analyze(page);
   await expect(page.locator('#metrics strong')).toHaveText(['0', '0', '0']);
-  await expect(page.locator('#commits')).toContainText('커밋이 없습니다');
-  await expect(page.locator('#releases')).toContainText('릴리스가 없습니다');
+  await expect(page.locator('#commits')).toContainText('No commits observed');
+  await expect(page.locator('#releases')).toContainText('No public releases observed');
 });
 
 test('cancel stops a pending query and restores controls', async ({ page, diagnostics }) => {
@@ -111,6 +111,6 @@ test('cancel stops a pending query and restores controls', async ({ page, diagno
   await page.route('https://api.github.com/**', async route => { await gate; await route.abort().catch(() => {}); });
   await page.goto('./'); await page.locator('#repo').fill('fixture/project'); await page.locator('#analyze').click();
   await page.locator('#cancel').click();
-  await expect(page.locator('#status')).toContainText('취소'); release();
+  await expect(page.locator('#status')).toContainText('canceled'); release();
   await expect(page.locator('#analyze')).toBeEnabled(); await expect(page.locator('#repo')).toBeEnabled();
 });

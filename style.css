@@ -3,3 +3,12 @@
 .token-panel{margin:24px 0;padding:28px}.token-panel>p{max-width:850px;color:#b7cba7}.token-panel h2{margin:12px 0}.token-panel a{text-decoration:underline}.token-panel label{display:block;margin-top:20px}.token-address{display:flex;gap:12px;margin-top:8px}.token-address input{flex:1;min-width:0;font:13px ui-monospace,monospace}.token-links{display:flex;flex-wrap:wrap;gap:12px 24px}.token-links a{padding:10px 0}.token-context{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}.token-context p{color:#b7cba7;font-size:13px}#copy-ca-status{min-height:24px;font-size:13px}@media(max-width:700px){.token-panel{padding:20px}.token-address{flex-direction:column}.token-context{grid-template-columns:1fr;gap:0}}
 
 .english-guide{margin:0 0 24px}.english-guide summary{color:#c5f277}.english-guide p,.english-guide li{color:#b7cba7}.english-guide li{margin:10px 0}
+
+/* Leave space for longer English labels without changing the brand palette. */
+.hero h1,.hero>p{max-width:calc(100% - 400px)}
+.section-head{flex-wrap:wrap}.report-grid>*,.metric{min-width:0}
+.comparison strong{display:block;font-size:clamp(22px,2.4vw,30px);overflow-wrap:anywhere}
+.metric strong{font-size:clamp(24px,3.4vw,44px)}
+.empty-steps{flex-wrap:wrap}.text-button{white-space:normal;text-align:left}
+@media(max-width:1050px){.hero-art{display:none}.hero h1,.hero>p{max-width:100%}}
+@media(max-width:700px){h1{font-size:clamp(39px,9vw,49px);letter-spacing:-2px}.metric h3{font-size:11px}.metric strong{font-size:clamp(22px,6vw,33px)}nav{gap:12px}.version{display:none}.hero-note{display:flex;flex-wrap:wrap;gap:4px}.hero-note span{margin:0 4px}}
