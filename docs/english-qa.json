@@ -1,0 +1,224 @@
+{
+  "recordedAt": "2026-11-11T08:01:35.201Z",
+  "productCommit": "2faf68de2ac1d6dafcb7e9783d009092d04ff3fd",
+  "actions": "https://github.com/dnfl1999/memediff/actions/runs/42983271329",
+  "jobs": {
+    "verify": "success",
+    "deploy": "success",
+    "public-qa": "success"
+  },
+  "unitTests": {
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browserStats": {
+    "localMock": {
+      "startTime": "2026-11-11T07:55:09.353Z",
+      "duration": 44514.361000000004,
+      "expected": 38,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "localLive": {
+      "startTime": "2026-11-11T07:56:09.038Z",
+      "duration": 5262.163,
+      "expected": 0,
+      "skipped": 1,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "linuxBuildMock": {
+      "startTime": "2026-11-11T07:57:53.624Z",
+      "duration": 30062.746,
+      "expected": 38,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "linuxPublicMock": {
+      "startTime": "2026-11-11T07:59:08.435Z",
+      "duration": 26226.721,
+      "expected": 38,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "linuxPublicLive": {
+      "startTime": "2026-11-11T07:59:35.192Z",
+      "duration": 2581.801,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "liveEvidence": [
+    {
+      "name": "LIVE-api-evidence",
+      "data": {
+        "mocked": false,
+        "authenticated": false,
+        "responses": [
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff",
+            "status": 200,
+            "remaining": "58",
+            "reset": "1794383998"
+          },
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-12T07:59:36.163Z&until=2026-11-11T07:59:36.163Z&per_page=100&page=1",
+            "status": 200,
+            "remaining": "57",
+            "reset": "1794383998"
+          },
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+            "status": 200,
+            "remaining": "56",
+            "reset": "1794383998"
+          }
+        ]
+      }
+    },
+    {
+      "name": "browser-diagnostics",
+      "data": {
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failures": [],
+        "responses": [],
+        "expectedStatuses": [],
+        "allowApiAbort": false
+      }
+    }
+  ],
+  "localLiveLimit": [
+    {
+      "type": "API_LIMIT",
+      "description": "{\"url\":\"https://api.github.com/repos/dnfl1999/memediff\",\"status\":403,\"remaining\":\"0\",\"reset\":\"1794386765\"}"
+    }
+  ],
+  "externalLinks": [
+    {
+      "url": "https://github.com/dnfl1999/memediff",
+      "checkedAt": "2026-11-11T07:56:34.072Z",
+      "status": 200,
+      "finalUrl": "https://github.com/dnfl1999/memediff"
+    },
+    {
+      "url": "https://forks.wiki/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "checkedAt": "2026-11-11T07:56:34.116Z",
+      "status": 200,
+      "finalUrl": "https://forks.wiki/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"
+    },
+    {
+      "url": "https://pump.fun/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "checkedAt": "2026-11-11T07:56:34.117Z",
+      "status": 403,
+      "finalUrl": "https://pump.fun/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"
+    },
+    {
+      "url": "https://solscan.io/token/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "checkedAt": "2026-11-11T07:56:34.118Z",
+      "status": 403,
+      "finalUrl": "https://solscan.io/token/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"
+    },
+    {
+      "url": "https://github.com/dnfl1999/memediff/blob/main/POST_LAUNCH_AUDIT.md",
+      "checkedAt": "2026-11-11T07:56:34.118Z",
+      "status": 200,
+      "finalUrl": "https://github.com/dnfl1999/memediff/blob/main/POST_LAUNCH_AUDIT.md"
+    },
+    {
+      "url": "https://github.com/dnfl1999/memediff/blob/main/ROADMAP.md",
+      "checkedAt": "2026-11-11T07:56:34.119Z",
+      "status": 200,
+      "finalUrl": "https://github.com/dnfl1999/memediff/blob/main/ROADMAP.md"
+    },
+    {
+      "url": "https://github.com/dnfl1999/memediff/issues",
+      "checkedAt": "2026-11-11T07:56:34.119Z",
+      "status": 200,
+      "finalUrl": "https://github.com/dnfl1999/memediff/issues"
+    }
+  ],
+  "missingDocumentLinks": [],
+  "publicFiles": {
+    "checkedAt": "2026-11-11T07:59:13.898Z",
+    "url": "https://dnfl1999.github.io/memediff/",
+    "files": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "828871f1995da54ca1bce3fd4cf377cf9325f36e4aa71a009077ae35a7ef0ae9"
+      },
+      {
+        "file": "style.css",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "02fe2da9e7f14daf4b6648c794341f639441329b0a3a68a3adae905782c6d784"
+      },
+      {
+        "file": "favicon.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "2f752634b70f468149df17629b98228ded6488794cec6a95059613f0def65b83"
+      },
+      {
+        "file": "src/app.js",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "22592f037a51763ed30a6409356fefe545b3c1d33218ffb2f9b26ead51058bbe"
+      },
+      {
+        "file": "src/core.js",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "ecd723f3df1979fb3bb142127281751b63897089c22679f0d9dbdbebaa18cd02"
+      },
+      {
+        "file": "src/format.js",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "bba9184c7cb43d21bcf107dcfe375c4902af6752b0b6490dd361044bb4b44ef2"
+      },
+      {
+        "file": "src/github.js",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "ec36d6a590154ae331a83ea01ab9ecb7edfd47ed9818d6993dc4ac2c40540f4f"
+      },
+      {
+        "file": "src/receipt.js",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "ebd1ba97afe0c635bf8b400f7fc71b2933db98a44d282352b3d4c1c076510eed"
+      },
+      {
+        "file": "src/token.js",
+        "status": 200,
+        "matchesLocal": true,
+        "koreanLiterals": false,
+        "sha256": "a317edb68389b95eafebaf9fc65e4b670fdf317332d113ea329b36e3aed3543f"
+      }
+    ]
+  },
+  "notes": [
+    "Mock API fixtures are test-only; the separate public-live test used unauthenticated real GitHub responses.",
+    "Local live test skipped once after GitHub 403 with zero requests remaining; no local retry.",
+    "Browser suite covers PNG CRC decoding, JSON schema, old baseline compatibility, CA copying, keyboard use and widths 360/768/1024/1440.",
+    "No Korean literals remain in shipped app source. Original GitHub text and historical audit documents retain their source language.",
+    "pump.fun and Solscan returned HTTP 403 to automated link checks; their reachability is not claimed."
+  ]
+}

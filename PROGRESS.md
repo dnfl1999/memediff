@@ -8,7 +8,9 @@
 
 로컬 단위 27/27, Chromium PC·모바일 모의 API E2E 38/38 통과. 한국어 기기 설정의 영어/UTC 표시, 예전 한국어 baseline 무변경 호환, 360/768/1024/1440px 레이아웃, 실제 PNG 디코딩·JSON 구조·CA 복사·콘솔/네트워크 오류를 확인했습니다. 앱 자체 표시 소스 한국어 잔존 0건. 로컬 실제 API 검사는 07:56 UTC GitHub 403/remaining=0으로 1건 skipped, 반복하지 않았습니다. 외부 링크 7개 중 GitHub/Forks 5개 HTTP 200, pump.fun/Solscan 2개 HTTP 403으로 접근 검증 제한. CA 링크는 변경하지 않았습니다. 문서 내부 파일 링크 누락 0건.
 
-dnfl1999 인증 및 push 권한, 원격 main과 일치를 확인했습니다. 다음 단계: 변경 커밋·push 후 Actions verify/deploy/public-qa 확인, 공개 사이트 영어 표시 및 실제 API 결과를 기록합니다. 재개 명령: `npm.cmd test`, `npm.cmd run build`, `npm.cmd run test:e2e` (독립 Chromium 경로는 `.local/pw-browsers`). 실제 API는 제한이 해제된 환경에서만 1회 실행합니다. 테스트 결과는 `qa-results/english-local/`, 제한 증거는 `qa-results/english-local-live/`에 있습니다.
+dnfl1999 계정으로 제품 커밋 `2faf68de2ac1d6dafcb7e9783d009092d04ff3fd`를 main에 안전하게 게시했습니다. [Actions 42983271329](https://github.com/dnfl1999/memediff/actions/runs/42983271329)의 verify/deploy/public-qa 전부 성공. 아티팩트 확인 결과 Linux 빌드 모의 38/38, 공개 사이트 모의 38/38, 공개 사이트 **실제 GitHub API·JSON/PNG 다운로드 1/1 통과**. 로컬 모의 38건을 포함한 브라우저 결과는 **115 passed / 0 failed / 1 skipped**이며 skipped는 위의 로컬 실제 API 제한입니다. 단위 테스트는 별도 27/27 통과했습니다. 예상된 오류 시나리오 외 콘솔·네트워크 실패는 없습니다.
+
+07:59:13 UTC(16:59:13 KST) 공개 사이트의 HTML/CSS/favicon/모든 JS 9개 파일이 HTTP 200, 로컬 배포 소스와 일치하며 한국어 리터럴 0건임을 확인했습니다. 공개 실제 브라우저 스크린샷의 영어 표시도 확인했습니다. [최종 QA 근거](docs/english-qa.json)에 시간·실제 API 응답·통과/건너뜀·파일 해시·링크 제한을 보존했습니다. 후속 기록 커밋은 문서만 `[skip ci]`로 게시해 검증된 Pages 배포를 유지합니다. 미완료 제품 작업은 없습니다. 다른 프로젝트·온체인 정보·지갑·거래는 변경하지 않았습니다.
 
 ## 이전 상태 — 신규 사용자 안내 및 피드백 운영 준비 (2026-11-11)
 
