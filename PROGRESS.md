@@ -1,32 +1,69 @@
 # MemeDiff 진행 기록
 
-기준일: 2026-11-11 (Asia/Seoul). 작업 대상은 이 MemeDiff 폴더와 dnfl1999/memediff뿐입니다.
+기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
-## 완료
+## 구현 및 공개 완료
 
-- 빈 폴더 확인, 기존 재사용 코드 없음.
-- 연결 GitHub 프로필 및 기존 Git credential의 API `/user` 모두 dnfl1999 확인.
-- 독립 정적 앱 구현: 7/30일 조회, SHA 비교, 선택적 토큰 기록, 증거 URL, PNG/JSON, 반응형 CSS, 오류·수집 한계·개인정보 안내.
-- MIT LICENSE, README, Pages Actions, 핵심 자동 테스트 작성.
+- 빈 폴더에서 독립 정적 앱 구현. 다른 프로젝트 소스·브랜치·작업 대기열 미사용.
+- 공개 GitHub URL 검증, 기본 브랜치 7/30일 커밋·릴리스·연결된 기여자, UTC 활동 차트, 원본 증거 링크.
+- Solana Base58 32바이트 주소 형식 검증 및 선택 기록. mint 존재·공식 연관성은 미검증으로 명시.
+- 명시적 로컬 비교 기준 저장, 저장소·브랜치·토큰별 SHA 관측 차이, 기간 이동·불완전 수집 표시.
+- JSON 전체 보고서 및 Canvas PNG 요약 내보내기 구현.
+- 반응형 CSS, 입력 검증·안전한 링크·textContent·CSP, API 제한·빈 저장소·404·5xx·취소·타임아웃 처리.
+- MIT LICENSE, README, 연구 문서, 테스트, GitHub Pages Actions 포함.
+- 연결 프로필 및 Git credential의 `/user`에서 dnfl1999 확인. 공개 GitHub noreply 작성자 주소 사용.
+- 공개 저장소: https://github.com/dnfl1999/memediff
+- 공개 웹사이트: https://dnfl1999.github.io/memediff/
+- 최초 앱 배포 커밋: `7a13f1c9887822b5e19c91cbbb9049e9c4f05468`
+- 최초 Actions 검증·배포 성공: https://github.com/dnfl1999/memediff/actions/runs/42960043325
 
-## 진행 중
+## 검증 결과
 
-- 테스트 재검증 및 GitHub 공개 게시·Pages 배포.
-- Forks Wiki 실제 저장소 인식과 비용 조사.
+| 검사 | 실제 결과 |
+| --- | --- |
+| `npm.cmd test` | 17/17 통과. URL·주소·시간 경계·집계·비교 격리·수집 상한·오류·취소·빈 저장소·릴리스 필터 테스트 |
+| `npm.cmd run build` | 성공 |
+| JavaScript 구문 검사 | app.js / github.js 통과 |
+| 실제 GitHub API 정상 데이터 | 기존 dnfl1999 인증을 메모리에서만 주입한 개발자 smoke 통과. 최초 커밋 1개, 연결 기여자 1명, 릴리스 0개, 수집 완료, 경고 없음 |
+| 실제 데이터 비교·JSON | 동일 스냅샷 SHA 차이 0, JSON round-trip 통과 |
+| 실제 비인증 API | 환경의 IP 요청 제한으로 403 관측. 정상 비인증 조회는 이 환경에서 미검증. 제품에는 인증값이 없으며 방문자 IP 한도가 적용됨 |
+| 공개 HTTP | HTML/CSS/SVG/JS 총 6개 자산 모두 200, 로컬 dist와 바이트 일치 |
+| 비밀키 점검 | 추적 대상 소스에서 일반 GitHub/OpenAI 키·개인키 패턴 미검출. 자격증명 파일·환경 파일·조사 캐시는 게시하지 않음 |
+| 의존성·라이선스 | npm 및 런타임 외부 의존성 0개, MIT. CI는 공식 GitHub Actions 사용 |
+| 브라우저 E2E | **미완료**. Windows 자동화가 현재 브라우저 URL을 안전하게 확인하지 못해 도구가 중단됨 |
+| 실제 PNG 다운로드·모바일 화면 | **미검증**. 구현 및 구문 확인만 완료. HTTP/자동 테스트를 브라우저 검증으로 대체하여 주장하지 않음 |
 
-## 검증 제한
+초기 테스트의 Windows sandbox `spawn EPERM`은 권한을 조정해 해결했습니다. 테스트 자체의 페이지 판별 버그(`page=1`이 `per_page=100`에 잘못 일치)는 URLSearchParams로 고쳤고 전체 테스트를 다시 통과했습니다.
 
-- 실제 브라우저 E2E 미완료. Windows 브라우저 자동화 도구가 현재 URL을 안전하게 확인하지 못해 중단됨. 이 상태를 통과로 기록하지 않음.
-- 비인증 실제 GitHub API 조회에서 403 rate limit 관측. 오류 안내 동작은 확인했으나 정상 조회 검증은 추가 필요.
-- 첫 자동 테스트 시도는 Windows sandbox spawn EPERM, 권한 조정 후 16/17. 실패 원인은 테스트의 page=1 문자열이 per_page=100에도 일치하던 것. 수정 후 재검증 중.
+## Forks Wiki 조사
 
-## 재개 명령
+게시 후 읽기 전용 `/api/launch/plan?repo=dnfl1999%2Fmemediff`가 **HTTP 200 / ok:true**로 저장소와 소유자를 인식했습니다. 현재 사전검사상 런칭 가능입니다. 이름 MemeDiff / 티커 MEMEDIFF는 형식 규칙에 맞지만 글로벌 중복/예약은 확인되지 않았습니다.
+
+현재 창작자 수수료 배분은 런처 50%·저장소 측 30%·Forks 20%. Jito tip 0.0005 SOL에 rent·네트워크 비용·선택 매수가 추가되므로 총액은 미확정입니다. 상세 근거와 보상 조건: [docs/FORKS_WIKI.md](docs/FORKS_WIKI.md).
+
+**실행하지 않은 작업:** 로그인/2FA, 지갑 연결, 서명, 거래 build/submit, SOL 지출, 초기 매수, 토큰 발행. 웹서비스의 배포는 토큰 발행이 아닙니다.
+
+## 남은 QA 및 재개 방법
+
+브라우저 자동화가 복구되면 다음을 공개 사이트에서 검증합니다. 이는 남은 QA이며 완료로 간주하지 않습니다.
+
+1. `dnfl1999/memediff` 조회 → 7일/30일 전환 → 토큰 주소 기록.
+2. 비교 기준 저장 → 재조회 → 같은 SHA의 추가 관측이 0인지 확인 → 기준 삭제.
+3. JSON/PNG 다운로드 후 JSON 필드·실제 PNG 이미지 확인.
+4. 잘못된 URL/토큰, 없는 저장소, 취소, 모바일 너비/키보드 탐색 확인.
+5. GitHub API 403이 발생하면 응답의 reset 이후 다시 시도. 테스트 목적으로 과도한 요청을 보내지 않음.
 
 ```powershell
 npm.cmd test
 npm.cmd run build
-./scripts/github-admin.ps1 -Action inspect
-./scripts/github-admin.ps1 -Action status
+node scripts/smoke.mjs
+npm.cmd start
 ```
 
-사용자 승인 없이 지갑 연결·서명·SOL 지출·토큰 발행·로그인·2FA를 하지 않습니다.
+GitHub 상태 확인(시스템 실행 정책을 변경하지 않는 방식):
+
+```powershell
+& ([scriptblock]::Create((Get-Content -LiteralPath ./scripts/github-admin.ps1 -Raw -Encoding utf8))) -Action status
+```
+
+사용자의 추가 조치는 공개 웹서비스 이용에는 필요하지 않습니다. 실제 코인 런칭은 별도의 명시적인 승인과 사용자 지갑 작업이 필요합니다.

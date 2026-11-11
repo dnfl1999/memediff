@@ -21,6 +21,8 @@
 
 현재 가이드는 공개 저장소, 지급 가능한 실제 GitHub 사람 계정, 저장소당 1개 코인, 지갑당 일 3개 런칭을 설명합니다. FORK/WIKI 계열 사칭 이름이나 공식 저장소 유사 프로젝트는 제한됩니다. MemeDiff는 빈 폴더에서 새로 구현한 독립 저장소입니다. 브라우저 UI 자동화는 URL 확인 오류로 중단되어 실제 화면의 최종 검증은 미완료입니다.
 
+**저장소 인식 확인 완료:** 공개 게시 후 [읽기 전용 launch plan API](https://forks.wiki/api/launch/plan?repo=dnfl1999%2Fmemediff)가 HTTP 200, `ok: true`, `plan.repo: dnfl1999/memediff`, `owner.login: dnfl1999`, `owner.type: User`를 반환했습니다. 수취인 배분은 dnfl1999 3,000bps, 런처 5,000bps, Forks 2,000bps였습니다. 현재 사전검사상 런칭 대상이며 실제 발행 성공을 보장하지는 않습니다. 반환되는 일회성 ticket은 기록·공개하지 않았고 거래 build/submit API를 호출하지 않았습니다.
+
 ## 비용 및 배분
 
 - 현재 Jito tip 설정: **0.0005 SOL**.

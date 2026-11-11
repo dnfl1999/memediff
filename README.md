@@ -2,7 +2,7 @@
 
 **코드의 변화를, 근거로.** 무료 오픈소스 밈코인 개발활동 분석 도구입니다. 입력한 공개 GitHub 저장소를 브라우저에서 직접 조회합니다. 투자 점수, 가짜 통계, 토큰 안전성 보장은 제공하지 않습니다.
 
-웹사이트: **https://dnfl1999.github.io/memediff/** (배포 검증 상태는 [PROGRESS.md](PROGRESS.md) 참고)
+웹사이트: **https://dnfl1999.github.io/memediff/** · [검증 결과와 제한](PROGRESS.md)
 
 ## 사용법
 
