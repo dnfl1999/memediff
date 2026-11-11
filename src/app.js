@@ -72,10 +72,11 @@ $('cancel').addEventListener('click', () => controller?.abort());
 document.querySelectorAll('[data-days]').forEach(b => b.addEventListener('click', () => { days = Number(b.dataset.days); document.querySelectorAll('[data-days]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); if (report) render(); }));
 $('save').addEventListener('click', () => { if (!report) return; try { localStorage.setItem(key(), JSON.stringify(report)); loadBaseline(); renderComparison(); status('현재 보고서를 이 브라우저의 비교 기준으로 저장했습니다. 다음 조회에 사용됩니다.'); } catch { status('기준을 저장할 수 없습니다. 브라우저 저장 공간 또는 개인정보 설정을 확인하세요.', true); } });
 $('clear').addEventListener('click', () => { if (!report) return; try { localStorage.removeItem(key()); comparison = null; renderComparison(); status('이 프로젝트의 로컬 비교 기준을 지웠습니다.'); } catch { status('브라우저 저장소에 접근할 수 없습니다.', true); } });
-function download(blob, extension) { const url = URL.createObjectURL(blob); const a = el('a'); a.href = url; a.download = `memediff-${report.repo.replace('/', '-')}-${report.fetchedAt.slice(0,10)}.${extension}`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000); }
+function download(blob, extension, snapshot = report) { const url = URL.createObjectURL(blob); const a = el('a'); a.href = url; a.download = `memediff-${snapshot.repo.replace('/', '-')}-${snapshot.fetchedAt.slice(0,10)}.${extension}`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000); }
 $('json').addEventListener('click', () => { if (report) { download(new Blob([JSON.stringify({ ...report, comparison, selectedDays: days }, null, 2)], { type:'application/json' }), 'json'); status('JSON 내보내기를 요청했습니다. 브라우저 다운로드를 확인하세요.'); } });
 $('png').addEventListener('click', () => {
   if (!report) return;
+  const snapshot = report;
   try {
     const canvas = document.createElement('canvas'); canvas.width = 1400; canvas.height = 1020;
     const ctx = canvas.getContext('2d'); ctx.fillStyle = '#101412'; ctx.fillRect(0,0,1400,1020);
@@ -95,6 +96,6 @@ $('png').addEventListener('click', () => {
     text('기본 브랜치 committer 날짜 / 공개 릴리스 published_at / GitHub 연결 계정·봇 포함',60,865,20);
     text('최대 1,000 커밋·500 릴리스 조회. 전체 증거 링크와 수집 오류는 JSON에 포함됩니다.',60,905,20);
     text('MemeDiff · MIT · https://dnfl1999.github.io/memediff/',60,970,20,'#a2b197');
-    canvas.toBlob(blob => { if (blob) { download(blob,'png'); status('PNG 내보내기를 요청했습니다. 브라우저 다운로드를 확인하세요.'); } else status('PNG 생성에 실패했습니다.',true); },'image/png');
+    canvas.toBlob(blob => { if (blob) { download(blob,'png',snapshot); status('PNG 내보내기를 요청했습니다. 브라우저 다운로드를 확인하세요.'); } else status('PNG 생성에 실패했습니다.',true); },'image/png');
   } catch { status('이 브라우저에서 PNG를 만들 수 없습니다. JSON 내보내기를 사용하세요.', true); }
 });

@@ -25,3 +25,25 @@ test('empty repository 409 is valid empty activity',async()=>{const r=await fetc
 test('release window filters drafts, future and old releases',async()=>{const releases=[{id:1,published_at:new Date(now).toISOString(),name:'v1',html_url:'https://github.com/a/b/releases/tag/v1'},{id:2,draft:true,published_at:new Date(now).toISOString()},{id:3,published_at:new Date(now+DAY).toISOString()},{id:4,published_at:new Date(now-31*DAY).toISOString()}]; const r=await fetchReport('a/b','',{now,fetcher:async url=>url.endsWith('/a/b')?response(info):response(url.includes('releases')?releases:[])}); assert.equal(r.releases.length,1);});
 test('abort is not converted to a partial successful report',async()=>{const controller=new AbortController();controller.abort(); await assert.rejects(fetchReport('a/b','',{signal:controller.signal,fetcher:async()=>{throw new Error('abort')}}),/45/);});
 
+test('release duplicates across pages count once and sort by publication', async () => {
+  const old = { id: 1, name: 'older', published_at: new Date(now - DAY).toISOString() };
+  const latest = { id: 2, name: 'latest', published_at: new Date(now).toISOString() };
+  const r = await fetchReport('a/b', '', { now, fetcher: async url => {
+    if (url.endsWith('/a/b')) return response(info);
+    if (url.includes('/commits')) return response([]);
+    return new URL(url).searchParams.get('page') === '1'
+      ? response([old], 200, { link: '<https://api.github.com/next>; rel="next"' })
+      : response([old, latest]);
+  }});
+  assert.equal(r.metrics[30].releases, 2);
+  assert.deepEqual(r.releases.map(x => x.id), [2, 1]);
+});
+
+test('release conflict is not interpreted as complete empty data', async () => {
+  const r = await fetchReport('a/b', '', { now, fetcher: async url =>
+    url.endsWith('/a/b') ? response(info) : url.includes('/commits') ? response([]) : response({}, 409)
+  });
+  assert.equal(r.coverage.releases, false);
+  assert.ok(r.warnings.some(x => x.includes('409')));
+});
+
