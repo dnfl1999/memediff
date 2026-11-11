@@ -14,7 +14,7 @@ test('deferred PNG export retains the original filename after another query fail
     setAttribute() {}
     remove() {}
     click() { if (this.tag === 'a' && this.download) downloads.push(this.download); }
-    getContext() { return { fillRect() {}, fillText() {} }; }
+    getContext() { return { fillRect() {}, fillText() {}, measureText(s) { return { width: String(s).length * 10 }; } }; }
     toBlob(callback) { pending.push(callback); }
   }
   const nodes = new Map();

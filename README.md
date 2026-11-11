@@ -1,5 +1,18 @@
 # ± MemeDiff
 
+## Share a Development Receipt
+
+MemeDiff turns a public GitHub activity observation into an English PNG card with an observation timestamp, exact UTC window, collection status and source evidence. It reuses the existing PNG export; there is no separate service or account to create.
+
+1. Open [MemeDiff](https://dnfl1999.github.io/memediff/) and enter a public GitHub URL or `owner/repo`. The optional Solana address is recorded, not verified.
+2. Select **Analyze**, then **7 days** or **30 days**. Review partial-data warnings before interpreting counts.
+3. Select **PNG Receipt** and export **JSON** alongside it for all API evidence, limits and errors. URLs printed in a PNG are not clickable.
+4. Save a local baseline with **비교 기준 저장**, then analyze again. SHA comparisons use the 30-day observation window even when the card displays 7-day metrics.
+
+Receipts are locally generated and editable, not signed certificates. Activity does not prove work performed, quality, token safety or returns. No wallet, token ownership, login, automatic social posting or hosted report is required. The main report UI remains primarily Korean, with an English quick start and bilingual primary controls.
+
+[Source repository](https://github.com/dnfl1999/memediff) · [Dated operations snapshot and product comparison](docs/OPERATIONS_UPDATE.md)
+
 ## Official project token — Solana Mainnet
 
 **MemeDiff / MEMEDIFF**
@@ -63,7 +76,7 @@ npm run build
 npm run test:e2e
 ```
 
-`test:e2e`는 모의 GitHub 응답을 사용하는 데스크톱·모바일 24개 테스트입니다. 실제 API 테스트는 별도로 `npm run test:e2e:live`를 실행합니다. 공개 사이트 대상은 `E2E_BASE_URL=https://dnfl1999.github.io/memediff/`를 설정합니다. Windows 설치 경로 예시 및 결과 해석은 [브라우저 QA 기록](docs/BROWSER_QA.md)을 참고하세요.
+`test:e2e`는 모의 GitHub 응답 및 정적 UI를 검증하는 데스크톱·모바일 32개 테스트입니다. Development Receipt의 실제 PNG 디코딩·기간·증거·부분 수집 문구와 공식 CA 복사도 포함합니다. 실제 API 테스트는 별도로 `npm run test:e2e:live`를 실행합니다. 공개 사이트 대상은 `E2E_BASE_URL=https://dnfl1999.github.io/memediff/`를 설정합니다. Windows 설치 경로 예시 및 결과 해석은 [브라우저 QA 기록](docs/BROWSER_QA.md)을 참고하세요.
 
 http://127.0.0.1:4173 에서 확인합니다. Windows PowerShell 실행 정책 때문에 `npm`이 막히면 `npm.cmd`를 사용하세요. Node 24 샌드박스에서 자식 프로세스가 제한되면 `node --test --test-isolation=none`으로 핵심 테스트를 실행할 수 있습니다.
 

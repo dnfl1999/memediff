@@ -1,0 +1,635 @@
+{
+  "ca": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+  "wallet": "EGQmE2VbE1h64zqG5EpUsuNrd6wrWFw2sx9WtyS5n27L",
+  "checks": {
+    "mint": {
+      "observedAt": "2026-11-11T07:19:06.258Z",
+      "url": "https://api.mainnet-beta.solana.com",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getAccountInfo",
+        "params": [
+          "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+          {
+            "encoding": "jsonParsed",
+            "commitment": "finalized"
+          }
+        ]
+      },
+      "httpStatus": 200,
+      "data": {
+        "jsonrpc": "2.0",
+        "result": {
+          "context": {
+            "apiVersion": "4.4.0",
+            "slot": 468036952
+          },
+          "value": {
+            "data": {
+              "parsed": {
+                "info": {
+                  "decimals": 6,
+                  "extensions": [
+                    {
+                      "extension": "metadataPointer",
+                      "state": {
+                        "authority": null,
+                        "metadataAddress": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"
+                      }
+                    },
+                    {
+                      "extension": "tokenMetadata",
+                      "state": {
+                        "additionalMetadata": [],
+                        "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                        "name": "MemeDiff",
+                        "symbol": "MEMEDIFF",
+                        "updateAuthority": null,
+                        "uri": "https://ipfs.io/ipfs/bafkreid5jhzwufn7zhzjk23wbjuz6v6ypgtxnekng5luryrh4nr7hbdsdi"
+                      }
+                    }
+                  ],
+                  "freezeAuthority": null,
+                  "isInitialized": true,
+                  "mintAuthority": null,
+                  "supply": "1000000000000000"
+                },
+                "type": "mint"
+              },
+              "program": "spl-token-2022",
+              "space": 414
+            },
+            "executable": false,
+            "lamports": 2753360,
+            "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+            "rentEpoch": 18446744073709552000,
+            "space": 414
+          }
+        },
+        "id": 1
+      }
+    },
+    "holdings": {
+      "observedAt": "2026-11-11T07:19:06.516Z",
+      "url": "https://api.mainnet-beta.solana.com",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getTokenAccountsByOwner",
+        "params": [
+          "EGQmE2VbE1h64zqG5EpUsuNrd6wrWFw2sx9WtyS5n27L",
+          {
+            "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"
+          },
+          {
+            "encoding": "jsonParsed",
+            "commitment": "finalized"
+          }
+        ]
+      },
+      "httpStatus": 200,
+      "data": {
+        "jsonrpc": "2.0",
+        "result": {
+          "context": {
+            "slot": 468036952,
+            "apiVersion": "4.3.0-beta.2"
+          },
+          "value": [
+            {
+              "pubkey": "TSekKLfRpP92ADsQLWedjTx7wa5AZtz7A5BXfVu3MEv",
+              "account": {
+                "lamports": 1513840,
+                "data": {
+                  "program": "spl-token-2022",
+                  "parsed": {
+                    "info": {
+                      "extensions": [
+                        {
+                          "extension": "immutableOwner"
+                        }
+                      ],
+                      "isNative": false,
+                      "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                      "owner": "EGQmE2VbE1h64zqG5EpUsuNrd6wrWFw2sx9WtyS5n27L",
+                      "state": "initialized",
+                      "tokenAmount": {
+                        "amount": "6983940536880",
+                        "decimals": 6,
+                        "uiAmount": 6983940.53688,
+                        "uiAmountString": "6983940.53688"
+                      }
+                    },
+                    "type": "account"
+                  },
+                  "space": 170
+                },
+                "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+                "executable": false,
+                "rentEpoch": 18446744073709552000,
+                "space": 170
+              }
+            }
+          ]
+        },
+        "id": 1
+      }
+    },
+    "holders": {
+      "observedAt": "2026-11-11T07:19:06.558Z",
+      "url": "https://api.mainnet-beta.solana.com",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getProgramAccounts",
+        "params": [
+          "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          {
+            "encoding": "jsonParsed",
+            "commitment": "finalized",
+            "filters": [
+              {
+                "memcmp": {
+                  "offset": 0,
+                  "bytes": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "httpStatus": 200,
+      "data": {
+        "jsonrpc": "2.0",
+        "result": [
+          {
+            "pubkey": "FPzfFzAs8MFP41LoiWzNAmSambpPX9PDF5bd2JmgpDp",
+            "account": {
+              "lamports": 1513840,
+              "data": {
+                "program": "spl-token-2022",
+                "parsed": {
+                  "info": {
+                    "extensions": [
+                      {
+                        "extension": "immutableOwner"
+                      }
+                    ],
+                    "isNative": false,
+                    "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                    "owner": "GJhnfPkf1mNw1jaoZBmQKi4jT41vhi6XQgSQxx7C9kh4",
+                    "state": "initialized",
+                    "tokenAmount": {
+                      "amount": "993016059463120",
+                      "decimals": 6,
+                      "uiAmount": 993016059.46312,
+                      "uiAmountString": "993016059.46312"
+                    }
+                  },
+                  "type": "account"
+                },
+                "space": 170
+              },
+              "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "executable": false,
+              "rentEpoch": 18446744073709552000,
+              "space": 170
+            }
+          },
+          {
+            "pubkey": "TSekKLfRpP92ADsQLWedjTx7wa5AZtz7A5BXfVu3MEv",
+            "account": {
+              "lamports": 1513840,
+              "data": {
+                "program": "spl-token-2022",
+                "parsed": {
+                  "info": {
+                    "extensions": [
+                      {
+                        "extension": "immutableOwner"
+                      }
+                    ],
+                    "isNative": false,
+                    "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                    "owner": "EGQmE2VbE1h64zqG5EpUsuNrd6wrWFw2sx9WtyS5n27L",
+                    "state": "initialized",
+                    "tokenAmount": {
+                      "amount": "6983940536880",
+                      "decimals": 6,
+                      "uiAmount": 6983940.53688,
+                      "uiAmountString": "6983940.53688"
+                    }
+                  },
+                  "type": "account"
+                },
+                "space": 170
+              },
+              "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "executable": false,
+              "rentEpoch": 18446744073709552000,
+              "space": 170
+            }
+          },
+          {
+            "pubkey": "6zHbikuRZw2zbarP5d9sw3vppyUJiWpwLM5Vy58QsP6y",
+            "account": {
+              "lamports": 1513840,
+              "data": {
+                "program": "spl-token-2022",
+                "parsed": {
+                  "info": {
+                    "extensions": [
+                      {
+                        "extension": "immutableOwner"
+                      }
+                    ],
+                    "isNative": false,
+                    "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                    "owner": "FoRb6ywRNrvL5jB1jsyAwaGFVW9DbtKTzztC2P4HTz2A",
+                    "state": "initialized",
+                    "tokenAmount": {
+                      "amount": "0",
+                      "decimals": 6,
+                      "uiAmount": 0,
+                      "uiAmountString": "0"
+                    }
+                  },
+                  "type": "account"
+                },
+                "space": 170
+              },
+              "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "executable": false,
+              "rentEpoch": 18446744073709552000,
+              "space": 170
+            }
+          },
+          {
+            "pubkey": "8SrJz482QwSPBwi2bBibbPd3cxLaWj7q78gdJgdGXGJ6",
+            "account": {
+              "lamports": 1513840,
+              "data": {
+                "program": "spl-token-2022",
+                "parsed": {
+                  "info": {
+                    "extensions": [
+                      {
+                        "extension": "immutableOwner"
+                      }
+                    ],
+                    "isNative": false,
+                    "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                    "owner": "CHJEPdabSPZUMYVTgazh91AGFAZY1a22iuuDhbZR2H7G",
+                    "state": "initialized",
+                    "tokenAmount": {
+                      "amount": "0",
+                      "decimals": 6,
+                      "uiAmount": 0,
+                      "uiAmountString": "0"
+                    }
+                  },
+                  "type": "account"
+                },
+                "space": 170
+              },
+              "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "executable": false,
+              "rentEpoch": 18446744073709552000,
+              "space": 170
+            }
+          },
+          {
+            "pubkey": "9zhdwLt1Z1bVb8kbW1BigfTsi4XL4qJ7XaJfGU7rRWpb",
+            "account": {
+              "lamports": 1513840,
+              "data": {
+                "program": "spl-token-2022",
+                "parsed": {
+                  "info": {
+                    "extensions": [
+                      {
+                        "extension": "immutableOwner"
+                      }
+                    ],
+                    "isNative": false,
+                    "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                    "owner": "CuM4VhBMaHuaZ6viLwbGAbmDhPCvuqay3aNzQSQ8KVBe",
+                    "state": "initialized",
+                    "tokenAmount": {
+                      "amount": "0",
+                      "decimals": 6,
+                      "uiAmount": 0,
+                      "uiAmountString": "0"
+                    }
+                  },
+                  "type": "account"
+                },
+                "space": 170
+              },
+              "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "executable": false,
+              "rentEpoch": 18446744073709552000,
+              "space": 170
+            }
+          }
+        ],
+        "id": 1
+      },
+      "summary": {
+        "positiveTokenAccounts": 2,
+        "uniqueOwnersIncludingPrograms": 2,
+        "notHumanHolderCount": true
+      }
+    },
+    "fees": {
+      "observedAt": "2026-11-11T07:19:06.602Z",
+      "url": "https://api.mainnet-beta.solana.com",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getMultipleAccounts",
+        "params": [
+          [
+            "Dyen5AzvjHRVG6pqKVyWGLVUXWnxFFUfTAE3KrTSeq36",
+            "DWMUdtbrTxj3tuAVGuWm2ZGrAH6GTcJHbPDi6yXbbbEW",
+            "FboBow7TKcrCNXTP2U52X1CCv6ysL5xjd1Jt2P1xQACk"
+          ],
+          {
+            "encoding": "base64",
+            "commitment": "finalized"
+          }
+        ]
+      },
+      "httpStatus": 200,
+      "data": {
+        "jsonrpc": "2.0",
+        "result": {
+          "context": {
+            "apiVersion": "4.4.0",
+            "slot": 468036953
+          },
+          "value": [
+            {
+              "data": [
+                "2EoJADiMXUv+AgG4F7Ok0fLPmWfWC/r3ls+yPBZKIUeTqL0ggg0R63U8bcUagrEbwWIqB3U4ALxHnblyrQ3b03RGBwcB7o5PdTb7AQMAAADY7ZZqzqAJz2xivy5R/Lu4R8QPUmfXsbz9T2Q04hZh9bgLxRqCsRvBYioHdTgAvEeduXKtDdvTdEYHBwHujk91NvuIE7rHNLSB/MXsPXpV9HV3HvgTi6yF4/LE8g2B6D5HFooM0AcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+                "base64"
+              ],
+              "executable": false,
+              "lamports": 5852160,
+              "owner": "pfeeUxB6jkeY1Hxd7CsFCAjcbHA9rWtchMGdZ6VojVZ",
+              "rentEpoch": 18446744073709552000,
+              "space": 1024
+            },
+            {
+              "data": [
+                "",
+                "base64"
+              ],
+              "executable": false,
+              "lamports": 13128918,
+              "owner": "11111111111111111111111111111111",
+              "rentEpoch": 18446744073709552000,
+              "space": 0
+            },
+            {
+              "data": [
+                "i2A1ESqpzpb/AQkAAAAyMTI0NjQ5MjYCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                "base64"
+              ],
+              "executable": false,
+              "lamports": 1559560,
+              "owner": "pfeeUxB6jkeY1Hxd7CsFCAjcbHA9rWtchMGdZ6VojVZ",
+              "rentEpoch": 18446744073709552000,
+              "space": 179
+            }
+          ]
+        },
+        "id": 1
+      }
+    },
+    "vaultRent": {
+      "observedAt": "2026-11-11T07:19:06.645Z",
+      "url": "https://api.mainnet-beta.solana.com",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getMinimumBalanceForRentExemption",
+        "params": [
+          0
+        ]
+      },
+      "httpStatus": 200,
+      "data": {
+        "jsonrpc": "2.0",
+        "result": 650240,
+        "id": 1
+      }
+    },
+    "socialRent": {
+      "observedAt": "2026-11-11T07:19:06.683Z",
+      "url": "https://api.mainnet-beta.solana.com",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getMinimumBalanceForRentExemption",
+        "params": [
+          179
+        ]
+      },
+      "httpStatus": 200,
+      "data": {
+        "jsonrpc": "2.0",
+        "result": 1559560,
+        "id": 1
+      }
+    },
+    "market": {
+      "observedAt": "2026-11-11T07:19:06.723Z",
+      "url": "https://api.dexscreener.com/latest/dex/tokens/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "httpStatus": 200,
+      "data": {
+        "schemaVersion": "1.0.0",
+        "pairs": [
+          {
+            "chainId": "solana",
+            "dexId": "pumpfun",
+            "url": "https://dexscreener.com/solana/gjhnfpkf1mnw1jaozbmqki4jt41vhi6xqgsqxx7c9kh4",
+            "pairAddress": "GJhnfPkf1mNw1jaoZBmQKi4jT41vhi6XQgSQxx7C9kh4",
+            "baseToken": {
+              "address": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+              "name": "MemeDiff",
+              "symbol": "MEMEDIFF"
+            },
+            "quoteToken": {
+              "address": "So11111111111111111111111111111111111111112",
+              "name": "Wrapped SOL",
+              "symbol": "SOL"
+            },
+            "priceNative": "0.00000002832",
+            "priceUsd": "0.000002330",
+            "txns": {
+              "m5": {
+                "buys": 0,
+                "sells": 0
+              },
+              "h1": {
+                "buys": 3,
+                "sells": 8
+              },
+              "h6": {
+                "buys": 3,
+                "sells": 8
+              },
+              "h24": {
+                "buys": 3,
+                "sells": 8
+              }
+            },
+            "volume": {
+              "h24": 344.18,
+              "h6": 344.18,
+              "h1": 344.18,
+              "m5": 0
+            },
+            "priceChange": {
+              "h1": -0.27,
+              "h6": -0.27,
+              "h24": -0.27
+            },
+            "fdv": 2330.71,
+            "marketCap": 2330.71,
+            "pairCreatedAt": 1794379889000
+          }
+        ]
+      }
+    },
+    "forks": {
+      "observedAt": "2026-11-11T07:19:07.115Z",
+      "url": "https://forks.wiki/api/tokens?repos=dnfl1999%2Fmemediff",
+      "httpStatus": 200,
+      "data": {
+        "ok": true,
+        "tokens": [
+          {
+            "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+            "name": "MemeDiff",
+            "repo": "dnfl1999/memediff",
+            "image": "https://ipfs.io/ipfs/bafkreia3y7m54xgpiflkoku7xcfryijq2zufpheok5pedyxu3qg3sijgii",
+            "split": [
+              {
+                "id": "212464926",
+                "bps": 3000,
+                "kind": "github",
+                "repo": "dnfl1999/memediff",
+                "login": "dnfl1999",
+                "roles": [
+                  "owner"
+                ],
+                "avatar": "https://avatars.githubusercontent.com/u/212464926?v=4&s=64"
+              },
+              {
+                "bps": 5000,
+                "kind": "wallet",
+                "login": "launcher",
+                "roles": [
+                  "launcher"
+                ],
+                "address": "EGQmE2VbE1h64zqG5EpUsuNrd6wrWFw2sx9WtyS5n27L"
+              },
+              {
+                "bps": 2000,
+                "kind": "wallet",
+                "login": "forks",
+                "roles": [
+                  "forks"
+                ],
+                "address": "Da71cES3NeUMLpW3MuNGkCVTht3jceik1RtNLrbqC6jV"
+              }
+            ],
+            "symbol": "MEMEDIFF",
+            "live_at": "2026-11-11T06:51:32.369252+00:00",
+            "market": {
+              "mcap": 2330.71,
+              "price": 0.00000233,
+              "change24": -0.27,
+              "url": "https://dexscreener.com/solana/gjhnfpkf1mnw1jaozbmqki4jt41vhi6xqgsqxx7c9kh4"
+            }
+          }
+        ]
+      }
+    },
+    "season": {
+      "observedAt": "2026-11-11T07:19:07.669Z",
+      "url": "https://forks.wiki/api/season",
+      "httpStatus": 200,
+      "data": {
+        "rules": {
+          "perDay": 3,
+          "coinMax": 1000000,
+          "minAgeDays": 30,
+          "walletsMax": 5,
+          "launchDevSol": 0.2,
+          "minDevBuySol": 0,
+          "confirmMinutes": 10,
+          "launchDevReward": 1500
+        },
+        "tiers": [
+          {
+            "id": "launch",
+            "mcap": null,
+            "label": "Coin launched",
+            "reward": 1000
+          },
+          {
+            "id": "cap10k",
+            "mcap": 10000,
+            "label": "$10K market cap",
+            "reward": 20000
+          },
+          {
+            "id": "cap30k",
+            "mcap": 30000,
+            "label": "$30K market cap",
+            "reward": 40000
+          },
+          {
+            "id": "grad",
+            "mcap": null,
+            "label": "Migrated from the curve",
+            "reward": 100000
+          },
+          {
+            "id": "cap250k",
+            "mcap": 250000,
+            "label": "$250K market cap",
+            "reward": 300000
+          },
+          {
+            "id": "cap500k",
+            "mcap": 500000,
+            "label": "$500K market cap",
+            "reward": 560000
+          }
+        ],
+        "season": {
+          "id": 1,
+          "name": "Season 0",
+          "open": true,
+          "paid": 103000,
+          "pool": 200000000,
+          "endsAt": null,
+          "startsAt": "2026-11-06T07:55:09.168043+00:00"
+        },
+        "signedIn": false,
+        "me": null,
+        "publicLeaderboardRow": {
+          "coins": 1,
+          "avatar": "https://pbs.twimg.com/profile_images/1976897255551750144/S7Bp22b0_200x200.jpg",
+          "earned": 1500,
+          "handle": "kanepkjinwoo"
+        }
+      }
+    }
+  }
+}

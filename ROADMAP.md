@@ -2,6 +2,8 @@
 
 The software remains a free static, open-source GitHub activity research tool. Token price, volume, holder count and rewards do not measure development progress.
 
+2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
+
 ## Next maintenance cycle
 
 - Keep core tests and desktop/mobile Playwright checks passing before each deployment.

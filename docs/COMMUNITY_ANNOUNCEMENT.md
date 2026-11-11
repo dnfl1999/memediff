@@ -1,19 +1,22 @@
-# Community announcement draft — NOT POSTED
+# X launch announcement — DRAFT, NOT POSTED
 
-MemeDiff is live as a free, open-source tool for checking public GitHub development activity.
+Suggested two-post thread for @kanepkjinwoo. Review before posting. No publication or engagement automation is configured. If attaching a card, use a real observation, never a test fixture presented as actual activity.
 
-Inspect 7-day and 30-day activity, compare local snapshots, follow original commit and release evidence, and export PNG or JSON reports. No wallet connection or token ownership is required.
+## Post 1 — practical use
 
-The MemeDiff project-associated token, **MEMEDIFF**, has launched on Solana through Forks Wiki for `dnfl1999/memediff`.
+MemeDiff is live: inspect public GitHub activity and export a Development Receipt with a UTC window, observation time and source links. Free & open source. No wallet required.
+https://dnfl1999.github.io/memediff/
+Activity is not a safety or return score.
 
-**Verify the full contract address:**
-`DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork`
+## Post 2 — official identity
 
-- Tool: https://dnfl1999.github.io/memediff/
-- Source and audit: https://github.com/dnfl1999/memediff
-- Forks Wiki: https://forks.wiki/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork
-- pump.fun: https://pump.fun/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork
+MEMEDIFF is the project-associated token on Solana, launched via Forks Wiki. Verify the full CA:
+DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork
+Source & launch audit: https://github.com/dnfl1999/memediff
+The tool is free without tokens. No price or return promises.
 
-Development evidence and token market activity are separate. A working tool or verified mint does not guarantee token safety, price, returns, liquidity, or rewards. We welcome reproducible bug reports and practical contributions to the software.
+## Optional follow-up instructions
 
-This is an unpublished draft for the user's review. It has not been sent to X or any community.
+Enter a public GitHub repository → Analyze → choose 7 or 30 days → PNG Receipt. Export JSON too for all source links and collection errors. A “+” marks incomplete collection. Save a local baseline and requery to compare observed SHA sets.
+
+The receipt is an English image, not a signed certificate or hosted report. It does not authenticate development claims or verify a user-entered token. Share genuine observations and submit reproducible bug reports through GitHub issues.

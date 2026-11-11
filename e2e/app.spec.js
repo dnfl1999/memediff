@@ -22,10 +22,10 @@ test('analysis, 7/30-day switching, safe text and responsive layout', async ({ p
   await page.goto('./');
   await analyze(page);
   await expect(page.locator('#metrics strong')).toHaveText(['3', '2', '2']);
-  await page.getByRole('button', { name: '최근 7일', exact: true }).click();
+  await page.getByRole('button', { name: '최근 7일 / 7 days', exact: true }).click();
   await expect(page.locator('#metrics strong')).toHaveText(['2', '1', '1']);
   await expect(page.locator('[data-days="7"]')).toHaveAttribute('aria-pressed', 'true');
-  await page.getByRole('button', { name: '최근 30일', exact: true }).click();
+  await page.getByRole('button', { name: '최근 30일 / 30 days', exact: true }).click();
   await expect(page.locator('#metrics strong')).toHaveText(['3', '2', '2']);
   await expect(page.locator('#description')).toContainText('<img');
   await expect(page.locator('#description img, #commits img')).toHaveCount(0);

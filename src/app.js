@@ -1,3 +1,4 @@
+import { drawReceipt } from './receipt.js';
 import { parseRepo, parseToken, compareSnapshots, inWindow, safeLink, DAY } from './core.js';
 import { fetchReport } from './github.js';
 const $ = id => document.getElementById(id);
@@ -79,23 +80,7 @@ $('png').addEventListener('click', () => {
   const snapshot = report;
   try {
     const canvas = document.createElement('canvas'); canvas.width = 1400; canvas.height = 1020;
-    const ctx = canvas.getContext('2d'); ctx.fillStyle = '#101412'; ctx.fillRect(0,0,1400,1020);
-    function text(t, x, y, size = 24, color = '#eaf4df') { ctx.fillStyle = color; ctx.font = `${size}px "Segoe UI", sans-serif`; ctx.fillText(String(t),x,y,1280); }
-    text('± MemeDiff / PUBLIC GITHUB EVIDENCE',60,75,28,'#c5f277');
-    text(report.repo,60,150,46); text(`조회: ${report.fetchedAt} · 최근 ${days}일`,60,205,22);
-    text(`기본 브랜치: ${report.branch} · ${report.fork ? 'Fork' : 'Non-fork'} · ${report.archived ? 'Archived' : 'Active repository'}`,60,250,22);
-    const m = report.metrics[days];
-    [['커밋',m.commits,report.coverage.commits],['릴리스',m.releases,report.coverage.releases],['연결된 기여자',m.contributors,report.coverage.commits]].forEach(([label,n,complete],i) => { text(label,60+i*440,330,26,'#b9caaa'); text(`${n}${complete?'':'+'}`,60+i*440,420,70,'#c5f277'); });
-    text(`수집: 커밋 ${report.coverage.commits?'완료':'불완전'} / 릴리스 ${report.coverage.releases?'완료':'불완전'} · 미연결 작성자 커밋 ${m.unattributed}건`,60,490,24);
-    text(comparison ? `비교 기준 ${comparison.previousAt}` : '비교 기준 없음',60,560,23);
-    if(comparison) text(`새로 관측된 SHA ${comparison.observed.length} · 겹치는 기간에서 미관측 ${comparison.missing.length}${comparison.partial ? ' · 불완전 비교' : ''}`,60,605,23);
-    text('SHA 차이는 신규 개발·삭제의 증거가 아닙니다. 기간 이동과 수집 범위를 확인하세요.',60,655,21,'#bdc9b4');
-    text(`사용자 입력 토큰: ${report.token || '없음'}`,60,715,21);
-    text('토큰 연관성·mint 존재 미검증. 개발 활동은 안전성·품질·수익을 보장하지 않습니다.',60,755,21,'#e3c79b');
-    text(`원본: https://github.com/${report.repo}`,60,820,23,'#c5f277');
-    text('기본 브랜치 committer 날짜 / 공개 릴리스 published_at / GitHub 연결 계정·봇 포함',60,865,20);
-    text('최대 1,000 커밋·500 릴리스 조회. 전체 증거 링크와 수집 오류는 JSON에 포함됩니다.',60,905,20);
-    text('MemeDiff · MIT · https://dnfl1999.github.io/memediff/',60,970,20,'#a2b197');
+    drawReceipt(canvas.getContext('2d'), snapshot, days, comparison);
     canvas.toBlob(blob => { if (blob) { download(blob,'png',snapshot); status('PNG 내보내기를 요청했습니다. 브라우저 다운로드를 확인하세요.'); } else status('PNG 생성에 실패했습니다.',true); },'image/png');
   } catch { status('이 브라우저에서 PNG를 만들 수 없습니다. JSON 내보내기를 사용하세요.', true); }
 });
