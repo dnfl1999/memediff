@@ -13,6 +13,8 @@ Receipts are locally generated and editable, not signed certificates. Activity d
 
 [Source repository](https://github.com/dnfl1999/memediff) · [Dated operations snapshot and product comparison](docs/OPERATIONS_UPDATE.md)
 
+New here? [Step-by-step guide](docs/GETTING_STARTED.md) · [Real historical receipt example](docs/examples/README.md) · [FAQ](docs/FAQ.md) · [Report a bug or suggest an improvement](https://github.com/dnfl1999/memediff/issues/new/choose). English and Korean feedback are welcome. [Contribution and privacy guidance](CONTRIBUTING.md).
+
 ## Official project token — Solana Mainnet
 
 **MemeDiff / MEMEDIFF**

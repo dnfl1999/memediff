@@ -4,9 +4,9 @@ Suggested two-post thread for @kanepkjinwoo. Review before posting. No publicati
 
 ## Post 1 — practical use
 
-MemeDiff is live: inspect public GitHub activity and export a Development Receipt with a UTC window, observation time and source links. Free & open source. No wallet required.
+MemeDiff makes public GitHub activity easier to check. Pick a repo, compare 7 or 30 days, and export a Development Receipt with timestamps and source links. Free, open source, no wallet required.
 https://dnfl1999.github.io/memediff/
-Activity is not a safety or return score.
+Activity isn't a safety score.
 
 ## Post 2 — official identity
 
@@ -14,6 +14,13 @@ MEMEDIFF is the project-associated token on Solana, launched via Forks Wiki. Ver
 DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork
 Source & launch audit: https://github.com/dnfl1999/memediff
 The tool is free without tokens. No price or return promises.
+
+## Follow-up — completed maintenance, not a feature promise
+
+A small MemeDiff update: clearer getting-started notes, a real Development Receipt example, and a FAQ. Bug reports and usability feedback are welcome. Tell us what you tried and where you got stuck.
+https://github.com/dnfl1999/memediff/issues/new/choose
+
+Post only after reviewing the published guide and templates. No user growth, new feature demand, or future release date is claimed.
 
 ## Optional follow-up instructions
 
