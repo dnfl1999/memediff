@@ -1,0 +1,14 @@
+{
+  "name": "memediff",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-first public GitHub activity reports for meme-token research",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test",
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {"node": ">=22"}
+}
