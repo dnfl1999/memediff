@@ -1,5 +1,22 @@
 # ± MemeDiff
 
+## Official project token — Solana Mainnet
+
+**MemeDiff / MEMEDIFF**
+
+CA: `DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork`
+
+MemeDiff is a free, open-source tool that makes public GitHub development activity easier to inspect. It compares 7-day and 30-day activity, preserves local evidence baselines, links to original sources, and exports PNG and JSON reports. Its purpose is to make development claims easier to check, without inventing trust scores.
+
+MEMEDIFF is the project-associated meme token launched through Forks Wiki for this repository. Token ownership is not required to use the software. Development activity and token market activity are separate; neither guarantees safety, price, returns, liquidity, or rewards.
+
+[Website](https://dnfl1999.github.io/memediff/) · [Forks Wiki](https://forks.wiki/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork) · [pump.fun](https://pump.fun/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork) · [Solscan](https://solscan.io/token/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork)
+
+[Post-launch audit](POST_LAUNCH_AUDIT.md) · [Development roadmap](ROADMAP.md) · [Operations and public APIs](docs/TOKEN_OPERATIONS.md) · [Unpublished community announcement](docs/COMMUNITY_ANNOUNCEMENT.md)
+
+Creator-fee shares: launcher 50%, GitHub owner dnfl1999 30%, Forks 20%. These are fee shares, not token allocations. The on-chain sharing config has its admin revoked. The immutable IPFS metadata contains Forks' generic non-endorsement wording and links its website field to the Forks coin page; this README identifies the project-maintained website separately. See the audit for evidence and limitations.
+
+
 **코드의 변화를, 근거로.** 무료 오픈소스 밈코인 개발활동 분석 도구입니다. 입력한 공개 GitHub 저장소를 브라우저에서 직접 조회합니다. 투자 점수, 가짜 통계, 토큰 안전성 보장은 제공하지 않습니다.
 
 웹사이트: **https://dnfl1999.github.io/memediff/** · [검증 결과와 제한](PROGRESS.md)

@@ -2,7 +2,19 @@
 
 기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
-## 최신 상태 — 독립 Playwright 검증 완료
+## 최신 상태 — 코인 발행 후 감사 및 사이트 정비 (2026-11-11)
+
+사용자가 직접 진행한 발행을 읽기 전용으로 확인했습니다. 공식 CA는 `DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork`입니다. Mint 생성, Forks 저장소 연결, 초기 0.2 SOL 매수, 토큰 수령, 50/30/20 creator-fee 배분 및 관리자 권한 폐기를 온체인에서 확인했습니다. 세부 정산과 한계는 [POST_LAUNCH_AUDIT.md](POST_LAUNCH_AUDIT.md), 공개 원본 관측은 [docs/launch-evidence.json](docs/launch-evidence.json)에 있습니다.
+
+README 및 사이트에 영어 프로젝트 코인 정보와 CA 복사를 추가했습니다. 기존 분석 로직은 변경하지 않았습니다. [ROADMAP.md](ROADMAP.md), [운영 API 안내](docs/TOKEN_OPERATIONS.md), [미게시 영어 공지 초안](docs/COMMUNITY_ANNOUNCEMENT.md)을 작성했습니다. 다른 프로젝트는 변경하지 않았으며 이번 작업에서 지갑·서명·매수·청구·SOL 지출을 실행하지 않았습니다.
+
+로컬 검증: 단위 테스트 **20/20**, 빌드 성공, Windows 독립 Chromium 데스크톱·모바일 E2E **28/28**. 기존 모의 API 회귀 24개와 새 코인 정보/클립보드 검증 4개입니다. JSON 다운로드 및 PNG 디코딩 포함. 콘솔·예상하지 않은 네트워크 실패 없음. 초기 샌드박스 실행은 자식 프로세스 `spawn EPERM`으로 차단되었으나, 승인된 외부 실행에서 같은 테스트가 통과했습니다. 두 화면 스크린샷을 실제 확인했습니다.
+
+게시 전 dnfl1999 인증 및 push 권한 확인, origin/main과 HEAD 일치 확인 완료. 이 기록 작성 시 새 변경분의 CI/Pages 결과는 아직 대기 중입니다. 재개 시 `git status`, `scripts/github-admin.ps1 -Action status`로 상태를 확인하고, 최신 Actions 검증·배포·공개 QA 결과를 기록합니다. 공개 URL은 https://dnfl1999.github.io/memediff/ 입니다.
+
+아래는 코인 발행 이전 단계의 이력이며, 현재 발행 상태는 위 감사 문서를 우선합니다.
+
+## 이전 상태 — 독립 Playwright 검증 완료
 
 사용자가 독립 Playwright 사용을 명시적으로 요청하여 이전 연결 도구 장애를 우회했습니다. Windows Chromium에서 로컬 모의 API E2E 24/24, 공개 사이트 모의 API E2E 24/24 통과. Linux Chromium에서도 빌드 결과 24/24, 공개 사이트 24/24, **실제 비인증 GitHub API 및 JSON/PNG 다운로드 1/1 통과**했습니다. 환경별 반복 실행을 합해 **97 passed / 0 failed / 1 skipped**입니다. Windows 실제 API 1건의 403 제한은 skipped로 별도 보존했습니다. 기존 단위 테스트 20/20과 npm audit 0 vulnerabilities도 확인했습니다.
 

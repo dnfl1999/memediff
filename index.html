@@ -7,6 +7,7 @@
   <meta name="referrer" content="no-referrer"><meta name="color-scheme" content="dark">
   <title>MemeDiff — 코드의 변화를, 근거로.</title><link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css">
   <script type="module" src="./src/app.js"></script>
+  <script type="module" src="./src/token.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -23,6 +24,18 @@
       <details class="panel"><summary>원본 API 증거 및 수집 범위</summary><p id="coverage"></p><ul id="sources" class="source-list"></ul></details>
     </section>
     <section id="empty" class="empty-state"><span class="empty-glyph">[ ± ]</span><h2>주장보다, 변경 기록.</h2><p>커밋 · 릴리스 · 기여자 · 이전 조회와의 차이<br>모든 관측치에는 원본으로 가는 길이 있습니다.</p><div class="empty-steps"><span>01 저장소 입력</span><span>02 공개 증거 확인</span><span>03 기준 저장 후 비교</span></div></section>
+    <section id="official-token" class="token-panel panel" lang="en" aria-labelledby="official-token-title">
+      <div class="eyebrow">PROJECT TOKEN · SOLANA MAINNET</div>
+      <h2 id="official-token-title">MemeDiff / MEMEDIFF</h2>
+      <p>MemeDiff is an open-source tool for inspecting public GitHub development activity. Compare 7-day and 30-day observations, save local baselines, follow source evidence, and export PNG or JSON reports.</p>
+      <p>MEMEDIFF is the project-associated meme token launched through Forks Wiki for <a href="https://github.com/dnfl1999/memediff" target="_blank" rel="noopener noreferrer">dnfl1999/memediff</a>. The mint and repository association were checked on November 11, 2026. The analysis tool remains free and requires no token or wallet.</p>
+      <label for="official-ca">Official contract address (CA)</label>
+      <div class="token-address"><input id="official-ca" readonly spellcheck="false" value="DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"><button id="copy-ca" type="button">Copy CA</button></div>
+      <p id="copy-ca-status" role="status" aria-live="polite"></p>
+      <div class="token-links"><a href="https://forks.wiki/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork" target="_blank" rel="noopener noreferrer">Forks Wiki</a><a href="https://pump.fun/coin/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork" target="_blank" rel="noopener noreferrer">pump.fun</a><a href="https://solscan.io/token/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork" target="_blank" rel="noopener noreferrer">Solscan</a><a href="https://github.com/dnfl1999/memediff/blob/main/POST_LAUNCH_AUDIT.md" target="_blank" rel="noopener noreferrer">Launch audit</a></div>
+      <div class="token-context"><div><h3>Development</h3><p>Repository activity is measured from GitHub evidence. Development progress is tracked in the <a href="https://github.com/dnfl1999/memediff/blob/main/ROADMAP.md" target="_blank" rel="noopener noreferrer">roadmap</a>.</p></div><div><h3>Token operations</h3><p>Market data and fee claims are separate from software development. Creator fees are split: launcher 50%, GitHub owner 30%, Forks 20%. These are fee shares, not token allocations.</p></div></div>
+      <p class="small">A verified mint is not a safety assessment. No price, return, liquidity, or reward is guaranteed. Match the full CA; names and tickers can be copied. This website does not connect wallets or execute trades.</p>
+    </section>
     <section id="method" class="method"><h2>숫자를 읽기 전에</h2><div><article><span>01 / SCOPE</span><h3>관측한 범위만 말합니다</h3><p>조회 시각 기준 최근 7일·30일의 기본 브랜치 커밋과 공개 릴리스입니다. 커밋 최대 1,000개, 릴리스 최대 500개를 조회하며 한도·오류로 불완전하면 표시합니다. 커밋 날짜는 작성자가 변경할 수 있습니다.</p></article><article><span>02 / CONTEXT</span><h3>활동은 신뢰도 점수가 아닙니다</h3><p>커밋 수는 코드 품질·프로젝트 독창성·토큰 안전성을 증명하지 않습니다. Fork·봇·자동 생성 코드도 활동에 포함될 수 있습니다. 가격 예측과 투자 권유를 제공하지 않습니다.</p></article><article><span>03 / PRIVACY</span><h3>브라우저에서 직접 조회합니다</h3><p>GitHub API에 저장소 경로와 접속 IP가 전달됩니다. 토큰 주소는 GitHub에 전송하지 않습니다. 분석 서버·추적기·API 키 입력이 없으며 저장 버튼을 누를 때만 이 기기에 비교 기준을 남깁니다. 내보낸 파일에는 입력한 토큰 주소가 포함됩니다.</p></article></div><p class="small">비인증 GitHub API는 일반적으로 IP당 시간당 60회 요청 제한이 있습니다. 한 번의 분석에 여러 요청이 사용됩니다. 모든 날짜는 조회 시각을 기준으로 계산되며 차트는 UTC입니다.</p></section>
   </main><footer><span class="brand">± MemeDiff</span><p>Public code. Visible changes. <span>MIT licensed.</span></p><a href="https://github.com/dnfl1999/memediff/issues" target="_blank" rel="noopener noreferrer">문제 제보 ↗</a></footer>
 </body></html>
