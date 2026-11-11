@@ -6,7 +6,13 @@
 
 Try Live Demo로 dnfl1999/memediff 실제 분석, 제출 시 최대 10개 GitHub 공개 이름 검색·선택, 공식 Forks API의 정확한 CA 연결 조회를 추가했습니다. 기존 분석 소스·JSON schema·저장 키·CA는 보존합니다. 사용자 UI는 영어입니다. Forks API가 Pages Origin에 CORS 헤더를 제공하지 않아 배포 시 공식 최근 목록 및 MemeDiff 연결을 수집한 제한된 시각 표시 인덱스를 사용합니다. 실시간 전체 검색이라고 주장하지 않으며 없거나 모호한 연결은 추측하지 않습니다. [조회 방식과 제한](docs/DISCOVERY.md).
 
-단위 31/31 통과. 초기 브라우저 테스트는 46 통과/2 실패: 모의 429 응답의 Retry-After CORS 노출 헤더 누락으로 일반 오류 안내가 나타난 테스트 fixture 문제였습니다. fixture를 수정하여 전체 PC·모바일 48건 재검증 중입니다. 기록은 `qa-results/discovery-local/`, 최종 재검증은 `qa-results/discovery-local-final/`에 보존합니다. 다음 단계: 테스트 통과 후 main 게시, Actions verify/deploy/public-qa와 실제 데모·검색 확인. 재개: `npm.cmd test`, `npm.cmd run build`, `npm.cmd run test:e2e`. 공식 인덱스 갱신: `node scripts/update-forks-index.mjs`. dnfl1999 인증·push 권한·원격 main 일치를 확인했습니다.
+단위 **31/31**, 최종 로컬 PC·모바일 E2E **48/48** 통과. 초기 46 통과/2 실패는 모의 429 응답의 Retry-After CORS 노출 누락이었으며 fixture 수정 후 전체 재검증했습니다. 초기 기록과 최종 기록을 각각 `qa-results/discovery-local/`, `qa-results/discovery-local-final/`에 보존했습니다.
+
+dnfl1999 인증 후 제품 커밋 `54e084631a403576e438ef5845426762a09fa0b0`를 main에 안전하게 게시했습니다. [Actions 42984986983](https://github.com/dnfl1999/memediff/actions/runs/42984986983)의 verify/deploy/public-qa 모두 성공. 다운로드한 아티팩트 기준 Linux 빌드 모의 48/48, 공개 모의 48/48, **공개 실제 API 데모·PNG/JSON 및 이름 검색·공식 CA 인덱스 2/2 통과**. 최종 브라우저 합계 **146 passed / 0 failed / 0 skipped**. 실제 API 응답과 콘솔·네트워크 진단은 [QA 증거](docs/discovery-qa.json)에 기록했습니다.
+
+08:13:03 UTC 공개 페이지와 모든 앱 소스가 HTTP 200 및 로컬과 일치하고 한국어 표시 소스 0건임을 확인했습니다. 배포된 공식 인덱스는 08:11:04 UTC 조회 20개 연결이며 공식 CA와 dnfl1999/memediff의 정확한 연결이 있습니다. 공개 브라우저 검색 결과 스크린샷도 확인했습니다. 인덱스는 매 배포에 갱신하며 미등록 CA를 추측하지 않습니다. 실시간 전체 CA 조회는 공식 API의 CORS 미지원 때문에 제공하지 않습니다. 이 제한은 UI·README·상세 문서에 명시했습니다.
+
+필요 시 기존 Pages workflow_dispatch로 공식 인덱스를 갱신·재검증·배포할 수 있습니다. 후속 QA 기록은 문서 전용 `[skip ci]` 커밋으로 게시하여 검증된 제품 배포를 유지합니다. 기존 기능·코인 정보·과거 감사 문서를 보존했으며 다른 프로젝트·지갑·SOL·거래는 변경하지 않았습니다.
 
 ## 이전 상태 — 공개 사이트 영어화 (2026-11-11)
 
