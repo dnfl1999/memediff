@@ -10,7 +10,9 @@ README 및 사이트에 영어 프로젝트 코인 정보와 CA 복사를 추가
 
 로컬 검증: 단위 테스트 **20/20**, 빌드 성공, Windows 독립 Chromium 데스크톱·모바일 E2E **28/28**. 기존 모의 API 회귀 24개와 새 코인 정보/클립보드 검증 4개입니다. JSON 다운로드 및 PNG 디코딩 포함. 콘솔·예상하지 않은 네트워크 실패 없음. 초기 샌드박스 실행은 자식 프로세스 `spawn EPERM`으로 차단되었으나, 승인된 외부 실행에서 같은 테스트가 통과했습니다. 두 화면 스크린샷을 실제 확인했습니다.
 
-게시 전 dnfl1999 인증 및 push 권한 확인, origin/main과 HEAD 일치 확인 완료. 이 기록 작성 시 새 변경분의 CI/Pages 결과는 아직 대기 중입니다. 재개 시 `git status`, `scripts/github-admin.ps1 -Action status`로 상태를 확인하고, 최신 Actions 검증·배포·공개 QA 결과를 기록합니다. 공개 URL은 https://dnfl1999.github.io/memediff/ 입니다.
+게시 전 dnfl1999 인증 및 push 권한 확인, origin/main과 HEAD 일치 확인 완료. 제품 커밋 `900edbf74e651b356c7254c9688d7964ae705a89`의 [Actions 42977232545](https://github.com/dnfl1999/memediff/actions/runs/42977232545)는 **verify / deploy / public-qa 모두 성공**했습니다. 아티팩트를 내려받아 Linux 빌드 E2E 28/28, Linux 공개 사이트 E2E 28/28, **실제 GitHub API·JSON/PNG 다운로드 1/1 성공**을 확인했습니다. 이번 로컬·CI 브라우저 실행 합계는 **85 passed / 0 failed / 0 skipped**입니다. API 모의 응답 84건과 실제 API 1건을 구분합니다. 초기 자식 프로세스 실행 차단은 실행 전 환경 오류로 별도 기록합니다.
+
+공개 URL https://dnfl1999.github.io/memediff/ 의 index.html, style.css, src/token.js가 HTTP 200이며 검증된 로컬 파일과 일치함을 확인했습니다. 결과 요약: [docs/post-launch-qa.json](docs/post-launch-qa.json). 이후 문서 결과 기록 커밋은 `[skip ci]`이며 배포된 제품 코드는 동일합니다. 남은 개발/배포 작업 없음. 사용자 로그인 후 CA별 Season 보상 이력 확인과 향후 수수료 청구는 사용자 직접 작업이며, 이번 감사에서 실행하지 않았습니다.
 
 아래는 코인 발행 이전 단계의 이력이며, 현재 발행 상태는 위 감사 문서를 우선합니다.
 

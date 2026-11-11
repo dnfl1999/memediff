@@ -86,7 +86,9 @@ The public [Season API](https://forks.wiki/api/season) showed Season 0 open, poo
 
 ## Validation and publication
 
-Existing analysis behavior is preserved. The added English token section is static and separate from GitHub reports, with accessible CA copying, fallback selection, official evidence links and no wallet/trading code. Test/deployment results are recorded in [PROGRESS.md](PROGRESS.md); do not infer a successful CI run from the chain audit alone.
+Existing analysis behavior is preserved. The added English token section is static and separate from GitHub reports, with accessible CA copying, fallback selection, official evidence links and no wallet/trading code.
+
+Product commit `900edbf74e651b356c7254c9688d7964ae705a89`: [Actions 42977232545](https://github.com/dnfl1999/memediff/actions/runs/42977232545) passed verification, deployment and public QA. Core tests: 20/20 locally and in CI. Playwright: Windows local 28, Linux build 28, Linux public mock 28, Linux public **real GitHub API 1**; **85 passed, 0 failed, 0 skipped**. Downloaded CI artifacts confirm these counts, including actual JSON/PNG download checks. Mobile uses Chromium device emulation. Public HTML, stylesheet and token module returned HTTP 200 and matched local files. Details: [post-launch-qa.json](docs/post-launch-qa.json) and [PROGRESS.md](PROGRESS.md).
 
 ## Remaining limitations
 

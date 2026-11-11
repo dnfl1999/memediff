@@ -1,0 +1,75 @@
+{
+  "recordedAt": "2026-11-11T07:11:47.745Z",
+  "commit": "900edbf74e651b356c7254c9688d7964ae705a89",
+  "actions": "https://github.com/dnfl1999/memediff/actions/runs/42977232545",
+  "jobs": {
+    "verify": "success",
+    "deploy": "success",
+    "publicQa": "success"
+  },
+  "unitTests": {
+    "passed": 20,
+    "failed": 0
+  },
+  "runs": [
+    {
+      "source": "qa-results/post-launch-local/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:05:39.813Z",
+        "duration": 21924.048,
+        "expected": 28,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "source": ".local/launch-ci-build/linux-build-mock/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:08:10.655Z",
+        "duration": 16290.970000000001,
+        "expected": 28,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "source": ".local/launch-ci-public/linux-public-mock/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:09:10.016Z",
+        "duration": 16688.341,
+        "expected": 28,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "source": ".local/launch-ci-public/linux-public-live/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:09:27.236Z",
+        "duration": 2175.839,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "totalBrowser": {
+    "passed": 85,
+    "failed": 0,
+    "skipped": 0
+  },
+  "publicFiles": {
+    "index.html": "200 matches local",
+    "style.css": "200 matches local",
+    "src/token.js": "200 matches local"
+  },
+  "limitations": [
+    "Initial Windows sandbox child-process spawn EPERM; tests subsequently passed outside sandbox",
+    "Mobile Chromium emulation, not physical-device coverage",
+    "Mock API functional cases are separate from the single live API test"
+  ]
+}
