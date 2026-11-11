@@ -3,3 +3,6 @@ node_modules/
 *.log
 .env*
 .local/
+qa-results/
+playwright-report/
+test-results/

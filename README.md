@@ -29,7 +29,7 @@
 
 ## 로컬 실행 및 테스트
 
-Node.js 22 이상. 설치할 패키지가 없습니다.
+Node.js 22 이상. 서비스 런타임은 외부 패키지 없이 동작합니다. 브라우저 QA에는 개발 전용 Playwright와 pngjs를 사용합니다.
 
 ```sh
 npm test
@@ -37,11 +37,22 @@ npm run build
 npm start
 ```
 
+브라우저 E2E (독립 Chromium, 기존 사용자 브라우저/로그인 프로필 미사용):
+
+```sh
+npm ci
+npx playwright install chromium
+npm run build
+npm run test:e2e
+```
+
+`test:e2e`는 모의 GitHub 응답을 사용하는 데스크톱·모바일 24개 테스트입니다. 실제 API 테스트는 별도로 `npm run test:e2e:live`를 실행합니다. 공개 사이트 대상은 `E2E_BASE_URL=https://dnfl1999.github.io/memediff/`를 설정합니다. Windows 설치 경로 예시 및 결과 해석은 [브라우저 QA 기록](docs/BROWSER_QA.md)을 참고하세요.
+
 http://127.0.0.1:4173 에서 확인합니다. Windows PowerShell 실행 정책 때문에 `npm`이 막히면 `npm.cmd`를 사용하세요. Node 24 샌드박스에서 자식 프로세스가 제한되면 `node --test --test-isolation=none`으로 핵심 테스트를 실행할 수 있습니다.
 
 ## 배포
 
-GitHub Settings → Pages → Source를 GitHub Actions로 설정합니다. `.github/workflows/pages.yml`은 main/PR에서 테스트하고 main에서만 정적 `dist/`를 Pages로 배포합니다. PR에는 배포 권한이 없습니다. 다른 정적 호스트에도 `dist/`를 게시할 수 있으며 상대 경로를 사용합니다.
+GitHub Settings → Pages → Source를 GitHub Actions로 설정합니다. `.github/workflows/pages.yml`은 main/PR에서 핵심 테스트와 Linux Chromium E2E를 통과한 뒤 main에서만 정적 `dist/`를 Pages로 배포합니다. 배포 후 공개 URL의 모의 API E2E와 실제 GitHub API 검사를 따로 실행하며 보고서·다운로드·스크린샷을 Actions 아티팩트로 14일 보관합니다. 실제 API의 403/429는 증거를 남기고 skipped로 구분하며 재시도하지 않습니다. PR에는 배포 권한이 없습니다. 다른 정적 호스트에도 `dist/`를 게시할 수 있으며 상대 경로를 사용합니다.
 
 `scripts/github-admin.ps1`은 기존 Git credential을 메모리에서만 사용하고 매번 `dnfl1999`를 확인합니다. 기본은 읽기 전용 `inspect`입니다. `create`, `pages`, `status` 작업을 지원하며 로그인/토큰 생성은 하지 않습니다. 다른 계정·저장소에는 사용할 수 없습니다.
 
@@ -53,6 +64,6 @@ GitHub API로 저장소 경로와 접속 IP가 전달됩니다. Solana 주소는
 
 ## 독립성과 라이선스
 
-빈 MemeDiff 폴더에서 독립 구현했습니다. 다른 프로젝트의 소스나 작업 대기열을 재사용하지 않았습니다. 런타임 및 npm 개발 의존성 0개. HTML/CSS/JavaScript와 Node 표준 라이브러리만 사용합니다. [MIT](LICENSE).
+빈 MemeDiff 폴더에서 독립 구현했습니다. 다른 프로젝트의 소스나 작업 대기열을 재사용하지 않았습니다. 서비스 런타임 의존성은 0개입니다. 개발 전용 직접 의존성은 Playwright(Apache-2.0)와 pngjs(MIT)이며 버전을 lockfile로 고정합니다. 이 도구와 Chromium은 공개 사이트에 포함되지 않습니다. [MIT](LICENSE).
 
 관련 도구와의 기능 비교 및 출처는 [docs/RESEARCH.md](docs/RESEARCH.md), Forks Wiki 준비 상태는 [docs/FORKS_WIKI.md](docs/FORKS_WIKI.md), 검증 기록 및 남은 작업은 [PROGRESS.md](PROGRESS.md)를 참고하세요.

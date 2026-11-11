@@ -6,9 +6,17 @@
   "description": "Evidence-first public GitHub activity reports for meme-token research",
   "license": "MIT",
   "scripts": {
-    "test": "node --test",
+    "test": "node --test test/*.test.js",
+    "test:e2e": "playwright test --project=desktop --project=mobile",
+    "test:e2e:live": "playwright test --project=live",
     "start": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs"
   },
-  "engines": {"node": ">=22"}
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "pngjs": "7.0.0"
+  }
 }

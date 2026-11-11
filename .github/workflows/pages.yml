@@ -17,8 +17,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
+      - run: npm ci
       - run: npm test
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Chromium desktop and mobile E2E (mock API)
+        run: npm run test:e2e
+        env:
+          QA_RUN: linux-build-mock
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-qa-build
+          path: qa-results/
+          retention-days: 14
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
@@ -37,3 +50,32 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+  public-qa:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Public Pages desktop and mobile E2E (mock API)
+        run: npm run test:e2e
+        env:
+          E2E_BASE_URL: https://dnfl1999.github.io/memediff/
+          QA_RUN: linux-public-mock
+      - name: Public Pages real GitHub API and downloads (no retries)
+        if: success() || failure()
+        run: npm run test:e2e:live
+        env:
+          E2E_BASE_URL: https://dnfl1999.github.io/memediff/
+          QA_RUN: linux-public-live
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-qa-public
+          path: qa-results/
+          retention-days: 14

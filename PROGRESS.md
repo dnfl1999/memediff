@@ -2,6 +2,12 @@
 
 기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## 최신 상태 — 독립 Playwright 검증 진행
+
+사용자가 독립 Playwright 사용을 명시적으로 요청하여 이전 연결 도구 장애를 우회했습니다. Windows Chromium에서 로컬 모의 API E2E 24/24, 공개 사이트 모의 API E2E 24/24 통과. 실제 JSON 다운로드와 PNG CRC/픽셀 디코딩 검증을 완료했습니다. 공개 실제 GitHub API 1건은 403 제한으로 skipped이며 성공으로 집계하지 않습니다. Linux Actions에서 동일 E2E와 실제 API 확인을 추가 진행합니다. 상세: [docs/BROWSER_QA.md](docs/BROWSER_QA.md).
+
+아래의 브라우저 차단/미검증 표기는 이전 단계의 이력입니다. 최신 검증 결과는 위 문서를 우선합니다.
+
 ## 구현 및 공개 완료
 
 - 빈 폴더에서 독립 정적 앱 구현. 다른 프로젝트 소스·브랜치·작업 대기열 미사용.
