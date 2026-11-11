@@ -3,6 +3,9 @@
 .token-panel{margin:24px 0;padding:28px}.token-panel>p{max-width:850px;color:#b7cba7}.token-panel h2{margin:12px 0}.token-panel a{text-decoration:underline}.token-panel label{display:block;margin-top:20px}.token-address{display:flex;gap:12px;margin-top:8px}.token-address input{flex:1;min-width:0;font:13px ui-monospace,monospace}.token-links{display:flex;flex-wrap:wrap;gap:12px 24px}.token-links a{padding:10px 0}.token-context{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}.token-context p{color:#b7cba7;font-size:13px}#copy-ca-status{min-height:24px;font-size:13px}@media(max-width:700px){.token-panel{padding:20px}.token-address{flex-direction:column}.token-context{grid-template-columns:1fr;gap:0}}
 
 .english-guide{margin:0 0 24px}.english-guide summary{color:#c5f277}.english-guide p,.english-guide li{color:#b7cba7}.english-guide li{margin:10px 0}
+.demo-row{display:flex;align-items:center;gap:16px;margin-bottom:24px}.demo-row p{font-size:12px;color:#b7cba7;margin:0}.demo-row button{color:#c5f277}
+.discovery{margin-top:24px;border-top:1px solid #344033;padding-top:20px}.discovery summary{color:#c5f277}.discovery form{margin-top:22px}.search-row{display:flex;gap:12px;align-items:center}.search-row input{flex:1;min-width:0}.discovery-results{list-style:none;padding:0}.discovery-results li{border-top:1px solid #344033;padding:16px 0;overflow-wrap:anywhere}.discovery-results button{white-space:normal;overflow-wrap:anywhere;text-align:left}.discovery-results a{display:inline-block;margin:8px 12px;text-decoration:underline;font-size:12px}.discovery-results p{font-size:12px;color:#b7cba7}.discovery-results small,#discovery-status{font-size:12px;color:#b7cba7}
+@media(max-width:700px){.demo-row,.search-row{align-items:stretch;flex-direction:column}.search-row button{white-space:normal}.demo-row{gap:8px}}
 
 /* Leave space for longer English labels without changing the brand palette. */
 .hero h1,.hero>p{max-width:calc(100% - 400px)}

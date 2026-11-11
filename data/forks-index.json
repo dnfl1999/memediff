@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "checkedAt": "2026-11-11T08:04:43.762Z",
+  "scope": "Recent Forks API listings plus the official MemeDiff repository; not a complete token directory.",
+  "sources": [
+    "https://forks.wiki/api/tokens/recent",
+    "https://forks.wiki/api/tokens?repos=dnfl1999%2Fmemediff"
+  ],
+  "entries": [
+    {
+      "mint": "ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+      "repo": "riansj2290/remote-ikan"
+    },
+    {
+      "mint": "8fHg42GVN1RzEAdxoPYC5GnztawPPxtCV4ZN76uGfork",
+      "repo": "sindresorhus/awesome"
+    },
+    {
+      "mint": "G9MRRqsBTbR9tZxnZdGGcBoVn8BB57ReK6vygN4fork",
+      "repo": "nektos/act"
+    },
+    {
+      "mint": "2V1c5qbiAham4ta2cfVN1ybaTKrXsvZxmuAfBvF9fork",
+      "repo": "cedd017/pekpek"
+    },
+    {
+      "mint": "BUzZYFR3FdR1sRRHoyV1AoghvevbqTqLP8ZxeKhXfork",
+      "repo": "romanslack/jev-drone"
+    },
+    {
+      "mint": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "repo": "dnfl1999/memediff"
+    },
+    {
+      "mint": "G6s4yZggZMeaVi7XMne5knfLDaAnWY2JhBh6D9DZfork",
+      "repo": "foostan/crkbd"
+    },
+    {
+      "mint": "3rmLijDYmPozApV7bcvmtHCho1yViokEzN3RGfPQfork",
+      "repo": "googlefonts/gftools"
+    },
+    {
+      "mint": "Cy9Bm7T43AXSuiSmLoTZ6hSXt5fyNEfUxZxFj3iRfork",
+      "repo": "trimstray/the-book-of-secret-knowledge"
+    },
+    {
+      "mint": "BXCbQfinWZnHndLmctJTG8cWRcGNUVkJXdXmxHrWfork",
+      "repo": "chatgptnextweb/nextchat"
+    },
+    {
+      "mint": "7x7CkVeH4qaW4XojMtP4pQucWEGA1Z89gmuUohtDfork",
+      "repo": "typicode/json-server"
+    },
+    {
+      "mint": "6gDN69quxsiQE7QGfPS1xcmT4WBETRnxoqt52U7ufork",
+      "repo": "louislam/uptime-kuma"
+    },
+    {
+      "mint": "71aXKTbmGxqj6Y4bNsK3NZqCVzfDiPDZMzN9xu8Sfork",
+      "repo": "ubuwaits/beautiful-web-type"
+    },
+    {
+      "mint": "DmYbxVcAcLHg9gsoCKAftZWQU7Z2LyrSSYsAfxoVfork",
+      "repo": "vercel/next.js"
+    },
+    {
+      "mint": "7qjTV9PtdffEfUUc1dhL67nRMMoBLR1o4vPAd9Vtfork",
+      "repo": "endless-sky/endless-sky"
+    },
+    {
+      "mint": "5oZC6U6D5kvJA7LpqM7Qgv1HVsJ8xdGozqdQvzGjfork",
+      "repo": "laion-ai/open-assistant"
+    },
+    {
+      "mint": "G5QGCiJxPxN6UF5f9bM2agJzdzjjPZREY1K1PP5ifork",
+      "repo": "ethereum/mist"
+    },
+    {
+      "mint": "8S8w98uhwkPRwJCF8o43UQko5xFspLunBk8bDBoYfork",
+      "repo": "dotboris/vuejs-serverside-template-xss"
+    },
+    {
+      "mint": "A9Zbz9uJvcjnqQhxT1RWY5YX1yRpQZSnFgwUbRjnfork",
+      "repo": "prefix-dev/pixi"
+    },
+    {
+      "mint": "F6Cr7TngB953QFvqs6wQNcqZkw9iQskWsdWmPAW2fork",
+      "repo": "veloren/veloren"
+    }
+  ]
+}

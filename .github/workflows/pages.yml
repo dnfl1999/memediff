@@ -20,6 +20,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Refresh exact-mint associations from official Forks API
+        run: node scripts/update-forks-index.mjs
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - name: Chromium desktop and mobile E2E (mock API)

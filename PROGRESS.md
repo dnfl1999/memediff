@@ -2,7 +2,13 @@
 
 기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
-## 최신 상태 — 공개 사이트 영어화 (2026-11-11)
+## 최신 상태 — 데모와 저장소 탐색 (2026-11-11)
+
+Try Live Demo로 dnfl1999/memediff 실제 분석, 제출 시 최대 10개 GitHub 공개 이름 검색·선택, 공식 Forks API의 정확한 CA 연결 조회를 추가했습니다. 기존 분석 소스·JSON schema·저장 키·CA는 보존합니다. 사용자 UI는 영어입니다. Forks API가 Pages Origin에 CORS 헤더를 제공하지 않아 배포 시 공식 최근 목록 및 MemeDiff 연결을 수집한 제한된 시각 표시 인덱스를 사용합니다. 실시간 전체 검색이라고 주장하지 않으며 없거나 모호한 연결은 추측하지 않습니다. [조회 방식과 제한](docs/DISCOVERY.md).
+
+단위 31/31 통과. 초기 브라우저 테스트는 46 통과/2 실패: 모의 429 응답의 Retry-After CORS 노출 헤더 누락으로 일반 오류 안내가 나타난 테스트 fixture 문제였습니다. fixture를 수정하여 전체 PC·모바일 48건 재검증 중입니다. 기록은 `qa-results/discovery-local/`, 최종 재검증은 `qa-results/discovery-local-final/`에 보존합니다. 다음 단계: 테스트 통과 후 main 게시, Actions verify/deploy/public-qa와 실제 데모·검색 확인. 재개: `npm.cmd test`, `npm.cmd run build`, `npm.cmd run test:e2e`. 공식 인덱스 갱신: `node scripts/update-forks-index.mjs`. dnfl1999 인증·push 권한·원격 main 일치를 확인했습니다.
+
+## 이전 상태 — 공개 사이트 영어화 (2026-11-11)
 
 공개 UI 전체를 영어로 전환했습니다. `lang=en`, SEO·브랜드 문구, 오류·상태·접근성 문구, UTC/en-US 표시, 영문 README·사용 안내·FAQ를 적용했습니다. 기존 README는 `README.ko.md`에 보존했습니다. 원본 GitHub 설명·커밋·릴리스 텍스트와 과거 감사 자료는 번역하지 않았습니다. 저장 키와 JSON schema 1, 공식 CA, 분석·SHA 비교·내보내기 기능은 유지합니다.
 

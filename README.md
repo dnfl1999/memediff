@@ -8,6 +8,12 @@ Track real GitHub activity behind crypto projects. MemeDiff is a free, open-sour
 
 ## How to use
 
+**New here? Select Try Live Demo** to analyze this repository using real GitHub data. It uses the same analyzer, limits and exports as any other repository; no sample statistics are substituted.
+
+Open **Find a repository by project name or token CA** to search public GitHub repository names (up to 10 matches per submission), then select a result and choose **Analyze**. A name match is not proof of token association. Searches have a separate API rate limit and do not run on each keystroke.
+
+CA lookup uses exact associations collected from the official Forks Wiki API at deployment time. Forks does not currently allow cross-origin browser reads, so Pages serves a dated index of recent listings plus MemeDiff, not a live or complete directory. Each match shows its observation time and links to Forks for rechecking. Missing or ambiguous matches are not guessed; the repository URL input remains available. Selecting a CA match fills both fields, while the report and its JSON schema remain unchanged and do not certify token ownership or safety. See [discovery sources and limitations](docs/DISCOVERY.md).
+
 1. Enter a public GitHub repository URL or `owner/repo` and select **Analyze**. A Solana mint address is optional; only its format is checked, not its existence or repository association.
 2. Select **7 days** or **30 days** to view commits, public releases and observed contributors. Read collection warnings and follow original evidence links.
 3. Select **Save baseline** to save this observation in your browser. Analyze the same repository, branch and optional token combination later to compare SHA observations. Use **Clear this project baseline** to remove it.
