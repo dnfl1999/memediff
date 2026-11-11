@@ -2,7 +2,15 @@
 
 기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
-## 최신 상태 — 데모와 저장소 탐색 (2026-11-11)
+## 최신 상태 — 공식 로고 브랜드 리디자인 (2026-11-11)
+
+발행 감사에 보존된 공식 라임 후드 로고 `.local/audit/token-image.png`를 재사용했습니다. 실제 형식은 JPEG이므로 내용 변경 없이 `assets/memediff-logo.jpg`로 복사하고 헤더·hero·토큰 카드에 적용했습니다. 라임/cyan/coral·near-black 테마, hero의 분석/실제 데모 CTA, 분석 패널·차트·토큰 CA/외부 링크 카드, favicon·1200×630 소셜 미리보기를 정비했습니다. 원본 로고 62,327 bytes, 외부 폰트·애니메이션 라이브러리 없음. 이미지 크기를 명시하고 토큰 로고는 lazy-load, reduced-motion을 지원합니다. [자산 출처](assets/README.md).
+
+기존 분석·검색·CA 인덱스·7/30일·스냅샷·JSON 구조는 그대로이며 PNG는 색상만 변경했습니다. UI는 영어입니다. 단위 31/31 통과. 초기 E2E 48 통과/2 실패는 이전 토큰 제목 문자열 기대값 문제였으며 새 표기에 맞게 수정했습니다. 최종 50개 PC·모바일 E2E 진행 중. 로컬 모바일 Lighthouse: Performance 98 / Accessibility 100 / Best Practices 100 / SEO 100. 로컬 단일 측정으로 실사용 성능 보장은 아니며 보고서는 `.local/brand-lighthouse.json`에 보존합니다.
+
+dnfl1999 인증 및 원격 main 일치를 확인했습니다. 다음 단계: 전체 E2E 통과 후 게시, Actions·Pages·공개 실제 API/다운로드 검증, 최종 증거 기록. 재개 명령: `npm.cmd run build`, `npm.cmd test`, `npm.cmd run test:e2e`. 다른 프로젝트·코인 발행·지갑·서명·SOL은 변경하지 않습니다.
+
+## 이전 상태 — 데모와 저장소 탐색 (2026-11-11)
 
 Try Live Demo로 dnfl1999/memediff 실제 분석, 제출 시 최대 10개 GitHub 공개 이름 검색·선택, 공식 Forks API의 정확한 CA 연결 조회를 추가했습니다. 기존 분석 소스·JSON schema·저장 키·CA는 보존합니다. 사용자 UI는 영어입니다. Forks API가 Pages Origin에 CORS 헤더를 제공하지 않아 배포 시 공식 최근 목록 및 MemeDiff 연결을 수집한 제한된 시각 표시 인덱스를 사용합니다. 실시간 전체 검색이라고 주장하지 않으며 없거나 모호한 연결은 추측하지 않습니다. [조회 방식과 제한](docs/DISCOVERY.md).
 

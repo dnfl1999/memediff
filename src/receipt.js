@@ -28,8 +28,8 @@ export function receiptData(report, days, comparison) {
 
 export function drawReceipt(ctx, report, days, comparison) {
   const r = receiptData(report, days, comparison);
-  const ink = '#eaf4df', green = '#c5f277', muted = '#b9caaa', amber = '#f1cc8c';
-  ctx.fillStyle = '#101412'; ctx.fillRect(0, 0, 1400, 1020);
+  const ink = '#eaf4df', green = '#a8ff32', muted = '#b5c4c7', amber = '#f1cc8c';
+  ctx.fillStyle = '#080a0b'; ctx.fillRect(0, 0, 1400, 1020);
   function text(value, x, y, size = 22, color = ink, width = 1280) {
     ctx.fillStyle = color; ctx.font = `${size}px "Segoe UI", sans-serif`;
     let display = String(value);
@@ -58,7 +58,7 @@ export function drawReceipt(ctx, report, days, comparison) {
   text(`Default branch: ${r.branch} | ${r.fork ? 'Fork' : 'Non-fork'} | ${r.archived ? 'Archived' : 'Not archived'}`, 60, 282, 21, muted);
   ['COMMITS', 'PUBLIC RELEASES', 'LINKED CONTRIBUTORS'].forEach((label, i) => {
     const x = 60 + i * 440;
-    ctx.fillStyle = '#1d281c'; ctx.fillRect(x, 308, 400, 142);
+    ctx.fillStyle = '#151d19'; ctx.fillRect(x, 308, 400, 142);
     text(label, x + 20, 344, 20, muted, 360);
     text(r.counts[i], x + 20, 416, 58, green, 360);
   });

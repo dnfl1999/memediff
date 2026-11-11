@@ -5,7 +5,7 @@ test('official token identity, links, clipboard and mobile layout', async ({ pag
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.goto('./');
   const section = page.locator('#official-token');
-  await expect(section).toContainText('MemeDiff / MEMEDIFF');
+  await expect(page.locator('#official-token-title')).toHaveText('MemeDiff $MEMEDIFF');
   await expect(page.locator('#official-ca')).toHaveValue(ca);
   for (const [label, url] of [['Forks Wiki', `https://forks.wiki/coin/${ca}`], ['pump.fun', `https://pump.fun/coin/${ca}`], ['Solscan', `https://solscan.io/token/${ca}`]]) {
     await expect(section.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', url);

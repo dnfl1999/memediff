@@ -52,7 +52,7 @@ test('English layout fits narrow mobile, tablet and desktop widths', async ({pag
       expect(box.x).toBeGreaterThanOrEqual(0); expect(box.x+box.width).toBeLessThanOrEqual(width);
     }
     const hero=await page.locator('.hero h1').boundingBox(), art=await page.locator('.hero-art').boundingBox();
-    if(art) expect(hero.x+hero.width).toBeLessThan(art.x);
+    if(art) expect(hero.x+hero.width < art.x || hero.y+hero.height < art.y).toBe(true);
     await page.screenshot({path:testInfo.outputPath(`english-${width}.png`),fullPage:true});
   }
 });

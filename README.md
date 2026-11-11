@@ -4,6 +4,8 @@
 
 Track real GitHub activity behind crypto projects. MemeDiff is a free, open-source web tool for inspecting public repository activity, comparing observed SHA values, and sharing evidence with a Development Receipt.
 
+The interface uses the official MemeDiff hooded mascot with a near-black, neon lime, cyan and coral palette. The same logo anchors the header, hero and official-token card; a dedicated social preview and favicon keep shared links consistent. See [brand assets and provenance](assets/README.md). The redesign changes presentation, not evidence collection, report schemas or saved baselines.
+
 [Open MemeDiff](https://dnfl1999.github.io/memediff/) · [GitHub](https://github.com/dnfl1999/memediff) · [Quick start](docs/GETTING_STARTED.md) · [FAQ](docs/FAQ.md) · [Real historical example](docs/examples/README.md)
 
 ## How to use
