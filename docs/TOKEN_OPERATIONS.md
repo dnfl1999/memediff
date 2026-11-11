@@ -10,6 +10,7 @@ Project: https://github.com/dnfl1999/memediff — website: https://dnfl1999.gith
 | --- | --- | --- |
 | Repository association | `GET https://forks.wiki/api/tokens?repos=dnfl1999%2Fmemediff` | Match full mint, not symbol. |
 | Price, volume, liquidity | `GET https://api.dexscreener.com/latest/dex/tokens/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork` | Check chainId, baseToken.address, pair, timestamp and liquidity fields. Missing liquidity is unknown, not zero. Volume is reported trading volume, not proven organic activity. |
+| Alternative pool valuation | `GET https://api.geckoterminal.com/api/v2/networks/solana/tokens/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork/pools` | Match base-token relationship and pool address. `reserve_in_usd` is a reported pool-reserve valuation, not cash or guaranteed exit liquidity. Keep nullable market cap separate from FDV; timestamp differences matter. |
 | Mint and authorities | Solana RPC `getAccountInfo`, params `[CA,{"encoding":"jsonParsed","commitment":"finalized"}]` | Verify owner program and embedded token metadata. |
 | Supply | `getTokenSupply`, params `[CA]` | Keep raw integer and decimals to avoid rounding. |
 | Wallet holdings | `getTokenAccountsByOwner`, params `[WALLET,{"mint":CA},{"encoding":"jsonParsed"}]` | Sum every returned token account for that mint; timestamp the result. |

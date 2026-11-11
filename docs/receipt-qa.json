@@ -1,0 +1,82 @@
+{
+  "recordedAt": "2026-11-11T07:33:55.724Z",
+  "productCommit": "0fd38d6c88fc3c71c29c1c2aaa410f7d625a090e",
+  "actions": "https://github.com/dnfl1999/memediff/actions/runs/42979878190",
+  "jobs": {
+    "verify": "success",
+    "deploy": "success",
+    "publicQa": "success"
+  },
+  "unitTests": {
+    "passed": 24,
+    "failed": 0
+  },
+  "finalRuns": [
+    {
+      "source": "qa-results/receipt-local-final/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:27:18.455Z",
+        "duration": 25129.585000000003,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "source": ".local/receipt-ci-build/linux-build-mock/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:30:04.588Z",
+        "duration": 20744.005,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "source": ".local/receipt-ci-public/linux-public-mock/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:31:07.250Z",
+        "duration": 16946.824,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "source": ".local/receipt-ci-public/linux-public-live/results.json",
+      "stats": {
+        "startTime": "2026-11-11T07:31:24.599Z",
+        "duration": 2136.2509999999997,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "finalBrowserTotals": {
+    "passed": 97,
+    "failed": 0,
+    "skipped": 0
+  },
+  "earlierAttempt": {
+    "passed": 30,
+    "failed": 2,
+    "reason": "Existing exact Korean button-name selectors did not match bilingual labels. Updated selectors; full suite rerun passed."
+  },
+  "publicFileMatches": [
+    "index.html",
+    "style.css",
+    "src/app.js",
+    "src/receipt.js"
+  ],
+  "notes": [
+    "96 mock/static UI cases and 1 real unauthenticated GitHub API case across final runs",
+    "JSON data and PNG decoding verified",
+    "Windows mock normal/partial PNGs and Linux live PNG visually inspected",
+    "Mobile tests use Chromium device emulation"
+  ]
+}

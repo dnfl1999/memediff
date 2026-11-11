@@ -4,13 +4,15 @@
 
 ## 최신 상태 — 실사용 및 운영 개선 (2026-11-11)
 
-16:19:06–16:19:08 KST 기준 공식 CA의 Mainnet 상태·시장·전체 토큰 계정·수수료 금고·Season 공개 보상 현황을 읽기 전용으로 재확인했습니다. 출처·요청별 시각·응답은 [docs/operations-snapshot.json](docs/operations-snapshot.json), 해석 및 유사 서비스 비교는 [docs/OPERATIONS_UPDATE.md](docs/OPERATIONS_UPDATE.md)에 있습니다. 유동성은 API 필드가 없어 미확인, 홀더는 본딩 커브 포함/제외 주소 수를 구분, 공동 금고 몫과 실제 GitHub 계정 적립 잔액을 구분했습니다.
+16:19:06–16:19:08 KST 기준 공식 CA의 Mainnet 상태·시장·전체 토큰 계정·수수료 금고·Season 공개 보상 현황을 읽기 전용으로 재확인했습니다. 출처·요청별 시각·응답은 [docs/operations-snapshot.json](docs/operations-snapshot.json), 해석 및 유사 서비스 비교는 [docs/OPERATIONS_UPDATE.md](docs/OPERATIONS_UPDATE.md)에 있습니다. DexScreener 유동성 필드는 없었으나, 16:31:50 KST GeckoTerminal 보조 조회에서 같은 풀의 준비금 평가액 $1,862.3936을 확인했습니다. 현금성 SOL·매도 가능 금액으로 단정하지 않았습니다. 홀더는 본딩 커브 포함/제외 주소 수를 구분했고, 공동 금고 몫과 실제 GitHub 계정 적립 잔액도 구분했습니다.
 
 기존 PNG 기능을 재사용해 영어 Development Receipt로 개선했습니다. 정확한 UTC 시작·종료, 최근 원본 항목 링크, 부분 수집 경고, 30일 비교 범위 표시를 추가했습니다. 영어 사용 안내와 주요 버튼 병기, README 안내, 미게시 X 공지 초안도 정비했습니다. 새 데이터 수집·점수·지갑·유료 서비스·게시 자동화는 없습니다.
 
 로컬 단위 테스트 **24/24**, 최종 Windows Chromium 데스크톱·모바일 E2E **32/32** 통과. 실제 PNG 파일을 열어 정상/부분 수집 카드 가독성 확인. 첫 E2E의 2건 실패는 영어를 병기한 기간 버튼 이름을 기존 exact-name 선택자가 찾지 못한 문제였고, 선택자 수정 후 전체 재검증을 통과했습니다. 실패 기록은 `qa-results/receipt-local/`, 최종 결과는 `qa-results/receipt-local-final/`에 보존했습니다. 기존 분석·비교·다운로드·주소 검증은 유지합니다.
 
-dnfl1999 인증 및 push 권한, origin/main과 HEAD 일치를 확인했습니다. 이 기록 작성 시 이번 제품 변경의 CI/배포는 아직 대기 중입니다. 다음 단계: 검증 변경분 push 후 Actions verify/deploy/public-qa와 공개 파일 일치 확인, 최종 결과 기록. 기존 코인 감사 및 이전 QA는 아래 이력입니다. 사용자 승인 없이 X 게시·지갑 서명·청구·자산 이동을 실행하지 않습니다.
+dnfl1999 인증 및 push 권한, origin/main과 HEAD 일치를 확인한 후 제품 커밋 `0fd38d6c88fc3c71c29c1c2aaa410f7d625a090e`를 게시했습니다. [Actions 42979878190](https://github.com/dnfl1999/memediff/actions/runs/42979878190)의 **verify / deploy / public-qa 전부 성공**. 다운로드한 아티팩트 기준 Linux 빌드 32/32, Linux 공개 모의·UI 32/32, 실제 GitHub API·JSON/PNG 다운로드 1/1 성공입니다. 최종 실행 합계 **97 passed / 0 failed / 0 skipped**(로컬 32 포함); 앞선 선택자 실패 2건은 별도 이력으로 보존했습니다. [docs/receipt-qa.json](docs/receipt-qa.json)에 결과를 기록했습니다.
+
+공개 URL https://dnfl1999.github.io/memediff/ 에서 HTML·CSS·app.js·receipt.js 모두 HTTP 200이며 로컬 검증 파일과 일치합니다. 실제 API로 생성한 7일 MemeDiff PNG도 열어 확인했습니다. 후속 운영 결과 문서 커밋은 `[skip ci]`로 불필요한 재배포를 생략하며 제품 코드는 동일합니다. 추가 개발/배포 작업 없음. X 초안은 미게시이며 로그인 후 CA별 보상 확인, 향후 청구·서명·자산 이동은 사용자 직접 승인 대상입니다. 기존 코인 감사 및 이전 QA는 아래 이력입니다.
 
 ## 이전 상태 — 코인 발행 후 감사 및 사이트 정비 (2026-11-11)
 

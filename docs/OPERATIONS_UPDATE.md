@@ -1,6 +1,6 @@
 # Dated operations snapshot and product review
 
-**2026-11-11 07:19:06–07:19:08 UTC / 16:19:06–16:19:08 KST.** Per-request timestamps, URLs, HTTP statuses and raw responses: [operations-snapshot.json](operations-snapshot.json). This is not a live price widget. The [launch audit](../POST_LAUNCH_AUDIT.md) remains a historical record.
+**2026-11-11 07:19:06–07:19:08 UTC / 16:19:06–16:19:08 KST**, with a supplementary GeckoTerminal observation at **07:31:50.168 UTC / 16:31:50.168 KST**. Per-request timestamps, URLs, HTTP statuses and raw responses: [operations-snapshot.json](operations-snapshot.json). This is not a live price widget. The [launch audit](../POST_LAUNCH_AUDIT.md) remains a historical record.
 
 ## Identity, market and holdings
 
@@ -19,13 +19,15 @@ Sources: [Solana Mainnet RPC](https://api.mainnet-beta.solana.com), [DexScreener
 | Reported market cap / FDV | **$2,330.71 / $2,330.71** |
 | Reported 24-hour volume | **$344.18**; token younger than 24 hours |
 | Reported 24-hour trades | 3 buys / 8 sells; not proof of organic activity |
-| USD liquidity | **Unavailable**: no liquidity field in returned pair. Not zero; not inferred from market cap. |
+| USD liquidity from DexScreener | **Unavailable**: no liquidity field in returned pair. Not zero; see the separate later GeckoTerminal observation below. |
 | Positive token accounts / distinct owners | **2 / 2**, including the bonding curve |
 | Positive owners excluding known bonding curve | **1 address**, the launcher; not a count of people |
 | Launch wallet | **6,983,940.536880 MEMEDIFF** (0.698394053688% of supply) |
 | Bonding curve | **993,016,059.463120 MEMEDIFF** |
 
 Pair/curve: `GJhnfPkf1mNw1jaoZBmQKi4jT41vhi6XQgSQxx7C9kh4`. Launch wallet: `EGQmE2VbE1h64zqG5EpUsuNrd6wrWFw2sx9WtyS5n27L`.
+
+Supplementary [GeckoTerminal pool query](https://api.geckoterminal.com/api/v2/networks/solana/tokens/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork/pools) at **16:31:50.168 KST** matched the exact mint and pair. It reported price **$0.000002331990709**, FDV **$2,331.990709**, 24-hour volume **$344.4415207941**, and **reserve_in_usd $1,862.3936**. The last is the provider's pool-reserve valuation (liquidity proxy), not cash SOL available to withdraw or a guarantee of executable sale proceeds. Its `market_cap_usd` was **null**: do not relabel FDV as a separately verified market cap. Sources have different times and valuation methods; values are not averaged or silently substituted. No paid API or authentication was used.
 
 `getProgramAccounts` on Token-2022 with exact mint memcmp offset 0 returned five accounts: two positive and three zero. Owners were deduplicated after excluding zero balances. Positive balances reconcile to total supply. This is an RPC snapshot, not a count of beneficial owners or people; no top-20 extrapolation was used.
 
@@ -82,4 +84,6 @@ English quick-start help and bilingual primary controls were added. Analysis log
 - Prioritize collection-warning clarity, sharing readability and English accessibility using actual feedback.
 - Keep code progress separate from token observations, retain CI, and avoid repeated rate-limited requests or paid tools.
 
-Validation and deployment outcomes: [PROGRESS.md](../PROGRESS.md). Snapshot times remain unchanged even when deployment finishes later. No wallet connection, signatures, claim, trade or SOL spending occurred.
+Validation: 24 unit tests passed. Final Playwright runs passed 32 local, 32 Linux build, 32 public mock/UI and 1 public real GitHub API case: **97 passed, 0 failed, 0 skipped**. Two initial selector failures after bilingual labeling were fixed and the full suite rerun; they are separately recorded. PNG decoding, JSON exports, both selected windows, partial-data labels, mobile layout and existing regression checks passed. Product commit `0fd38d6c88fc3c71c29c1c2aaa410f7d625a090e` passed [Actions 42979878190](https://github.com/dnfl1999/memediff/actions/runs/42979878190), including Pages deployment and public QA. Public product files matched local files. See [receipt-qa.json](receipt-qa.json) and [PROGRESS.md](../PROGRESS.md).
+
+Snapshot times remain unchanged even when deployment finishes later. No wallet connection, signatures, claim, trade, SOL spending or X publication occurred.
