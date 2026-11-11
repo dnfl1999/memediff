@@ -1,0 +1,395 @@
+{
+  "recordedAt": "2026-11-11T09:45:31.755Z",
+  "productCommit": "80260dee400bcd89f47b2184788236c6e0ded0c1",
+  "deployedCommit": "89738d1bef0aa13d0dc39b934c4e97ab210af1ec",
+  "actions": "https://github.com/dnfl1999/memediff/actions/runs/42997118463",
+  "publicURL": "https://dnfl1999.github.io/memediff/",
+  "unit": {
+    "passed": 39,
+    "failed": 0
+  },
+  "localMock": {
+    "startTime": "2026-11-11T09:31:24.234Z",
+    "duration": 81979.797,
+    "expected": 66,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localLive": {
+    "stats": {
+      "startTime": "2026-11-11T09:32:58.628Z",
+      "duration": 7592.728,
+      "expected": 1,
+      "skipped": 3,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "LIVE CA-only MEMEDIFF auto-analysis and development exports",
+        "status": "skipped",
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Real API limited; evidence attached, no retry.",
+            "location": {
+              "file": "C:\\Users\\admin\\OneDrive\\Desktop\\MemeDiff\\e2e\\live.spec.js",
+              "line": 10,
+              "column": 196
+            }
+          }
+        ],
+        "api": [
+          {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-11T09:33:03.550Z",
+            "responses": [
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff",
+                "status": 403,
+                "remaining": "0",
+                "reset": "1794390892"
+              },
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                "status": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "LIVE CA-only another Forks coin auto-analysis and development exports",
+        "status": "skipped",
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Previous live GitHub rate limit; no further GitHub requests.",
+            "location": {
+              "file": "C:\\Users\\admin\\OneDrive\\Desktop\\MemeDiff\\e2e\\live.spec.js",
+              "line": 14,
+              "column": 7
+            }
+          }
+        ],
+        "api": []
+      },
+      {
+        "title": "LIVE general Solana meme token shows exact-CA market information without invented repository",
+        "status": "passed",
+        "annotations": [],
+        "api": [
+          {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-11T09:33:05.278Z",
+            "responses": [
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+                "status": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "LIVE Advanced Search preserves direct GitHub and name search",
+        "status": "skipped",
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Previous live GitHub rate limit; no further GitHub requests.",
+            "location": {
+              "file": "C:\\Users\\admin\\OneDrive\\Desktop\\MemeDiff\\e2e\\live.spec.js",
+              "line": 28,
+              "column": 7
+            }
+          }
+        ],
+        "api": []
+      }
+    ]
+  },
+  "linuxBuildMock": {
+    "startTime": "2026-11-11T09:40:43.576Z",
+    "duration": 53383.28,
+    "expected": 66,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "linuxPublicMock": {
+    "startTime": "2026-11-11T09:42:35.178Z",
+    "duration": 63269.863,
+    "expected": 66,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "linuxPublicLive": {
+    "stats": {
+      "startTime": "2026-11-11T09:43:39.139Z",
+      "duration": 7261.161,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "LIVE CA-only MEMEDIFF auto-analysis and development exports",
+        "status": "passed",
+        "annotations": [],
+        "api": [
+          {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-11T09:43:41.288Z",
+            "responses": [
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                "status": 200
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff",
+                "status": 200,
+                "remaining": "59",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-12T09:43:40.525Z&until=2026-11-11T09:43:40.525Z&per_page=100&page=1",
+                "status": 200,
+                "remaining": "58",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "57",
+                "reset": "1794393820"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "LIVE CA-only another Forks coin auto-analysis and development exports",
+        "status": "passed",
+        "annotations": [],
+        "api": [
+          {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-11T09:43:43.500Z",
+            "responses": [
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+                "status": 200
+              },
+              {
+                "url": "https://api.github.com/repos/riansj2290/remote-ikan",
+                "status": 200,
+                "remaining": "56",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/repos/riansj2290/remote-ikan/commits?sha=main&since=2026-10-12T09:43:42.719Z&until=2026-11-11T09:43:42.719Z&per_page=100&page=1",
+                "status": 409,
+                "remaining": "55",
+                "reset": "1794393820",
+                "message": "Git Repository is empty."
+              },
+              {
+                "url": "https://api.github.com/repos/riansj2290/remote-ikan/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "54",
+                "reset": "1794393820"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "LIVE general Solana meme token shows exact-CA market information without invented repository",
+        "status": "passed",
+        "annotations": [],
+        "api": [
+          {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-11T09:43:44.891Z",
+            "responses": [
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+                "status": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "LIVE Advanced Search preserves direct GitHub and name search",
+        "status": "passed",
+        "annotations": [],
+        "api": [
+          {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-11T09:43:45.841Z",
+            "responses": [
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff",
+                "status": 200,
+                "remaining": "53",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-12T09:43:45.543Z&until=2026-11-11T09:43:45.543Z&per_page=100&page=1",
+                "status": 200,
+                "remaining": "52",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "51",
+                "reset": "1794393820"
+              }
+            ]
+          },
+          {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-11T09:43:46.308Z",
+            "responses": [
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff",
+                "status": 200,
+                "remaining": "53",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-12T09:43:45.543Z&until=2026-11-11T09:43:45.543Z&per_page=100&page=1",
+                "status": 200,
+                "remaining": "52",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "51",
+                "reset": "1794393820"
+              },
+              {
+                "url": "https://api.github.com/search/repositories?q=memediff%20in%3Aname%20is%3Apublic&per_page=10",
+                "status": 200,
+                "remaining": "9",
+                "reset": "1794390286"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "previousFailures": {
+    "localMock": {
+      "passed": 62,
+      "failed": 4,
+      "cause": "Old tests did not expand Advanced Search before accessing the preserved repository controls; corrected and all 66 passed."
+    },
+    "firstPublicLive": {
+      "stats": {
+        "startTime": "2026-11-11T09:37:22.096Z",
+        "duration": 8382.156,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cause": "Live test expected only HTTP 200; exact linked remote-ikan repository returned Git Repository is empty (409). Test now accepts only that explicit commits response, not arbitrary conflicts."
+    }
+  },
+  "publicFiles": {
+    "observedAt": "2026-11-11T09:44:41.295Z",
+    "checks": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "same": true,
+        "sha256": "d23ca074ef6c46fcc866a2b96b11b381aec2cc05d5a3755263cd248c165d810a"
+      },
+      {
+        "file": "style.css",
+        "status": 200,
+        "same": true,
+        "sha256": "f81c4f965136f3c5583cbc76ed2f467d0a844fd391f1ae5d33f3888d94164cba"
+      },
+      {
+        "file": "src/app.js",
+        "status": 200,
+        "same": true,
+        "sha256": "6710424d1b03869708f64f911562507f95b367e4c38887b05b52938eed18b43a"
+      },
+      {
+        "file": "src/token-ui.js",
+        "status": 200,
+        "same": true,
+        "sha256": "4e06f753e594a48dcc6b251298b1d36732c1b61c5a5ae024b76b6b9c10d9ddd1"
+      },
+      {
+        "file": "src/token-data.js",
+        "status": 200,
+        "same": true,
+        "sha256": "50c4100cbf74cfd162d5126b002ff1ce3e0a8c6a2d4760bf43b94487902cabe1"
+      },
+      {
+        "file": "src/discovery-ui.js",
+        "status": 200,
+        "same": true,
+        "sha256": "f92f454572242f73de2076cfafa488645cc2c94ebdb72166c8c6f13079c96edb"
+      },
+      {
+        "file": "assets/memediff-logo.jpg",
+        "status": 200,
+        "same": true,
+        "sha256": "1bc7d9de5ccf4156a72a9fb88b1c2130d668579c8e575e41e2f4dc0db9212642"
+      },
+      {
+        "file": "assets/favicon.png",
+        "status": 200,
+        "same": true,
+        "sha256": "675a7e54657d10528cb46b614d5e125a348c8d8aa268c19d789afe383f8796b5"
+      },
+      {
+        "file": "assets/social-preview.png",
+        "status": 200,
+        "same": true,
+        "sha256": "97a247c1a48132161a88f1f4697b30824116ed5dd7fc38ad078ff33942dc018a"
+      }
+    ],
+    "index": {
+      "checkedAt": "2026-11-11T09:40:27.941Z",
+      "coverage": {
+        "recentCount": 20,
+        "candidateCount": 32,
+        "attempted": 32,
+        "verified": 32,
+        "cap": 200,
+        "capped": false,
+        "pagination": "Unconfirmed: tested page/limit/offset returned the same 20 records."
+      },
+      "complete": false
+    }
+  },
+  "limits": [
+    "Forks browser CORS still prevents direct API reads. Only a dated partial index is deployed.",
+    "Official recent pagination/full enumeration unconfirmed; missing entries do not prove no association.",
+    "Six-hour refresh can be delayed or disabled; entries older than 48 hours are rejected.",
+    "Optional serverless Worker has unit mocks only, is not deployed, and requires separately authorized external account setup.",
+    "Market values are one exact Solana base-token pool observation, not aggregated market totals.",
+    "No wallet, signing, trading, fee claim or paid service used."
+  ]
+}

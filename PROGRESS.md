@@ -10,7 +10,7 @@ CA 입력 한 번으로 DexScreener의 정확한 Solana base-token 시장 정보
 
 로컬 최종 단위 39/39, PC·모바일 모의 E2E 66/66 통과. 최초 모의 62통과/4실패는 Advanced Search를 열지 않는 기존 테스트 절차를 수정한 뒤 해소했습니다. 실제 로컬 API는 1통과/3건너뜀: BONK 시장 조회 성공, GitHub API 제한에 따른 반복 요청 중단. PNG 실제 디코딩·JSON·기존 스냅샷·영어·모바일 검증 포함. 인증 계정 dnfl1999 및 origin/main 동일 상태를 확인했습니다.
 
-다음 단계: 제품 커밋을 main에 게시하고 Actions verify/deploy/public-qa 결과 및 공개 CA 단독 입력 검증 결과를 이 문서에 추가합니다. 재개 명령: `npm.cmd test`, `npm.cmd run build`, `npm.cmd run test:e2e`, `npm.cmd run test:e2e:live` (실제 API 제한이면 같은 환경에서 재시도하지 않음).
+제품 커밋 80260de와 실전 테스트 보완 89738d1을 dnfl1999 main에 게시했습니다. 최초 공개 실제 API는 3통과/1실패였고, 다른 Forks 연결 저장소의 명시적 empty-repository 409를 테스트가 오류로 취급한 원인을 수정했습니다. [최종 Actions 42997118463](https://github.com/dnfl1999/memediff/actions/runs/42997118463)의 verify/deploy/public-qa가 성공했습니다. Linux 빌드 모의 66/66, 공개 모의 66/66, 공개 실제 API 4/4(건너뜀 0) 통과. MEMEDIFF CA → dnfl1999/memediff 자동 분석, 다른 Forks CA → riansj2290/remote-ikan 빈 저장소 분석, BONK 시장 정보/연결 미확인, 기존 GitHub 직접 입력·이름 검색을 확인했습니다. 연결된 두 CA의 PNG 디코딩·JSON·7일/30일·baseline 동작도 성공했습니다. 최종 공개 인덱스는 32개 연결이며 complete=false입니다. 공개 주요 파일 9개 HTTP 200 및 로컬 일치·브랜드 자산 보존 확인. [세부 QA 기록](docs/ca-qa.json). 문서 기록은 [skip ci] 커밋으로 검증된 배포를 유지합니다. 재개 명령: `npm.cmd test`, `npm.cmd run build`, `npm.cmd run test:e2e`, `npm.cmd run test:e2e:live` (실제 API 제한이면 같은 환경에서 재시도하지 않음).
 
 ## 이전 상태 — 공식 로고 브랜드 리디자인 (2026-11-11)
 
