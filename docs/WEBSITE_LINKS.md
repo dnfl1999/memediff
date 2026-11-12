@@ -29,7 +29,7 @@ The official [pump.fun creation guide](https://pump.fun/docs/create-coin) descri
 
 **DexScreener:** The [official listing documentation](https://docs.dexscreener.com/token-listing) says profiles may be enriched from external lists such as CoinGecko. That is not a guaranteed free direct update or guaranteed acceptance on CoinGecko. The direct [Enhanced Token Info application](https://marketplace.dexscreener.com/product/token-info) currently advertises **from $299**, alongside a struck-through $499 price. Steps: enter token/profile details, pay, await processing. It is a paid service, so no order or checkout was opened or submitted. Do not confuse automatic market listing with website-profile registration.
 
-**Forks:** The [official guide](https://forks.wiki/guide) links its [public source repository](https://github.com/forkwiki/fork). Its [issue form](https://github.com/forkwiki/fork/issues/new) is a maintainer inquiry route, not an advertised token-registration API. Ask whether the existing coin record can display the official website separately. Include CA, repository, website, and the original-field evidence. GitHub login and maintainer action are required; no issue was posted. Do not relaunch the coin.
+**Forks:** The [official guide](https://forks.wiki/guide) links its [public source repository](https://github.com/forkwiki/fork). Its [issue form](https://github.com/forkwiki/fork/issues/new) is a maintainer inquiry route, not an advertised token-registration API. Ask whether the existing coin record can display the official website separately. Include CA, repository, website, and the original-field evidence. An English request was submitted by authenticated dnfl1999 on November 12, 2026 at 04:28:56 UTC (13:28:56 KST): [Issue #3](https://github.com/forkwiki/fork/issues/3). Its Open state and author were read back after submission. All existing issues were checked; there was no duplicate. No private contact details were included. Maintainer action is pending; do not create a duplicate request or relaunch the coin.
 
 **pump.fun:** Recheck the exact coin page in a normal browser. No verified dedicated website-update application URL was found, so none is invented here. Any displayed-profile change must be confirmed with the platform through its own interface. The immutable mint metadata cannot be edited by the launcher.
 
@@ -53,3 +53,13 @@ The deployed project includes sitemap.xml and robots.txt. A crawler's authoritat
 ## Verified deployment
 
 Code commit `0cbf8d13115d680a61e157643e00f147aadbdd92` was deployed successfully by [Actions run 43148330961](https://github.com/dnfl1999/memediff/actions/runs/43148330961). Local unit tests: 39 passed. Local desktop/mobile Chromium E2E: 66 passed. Public Pages desktop/mobile mocked-API E2E: 66 passed. Public Pages real-API E2E: 4 passed, 0 skipped, including MEMEDIFF CA-only market lookup, GitHub analysis, PNG/JSON downloads and baseline comparison. The live browser tests ran in GitHub Actions; no mocked responses or authentication were used for those four tests. [QA summary and decoded API evidence](website-qa.json) retain the coverage and limits.
+
+## External registration follow-up — November 12, 2026
+
+Forks request: **submitted**, [issue #3](https://github.com/forkwiki/fork/issues/3), Open, author dnfl1999, no maintainer response at verification. This is a submitted request, not a completed profile update.
+
+Solscan request: **prepared, not entered or submitted**. [Field-by-field draft](solscan-submission-draft.json) includes the public CA, website, logo, and neutral English description; requester name/email remain blank. The browser connection host was unavailable and native window approval timed out. Current MEMEDIFF reputation could not be observed and is not inferred from Solscan defaults.
+
+The provisional type is Social Links & Logo Update for the requested link correction. If the actual reputation is Unknown or Unclassified, a Reputation Update review may be needed for website visibility; eligibility is not established. If Neutral/OK, use Social Links & Logo Update. Submit only one request after checking the actual status.
+
+The [official guideline](https://info.solscan.io/solscan-token-update-guideline/) requires the requester email to use the project domain or be listed on the project website. The user must decide which contact name/email to use and whether to publish that email. No personal data was entered or published, and no CAPTCHA, authentication, paid service, wallet signature, trade, or token issuance was performed.

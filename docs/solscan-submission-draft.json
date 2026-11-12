@@ -1,0 +1,35 @@
+{
+  "status": "prepared_not_entered_or_submitted",
+  "form": "https://solscan.io/token-update",
+  "preparedDate": "2026-11-12",
+  "requestType": {
+    "provisional": "Social Links & Logo Update",
+    "reason": "The requested change is a website/logo correction, not an unverified claim of Neutral eligibility.",
+    "currentReputation": "unverified_access_blocked",
+    "decision": "If the token is Neutral or OK, use Social Links & Logo Update. If Unknown or Unclassified, consult Reputation Update requirements because profile links may be hidden. Do not assume eligibility or submit duplicate requests."
+  },
+  "fields": {
+    "tokenContractAddress": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+    "requesterName": null,
+    "requesterEmailAddress": null,
+    "officialProjectWebsite": "https://dnfl1999.github.io/memediff/",
+    "linkToTokenImage": "https://dnfl1999.github.io/memediff/assets/memediff-logo.jpg",
+    "shortDescription": "MemeDiff is a free, open-source tool for inspecting public GitHub activity behind Solana tokens. It provides exact-address market lookups, verified Forks repository associations, local baseline comparisons, and PNG/JSON reports. MEMEDIFF is the project-associated meme token. Please display the official website above. This request concerns Solscan profile information, not immutable on-chain metadata. Repository: https://github.com/dnfl1999/memediff",
+    "coinMarketCap": null,
+    "coinGecko": null,
+    "discord": null,
+    "medium": null,
+    "telegram": null,
+    "twitter": null
+  },
+  "blockers": [
+    "Requester name and email must be supplied by the user; no personal information was entered.",
+    "Solscan requires an official project-domain email or publication of the requesting email on the project website. No email was published.",
+    "Current token reputation was not observable: web access failed, browser host was unavailable, and native window access approval timed out.",
+    "No form fields were entered; no CAPTCHA or authentication was attempted."
+  ],
+  "sources": [
+    "https://info.solscan.io/solscan-token-update-guideline/",
+    "https://info.solscan.io/solscan-token-reputation/"
+  ]
+}
