@@ -1,12 +1,12 @@
 # MemeDiff 진행 기록
 
-기준일: **2026-11-11 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
+기준일: **2026-11-12 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
 ## 최신 상태 — v1.1 JSON Snapshot Import & Comparison (2026-11-12)
 
 기존 런타임 코드·README·ROADMAP·PROGRESS·최근 배포 Actions 43148330961을 확인했습니다. 시작 단위 39/39 통과, 저장소 깨끗함, 원격과 로컬 f6cfe96 일치. 브라우저 로컬 파일 검증·미리보기·명시적 비교 및 저장을 구현했습니다. schema 1과 기존 baseline 키, compareSnapshots를 유지하며 imported-json 출처는 추가 필드로만 표시합니다. 기존 브라우저 baseline은 Compare without saving에서 바뀌지 않으며 Save imported baseline을 눌러야 덮어씁니다. 새 조회 중 늦게 완료된 파일 읽기는 무시합니다.
 
-검증: 최종 단위 68/68 통과. 최초 PC·모바일 전체 E2E 78/78, 검증기 보완 후 가져오기 집중 재검사 12/12 통과. 로컬 실제 API는 1통과/3건너뜀/0실패: GitHub 403 remaining=0을 기록하고 추가 GitHub 요청을 중단했으며 DexScreener는 200 응답. 이전 공개 실제 MEMEDIFF JSON(21커밋, 공식 CA)도 새 검증기로 읽기 성공. 최종 UI 포커스 반영 후 전체 PC·모바일 회귀 재검사 78/78 통과(실패·건너뜀 0). 실제 화면 미리보기와 PNG의 imported/unverified 표기를 확인했습니다. 배포 결과는 이어 기록합니다.
+검증: 최종 단위 68/68 통과. 최초 PC·모바일 전체 E2E 78/78, 검증기 보완 후 가져오기 집중 재검사 12/12 통과. 로컬 실제 API는 1통과/3건너뜀/0실패: GitHub 403 remaining=0을 기록하고 추가 GitHub 요청을 중단했으며 DexScreener는 200 응답. 이전 공개 실제 MEMEDIFF JSON(21커밋, 공식 CA)도 새 검증기로 읽기 성공. 최종 UI 포커스 반영 후 전체 PC·모바일 회귀 재검사 78/78 통과(실패·건너뜀 0). 실제 화면 미리보기와 PNG의 imported/unverified 표기를 확인했습니다. 제품 커밋 `ca4148abd1f4098490ef7c0b11a23f3bee5cb85c`를 dnfl1999/memediff main에 푸시했습니다. [Actions 43159340609](https://github.com/dnfl1999/memediff/actions/runs/43159340609)의 verify/deploy/public-qa 모두 성공. 서버 단위 68/68, Linux 배포 전 모의 78/78, 공개 PC·모바일 모의 78/78, 공개 실제 API 4/4 통과(공개 검사 실패·건너뜀 0). 실제 MEMEDIFF CA → 시장정보 → GitHub 분석 → JSON 다운로드 → 같은 파일 가져오기 → 30일 비교 → PNG/JSON 재출력을 확인했습니다. 공개 9개 파일 HTTP 200 및 빌드 일치. [최종 QA·실제 API 응답 증거](docs/import-qa.json). 로컬 GitHub 제한에 따른 3건너뜀은 공개 성공과 구분해 보존합니다. 최종 증거 문서는 [skip ci]로 게시하며 앱 배포를 반복하지 않습니다.
 
 ## 이전 상태 — CA 단독 분석 (2026-11-11)
 
