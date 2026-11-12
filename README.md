@@ -34,6 +34,8 @@ If sharing is unsupported (including a negative `canShare()` result), the same c
 
 A resolved Web Share request does **not** prove delivery to a recipient: platform behavior differs. See [Web Share behavior](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share). Browser support and available targets depend on the device. Desktop/mobile Chromium tests simulate native success, cancellation and failure; a real Android/iOS share sheet has **not been exercised in this environment**. Clipboard and manual copying remain available. This release retains the existing website, canonical, sitemap and external registration requests.
 
+The next [v1.5 SHA explorer plan](ROADMAP.md) defines overlap filters, source links and compatibility checks. It is design-only; v1.4 does not implement that explorer.
+
 ## v1.3 — Share a token analysis link
 
 Enter a Solana CA in the token analyzer and select **Copy Analysis Link**. The link always uses the official site and one parameter: `https://dnfl1999.github.io/memediff/?ca=YOUR_CA`. It shares the **CA currently in the input**, not a saved analysis. If clipboard access is unavailable, the full link is selected in a read-only field: use Ctrl/Cmd+C or long-press and Copy on mobile.

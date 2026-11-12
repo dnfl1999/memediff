@@ -80,7 +80,7 @@
       "attachments": []
     }
   ],
-  "deployment": "pending",
+  "deployment": "success",
   "nativeShareValidation": {
     "automated": "Unit and desktop/mobile Chromium tests simulate native success, cancellation, rejection, missing API, canShare false, repeated clicks and stale completion.",
     "physicalMobileOS": "NOT TESTED: no physical Android/iOS share sheet was exercised; OS target delivery is not claimed."
@@ -98,5 +98,365 @@
     "token CA",
     "JSON schema 1",
     "baseline storage keys"
+  ],
+  "workflow": {
+    "id": 43191061937,
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/dnfl1999/memediff/actions/runs/43191061937",
+    "head_sha": "45b8bf0b0b432525c97a84b4cd74f85fa561122b"
+  },
+  "codeCommit": "45b8bf0b0b432525c97a84b4cd74f85fa561122b",
+  "publicFiles": {
+    "checkedAt": "2026-11-12T09:26:47.926Z",
+    "checks": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 19523
+      },
+      {
+        "file": "src/app.js",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 16844
+      },
+      {
+        "file": "src/import.js",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 7695
+      },
+      {
+        "file": "src/share.js",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 1587
+      },
+      {
+        "file": "src/share-ui.js",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 3405
+      },
+      {
+        "file": "src/core.js",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 4985
+      },
+      {
+        "file": "src/timeline.js",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 1022
+      },
+      {
+        "file": "src/receipt.js",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 6805
+      },
+      {
+        "file": "style.css",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 24307
+      },
+      {
+        "file": "assets/favicon.png",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 8788
+      },
+      {
+        "file": "assets/social-preview.png",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 200094
+      },
+      {
+        "file": "sitemap.xml",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 167
+      },
+      {
+        "file": "robots.txt",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 80
+      }
+    ],
+    "sharedPage": {
+      "url": "https://dnfl1999.github.io/memediff/?ca=DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+      "status": 200,
+      "matchesStaticBuild": true,
+      "canonicalUnchanged": true,
+      "shareModule": true
+    }
+  },
+  "ciUnit": {
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0
+  },
+  "ciBuildMock": {
+    "passed": 114,
+    "failed": 0,
+    "skipped": 0
+  },
+  "linux-public-mock": {
+    "startTime": "2026-11-12T09:27:03.238Z",
+    "duration": 169706.417,
+    "expected": 114,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "linux-public-live": {
+    "startTime": "2026-11-12T09:29:53.694Z",
+    "duration": 8384.108,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "publicLiveEvidence": [
+    {
+      "test": "LIVE CA-only MEMEDIFF auto-analysis and development exports",
+      "status": "passed",
+      "evidence": [
+        {
+          "name": "LIVE-api-evidence",
+          "data": {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-12T09:29:55.560Z",
+            "responses": [
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+                "status": 200
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff",
+                "status": 200,
+                "remaining": "29",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-13T09:29:54.860Z&until=2026-11-12T09:29:54.860Z&per_page=100&page=1",
+                "status": 200,
+                "remaining": "28",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "27",
+                "reset": "1794476195"
+              }
+            ]
+          }
+        },
+        {
+          "name": "browser-diagnostics",
+          "data": {
+            "pageErrors": [],
+            "consoleErrors": [],
+            "failures": [],
+            "responses": [],
+            "expectedStatuses": [],
+            "allowApiAbort": false,
+            "expectedURLs": []
+          }
+        }
+      ],
+      "downloads": [
+        "download-json",
+        "download-png",
+        "download-json",
+        "download-png"
+      ]
+    },
+    {
+      "test": "LIVE CA-only another Forks coin auto-analysis and development exports",
+      "status": "passed",
+      "evidence": [
+        {
+          "name": "LIVE-api-evidence",
+          "data": {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-12T09:29:59.094Z",
+            "responses": [
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork",
+                "status": 200
+              },
+              {
+                "url": "https://api.github.com/repos/riansj2290/remote-ikan",
+                "status": 200,
+                "remaining": "26",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/repos/riansj2290/remote-ikan/commits?sha=main&since=2026-10-13T09:29:58.298Z&until=2026-11-12T09:29:58.298Z&per_page=100&page=1",
+                "status": 409,
+                "remaining": "25",
+                "reset": "1794476195",
+                "message": "Git Repository is empty."
+              },
+              {
+                "url": "https://api.github.com/repos/riansj2290/remote-ikan/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "24",
+                "reset": "1794476195"
+              }
+            ]
+          }
+        },
+        {
+          "name": "browser-diagnostics",
+          "data": {
+            "pageErrors": [],
+            "consoleErrors": [
+              "Failed to load resource: the server responded with a status of 409 ()"
+            ],
+            "failures": [],
+            "responses": [
+              {
+                "url": "https://api.github.com/repos/riansj2290/remote-ikan/commits?sha=main&since=2026-10-13T09:29:58.298Z&until=2026-11-12T09:29:58.298Z&per_page=100&page=1",
+                "status": 409
+              }
+            ],
+            "expectedStatuses": [
+              409
+            ],
+            "allowApiAbort": false,
+            "expectedURLs": []
+          }
+        }
+      ],
+      "downloads": [
+        "download-json",
+        "download-png"
+      ]
+    },
+    {
+      "test": "LIVE general Solana meme token shows exact-CA market information without invented repository",
+      "status": "passed",
+      "evidence": [
+        {
+          "name": "LIVE-api-evidence",
+          "data": {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-12T09:30:00.498Z",
+            "responses": [
+              {
+                "url": "https://api.dexscreener.com/tokens/v1/solana/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "name": "browser-diagnostics",
+          "data": {
+            "pageErrors": [],
+            "consoleErrors": [],
+            "failures": [],
+            "responses": [],
+            "expectedStatuses": [],
+            "allowApiAbort": false,
+            "expectedURLs": []
+          }
+        }
+      ],
+      "downloads": []
+    },
+    {
+      "test": "LIVE Advanced Search preserves direct GitHub and name search",
+      "status": "passed",
+      "evidence": [
+        {
+          "name": "LIVE-api-evidence",
+          "data": {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-12T09:30:01.468Z",
+            "responses": [
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff",
+                "status": 200,
+                "remaining": "23",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-13T09:30:01.170Z&until=2026-11-12T09:30:01.170Z&per_page=100&page=1",
+                "status": 200,
+                "remaining": "22",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "21",
+                "reset": "1794476195"
+              }
+            ]
+          }
+        },
+        {
+          "name": "LIVE-api-evidence",
+          "data": {
+            "mocked": false,
+            "authenticated": false,
+            "observedAt": "2026-11-12T09:30:01.949Z",
+            "responses": [
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff",
+                "status": 200,
+                "remaining": "23",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-13T09:30:01.170Z&until=2026-11-12T09:30:01.170Z&per_page=100&page=1",
+                "status": 200,
+                "remaining": "22",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+                "status": 200,
+                "remaining": "21",
+                "reset": "1794476195"
+              },
+              {
+                "url": "https://api.github.com/search/repositories?q=memediff%20in%3Aname%20is%3Apublic&per_page=10",
+                "status": 200,
+                "remaining": "9",
+                "reset": "1794475861"
+              }
+            ]
+          }
+        },
+        {
+          "name": "browser-diagnostics",
+          "data": {
+            "pageErrors": [],
+            "consoleErrors": [],
+            "failures": [],
+            "responses": [],
+            "expectedStatuses": [],
+            "allowApiAbort": false,
+            "expectedURLs": []
+          }
+        }
+      ],
+      "downloads": []
+    }
   ]
 }
