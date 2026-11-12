@@ -6,7 +6,7 @@
 
 시작 main `2365d49faa1fafa0b3ade85c74ae5369b330a36f` 원격 일치, dnfl1999 인증, v1.2 Actions 43164014308 성공을 확인했습니다. 기존 URL 처리에 공유 기능이 없음을 확인하고 기존 parseToken 및 CA 조회를 재사용했습니다. 시작 단위 80/80 통과. 공식 홈페이지 + 단일 ca 파라미터로만 공유 링크를 생성합니다. URL에서 검증된 CA는 입력만 하며 Analyze Token을 눌러야 조회합니다. 잘못된 CA·중복 파라미터를 거부하고 외부 URL로 이동하지 않습니다. 클립보드 실패 시 선택 가능한 전체 링크와 수동 복사 안내를 제공합니다. baseline/JSON/report를 읽거나 공유하지 않으며, 복사 중 입력 변경 시 이전 상태 안내를 무시합니다. 일반 방문·공식 CA 정보·임의 CA 구분·정적 공유 미리보기 한계를 유지/안내합니다.
 
-단위 88통과/0실패/0건너뜀, PC·모바일 Chromium 전체 102통과/0실패/0건너뜀. URL 인코딩·악성/중복/빈 CA, 직접 입력과 공유 조회 일치, 복사 성공·실패·API 부재·지연 완료, 사전 API 요청 없음, baseline/import 보호, 타임라인·PNG/JSON과 기존 전체 기능을 검증했습니다. 로컬 실제 API 1통과/0실패/3건너뜀. API 제한 응답은 [QA 증거](docs/share-qa.json)에 보존하며 자동 재시도하지 않았습니다. 배포 결과는 확인 후 기록합니다.
+단위 88통과/0실패/0건너뜀, PC·모바일 Chromium 전체 102통과/0실패/0건너뜀. URL 인코딩·악성/중복/빈 CA, 직접 입력과 공유 조회 일치, 복사 성공·실패·API 부재·지연 완료, 사전 API 요청 없음, baseline/import 보호, 타임라인·PNG/JSON과 기존 전체 기능을 검증했습니다. 로컬 실제 API 1통과/0실패/3건너뜀. API 제한 응답은 [QA 증거](docs/share-qa.json)에 보존하며 자동 재시도하지 않았습니다. 제품 커밋 `111e3d64ac4f0800fd875f23e3ca97866af2d395`를 main에 푸시했고 [Actions 43170237297](https://github.com/dnfl1999/memediff/actions/runs/43170237297) verify/deploy/public-qa 모두 성공했습니다. CI 단위 88통과, 배포 전 모의 102통과, 공개 PC·모바일 모의 102통과/0실패/0건너뜀, 공개 실제 API 4통과/0실패/0건너뜀. 공개 MEMEDIFF 공유 URL 직접 열기→CA 사전 입력/API 요청 없음→Analyze Token→시장정보→GitHub→링크 생성→JSON import→UTC 타임라인→PNG/JSON을 검증했습니다. 공개 13개 파일 HTTP 200 및 빌드 일치. 로컬 API 제한 3건너뜀은 별도로 보존합니다. 최종 QA 문서는 [skip ci]로 게시하며 앱 배포는 반복하지 않습니다.
 
 ## 이전 상태 — v1.2 Observation Period Timeline (2026-11-12)
 
