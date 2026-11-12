@@ -49,3 +49,7 @@ The official [pump.fun creation guide](https://pump.fun/docs/create-coin) descri
 Canonical, Open Graph and Twitter image paths target the project Pages URL. The existing 1200 x 630 social image and favicon are retained. The build substitutes the official CA from `src/token-data.js` into the HTML template, keeping one application constant and crawlable static token links. Run `npm run build` before previewing `dist/`; the source HTML is a build template.
 
 The deployed project includes sitemap.xml and robots.txt. A crawler's authoritative robots.txt is at the origin root (https://dnfl1999.github.io/robots.txt), not /memediff/robots.txt; this project-scoped file cannot control other repositories. No Search Console verification or indexing request was made, and indexing is not guaranteed.
+
+## Verified deployment
+
+Code commit `0cbf8d13115d680a61e157643e00f147aadbdd92` was deployed successfully by [Actions run 43148330961](https://github.com/dnfl1999/memediff/actions/runs/43148330961). Local unit tests: 39 passed. Local desktop/mobile Chromium E2E: 66 passed. Public Pages desktop/mobile mocked-API E2E: 66 passed. Public Pages real-API E2E: 4 passed, 0 skipped, including MEMEDIFF CA-only market lookup, GitHub analysis, PNG/JSON downloads and baseline comparison. The live browser tests ran in GitHub Actions; no mocked responses or authentication were used for those four tests. [QA summary and decoded API evidence](website-qa.json) retain the coverage and limits.
