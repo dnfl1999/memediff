@@ -6,7 +6,7 @@
 
 시작 main `cc457bf1eca1a1ab6e64db58f39c3f435eda27a2` 원격 일치, dnfl1999 인증, v1.1 Actions 43159340609 성공을 확인했습니다. 시작 단위 68/68 통과. 기존 compareSnapshots를 확장해 UTC 30일 구간·겹침·경계만 접함·분리됨을 구분합니다. UI와 PNG는 같은 기간/좌표 계산을 사용합니다. missing SHA를 겹치는 기간의 양 끝으로 제한하며, 분리된 기간은 N/A 표시입니다. 7/30일 선택과 30일 비교 기준, 기존 schema 1·저장 키·로컬 파일 처리·명시적 저장을 보존했습니다. JSON comparison.windows는 추가 메타데이터이며 가져올 때 신뢰하지 않고 재계산합니다. 비교 PNG는 1400×1260, 비교 없는 PNG는 기존 1400×1020입니다. 실제 v1.1 공개 다운로드를 수정 없이 호환성 샘플로 추가했습니다.
 
-최종 단위 80통과/0실패/0건너뜀, PC·모바일 Chromium 전체 88통과/0실패/0건너뜀. 기존 전체 기능, 겹침·경계·비겹침, UTC 경계/윤일/잘못된 날짜, 7/30일, baseline·import, 429 불완전 수집, PNG/JSON을 검증했습니다. 로컬 실제 API는 1통과/0실패/3건너뜀: GitHub 제한 응답에 따라 추가 GitHub 요청 없이 중단했고 DexScreener 조회는 통과했습니다. 화면·PNG를 시각 확인했습니다. [QA 증거](docs/timeline-qa.json). 배포 결과는 확인 후 기록합니다.
+최종 단위 80통과/0실패/0건너뜀, PC·모바일 Chromium 전체 88통과/0실패/0건너뜀. 기존 전체 기능, 겹침·경계·비겹침, UTC 경계/윤일/잘못된 날짜, 7/30일, baseline·import, 429 불완전 수집, PNG/JSON을 검증했습니다. 로컬 실제 API는 1통과/0실패/3건너뜀: GitHub 제한 응답에 따라 추가 GitHub 요청 없이 중단했고 DexScreener 조회는 통과했습니다. 화면·PNG를 시각 확인했습니다. [QA 증거](docs/timeline-qa.json). 제품 커밋 `1df959b8dadc2c2aab58b2703a18c8f6646054bb`를 main에 푸시했고 [Actions 43164014308](https://github.com/dnfl1999/memediff/actions/runs/43164014308) verify/deploy/public-qa 모두 성공했습니다. CI 단위 80통과, 배포 전 모의 88통과, 공개 PC·모바일 모의 88통과/0실패/0건너뜀, 공개 실제 API 4통과/0실패/0건너뜀. 실제 MEMEDIFF CA→시장정보→GitHub→JSON import→UTC 타임라인→PNG/JSON을 검증했습니다. 공개 11개 파일 HTTP 200 및 빌드 일치. 로컬 API 제한 3건너뜀은 별도로 보존합니다. 최종 QA 문서는 [skip ci]로 게시하며 앱 배포는 반복하지 않습니다.
 
 ## 이전 상태 — v1.1 JSON Snapshot Import & Comparison (2026-11-12)
 
