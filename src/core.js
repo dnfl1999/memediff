@@ -36,19 +36,42 @@ export function summarize(commits, releases, now) {
     return [days, { commits: c.length, releases: r.length, contributors: new Set(c.map(x => x.author).filter(Boolean)).size, unattributed: c.filter(x => !x.author).length }];
   }));
 }
+// UTC calendar validation avoids Date.parse silently normalizing invalid dates.
+export function utcMillis(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)) return NaN;
+  const ms = Date.parse(value);
+  return Number.isFinite(ms) && ms >= 0 && new Date(ms).toISOString() === (value.length === 20 ? value.replace('Z', '.000Z') : value) ? ms : NaN;
+}
+export function observationWindows(previous, current) {
+  function window(snapshot) {
+    const end = utcMillis(snapshot?.fetchedAt), start = end - 30 * DAY;
+    // Old browser baselines may omit since; their collection was also 30 days.
+    if (!Number.isFinite(end) || start < 0 || (snapshot.since !== undefined && utcMillis(snapshot.since) !== start)) return null;
+    return { start: new Date(start).toISOString(), end: new Date(end).toISOString() };
+  }
+  const a = window(previous), b = window(current);
+  if (!a || !b || a.end > b.end) return null;
+  const start = b.start, end = a.end, durationMs = Date.parse(end) - Date.parse(start);
+  return { previous: a, current: b,
+    overlap: durationMs >= 0 ? { start, end, durationMs } : null,
+    relation: durationMs > 0 ? 'overlap' : durationMs === 0 ? 'touching' : 'disjoint',
+    gapMs: Math.max(0, -durationMs) };
+}
 export function compareSnapshots(previous, current) {
   if (!previous) return null;
   if (previous.schema !== 1 || previous.repo !== current.repo || previous.token !== current.token || previous.branch !== current.branch || previous.source !== current.source) return null;
   if (!Array.isArray(previous.commits) || !previous.metrics?.[30] || !Number.isFinite(Date.parse(previous.fetchedAt))) return null;
+  const windows = observationWindows(previous, current);
+  if (!windows) return null;
   const old = new Set(previous.commits.map(x => x.sha));
   const fresh = new Set(current.commits.map(x => x.sha));
-  const start = Date.parse(current.fetchedAt) - 30 * DAY;
   return {
     previousAt: previous.fetchedAt,
+    windows,
     observed: current.commits.filter(x => !old.has(x.sha)).map(x => x.sha),
-    missing: previous.commits.filter(x => Date.parse(x.date) >= start && !fresh.has(x.sha)).map(x => x.sha),
+    missing: previous.commits.filter(x => windows.overlap && Date.parse(x.date) >= Date.parse(windows.overlap.start) && Date.parse(x.date) <= Date.parse(windows.overlap.end) && !fresh.has(x.sha)).map(x => x.sha),
     commitDelta: current.metrics[30].commits - previous.metrics[30].commits,
-    partial: !current.coverage.commits || !previous.coverage?.commits,
+    partial: !current.coverage.commits || !previous.coverage?.commits || current.coverage.releases === false || previous.coverage?.releases === false,
     note: 'Newly observed SHA values do not prove new work. Rolling windows, history changes, delayed updates and collection limits affect differences. Missing observations do not prove deletion or manipulation.'
   };
 }

@@ -25,8 +25,10 @@ for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['anothe
    await expect(page.locator('#import-preview')).toBeVisible();await page.locator('#import-apply').click();
    await expect(page.locator('#comparison')).toContainText('Imported JSON baseline');
    await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');
+   await expect(page.locator('.observation-timeline')).toContainText(data.since);
+   await expect(page.locator('.observation-timeline')).toContainText('Shared interval');
    expect(await page.evaluate(()=>JSON.stringify(localStorage))).toBe(stored);expect(responses.length).toBe(requestCount);
-   const imported=await downloadReport(page,'json',info);expect(imported.comparison.baselineOrigin).toBe('imported-json');await downloadReport(page,'png',info);
+   const imported=await downloadReport(page,'json',info);expect(imported.comparison.baselineOrigin).toBe('imported-json');expect(imported.comparison.windows.overlap.durationMs).toBe(30*86400000);const png=await downloadReport(page,'png',info);expect(png.height).toBe(1260);
  }
  await page.screenshot({path:info.outputPath('LIVE-ca-linked.png'),fullPage:true});
 });

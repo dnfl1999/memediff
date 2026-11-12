@@ -5,7 +5,7 @@ import {parseImport, readImportFile, importedComparison, MAX_IMPORT_BYTES} from 
 import {summarize, DAY} from '../src/core.js';
 import {receiptData} from '../src/receipt.js';
 const original = JSON.parse(await readFile(new URL('../docs/examples/memediff-source-2026-11-11.json', import.meta.url), 'utf8'));
-const current = {...original, fetchedAt:'2026-11-12T07:31:25.463Z'};
+const current = {...original, fetchedAt:'2026-11-12T07:31:25.463Z', since:'2026-10-13T07:31:25.463Z'};
 const copy = () => structuredClone(original);
 test('real historical schema 1 export imports without changing its report or selected display', () => {
   const snapshot = parseImport(JSON.stringify(original),current);
@@ -56,7 +56,7 @@ test('rolling-window missing SHA excludes aged-out records and uses 30-day count
   const p=parseImport(JSON.stringify(original),current);
   const c={...current,commits:current.commits.slice(1)};c.metrics=summarize(c.commits,c.releases,Date.parse(c.fetchedAt));
   let result=importedComparison(p,c);assert.deepEqual(result.missing,[p.commits[0].sha]);assert.equal(result.commitDelta,-1);
-  c.fetchedAt=new Date(Date.parse(original.fetchedAt)+31*DAY).toISOString();c.commits=[];c.metrics=summarize([],[],Date.parse(c.fetchedAt));
+  c.fetchedAt=new Date(Date.parse(original.fetchedAt)+31*DAY).toISOString();c.since=new Date(Date.parse(c.fetchedAt)-30*DAY).toISOString();c.commits=[];c.metrics=summarize([],[],Date.parse(c.fetchedAt));
   assert.deepEqual(importedComparison(p,c).missing,[]);
 });
 test('empty repository and saved imported baseline remain schema 1 compatible',()=>{

@@ -24,3 +24,7 @@ These files were copied unchanged from the public-site **real, unauthenticated G
 **Why does the JSON say `selectedDays: 30`?** The live test exported JSON first, then switched to 7 days and exported PNG without querying again. The JSON preserves the same fetchedAt and includes both `metrics["7"]` and `metrics["30"]` plus the full 30-day source dataset. Both windows happened to have the same counts in this snapshot. The original exports are intentionally unedited; read `metrics["7"]` for the card.
 
 To make your own: [open MemeDiff](https://dnfl1999.github.io/memediff/), enter a public repository, Analyze, select a period and download PNG Receipt plus JSON. See the [walkthrough](../GETTING_STARTED.md) and [FAQ](../FAQ.md). Do not share fixture screenshots as real development activity.
+
+## v1.1 import compatibility sample (2026-11-12)
+
+[Actual schema 1 JSON](memediff-v1.1-2026-11-12.json) was copied unchanged from the MEMEDIFF real-API public QA artifact of [Actions 43159340609](https://github.com/dnfl1999/memediff/actions/runs/43159340609), observed at 2026-11-12T05:12:13.929Z. It includes the official token CA and an imported-baseline comparison from the v1.1 roundtrip test. It is a historical, editable observation, not current statistics or a signed certificate. The v1.2 tests validate and recalculate its comparison without transmitting the file. Unlike the original November 11 repository-only sample, it requires the exact MEMEDIFF CA in the current report.

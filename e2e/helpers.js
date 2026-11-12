@@ -55,8 +55,8 @@ export async function downloadReport(page, type, testInfo) {
   const bytes = await readFile(path);
   if (type === 'json') return JSON.parse(bytes.toString('utf8'));
   const png = PNG.sync.read(bytes, { checkCRC: true });
-  expect([png.width, png.height]).toEqual([1400, 1020]);
-  expect(png.data.length).toBe(1400 * 1020 * 4);
+  expect(png.width).toBe(1400); expect([1020,1260]).toContain(png.height);
+  expect(png.data.length).toBe(1400 * png.height * 4);
   const colors = new Set();
   for (let i = 0; i < png.data.length; i += 4) colors.add(png.data.readUInt32BE(i));
   expect(colors.size, 'PNG must contain rendered content, not a blank canvas').toBeGreaterThan(100);

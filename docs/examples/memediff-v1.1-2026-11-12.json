@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "source": "github-live",
+  "repo": "dnfl1999/memediff",
+  "token": "DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+  "branch": "main",
+  "fetchedAt": "2026-11-12T05:12:13.929Z",
+  "since": "2026-10-13T05:12:13.929Z",
+  "description": "Evidence-first GitHub activity reports for meme-token research. Local snapshot comparisons, source links, PNG and JSON exports.",
+  "fork": false,
+  "parent": null,
+  "archived": false,
+  "commits": [
+    {
+      "sha": "ca4148abd1f4098490ef7c0b11a23f3bee5cb85c",
+      "date": "2026-11-12T05:08:04Z",
+      "message": "feat: add local schema 1 snapshot import and comparison for v1.1",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/ca4148abd1f4098490ef7c0b11a23f3bee5cb85c"
+    },
+    {
+      "sha": "f6cfe962c96a3f1cbaabc4afe9b561646d05a689",
+      "date": "2026-11-12T04:29:41Z",
+      "message": "docs: record Forks request and prepare Solscan submission [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/f6cfe962c96a3f1cbaabc4afe9b561646d05a689"
+    },
+    {
+      "sha": "983ab0bdb8c26bff3d345ce2fd88d84a3fbee671",
+      "date": "2026-11-12T03:34:09Z",
+      "message": "docs: record successful website and live API verification [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/983ab0bdb8c26bff3d345ce2fd88d84a3fbee671"
+    },
+    {
+      "sha": "0cbf8d13115d680a61e157643e00f147aadbdd92",
+      "date": "2026-11-12T03:27:14Z",
+      "message": "Clarify official token links and document immutable launch metadata",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/0cbf8d13115d680a61e157643e00f147aadbdd92"
+    },
+    {
+      "sha": "6f5f06dcb3dc5464bf1d5c978e021cec0df3758f",
+      "date": "2026-11-11T09:45:41Z",
+      "message": "docs: record CA-first public QA and coverage limits [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/6f5f06dcb3dc5464bf1d5c978e021cec0df3758f"
+    },
+    {
+      "sha": "89738d1bef0aa13d0dc39b934c4e97ab210af1ec",
+      "date": "2026-11-11T09:40:03Z",
+      "message": "Recognize verified empty repositories in live CA QA",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/89738d1bef0aa13d0dc39b934c4e97ab210af1ec"
+    },
+    {
+      "sha": "80260dee400bcd89f47b2184788236c6e0ded0c1",
+      "date": "2026-11-11T09:33:50Z",
+      "message": "Make token CA the primary analysis entry point",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/80260dee400bcd89f47b2184788236c6e0ded0c1"
+    },
+    {
+      "sha": "facc52d0efc2b8c0a27d56beae22eba9042226ec",
+      "date": "2026-11-11T08:30:05Z",
+      "message": "docs: record mascot redesign deployment and Lighthouse verification [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/facc52d0efc2b8c0a27d56beae22eba9042226ec"
+    },
+    {
+      "sha": "66c24c706ace849b2922ddf4d8695cd45e963bd0",
+      "date": "2026-11-11T08:25:15Z",
+      "message": "Redesign MemeDiff around the official neon mascot brand",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/66c24c706ace849b2922ddf4d8695cd45e963bd0"
+    },
+    {
+      "sha": "eb67fc23c254cab20276746486867c812e71d756",
+      "date": "2026-11-11T08:15:07Z",
+      "message": "docs: record discovery deployment and live API verification [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/eb67fc23c254cab20276746486867c812e71d756"
+    },
+    {
+      "sha": "54e084631a403576e438ef5845426762a09fa0b0",
+      "date": "2026-11-11T08:10:37Z",
+      "message": "Add live demo and evidence-based repository discovery",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/54e084631a403576e438ef5845426762a09fa0b0"
+    },
+    {
+      "sha": "44255782fd3a3bd8b11f52b407286ef32f6d8e31",
+      "date": "2026-11-11T08:01:52Z",
+      "message": "docs: record English deployment and browser verification [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/44255782fd3a3bd8b11f52b407286ef32f6d8e31"
+    },
+    {
+      "sha": "2faf68de2ac1d6dafcb7e9783d009092d04ff3fd",
+      "date": "2026-11-11T07:57:15Z",
+      "message": "Make public website fully English while preserving reports and baselines",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/2faf68de2ac1d6dafcb7e9783d009092d04ff3fd"
+    },
+    {
+      "sha": "1378e46534abb71b5cd3be704602d2d62f19feac",
+      "date": "2026-11-11T07:46:29Z",
+      "message": "docs: prepare onboarding examples and user feedback templates [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/1378e46534abb71b5cd3be704602d2d62f19feac"
+    },
+    {
+      "sha": "c16395666ebeefa8817915b3d9089ab3600749e6",
+      "date": "2026-11-11T07:34:34Z",
+      "message": "docs: record receipt deployment and supplemental market evidence [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/c16395666ebeefa8817915b3d9089ab3600749e6"
+    },
+    {
+      "sha": "0fd38d6c88fc3c71c29c1c2aaa410f7d625a090e",
+      "date": "2026-11-11T07:29:27Z",
+      "message": "feat: improve existing PNG export as an English development receipt",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/0fd38d6c88fc3c71c29c1c2aaa410f7d625a090e"
+    },
+    {
+      "sha": "7cae8a19dcdd84d7982dcf97fe8570207a68e3ec",
+      "date": "2026-11-11T07:12:08Z",
+      "message": "docs: record successful post-launch deployment and browser QA [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/7cae8a19dcdd84d7982dcf97fe8570207a68e3ec"
+    },
+    {
+      "sha": "900edbf74e651b356c7254c9688d7964ae705a89",
+      "date": "2026-11-11T07:07:33Z",
+      "message": "feat: publish verified MEMEDIFF identity and post-launch audit",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/900edbf74e651b356c7254c9688d7964ae705a89"
+    },
+    {
+      "sha": "a8e62361272c81a04873776ff63a758aea50e96f",
+      "date": "2026-11-11T04:54:45Z",
+      "message": "docs: record completed browser QA and live download evidence [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/a8e62361272c81a04873776ff63a758aea50e96f"
+    },
+    {
+      "sha": "b6b959c7317c07108896a6d3cd3bc40cf584e109",
+      "date": "2026-11-11T04:50:32Z",
+      "message": "Add independent Chromium E2E and verified report downloads",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/b6b959c7317c07108896a6d3cd3bc40cf584e109"
+    },
+    {
+      "sha": "01057e744943acbd6b7e61f2a6f259b27e978736",
+      "date": "2026-11-11T04:42:57Z",
+      "message": "docs: record completion audit and browser QA blocker [skip ci]",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/01057e744943acbd6b7e61f2a6f259b27e978736"
+    },
+    {
+      "sha": "58a2a9713857cfc1b7a8bb9a359365362434afa7",
+      "date": "2026-11-11T04:40:53Z",
+      "message": "Fix release aggregation and asynchronous PNG export consistency",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/58a2a9713857cfc1b7a8bb9a359365362434afa7"
+    },
+    {
+      "sha": "0cf0495257fc2a2af58758b0afc43c67d0ec7e9d",
+      "date": "2026-11-11T04:36:47Z",
+      "message": "Document deployment evidence and Forks Wiki readiness",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/0cf0495257fc2a2af58758b0afc43c67d0ec7e9d"
+    },
+    {
+      "sha": "7a13f1c9887822b5e19c91cbbb9049e9c4f05468",
+      "date": "2026-11-11T04:33:32Z",
+      "message": "Build independent evidence-first MemeDiff web app",
+      "author": "dnfl1999",
+      "url": "https://github.com/dnfl1999/memediff/commit/7a13f1c9887822b5e19c91cbbb9049e9c4f05468"
+    }
+  ],
+  "releases": [],
+  "metrics": {
+    "7": {
+      "commits": 24,
+      "releases": 0,
+      "contributors": 1,
+      "unattributed": 0
+    },
+    "30": {
+      "commits": 24,
+      "releases": 0,
+      "contributors": 1,
+      "unattributed": 0
+    }
+  },
+  "coverage": {
+    "commits": true,
+    "releases": true,
+    "maxCommits": 1000,
+    "maxReleases": 500
+  },
+  "remaining": "57",
+  "evidence": [
+    "https://api.github.com/repos/dnfl1999/memediff",
+    "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-13T05:12:13.929Z&until=2026-11-12T05:12:13.929Z&per_page=100&page=1",
+    "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1"
+  ],
+  "warnings": [],
+  "methodology": "Rolling 7/30-day windows ending at the observation time, using default-branch committer timestamps. Contributors are linked GitHub author accounts, including bots and excluding unlinked authors. Public releases use published_at and include prereleases. Code quality, originality, actual work time and token association are not verified.",
+  "comparison": {
+    "previousAt": "2026-11-12T05:12:13.929Z",
+    "observed": [],
+    "missing": [],
+    "commitDelta": 0,
+    "partial": false,
+    "note": "Baseline from imported JSON: unverified and editable, not an official or signed certificate. Newly observed SHA values do not prove new work. Rolling windows, history changes, delayed updates and collection limits affect differences. Missing observations do not prove deletion or manipulation.",
+    "baselineOrigin": "imported-json"
+  },
+  "selectedDays": 7
+}

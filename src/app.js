@@ -1,6 +1,7 @@
 import { readImportFile, importedComparison, validateImport } from './import.js';
 import { formatDate, formatNumber } from './format.js';
 import { drawReceipt } from './receipt.js';
+import { timelineRows, utcRange, windowSummary } from './timeline.js';
 import { parseRepo, parseToken, compareSnapshots, inWindow, safeLink, DAY } from './core.js';
 import { fetchReport } from './github.js';
 const $ = id => document.getElementById(id);
@@ -21,10 +22,29 @@ function renderComparison() {
   if (!comparison) { box.append(el('p', 'No saved baseline yet. Save this report, then analyze again to compare observed SHA values.')); return; }
   box.append(el('p', `Baseline: ${formatDate(comparison.previousAt)}`));
   box.append(el('p', `Current live observation: ${formatDate(report.fetchedAt)} · Comparison always uses 30-day snapshots, independent of the 7/30-day display.`));
-  if (Date.parse(report.fetchedAt) - Date.parse(comparison.previousAt) > 30 * DAY) box.append(el('p', 'These 30-day observation windows do not overlap. Aged-out commits are not counted as missing.', 'warning'));
+  const windows = comparison.windows;
+  const timeline = el('section', null, 'observation-timeline');
+  timeline.setAttribute('aria-label', '30-day observation periods in UTC');
+  timeline.append(el('h4', 'Observation periods · UTC'));
+  for (const row of timelineRows(windows)) {
+    const item = el('div', null, 'timeline-row');
+    item.append(el('p', `${row.key === 'previous' ? 'Previous' : 'Current'}: ${utcRange(windows[row.key])}`, 'timeline-dates'));
+    const track = el('div', null, 'timeline-track'); track.setAttribute('aria-hidden', 'true');
+    const bar = el('span', null, `timeline-bar timeline-${row.key}`);
+    bar.style.left = `${row.left * 100}%`; bar.style.width = `${row.width * 100}%`; track.append(bar);
+    if (row.overlap) {
+      const overlap = el('span', null, `timeline-overlap${windows.relation === 'touching' ? ' timeline-boundary' : ''}`);
+      overlap.style.left = `${row.overlap.left * 100}%`; overlap.style.width = `${row.overlap.width * 100}%`; track.append(overlap);
+    }
+    item.append(track); timeline.append(item);
+  }
+  timeline.append(el('p', windowSummary(windows), windows.relation === 'overlap' ? 'small' : 'warning'));
+  timeline.append(el('p', 'One shared time scale. Hatched area = shared interval; a vertical line = boundary only. Bars show collection periods, not work volume or complete coverage.', 'small'));
+  box.append(timeline);
   if (comparison.baselineOrigin === 'imported-json') box.append(el('p', 'Imported JSON baseline · Unverified, editable file. Not an official certificate.', 'warning'));
   box.append(el('strong', `${formatNumber(comparison.observed.length)} newly observed`));
-  box.append(el('p', `30-day commit observation change: ${comparison.commitDelta >= 0 ? '+' : ''}${formatNumber(comparison.commitDelta)} · No longer observed in overlap: ${formatNumber(comparison.missing.length)}`));
+  box.append(el('p', `30-day commit count difference (separate rolling windows): ${comparison.commitDelta >= 0 ? '+' : ''}${formatNumber(comparison.commitDelta)} · No longer observed in overlap: ${windows.relation === 'disjoint' ? 'N/A — no shared interval' : formatNumber(comparison.missing.length)}`));
+  box.append(el('p', windows.relation === 'overlap' ? 'The totals cover different rolling windows, not just the shared interval. Their difference is not a rate of new work.' : 'No shared duration: count differences are descriptive totals from separate periods, not a directly comparable development trend.', 'small'));
   if (comparison.partial) box.append(el('p', 'This comparison includes incomplete collection. Count differences do not measure changes in work performed.', 'warning'));
   box.append(el('p', comparison.note, 'small'));
   if (comparison.observed.length) {
@@ -95,7 +115,7 @@ $('png').addEventListener('click', () => {
   if (!report) return;
   const snapshot = report;
   try {
-    const canvas = document.createElement('canvas'); canvas.width = 1400; canvas.height = 1020;
+    const canvas = document.createElement('canvas'); canvas.width = 1400; canvas.height = comparison ? 1260 : 1020;
     drawReceipt(canvas.getContext('2d'), snapshot, days, comparison);
     canvas.toBlob(blob => { if (blob) { download(blob,'png',snapshot); status('PNG export requested. Check your browser downloads.'); } else status('Could not generate the PNG.',true); },'image/png');
   } catch { status('This browser could not generate the PNG. Use JSON export instead.', true); }

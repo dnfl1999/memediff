@@ -1,0 +1,94 @@
+{
+  "version": "1.2.0",
+  "date": "2026-11-12",
+  "baselineCommit": "cc457bf1eca1a1ab6e64db58f39c3f435eda27a2",
+  "startingUnit": {
+    "passed": 68,
+    "failed": 0,
+    "skipped": 0
+  },
+  "unit": {
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0
+  },
+  "localMock": {
+    "startTime": "2026-11-12T05:46:07.607Z",
+    "duration": 162928.024,
+    "expected": 88,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localLive": {
+    "startTime": "2026-11-12T05:49:15.074Z",
+    "duration": 7654.866,
+    "expected": 1,
+    "skipped": 3,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localLiveEvidence": [
+    {
+      "test": "LIVE CA-only MEMEDIFF auto-analysis and development exports",
+      "status": "skipped",
+      "attachments": [
+        {
+          "mocked": false,
+          "authenticated": false,
+          "observedAt": "2026-11-12T05:49:20.098Z",
+          "responses": [
+            {
+              "url": "https://api.github.com/repos/dnfl1999/memediff",
+              "status": 403,
+              "remaining": "0",
+              "reset": "1794465181"
+            },
+            {
+              "url": "https://api.dexscreener.com/tokens/v1/solana/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test": "LIVE CA-only another Forks coin auto-analysis and development exports",
+      "status": "skipped",
+      "attachments": []
+    },
+    {
+      "test": "LIVE general Solana meme token shows exact-CA market information without invented repository",
+      "status": "passed",
+      "attachments": [
+        {
+          "mocked": false,
+          "authenticated": false,
+          "observedAt": "2026-11-12T05:49:21.882Z",
+          "responses": [
+            {
+              "url": "https://api.dexscreener.com/tokens/v1/solana/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test": "LIVE Advanced Search preserves direct GitHub and name search",
+      "status": "skipped",
+      "attachments": []
+    }
+  ],
+  "deployment": "pending",
+  "privacy": "Import/compare E2E observed no network requests and unchanged localStorage before explicit saving.",
+  "historicalSamples": [
+    "docs/examples/memediff-source-2026-11-11.json",
+    "docs/examples/memediff-v1.1-2026-11-12.json"
+  ],
+  "visualReview": [
+    "Desktop overlap timeline",
+    "Mobile overlap timeline",
+    "Disjoint comparison PNG with sources and caveats"
+  ]
+}

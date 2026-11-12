@@ -36,6 +36,14 @@ Validation checks schema/source, identity, UTC dates and the exact 30-day collec
 
 Comparison always uses **30-day snapshots**, even when the displayed report/PNG is set to 7 days. Aged-out commits are excluded from missing observations. Non-overlapping windows and incomplete collection are labeled. Imported baselines are editable, unauthenticated observations; UI, exported comparison and PNG label their origin. Saving an imported baseline keeps that label on subsequent visits. No signature, safety assessment or verification of the file's truth is implied. JSON schema 1 and existing storage keys remain unchanged; baseline-origin labels are additive metadata.
 
+## v1.2 — Observation period timeline
+
+After applying an imported report or loading a saved baseline, the comparison shows **previous and current 30-day periods on one UTC time scale**. Exact ISO timestamps include milliseconds. The hatched region identifies their shared interval; a vertical line marks an exact boundary with zero shared duration. Separated periods explicitly show **No overlap** and **N/A** for missing SHA comparison. Text labels carry the same information without relying on color.
+
+The 7/30-day selector still controls current metrics and receipt statistics, not the 30-day comparison. Newly observed SHA values are not necessarily newly performed work. Missing SHA values are limited to the shared interval (inclusive endpoints) and do not prove deleted code. The count difference compares each full rolling window, not just their overlap; with no shared duration it is not a directly comparable development trend. Collection limits and imported-file uncertainty remain visible.
+
+PNG receipts with a comparison include both periods and their shared interval (1400×1260); receipts without a comparison retain 1400×1020. Source links and all uncertainty labels remain. JSON stays **schema 1**, with additive `comparison.windows` metadata: previous/current start/end, overlap start/end/durationMs or null, relation (overlap/touching/disjoint), and gapMs. Imports discard exported comparisons and recalculate them locally; v1.1 files and existing browser baseline keys remain compatible. Invalid dates/ranges and baselines newer than the current query are not compared. See [historical examples](docs/examples/README.md).
+
 ## What the comparison means
 
 MemeDiff compares SHA sets across observations instead of assigning a development or investment score. It shows newly observed SHA values, values no longer observed in the overlapping window, the change in 30-day commit counts, and incomplete collection. Baseline comparisons always use the 30-day dataset, even on a 7-day receipt. Commits that naturally fall outside the rolling window are excluded from missing observations.
