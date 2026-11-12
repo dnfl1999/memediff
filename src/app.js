@@ -1,3 +1,4 @@
+import { readImportFile, importedComparison, validateImport } from './import.js';
 import { formatDate, formatNumber } from './format.js';
 import { drawReceipt } from './receipt.js';
 import { parseRepo, parseToken, compareSnapshots, inWindow, safeLink, DAY } from './core.js';
@@ -5,19 +6,23 @@ import { fetchReport } from './github.js';
 const $ = id => document.getElementById(id);
 let report = null, comparison = null, days = 30, controller = null;
 let externalLock = false;
+let importCandidate = null, importGeneration = 0;
 export function lockAnalysis(value) { externalLock = value; for (const id of ['analyze','repo','token']) $(id).disabled = value || Boolean(controller); }
 function el(tag, text, className) { const n = document.createElement(tag); if (text != null) n.textContent = text; if (className) n.className = className; return n; }
 function link(text, url) { const a = el('a', text); const safe = safeLink(url); if (safe) { a.href = safe; a.target = '_blank'; a.rel = 'noopener noreferrer'; } return a; }
 function key() { return `memediff:v1:${report.repo}:${report.branch}:${report.token}`; }
 function status(text, error = false) { $('status').textContent = text; $('status').classList.toggle('error', error); }
 function loadBaseline() {
-  try { const raw = localStorage.getItem(key()); comparison = compareSnapshots(raw ? JSON.parse(raw) : null, report); }
+  try { const raw = localStorage.getItem(key()); const baseline = raw ? JSON.parse(raw) : null; comparison = baseline?.baselineOrigin === 'imported-json' ? importedComparison(validateImport(baseline, report), report) : compareSnapshots(baseline, report); }
   catch { comparison = null; status('Could not read the baseline. Browser storage may be blocked or the saved record damaged.', true); }
 }
 function renderComparison() {
   const box = $('comparison'); box.replaceChildren();
   if (!comparison) { box.append(el('p', 'No saved baseline yet. Save this report, then analyze again to compare observed SHA values.')); return; }
   box.append(el('p', `Baseline: ${formatDate(comparison.previousAt)}`));
+  box.append(el('p', `Current live observation: ${formatDate(report.fetchedAt)} · Comparison always uses 30-day snapshots, independent of the 7/30-day display.`));
+  if (Date.parse(report.fetchedAt) - Date.parse(comparison.previousAt) > 30 * DAY) box.append(el('p', 'These 30-day observation windows do not overlap. Aged-out commits are not counted as missing.', 'warning'));
+  if (comparison.baselineOrigin === 'imported-json') box.append(el('p', 'Imported JSON baseline · Unverified, editable file. Not an official certificate.', 'warning'));
   box.append(el('strong', `${formatNumber(comparison.observed.length)} newly observed`));
   box.append(el('p', `30-day commit observation change: ${comparison.commitDelta >= 0 ? '+' : ''}${formatNumber(comparison.commitDelta)} · No longer observed in overlap: ${formatNumber(comparison.missing.length)}`));
   if (comparison.partial) box.append(el('p', 'This comparison includes incomplete collection. Count differences do not measure changes in work performed.', 'warning'));
@@ -26,6 +31,11 @@ function renderComparison() {
     const list = el('ul', null, 'source-list');
     comparison.observed.slice(0, 5).forEach(sha => { const li = el('li'); li.append(link(sha.slice(0, 12), `https://github.com/${report.repo}/commit/${sha}`)); list.append(li); });
     box.append(list, el('p', 'Showing up to 5 newly observed SHA values · Export JSON for the full comparison', 'small'));
+  }
+  if (comparison.missing.length) {
+    const list = el('ul', null, 'source-list');
+    comparison.missing.slice(0, 5).forEach(sha => { const li = el('li'); li.append(link(sha.slice(0, 12), `https://github.com/${report.repo}/commit/${sha}`)); list.append(li); });
+    box.append(el('h4', 'No longer observed in the overlapping window'), list, el('p', 'Showing up to 5 SHA values. This is not proof of deletion. Export JSON for the full comparison.', 'small'));
   }
 }
 function render() {
@@ -60,12 +70,13 @@ function render() {
   $('sources').replaceChildren(...report.evidence.map(url => { const li = el('li'); li.append(link(url, url)); return li; }));
   renderComparison();
 }
-export function clearReport() { report = null; comparison = null; $('report').hidden = true; $('empty').hidden = true; }
+export function clearReport() { resetImport(); report = null; comparison = null; $('report').hidden = true; $('empty').hidden = true; }
 export function cancelAnalysis() { controller?.abort(); }
 export async function analyzeRepository(repoInput, tokenInput = '') {
   let repo, token;
   try { repo = parseRepo(repoInput); token = parseToken(tokenInput); } catch(e) { status(e.message, true); return false; }
   if (controller) return;
+  resetImport();
   controller = new AbortController(); const timer = setTimeout(() => controller?.abort(), 45000);
   $('analyze').disabled = true; $('cancel').hidden = false; $('repo').disabled = true; $('token').disabled = true;
   $('report').hidden = true; status('Collecting public GitHub evidence…');
@@ -76,8 +87,8 @@ export async function analyzeRepository(repoInput, tokenInput = '') {
 $('query').addEventListener('submit', async event => { event.preventDefault(); if(externalLock)return; $('token-result').hidden = true; await analyzeRepository($('repo').value, $('token').value); });
 $('cancel').addEventListener('click', () => controller?.abort());
 document.querySelectorAll('[data-days]').forEach(b => b.addEventListener('click', () => { days = Number(b.dataset.days); document.querySelectorAll('[data-days]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); if (report) render(); }));
-$('save').addEventListener('click', () => { if (!report) return; try { localStorage.setItem(key(), JSON.stringify(report)); loadBaseline(); renderComparison(); status('Report saved as the baseline in this browser. It will be used for the next query.'); } catch { status('Could not save the baseline. Check browser storage and privacy settings.', true); } });
-$('clear').addEventListener('click', () => { if (!report) return; try { localStorage.removeItem(key()); comparison = null; renderComparison(); status('Local baseline cleared for this project.'); } catch { status('Could not access browser storage.', true); } });
+$('save').addEventListener('click', () => { if (!report) return; try { localStorage.setItem(key(), JSON.stringify(report)); resetImport(); loadBaseline(); renderComparison(); status('Report saved as the baseline in this browser. It will be used for the next query.'); } catch { status('Could not save the baseline. Check browser storage and privacy settings.', true); } });
+$('clear').addEventListener('click', () => { if (!report) return; try { localStorage.removeItem(key()); resetImport(); comparison = null; renderComparison(); status('Local baseline cleared for this project.'); } catch { status('Could not access browser storage.', true); } });
 function download(blob, extension, snapshot = report) { const url = URL.createObjectURL(blob); const a = el('a'); a.href = url; a.download = `memediff-${snapshot.repo.replace('/', '-')}-${snapshot.fetchedAt.slice(0,10)}.${extension}`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000); }
 $('json').addEventListener('click', () => { if (report) { download(new Blob([JSON.stringify({ ...report, comparison, selectedDays: days }, null, 2)], { type:'application/json' }), 'json'); status('JSON export requested. Check your browser downloads.'); } });
 $('png').addEventListener('click', () => {
@@ -89,3 +100,51 @@ $('png').addEventListener('click', () => {
     canvas.toBlob(blob => { if (blob) { download(blob,'png',snapshot); status('PNG export requested. Check your browser downloads.'); } else status('Could not generate the PNG.',true); },'image/png');
   } catch { status('This browser could not generate the PNG. Use JSON export instead.', true); }
 });
+
+function importStatus(message, error = false) {
+  $('import-status').textContent = message;
+  $('import-status').classList.toggle('error', error);
+}
+function resetImport() {
+  importGeneration++; importCandidate = null;
+  $('import-preview').hidden = true; $('import-file').value = '';
+  $('import-apply').disabled = true; $('import-save').disabled = true;
+  importStatus('Files stay on this device. No upload or network request is made.');
+}
+$('import-open').addEventListener('click', () => {
+  if (!report || controller || externalLock) return;
+  $('import-file').value = ''; $('import-file').click();
+});
+$('import-file').addEventListener('change', async () => {
+  const file = $('import-file').files?.[0];
+  if (!file || !report || controller || externalLock) return;
+  const current = report, generation = ++importGeneration;
+  try {
+    const candidate = await readImportFile(file, current);
+    if (generation !== importGeneration || current !== report || controller || externalLock) return;
+    importCandidate = candidate;
+    const preview = $('import-details'); preview.replaceChildren();
+    for (const [label, value] of [['Repository',candidate.repo],['Token CA',candidate.token || 'Not recorded (repository-only report)'],['Branch',candidate.branch || 'No branch'],['Previous observation (UTC)',formatDate(candidate.fetchedAt)],['Current live observation (UTC)',formatDate(current.fetchedAt)],['Collection', 'Commits: ' + (candidate.coverage.commits ? 'complete' : 'incomplete') + ' · Releases: ' + (candidate.coverage.releases ? 'complete' : 'incomplete')]]) {
+      preview.append(el('dt', label), el('dd', value));
+    }
+    $('import-preview').hidden = false; $('import-apply').disabled = false; $('import-save').disabled = true;
+    importStatus('Structure and identity match. Preview only: your comparison and saved baseline have not changed. File contents are not authenticated.');
+    $('import-title').focus({preventScroll:true}); $('import-preview').scrollIntoView({block:'nearest'});
+  } catch (e) {
+    if (generation === importGeneration && current === report) importStatus(e.message + ' Existing results and saved baseline are unchanged.', true);
+  }
+});
+$('import-apply').addEventListener('click', () => {
+  if (!report || !importCandidate || controller || externalLock) return;
+  comparison = importedComparison(importCandidate, report); renderComparison(); $('import-save').disabled = false;
+  importStatus('Comparing with imported JSON in memory only. The existing browser baseline is unchanged.');
+});
+$('import-save').addEventListener('click', () => {
+  if (!report || !importCandidate || controller || externalLock || $('import-save').disabled) return;
+  try {
+    localStorage.setItem(key(), JSON.stringify({ ...importCandidate, baselineOrigin: 'imported-json' }));
+    importStatus('Imported baseline saved in this browser, replacing the baseline for this exact repository, branch and CA. It remains unverified.');
+  } catch { importStatus('Could not save the imported baseline. The in-memory comparison is still available.', true); }
+});
+$('import-dismiss').addEventListener('click', () => { resetImport(); importStatus('Preview canceled. The current comparison and saved baseline are unchanged.'); });
+$('import-restore').addEventListener('click', () => { if (!report) return; resetImport(); loadBaseline(); renderComparison(); importStatus('Returned to the saved browser baseline without changing storage.'); });

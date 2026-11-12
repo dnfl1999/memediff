@@ -18,7 +18,7 @@ export function receiptData(report, days, comparison) {
       formatNumber(m.contributors) + (report.coverage.commits ? '' : '+')],
     complete: report.coverage.commits && report.coverage.releases,
     coverage: `Commits: ${report.coverage.commits ? 'complete' : 'INCOMPLETE'} | Releases: ${report.coverage.releases ? 'complete' : 'INCOMPLETE'} | Unlinked-author commits: ${m.unattributed}`,
-    baseline: comparison ? `30-day baseline: ${comparison.previousAt}` : '30-day baseline: not saved',
+    baseline: comparison ? `30-day baseline: ${comparison.previousAt}${comparison.baselineOrigin === 'imported-json' ? ' | IMPORTED / UNVERIFIED' : ''}` : '30-day baseline: not saved',
     changes: comparison ? `Newly observed SHA: ${comparison.observed.length} | No longer observed in overlap: ${comparison.missing.length}${comparison.partial ? ' | PARTIAL comparison' : ''}` : 'Save a baseline, then query again to compare observed SHA sets.',
     token: report.token || '(not recorded)',
     repoUrl: `https://github.com/${report.repo}`,

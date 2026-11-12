@@ -4,6 +4,10 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v1.1 — implemented
+
+Local schema 1 JSON import with strict validation, preview, in-memory 30-day comparison, explicit baseline persistence and unverified-origin labels. Existing CA analysis, market information, exports and storage keys are preserved. See README for limits and PROGRESS for actual test/deployment results.
+
 ## Next maintenance cycle
 
 - Keep core tests and desktop/mobile Playwright checks passing before each deployment.
@@ -14,7 +18,7 @@ The software remains a free static, open-source GitHub activity research tool. T
 ## Next useful improvements
 
 - Improve explanations of incomplete GitHub observations and moving-window comparisons, driven by reported confusion.
-- Evaluate an optional local JSON snapshot import with strict schema validation and privacy review. Implement only if users need cross-device comparisons.
+- Gather feedback on v1.1 local JSON import, identity mismatch messages, and comparison provenance.
 - Add focused accessibility and internationalization improvements without changing report meaning or inventing quality scores.
 
 ## Release discipline

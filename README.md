@@ -24,7 +24,17 @@ Forks currently blocks cross-origin browser reads. A limited index is refreshed 
 
 The public app uses no wallet, paid API or login. An optional restrictive [read-only Worker design](serverless/README.md) is supplied for future arbitrary live Forks lookups, but is **not deployed or called by this site**. External account connection and deployment require owner approval.
 
-The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. No JSON import or automatic social posting exists.
+The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
+
+## v1.1 — Import a previous report
+
+After loading a current live report, select **Import Previous Report** and choose an existing MemeDiff schema 1 JSON export (maximum **2 MiB**). Review the repository, exact token CA (including an empty CA), branch and both observation times, then select **Compare without saving**. File bytes are read only in your browser; importing makes no network requests and never fetches URLs embedded in the file.
+
+The current live report and existing stored baseline remain unchanged. **Save imported baseline** explicitly replaces only the baseline for that repository, branch and CA. **Use saved browser baseline** returns to the stored baseline without changing it. Canceling the preview or selecting an invalid file preserves the current comparison. Starting a new live analysis clears the pending import. Existing Save baseline and Clear baseline retain their behavior.
+
+Validation checks schema/source, identity, UTC dates and the exact 30-day collection range, SHA format/uniqueness, bounded arrays, coverage flags, evidence URLs and recomputed 7/30-day metrics. A previous observation newer than the current report is rejected. An empty CA is not treated as matching a token-specific report. Corrupt or unsupported files are refused; no contents are executed as HTML. The file's exported comparison is discarded and recalculated with the existing SHA comparison engine.
+
+Comparison always uses **30-day snapshots**, even when the displayed report/PNG is set to 7 days. Aged-out commits are excluded from missing observations. Non-overlapping windows and incomplete collection are labeled. Imported baselines are editable, unauthenticated observations; UI, exported comparison and PNG label their origin. Saving an imported baseline keeps that label on subsequent visits. No signature, safety assessment or verification of the file's truth is implied. JSON schema 1 and existing storage keys remain unchanged; baseline-origin labels are additive metadata.
 
 ## What the comparison means
 

@@ -26,7 +26,7 @@ The selected period controls metric counts and receipt evidence. Baseline compar
 
 ### Where is my baseline? Can I import JSON?
 
-The baseline is stored in this browser/profile under the repository, branch and optional token combination. It is not synced or hosted. Storage restrictions, clearing browser data or using another device can make it unavailable. JSON import is not implemented.
+The baseline is stored in this browser/profile under the repository, branch and optional token combination. It is not synced or hosted. Storage restrictions, clearing browser data or using another device can make it unavailable. In v1.1, load a current live report and select Import Previous Report to preview a matching schema 1 JSON export up to 2 MiB. Compare without saving does not change storage or send file data over the network. Save imported baseline explicitly replaces this project baseline; imported data stays labeled unverified. Different repository, branch, CA (including empty CA), newer observations and damaged files are rejected.
 
 ### Can I start with just a Solana CA?
 

@@ -19,6 +19,15 @@ for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['anothe
  await evidence(responses,diagnostics,info);await expect(page.locator('#report-title')).toHaveText(repo);await expect(page.locator('#association')).toContainText('Exact CA');await expect(page.locator('#token-result')).toBeVisible();
  const data=await downloadReport(page,'json',info);expect(data.schema).toBe(1);expect(data.token).toBe(mint);expect(data.repo.toLowerCase()).toBe(repo);expect(data.source).toBe('github-live');expect(data.coverage).toMatchObject({commits:true,releases:true});
  await page.locator('[data-days="7"]').click();await page.locator('#save').click();await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');await page.locator('#clear').click();await downloadReport(page,'png',info);
+ if(name==='MEMEDIFF') {
+   const requestCount=responses.length,stored=await page.evaluate(()=>JSON.stringify(localStorage));
+   await page.locator('#import-file').setInputFiles({name:'actual-schema-1.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(data))});
+   await expect(page.locator('#import-preview')).toBeVisible();await page.locator('#import-apply').click();
+   await expect(page.locator('#comparison')).toContainText('Imported JSON baseline');
+   await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');
+   expect(await page.evaluate(()=>JSON.stringify(localStorage))).toBe(stored);expect(responses.length).toBe(requestCount);
+   const imported=await downloadReport(page,'json',info);expect(imported.comparison.baselineOrigin).toBe('imported-json');await downloadReport(page,'png',info);
+ }
  await page.screenshot({path:info.outputPath('LIVE-ca-linked.png'),fullPage:true});
 });
 test('LIVE general Solana meme token shows exact-CA market information without invented repository',async({page,diagnostics},info)=>{

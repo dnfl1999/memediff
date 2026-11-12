@@ -23,3 +23,7 @@ Expand **Advanced Search — GitHub repository**, enter a public URL or `owner/r
 The Forks index is limited and dated. Scheduled refresh is attempted every six hours; GitHub may delay or disable scheduled runs. Associations older than 48 hours are not automatically used. A missing entry does not prove no relationship exists. Source errors, throttling and timeout are shown without automatic retries. Browser JavaScript cannot reliably distinguish a CORS denial from a general network failure; that ambiguity is stated.
 
 Read [FAQ](FAQ.md) and [data sources](DISCOVERY.md). Report reproducible bugs through [GitHub Issues](https://github.com/dnfl1999/memediff/issues/new/choose); remove secrets and unnecessary personal data. The app does not trade, connect wallets, claim fees or publish to X.
+
+## Compare a downloaded JSON report
+
+After the current live analysis completes, select **Import Previous Report**. Choose a schema 1 JSON export up to 2 MiB from the same repository, branch and exact CA. Review both observation times, then select **Compare without saving**. The existing browser baseline stays untouched. **Save imported baseline** is the explicit replacement action. **Use saved browser baseline** returns to the stored baseline without writing anything. Imported files are editable, unverified observations, not signed certificates; comparison always uses the 30-day dataset. Files never leave your browser.
