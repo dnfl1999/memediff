@@ -4,6 +4,10 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v1.3 — implemented
+
+CA-only analysis links, strict URL validation, review-before-query prefilling, accessible clipboard/manual-copy handling, explicit token identity and static-preview limitations. Sharing does not read or serialize baselines or imported reports. Existing analysis and exports are preserved; PROGRESS records test and deployment evidence.
+
 ## v1.2 — implemented
 
 UTC observation period timeline shared by the responsive UI and PNG, exact overlap/boundary/gap semantics, explicit non-comparable totals, schema 1 comparison metadata, and a second real historical export compatibility fixture. Existing imports, local baselines and privacy behavior are preserved. PROGRESS records the actual validation and deployment results.

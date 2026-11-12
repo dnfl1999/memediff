@@ -1,0 +1,90 @@
+{
+  "version": "1.3.0",
+  "date": "2026-11-12",
+  "baselineCommit": "2365d49faa1fafa0b3ade85c74ae5369b330a36f",
+  "startingUnit": {
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0
+  },
+  "unit": {
+    "passed": 88,
+    "failed": 0,
+    "skipped": 0
+  },
+  "localMock": {
+    "startTime": "2026-11-12T06:40:14.108Z",
+    "duration": 197323.572,
+    "expected": 102,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localLive": {
+    "startTime": "2026-11-12T06:43:41.609Z",
+    "duration": 7248.452,
+    "expected": 1,
+    "skipped": 3,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localLiveEvidence": [
+    {
+      "test": "LIVE CA-only MEMEDIFF auto-analysis and development exports",
+      "status": "skipped",
+      "attachments": [
+        {
+          "mocked": false,
+          "authenticated": false,
+          "observedAt": "2026-11-12T06:43:46.152Z",
+          "responses": [
+            {
+              "url": "https://api.github.com/repos/dnfl1999/memediff",
+              "status": 403,
+              "remaining": "0",
+              "reset": "1794469252"
+            },
+            {
+              "url": "https://api.dexscreener.com/tokens/v1/solana/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test": "LIVE CA-only another Forks coin auto-analysis and development exports",
+      "status": "skipped",
+      "attachments": []
+    },
+    {
+      "test": "LIVE general Solana meme token shows exact-CA market information without invented repository",
+      "status": "passed",
+      "attachments": [
+        {
+          "mocked": false,
+          "authenticated": false,
+          "observedAt": "2026-11-12T06:43:47.920Z",
+          "responses": [
+            {
+              "url": "https://api.dexscreener.com/tokens/v1/solana/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test": "LIVE Advanced Search preserves direct GitHub and name search",
+      "status": "skipped",
+      "attachments": []
+    }
+  ],
+  "deployment": "pending",
+  "privacy": "Shared URL only contains CA; no requests on preload/copy. Existing baseline and imported comparison remain unchanged. Fixed official origin; no redirects.",
+  "visualReview": [
+    "Desktop share controls",
+    "Mobile share controls"
+  ],
+  "sharedURL": "https://dnfl1999.github.io/memediff/?ca=DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork"
+}

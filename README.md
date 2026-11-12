@@ -26,6 +26,16 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v1.3 — Share a token analysis link
+
+Enter a Solana CA in the token analyzer and select **Copy Analysis Link**. The link always uses the official site and one parameter: `https://dnfl1999.github.io/memediff/?ca=YOUR_CA`. It shares the **CA currently in the input**, not a saved analysis. If clipboard access is unavailable, the full link is selected in a read-only field: use Ctrl/Cmd+C or long-press and Copy on mobile.
+
+[Open the MEMEDIFF shared-link example](https://dnfl1999.github.io/memediff/?ca=DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork). The recipient reviews the prefilled address and selects **Analyze Token** to request current source data. Opening the link alone does not query GitHub, DexScreener or the association index, and does not load a report or browser baseline. Other valid Solana addresses work too; their identity is explicitly distinguished from the official MEMEDIFF CA. Valid address syntax does not establish mint existence, recommendation, safety or a repository relationship.
+
+The link contains no repository override, personal contact, baseline, imported JSON, report, API key or fragment. Duplicate, empty, malformed, whitespace-padded and invalid CA values in shared URLs are rejected while the ordinary analyzer stays usable. Unknown parameters are not acted on or copied. No URL-based redirect or automatic analysis occurs. Existing exact-CA Forks association checks, API errors and indexing limitations are unchanged.
+
+GitHub Pages serves **one static MemeDiff social preview** for these URLs. A link preview is not a token-specific image, current price or analysis result. The query CA is visible to recipients and the website host as part of the URL; choosing Analyze Token then makes the existing public API requests described below. No new API or sharing service was added.
+
 ## v1.1 — Import a previous report
 
 After loading a current live report, select **Import Previous Report** and choose an existing MemeDiff schema 1 JSON export (maximum **2 MiB**). Review the repository, exact token CA (including an empty CA), branch and both observation times, then select **Compare without saving**. File bytes are read only in your browser; importing makes no network requests and never fetches URLs embedded in the file.

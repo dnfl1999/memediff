@@ -14,13 +14,18 @@ async function evidence(responses,diagnostics,info){
 }
 for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['another Forks coin','ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork','riansj2290/remote-ikan']])test(`LIVE CA-only ${name} auto-analysis and development exports`,async({page,diagnostics},info)=>{
  test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');
- const responses=capture(page);await page.goto('./');await expect(page.locator('#repo')).toBeHidden();
- await page.locator('#token-ca').fill(mint);await page.locator('#analyze-token').click();await expect(page.locator('#analyze-token')).toBeEnabled({timeout:55000});
+ const responses=capture(page);await page.goto(name==='MEMEDIFF'?'./?ca='+mint:'./');await expect(page.locator('#repo')).toBeHidden();
+ if(name==='MEMEDIFF') {
+   await expect(page.locator('#token-ca')).toHaveValue(mint);await expect(page.locator('#share-status')).toContainText('No analysis has run');
+   await expect(page.locator('#report')).toBeHidden();await expect(page.locator('#token-result')).toBeHidden();expect(responses).toHaveLength(0);
+ } else await page.locator('#token-ca').fill(mint);
+ await page.locator('#analyze-token').click();await expect(page.locator('#analyze-token')).toBeEnabled({timeout:55000});
  await evidence(responses,diagnostics,info);await expect(page.locator('#report-title')).toHaveText(repo);await expect(page.locator('#association')).toContainText('Exact CA');await expect(page.locator('#token-result')).toBeVisible();
  const data=await downloadReport(page,'json',info);expect(data.schema).toBe(1);expect(data.token).toBe(mint);expect(data.repo.toLowerCase()).toBe(repo);expect(data.source).toBe('github-live');expect(data.coverage).toMatchObject({commits:true,releases:true});
  await page.locator('[data-days="7"]').click();await page.locator('#save').click();await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');await page.locator('#clear').click();await downloadReport(page,'png',info);
  if(name==='MEMEDIFF') {
    const requestCount=responses.length,stored=await page.evaluate(()=>JSON.stringify(localStorage));
+   await page.locator('#copy-analysis-link').click();await expect(page.locator('#analysis-link')).toHaveValue('https://dnfl1999.github.io/memediff/?ca='+mint);await expect(page.locator('#copy-analysis-link')).toBeEnabled();
    await page.locator('#import-file').setInputFiles({name:'actual-schema-1.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(data))});
    await expect(page.locator('#import-preview')).toBeVisible();await page.locator('#import-apply').click();
    await expect(page.locator('#comparison')).toContainText('Imported JSON baseline');
