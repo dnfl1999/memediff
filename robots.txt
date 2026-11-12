@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dnfl1999.github.io/memediff/sitemap.xml

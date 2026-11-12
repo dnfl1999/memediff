@@ -9,7 +9,7 @@ const money=n=>n===null?'Unknown':new Intl.NumberFormat('en-US',{style:'currency
 function renderMarket(data){
  $('token-result-title').textContent=data.name?`${data.name}${data.symbol?' / '+data.symbol:''}`:'Unknown token';
  $('market-metrics').replaceChildren(...[['Price',data.price],['FDV',data.fdv],['Market cap',data.marketCap],['Pool liquidity',data.liquidity],['24h pool volume',data.volume24h]].map(([label,value])=>{const n=el('article','');n.append(el('h3',label),el('strong',money(value)));return n;}));
- $('market-status').textContent=data.available?`Market data observed at ${formatDate(data.observedAt)}. One exact-CA Solana pool; values are not summed across pools.`:`No matching market data returned. Fields are Unknown, not zero. Checked at ${formatDate(data.observedAt)}.`;
+ $('market-status').textContent=data.available?`Market data observed at ${formatDate(data.observedAt)}. One exact-CA Solana pool; values are not summed across pools.`:`No matching market data returned. The token may not be indexed yet; indexing delays are not proof of no trading. Fields are Unknown, not zero. Checked at ${formatDate(data.observedAt)}.`;
  $('market-source').replaceChildren(source('Original DexScreener API response ↗',data.source));
  if(data.pairUrl)$('market-source').append(source('Selected pool ↗',data.pairUrl));
 }

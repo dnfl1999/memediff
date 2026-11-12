@@ -8,6 +8,8 @@ The interface uses the official MemeDiff hooded mascot with a near-black, neon l
 
 [Open MemeDiff](https://dnfl1999.github.io/memediff/) · [GitHub](https://github.com/dnfl1999/memediff) · [Quick start](docs/GETTING_STARTED.md) · [FAQ](docs/FAQ.md) · [Real historical example](docs/examples/README.md)
 
+See the [website-link audit and platform update guide](docs/WEBSITE_LINKS.md) for immutable metadata findings, official registration paths, and fees. The GitHub repository homepage now points to this official site.
+
 ## How to use
 
 1. Paste a **Solana Token CA** and select **Analyze Token**. You do not need a GitHub URL. **Try Live Demo** runs this flow for the official MEMEDIFF CA.

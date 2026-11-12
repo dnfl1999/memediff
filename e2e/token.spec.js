@@ -7,9 +7,12 @@ test('official token identity, links, clipboard and mobile layout', async ({ pag
   const section = page.locator('#official-token');
   await expect(page.locator('#official-token-title')).toHaveText('MemeDiff $MEMEDIFF');
   await expect(page.locator('#official-ca')).toHaveValue(ca);
-  for (const [label, url] of [['Forks Wiki', `https://forks.wiki/coin/${ca}`], ['pump.fun', `https://pump.fun/coin/${ca}`], ['Solscan', `https://solscan.io/token/${ca}`]]) {
+  for (const [label, url] of [['Official website', 'https://dnfl1999.github.io/memediff/'], ['GitHub', 'https://github.com/dnfl1999/memediff'], ['Forks Wiki', `https://forks.wiki/coin/${ca}`], ['pump.fun', `https://pump.fun/coin/${ca}`], ['Solscan', `https://solscan.io/token/${ca}`]]) {
     await expect(section.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', url);
   }
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', 'https://dnfl1999.github.io/memediff/');
+  await expect(section.locator('.token-facts')).toContainText('1,000,000,000 MEMEDIFF');
+  expect(await page.content()).not.toContain('{{OFFICIAL_CA}}');
   await page.locator('#copy-ca').focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#copy-ca-status')).toHaveText('Contract address copied.');
