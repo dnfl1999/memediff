@@ -20,3 +20,14 @@ export function analysisLink(value) {
   url.searchParams.set('ca', mint);
   return url.href;
 }
+export async function nativeShare(value, platform) {
+  const url = analysisLink(value), data = {url};
+  try {
+    if (typeof platform?.share !== 'function' || (typeof platform.canShare === 'function' && !platform.canShare(data))) return {status:'unsupported', url};
+    // Called from the click handler without any preceding asynchronous work.
+    await platform.share(data);
+    return {status:'completed', url};
+  } catch (error) {
+    return {status:error?.name === 'AbortError' ? 'canceled' : 'failed', url};
+  }
+}

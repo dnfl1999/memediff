@@ -26,6 +26,14 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v1.4 — Native Share
+
+Select **Share** beside **Copy Analysis Link** to open your device's sharing menu when Web Share is supported. The payload contains only the URL produced by the existing `analysisLink()`: the unchanged GitHub Pages address and one exact Solana CA. No title, extra text, files, report, imported JSON or browser baseline is sent.
+
+If sharing is unsupported (including a negative `canShare()` result), the same click falls back to the existing copy/manual-selection flow. Canceling never triggers a copy. A native error leaves an explicit Copy Analysis Link/manual-copy choice; it does not retry or post automatically. Both buttons are disabled while an operation is pending, and results from an earlier input cannot overwrite the message for an edited CA. Current analysis, schema 1 and local storage are unchanged.
+
+A resolved Web Share request does **not** prove delivery to a recipient: platform behavior differs. See [Web Share behavior](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share). Browser support and available targets depend on the device. Desktop/mobile Chromium tests simulate native success, cancellation and failure; a real Android/iOS share sheet has **not been exercised in this environment**. Clipboard and manual copying remain available. This release retains the existing website, canonical, sitemap and external registration requests.
+
 ## v1.3 — Share a token analysis link
 
 Enter a Solana CA in the token analyzer and select **Copy Analysis Link**. The link always uses the official site and one parameter: `https://dnfl1999.github.io/memediff/?ca=YOUR_CA`. It shares the **CA currently in the input**, not a saved analysis. If clipboard access is unavailable, the full link is selected in a read-only field: use Ctrl/Cmd+C or long-press and Copy on mobile.

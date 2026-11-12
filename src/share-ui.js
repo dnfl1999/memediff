@@ -1,9 +1,9 @@
-import {sharedToken, analysisLink} from './share.js';
+import {sharedToken, analysisLink, nativeShare} from './share.js';
 import {OFFICIAL_CA} from './token-data.js';
 
 const $ = id => document.getElementById(id);
-const input = $('token-ca'), button = $('copy-analysis-link');
-let revision = 0;
+const input = $('token-ca'), button = $('copy-analysis-link'), shareButton = $('native-share');
+let revision = 0, busy = false;
 function message(text, error = false) {
   $('share-status').textContent = text;
   $('share-status').classList.toggle('error', error);
@@ -22,24 +22,41 @@ function reset() {
 input.addEventListener('input', reset);
 $('token-query').addEventListener('submit', reset);
 $('live-demo').addEventListener('click', reset);
-button.addEventListener('click', async () => {
-  const attempt = ++revision;
-  let url;
-  try { url = analysisLink(input.value); }
-  catch (e) { $('share-fallback').hidden = true; $('analysis-link').value = ''; message(e.message, true); return; }
-  context();
+function showLink(url) {
   $('analysis-link').value = url; $('share-fallback').hidden = false;
-  button.disabled = true;
+}
+async function copyLink(url, attempt, prefix = '') {
+  showLink(url);
   try {
     await navigator.clipboard.writeText(url);
-    if (attempt === revision) message('Analysis link copied. Only the CA is included; no report or saved baseline is shared.');
+    if (attempt === revision) message(prefix + 'Analysis link copied. Only the CA is included; no report or saved baseline is shared.');
   } catch {
     if (attempt === revision) {
       const field = $('analysis-link'); field.focus(); field.select(); field.setSelectionRange(0, url.length);
-      message('Clipboard unavailable. Copy the selected link manually (Ctrl/Cmd+C, or long-press and Copy on mobile).', true);
+      message(prefix + 'Clipboard unavailable. Copy the selected link manually (Ctrl/Cmd+C, or long-press and Copy on mobile).', true);
     }
-  } finally { button.disabled = false; }
-});
+  }
+}
+async function run(mode) {
+  if (busy) return;
+  const attempt = ++revision, value = input.value;
+  let url;
+  try { url = analysisLink(value); }
+  catch (e) { $('share-fallback').hidden = true; $('analysis-link').value = ''; message(e.message, true); return; }
+  context(); busy = true; button.disabled = true; shareButton.disabled = true;
+  try {
+    if (mode === 'copy') { await copyLink(url, attempt); return; }
+    message('Opening your device share menu…');
+    const result = await nativeShare(value, navigator);
+    if (attempt !== revision) return;
+    if (result.status === 'unsupported') await copyLink(url, attempt, 'Native sharing unavailable. ');
+    else if (result.status === 'completed') message('Share request handed to your device. Delivery to a recipient is not confirmed.');
+    else if (result.status === 'canceled') message('Share canceled or no share target was available. Nothing was copied.');
+    else { showLink(url); message('Native sharing could not complete. Use Copy Analysis Link or select the link to copy manually.', true); }
+  } finally { busy = false; button.disabled = false; shareButton.disabled = false; }
+}
+button.addEventListener('click', () => run('copy'));
+shareButton.addEventListener('click', () => run('native'));
 try {
   const mint = sharedToken(window.location.search);
   if (mint) {

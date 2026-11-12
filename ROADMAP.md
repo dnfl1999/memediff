@@ -4,6 +4,10 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v1.4 — implemented
+
+Native Share uses the existing CA-only analysis link, with copy fallback for unsupported browsers, cancellation/error handling, serialized operations and accessible status messages. Automated native API tests are distinct from physical Android/iOS share-sheet validation. Existing hosting and external registrations stay unchanged. See PROGRESS for actual QA and deployment results.
+
 ## v1.3 — implemented
 
 CA-only analysis links, strict URL validation, review-before-query prefilling, accessible clipboard/manual-copy handling, explicit token identity and static-preview limitations. Sharing does not read or serialize baselines or imported reports. Existing analysis and exports are preserved; PROGRESS records test and deployment evidence.

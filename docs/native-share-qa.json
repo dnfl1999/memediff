@@ -1,0 +1,102 @@
+{
+  "version": "1.4.0",
+  "date": "2026-11-12",
+  "baselineCommit": "0572615c552397693f5f40bd1a62838588389d75",
+  "startingUnit": {
+    "passed": 88,
+    "failed": 0,
+    "skipped": 0
+  },
+  "unit": {
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0
+  },
+  "localMock": {
+    "startTime": "2026-11-12T09:18:48.526Z",
+    "duration": 221745.42899999997,
+    "expected": 114,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localLive": {
+    "startTime": "2026-11-12T09:22:47.680Z",
+    "duration": 9246.929,
+    "expected": 1,
+    "skipped": 3,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localLiveEvidence": [
+    {
+      "test": "LIVE CA-only MEMEDIFF auto-analysis and development exports",
+      "status": "skipped",
+      "attachments": [
+        {
+          "mocked": false,
+          "authenticated": false,
+          "observedAt": "2026-11-12T09:22:53.074Z",
+          "responses": [
+            {
+              "url": "https://api.github.com/repos/dnfl1999/memediff",
+              "status": 403,
+              "remaining": "0",
+              "reset": "1794477427"
+            },
+            {
+              "url": "https://api.dexscreener.com/tokens/v1/solana/DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test": "LIVE CA-only another Forks coin auto-analysis and development exports",
+      "status": "skipped",
+      "attachments": []
+    },
+    {
+      "test": "LIVE general Solana meme token shows exact-CA market information without invented repository",
+      "status": "passed",
+      "attachments": [
+        {
+          "mocked": false,
+          "authenticated": false,
+          "observedAt": "2026-11-12T09:22:55.373Z",
+          "responses": [
+            {
+              "url": "https://api.dexscreener.com/tokens/v1/solana/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "test": "LIVE Advanced Search preserves direct GitHub and name search",
+      "status": "skipped",
+      "attachments": []
+    }
+  ],
+  "deployment": "pending",
+  "nativeShareValidation": {
+    "automated": "Unit and desktop/mobile Chromium tests simulate native success, cancellation, rejection, missing API, canShare false, repeated clicks and stale completion.",
+    "physicalMobileOS": "NOT TESTED: no physical Android/iOS share sheet was exercised; OS target delivery is not claimed."
+  },
+  "privacy": "Native payload contains only analysisLink CA URL. No network requests or localStorage changes in sharing test; imported comparison unchanged. Cancel does not copy.",
+  "visualReview": [
+    "Desktop Native Share controls",
+    "Mobile Native Share controls"
+  ],
+  "unchanged": [
+    "GitHub Pages URL",
+    "canonical",
+    "sitemap",
+    "external registration requests",
+    "token CA",
+    "JSON schema 1",
+    "baseline storage keys"
+  ]
+}
