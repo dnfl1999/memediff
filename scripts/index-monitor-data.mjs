@@ -3,6 +3,7 @@ import { associationHealth } from '../src/index-health.js';
 import { OFFICIAL_CA, verifyForksCoin } from '../src/token-data.js';
 import { diagnosticName, diagnosticStage, maxDiagnosticArchiveBytes, sanitizeFailure } from './index-diagnostic.mjs';
 import { readDiagnosticArchive } from './index-diagnostic-archive.mjs';
+import { qaChecks, qaMatchesStep } from './qa-diagnostic.mjs';
 export { sanitizeFailure } from './index-diagnostic.mjs';
 
 export const repository = 'dnfl1999/memediff';
@@ -139,6 +140,15 @@ function matchesRun(record, run, jobs) {
     const job = jobs.find(item => item.name === name);
     if (record.stages[field] !== diagnosticStage(job ? job.conclusion : 'skipped')) return false;
   }
+  if (record.qa) {
+    for (const [key, { stage, step }] of Object.entries(qaChecks)) {
+      const job = jobs.find(item => item.name === (stage === 'verify' ? 'verify' : 'public-qa'));
+      const conclusion = job?.steps?.find(item => item.name === step)?.conclusion;
+      const check = record.qa[key];
+      if (!qaMatchesStep(check, diagnosticStage(conclusion ?? (job?.conclusion === 'skipped' || !job ? 'skipped' : undefined))) ||
+          [check.startedAt, check.completedAt].some(at => at !== null && !withinRun(at, run))) return false;
+    }
+  }
   const step = refreshStep(jobs).state;
   if (step === 'failure') return record.forks.state === 'failed';
   if (step === 'success') return record.forks.state === 'refreshed' || (record.forks.state === 'retained' && run.event !== 'schedule');
@@ -166,7 +176,8 @@ async function pagesDiagnostic(request, run, jobs, now) {
 
 async function scheduledFailure(request, run, jobs, step, now) {
   const diagnostic = await pagesDiagnostic(request, run, jobs, now);
-  if (diagnostic?.record.forks.failure) return { failure: diagnostic.record.forks.failure, evidence: 'diagnostic artifact', artifactURL: diagnostic.url };
+  if (diagnostic?.record.forks.failure) return { failure: diagnostic.record.forks.failure, evidence: 'diagnostic artifact',
+    artifactURL: diagnostic.url, qa: diagnostic.record.qa };
   if (!validId(step.jobId)) return { failure: null, evidence: 'unavailable' };
   try {
     const failure = failureFromLog(await request(`/actions/jobs/${step.jobId}/logs`, { text: true, label: 'Pages refresh log' }));
@@ -217,7 +228,7 @@ async function publishedEvidence(request, index, now) {
       forks.latestVerifiedAt === index.lastVerifiedAt && forks.newlyVerified === index.verified && forks.retained === index.retained;
     if (diagnostic && !matchesIndex) return { index, recovery: null };
     if (matchesIndex) {
-      index = { ...index, operation: { ...index.operation, failure: forks.failure, artifactURL: diagnostic.url } };
+      index = { ...index, operation: { ...index.operation, failure: forks.failure, artifactURL: diagnostic.url, qa: diagnostic.record.qa } };
     }
     const recovered = index.operation.outcome === 'refreshed' && index.verified > 0 && withinRun(index.verifiedAt, run);
     const recovery = recovered ? { id, verifiedAt: index.verifiedAt, indexCheckedAt: index.checkedAt,

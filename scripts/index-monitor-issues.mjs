@@ -1,5 +1,6 @@
 import { utcMillis } from '../src/core.js';
 import { MonitorReadError, repoURL, runURL, sanitizeFailure, validId } from './index-monitor-data.mjs';
+import { qaSummary } from './qa-diagnostic.mjs';
 
 export const issueTitle = 'Operations: Forks index verification';
 const bot = 'github-actions[bot]';
@@ -90,11 +91,13 @@ export function renderIssue(observation, state) {
 }
 
 export function renderSummary(observation, mode, transition) {
-  const { index, activeFailure } = observation;
+  const { index, activeFailure, schedule } = observation;
+  const scheduled = schedule.attempt?.qa;
   return ['### Index Health Monitor', '', ...evidenceLines(observation), '',
     `- Consecutive refresh failure alert ${activeFailure ? 'active' : 'unconfirmed or inactive'}`,
     `- Verification age alert ${['expiring','expired'].includes(index.state) ? index.state : 'inactive or unavailable'}`,
-    `- ${mode} · ${transition}`].join('\n');
+    `- ${mode} · ${transition}`, '', '#### Published Pages QA', '', ...qaSummary(index.operation?.qa),
+    ...(scheduled ? ['', '#### Scheduled refresh attempt QA', '', ...qaSummary(scheduled)] : [])].join('\n');
 }
 
 async function allPages(request, path, label) {

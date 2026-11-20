@@ -6,6 +6,7 @@ import { buildDiagnostic, diagnosticFile, diagnosticName, forkDiagnostic, maxDia
 import { diagnosticChecksum, readDiagnosticArchive } from '../scripts/index-diagnostic-archive.mjs';
 import { indexURL, monitorClient, observeMonitor } from '../scripts/index-monitor-data.mjs';
 import { renderSummary, syncIssue } from '../scripts/index-monitor-issues.mjs';
+import { emptyQa, qaChecks } from '../scripts/qa-diagnostic.mjs';
 import { OFFICIAL_CA, verifyForksCoin } from '../src/token-data.js';
 
 const iso = millis => new Date(millis).toISOString();
@@ -125,7 +126,8 @@ const index = (officialAt, operation) => ({schema:2,checkedAt:officialAt,entries
   {ok:true,coin:{mint:OFFICIAL_CA,kind:'forks',repo:'dnfl1999/memediff'}},officialAt)], coverage:{verified:1,retained:0},
   ...(operation?{operation:{...operation,indexCheckedAt:officialAt}}:{})});
 
-function apiFixture({ scheduledRecord, scheduledArtifact, publicRecord, snapshot = index(oldTime), missingLog = false, blockedList = false } = {}) {
+function apiFixture({ scheduledRecord, scheduledArtifact, publicRecord, snapshot = index(oldTime), missingLog = false,
+  blockedList = false, unitOutcome } = {}) {
   const calls=[];
   const bundles = new Map([[77,scheduledRecord], [88,publicRecord]].filter(([,value])=>value).map(([id,value])=>[id,archive(value)]));
   const request=async(path,options={})=>{
@@ -139,7 +141,9 @@ function apiFixture({ scheduledRecord, scheduledArtifact, publicRecord, snapshot
     }
     if(path.includes('/jobs?')) {
       const id=Number(path.match(/\/runs\/(\d+)/)[1]);
-      return {jobs:jobs(id===55||id===88?'success':'failure',id===88?'success':'skipped')};
+      const runJobs=jobs(id===55||id===88?'success':'failure',id===88?'success':'skipped');
+      if (unitOutcome && id === 77) runJobs[0].steps.push({ name: qaChecks.unit.step, conclusion: unitOutcome });
+      return {jobs:runJobs};
     }
     if(path.includes('/artifacts?')) {
       if (blockedList) throw Error('inaccessible');
@@ -218,6 +222,21 @@ test('new artifact carrying the same diagnosis does not update an existing incid
   const oldEvidence={...first,schedule:{...first.schedule,attempt:{...first.schedule.attempt,evidence:'job log',artifactURL:undefined}}};
   assert.deepEqual((await syncIssue(writer,oldEvidence,{write:true})).actions,['create']);
   assert.deepEqual((await syncIssue(writer,first,{write:true})).actions,[]);
+  const knownQa = passed => {
+    const missing = emptyQa('unavailable', origin);
+    const unit = { ...missing, status:'success', evidence:'node-test-json', passed, failed:0, skipped:0,
+      startedAt:refreshTime, completedAt:refreshTime };
+    return { unit, preDeploy:missing, publicMock:emptyQa('skipped', origin), publicLive:emptyQa('skipped', origin) };
+  };
+  for (const passed of [160,161]) {
+    const scheduledRecord = record({ qa:knownQa(passed) });
+    const withQa = await observeMonitor(apiFixture({ scheduledRecord, unitOutcome:'success' }).request, now);
+    assert.ok(renderSummary(withQa, 'Read-only', 'No issue change').includes(`${passed} passed / 0 failed / 0 skipped`));
+    assert.deepEqual((await syncIssue(writer,withQa,{write:true})).actions,[]);
+  }
+  const mismatch = await observeMonitor(apiFixture({ scheduledRecord:record({ qa:knownQa(160) }), unitOutcome:'failure' }).request, now);
+  assert.equal(mismatch.schedule.attempt.evidence,'job log');
+  assert.doesNotMatch(renderSummary(mismatch, 'Read-only', 'No issue change'), /160 passed/);
   assert.deepEqual(writes,['POST']);
 });
 

@@ -1,5 +1,5 @@
 import {test,expect,downloadReport,openAdvanced} from './helpers.js';
-import {isCommitProcessingTimeout} from '../src/github.js';
+import {classifyLiveResponses,limited} from './http-evidence.js';
 import {associationHealth,recordedRefreshFailure} from '../src/index-health.js';
 import {marketObservation,MAX_ASSOCIATION_AGE} from '../src/token-data.js';
 test.setTimeout(70000);
@@ -16,11 +16,8 @@ async function evidence(responses,diagnostics,info){
      message:text(body?.message),documentation:text(body?.documentation_url),errors};
  }));
  await info.attach('LIVE-api-evidence',{body:JSON.stringify({mocked:false,authenticated:false,observedAt:new Date().toISOString(),responses:data}),contentType:'application/json'});
- const commitList=r=>/^https:\/\/api.github.com\/repos\/[^/]+\/[^/]+\/commits\?/.test(r.url);
- const empty=r=>r.status===409&&commitList(r)&&/^Git Repository is empty\.?$/i.test(r.message||'');
- const limited=r=>r.status===429||r.status===403&&(r.remaining==='0'||Boolean(r.retryAfter)||/rate limit/i.test(r.message||''));
- const recovered=(r,i)=>r.status===422&&commitList(r)&&isCommitProcessingTimeout(r.message)&&data.slice(i+1).some(later=>later.url===r.url&&later.status===200);
- const expected=data.filter((r,i)=>empty(r)||limited(r)||recovered(r,i));
+ const classifications=classifyLiveResponses(data);
+ const expected=data.filter((_,i)=>classifications[i].expected);
  diagnostics.expectedResponses=expected.map(({url,status})=>({url,status}));
  expect(data.filter(r=>r.status!==200&&!expected.includes(r)), 'Unrecovered real API responses').toEqual([]);
  if(data.some(limited)){

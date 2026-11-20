@@ -26,6 +26,10 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v1.9 — QA evidence in Pages diagnostics
+
+Each Pages attempt records the test counts from Node and Playwright for unit, pre-deployment desktop/mobile, public desktop/mobile and public real-API QA. Statuses distinguish tests that passed, failed or were skipped, checks that did not run and unavailable reports. Browser HTTP evidence separates successful responses, expected API errors, unexpected errors and confirmed HTTP 422 → 200 recovery within a request sequence. Index Health Monitor shows these counts in its Actions summary. GitHub Actions handles ordinary QA failure notifications. [Operations guide](docs/INDEX_MONITOR.md#pages-operation-diagnostics)
+
 ## v1.8 — Pages operation diagnostics
 
 Each Pages run on `main` saves a small attempt-specific diagnostic artifact when GitHub finishes the recording job. It records Forks refresh, verification, deployment and public QA independently. The Monitor checks the run and attempt before using the artifact. Its fallback is the recorded job log, with unavailable evidence shown explicitly. [Diagnostic schema and operations](docs/INDEX_MONITOR.md#pages-operation-diagnostics)

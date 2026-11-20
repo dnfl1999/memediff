@@ -1,4 +1,5 @@
 import { utcMillis } from '../src/core.js';
+import { exact, validQa } from './qa-diagnostic.mjs';
 
 export const diagnosticFile = 'index-diagnostic.json';
 export const maxDiagnosticBytes = 8192;
@@ -23,11 +24,6 @@ const timestamp = value => Number.isFinite(utcMillis(value));
 const count = value => Number.isInteger(value) && value >= 0 && value <= 200;
 const id = value => typeof value === 'string' && /^[1-9]\d{0,19}$/.test(value);
 export const diagnosticRunURL = runId => `https://github.com/dnfl1999/memediff/actions/runs/${runId}`;
-
-function exact(record, keys) {
-  return !!record && typeof record === 'object' && !Array.isArray(record) && Object.keys(record).length === keys.length &&
-    keys.every(key => Object.hasOwn(record, key));
-}
 
 function validFailure(failure) {
   if (failure === null) return true;
@@ -60,12 +56,15 @@ function parseCanonical(raw) {
 
 export function parseDiagnostic(raw) {
   const value = parseCanonical(raw);
-  if (!exact(value, ['schemaVersion', 'runId', 'runAttempt', 'workflow', 'event', 'recordedAt', 'actionsURL', 'stages', 'forks']) ||
-      value.schemaVersion !== 1 || !id(value.runId) || !Number.isInteger(value.runAttempt) || value.runAttempt < 1 || value.runAttempt > 1000 ||
+  const keys = ['schemaVersion', 'runId', 'runAttempt', 'workflow', 'event', 'recordedAt', 'actionsURL', 'stages', 'forks'];
+  if (value?.schemaVersion === 2) keys.push('qa');
+  if (!exact(value, keys) ||
+      ![1, 2].includes(value.schemaVersion) || !id(value.runId) || !Number.isInteger(value.runAttempt) || value.runAttempt < 1 || value.runAttempt > 1000 ||
       value.workflow !== pagesWorkflow || !['push', 'pull_request', 'schedule', 'workflow_dispatch'].includes(value.event) ||
       !timestamp(value.recordedAt) || value.actionsURL !== diagnosticRunURL(value.runId) ||
       !exact(value.stages, ['verify', 'deploy', 'publicQA']) || Object.values(value.stages).some(status => !stageResults.has(status)) ||
-      !validForks(value.forks) || (value.forks.observedAt !== null && utcMillis(value.forks.observedAt) > utcMillis(value.recordedAt))) return null;
+      !validForks(value.forks) || (value.forks.observedAt !== null && utcMillis(value.forks.observedAt) > utcMillis(value.recordedAt)) ||
+      (value.schemaVersion === 2 && !validQa(value.qa, value))) return null;
   return value;
 }
 
@@ -85,7 +84,7 @@ export function forkDiagnostic({ state, health, failure, newlyVerified = 0, reta
   return validForks(record) ? record : emptyForks('unavailable');
 }
 
-export function buildDiagnostic({ runId, runAttempt, workflow, event, stages, refreshOutcome, refreshData, now = new Date().toISOString() }) {
+export function buildDiagnostic({ runId, runAttempt, workflow, event, stages, refreshOutcome, refreshData, qa, now = new Date().toISOString() }) {
   const fromStep = parseCanonical(refreshData);
   const attempted = ['success', 'failure', 'cancelled'].includes(refreshOutcome);
   const skipped = refreshOutcome === 'skipped' || (!refreshOutcome && (event === 'pull_request' || stages.verify === 'skipped'));
@@ -93,9 +92,10 @@ export function buildDiagnostic({ runId, runAttempt, workflow, event, stages, re
   if (attempted && validForks(fromStep) && ((refreshOutcome === 'failure' && fromStep.state === 'failed') ||
       (refreshOutcome === 'success' && ['refreshed', 'retained'].includes(fromStep.state))) &&
       utcMillis(fromStep.observedAt) <= utcMillis(now)) forks = fromStep;
-  const value = { schemaVersion: 1, runId, runAttempt, workflow, event, recordedAt: now,
+  const value = { schemaVersion: qa === undefined ? 1 : 2, runId, runAttempt, workflow, event, recordedAt: now,
     actionsURL: diagnosticRunURL(runId), stages: { verify: diagnosticStage(stages.verify), deploy: diagnosticStage(stages.deploy),
       publicQA: diagnosticStage(stages.publicQA) }, forks };
-  if (!parseDiagnostic(JSON.stringify(value))) throw new Error('Diagnostic run metadata is invalid.');
+  if (qa !== undefined) value.qa = qa;
+  if (!parseDiagnostic(JSON.stringify(value) + '\n')) throw new Error('Diagnostic run metadata is invalid or exceeds the size limit.');
   return value;
 }

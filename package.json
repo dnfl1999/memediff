@@ -1,12 +1,13 @@
 {
   "name": "memediff",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "private": true,
   "type": "module",
   "description": "Evidence-first public GitHub activity reports for meme-token research",
   "license": "MIT",
   "scripts": {
     "test": "node --test test/*.test.js",
+    "test:qa": "node --test --test-reporter=spec --test-reporter=./scripts/unit-qa-reporter.mjs --test-reporter-destination=stdout --test-reporter-destination=qa-results/unit-v19.json test/*.test.js",
     "test:e2e": "playwright test --project=desktop --project=mobile",
     "test:e2e:live": "playwright test --project=live",
     "start": "node scripts/serve.mjs",

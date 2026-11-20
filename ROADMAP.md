@@ -4,6 +4,12 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v1.9 — QA evidence in Pages diagnostics
+
+- Attach validated Node and Playwright counts and observed HTTP status totals to the attempt-specific Pages diagnostic.
+- Preserve earlier diagnostic artifacts and show available QA evidence in the Monitor summary. Use Actions notifications for QA failures and Issue #1 for Forks index incidents.
+- Consider a SHA-backed comparison of commit and release activity across two periods for v2.0, with visible gaps when collection is partial.
+
 ## v1.8 — Pages operation diagnostics
 
 - Record an attempt-specific JSON artifact for Forks refresh, verification, deployment and public QA outcomes.

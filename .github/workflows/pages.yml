@@ -17,6 +17,8 @@ jobs:
     outputs:
       forks_step_outcome: ${{ steps.forks_refresh.outcome }}
       forks_diagnostic: ${{ steps.forks_refresh.outputs.diagnostic }}
+      unit_qa: ${{ steps.qa.outputs.unit }}
+      pre_deploy_qa: ${{ steps.qa.outputs.preDeploy }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,13 +26,26 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npm test
+      - name: Unit tests
+        id: unit
+        run: |
+          mkdir -p qa-results
+          npm run test:qa
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - name: Chromium desktop and mobile E2E (mock API)
+        id: pre_deploy
         run: npm run test:e2e
         env:
           QA_RUN: linux-build-mock
+      - name: Collect pre-deployment QA diagnostics
+        id: qa
+        if: always() && steps.unit.outcome != ''
+        continue-on-error: true
+        run: node scripts/collect-qa-diagnostic.mjs verify
+        env:
+          QA_UNIT_OUTCOME: ${{ steps.unit.outcome }}
+          QA_PREDEPLOY_OUTCOME: ${{ steps.pre_deploy.outcome }}
       - name: Prepare exact-mint index and report verification health
         id: forks_refresh
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -71,6 +86,10 @@ jobs:
           PUBLIC_QA_RESULT: ${{ needs.public-qa.result }}
           FORKS_STEP_OUTCOME: ${{ needs.verify.outputs.forks_step_outcome }}
           FORKS_DIAGNOSTIC: ${{ needs.verify.outputs.forks_diagnostic }}
+          QA_UNIT: ${{ needs.verify.outputs.unit_qa }}
+          QA_PREDEPLOY: ${{ needs.verify.outputs.pre_deploy_qa }}
+          QA_PUBLICMOCK: ${{ needs.public-qa.outputs.mock_qa }}
+          QA_PUBLICLIVE: ${{ needs.public-qa.outputs.live_qa }}
       - name: Upload Pages diagnostic JSON
         id: diagnostic_upload
         uses: actions/upload-artifact@v4
@@ -109,6 +128,9 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      mock_qa: ${{ steps.qa.outputs.publicMock }}
+      live_qa: ${{ steps.qa.outputs.publicLive }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -118,16 +140,26 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Public Pages desktop and mobile E2E (mock API)
+        id: public_mock
         run: npm run test:e2e
         env:
           E2E_BASE_URL: https://dnfl1999.github.io/memediff/
           QA_RUN: linux-public-mock
       - name: Public Pages real GitHub API and downloads (no retries)
+        id: public_live
         if: success() || failure()
         run: npm run test:e2e:live
         env:
           E2E_BASE_URL: https://dnfl1999.github.io/memediff/
           QA_RUN: linux-public-live
+      - name: Collect public QA diagnostics
+        id: qa
+        if: always() && steps.public_mock.outcome != ''
+        continue-on-error: true
+        run: node scripts/collect-qa-diagnostic.mjs publicQA
+        env:
+          QA_PUBLICMOCK_OUTCOME: ${{ steps.public_mock.outcome }}
+          QA_PUBLICLIVE_OUTCOME: ${{ steps.public_live.outcome }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
