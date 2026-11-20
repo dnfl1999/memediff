@@ -1,0 +1,105 @@
+{
+  "version": "1.7.0",
+  "dateKST": "2026-11-20",
+  "baseCommit": "3b2dc6c3c225184d8663ae822900206232752a5c",
+  "releaseCommit": "b9dff50600ff3e8230898f1243891aa1928d0290",
+  "preflight": {
+    "account": "dnfl1999",
+    "localAndRemoteMainMatched": true,
+    "cleanWorktree": true,
+    "existingOperationsIssues": 0,
+    "repositorySubscriptionHTTP": 404,
+    "latestPagesRelease": 44664298501,
+    "latestScheduledFailureIds": [44612527688, 44481359812],
+    "index": {
+      "checkedAt": "2026-11-18T20:44:01.396Z",
+      "officialCheckedAt": "2026-11-18T20:43:46.517Z",
+      "lastSuccessfulRecordVerification": "2026-11-18T20:44:01.390Z",
+      "expiringSoonAt": "2026-11-20T14:43:46.517Z",
+      "expiresAfter": "2026-11-20T20:43:46.517Z",
+      "entries": 117
+    },
+    "forks": {
+      "observedAt": "2026-11-20T04:18:03.376Z",
+      "endpoint": "https://forks.wiki/api/tokens/recent",
+      "dns": "ENOTFOUND",
+      "httpsAttempt": "ENOTFOUND before TLS and HTTP"
+    }
+  },
+  "local": {
+    "unit": { "passed": 140, "failed": 0, "skipped": 0, "monitorCases": 11 },
+    "build": "success",
+    "mockBrowser": { "passed": 122, "failed": 0, "skipped": 0, "desktop": 61, "mobile": 61 },
+    "realBrowser": { "passed": 5, "failed": 0, "skipped": 0 },
+    "readOnlyMonitor": {
+      "observedAt": "2026-11-20T04:24:25.306Z",
+      "consecutiveScheduledRefreshFailures": 2,
+      "latestScheduledFailureCategory": "network",
+      "publishedSnapshotReuseCategory": "dns",
+      "publishedSnapshotReuseCode": "ENOTFOUND",
+      "indexState": "fresh",
+      "newlyVerified": 0,
+      "retained": 117,
+      "result": "Would create",
+      "issueWrites": 0
+    }
+  },
+  "pages": {
+    "runId": 44674755435,
+    "completedAt": "2026-11-20T04:38:06Z",
+    "verify": { "jobId": 136083830258, "conclusion": "success", "unitPassed": 140, "mockPassed": 122 },
+    "deploy": { "jobId": 136085389591, "conclusion": "success" },
+    "publicQA": {
+      "jobId": 136085484143,
+      "conclusion": "success",
+      "mockBrowser": { "passed": 122, "failed": 0, "skipped": 0 },
+      "realBrowser": { "passed": 5, "failed": 0, "skipped": 0 },
+      "artifact": { "id": 14601623158, "sha256": "06fa1674c0d9e7294d864ef87e8eb5200d8abfd9d3106f8435f4f1893a0179d8", "expiresAt": "2026-12-04T04:38:00Z" }
+    },
+    "refresh": { "observedAt": "2026-11-20T04:33:38.812Z", "category": "dns", "code": "ENOTFOUND", "newlyVerified": 0, "retained": 117 },
+    "static": { "observedAt": "2026-11-20T04:34:30.5644149Z", "sharedURLHTTP": 200, "indexHTTP": 200, "priorSnapshotMatchedExcludingNewOperationRecord": true }
+  },
+  "monitor": {
+    "firstReadOnly": {
+      "runId": 44674795984,
+      "observeJobId": 136083974036,
+      "observe": "success",
+      "notify": "skipped",
+      "result": "Would create",
+      "issueCountAfterRun": 0
+    },
+    "publish": {
+      "runId": 44675326010,
+      "observeJobId": 136085673136,
+      "notifyJobId": 136085724470,
+      "observe": "success",
+      "notify": "success",
+      "actualTrigger": "two confirmed scheduled index refresh failures",
+      "issue": { "number": 1, "url": "https://github.com/dnfl1999/memediff/issues/1", "state": "open", "author": "github-actions[bot]", "createdAt": "2026-11-20T04:34:47Z", "comments": 0 }
+    },
+    "publishRepeat": {
+      "runId": 44675451404,
+      "observeJobId": 136086076019,
+      "notifyJobId": 136086145308,
+      "observe": "success",
+      "notify": "success",
+      "result": "No issue change",
+      "issueCountAfterRun": 1,
+      "commentCountAfterRun": 0,
+      "issueUpdatedAtAfterRun": "2026-11-20T04:34:47Z"
+    },
+    "inbox": {
+      "checkedAt": "2026-11-20T04:35:36.0544958Z",
+      "account": "dnfl1999",
+      "repositoryNotificationsHTTP": 200,
+      "matchedIssue": 1,
+      "reason": "mention",
+      "emailAndPushDelivery": "not verified"
+    }
+  },
+  "limits": [
+    "The first three monitor runs were manual dispatches. The hourly cron is configured and an automatic schedule tick was not observed during release QA.",
+    "Expiry updates, recovery comments and closing/reopening were exercised in fixtures. The production issue remained open with no state transition to apply during QA.",
+    "Forks DNS recovery and a newer production official verification were not observed."
+  ]
+}

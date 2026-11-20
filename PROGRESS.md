@@ -8,6 +8,10 @@
 
 시간당 정기 Monitor와 읽기 전용 수동 실행을 추가했습니다. 정기 Pages 인덱스 단계의 연속 실패, 6시간 이내 만료, 48시간 초과, 새 공식 검증 배포로 확인된 복구를 추적합니다. 실제 실패 출처와 48시간 경계를 출력하고, 같은 장애의 상태 변경은 같은 운영 이슈의 댓글로 남깁니다. 최초 로컬 읽기 전용 실행에서 정기 갱신 연속 실패 2건, 공개 인덱스 Fresh, 이전 연결 유지 117개, 이슈 생성 예정 상태를 확인했습니다. [Monitor 운영 문서](docs/INDEX_MONITOR.md).
 
+기능 커밋 `b9dff50600ff3e8230898f1243891aa1928d0290`. 로컬 단위 140건, PC·모바일 모의 E2E 122건, 실제 API 5건이 모두 통과했습니다. v1.7 [Pages 실행 44674755435](https://github.com/dnfl1999/memediff/actions/runs/44674755435)는 `verify`, `deploy`, `public-qa`가 성공했습니다. CI 단위 140건, 배포 전 PC·모바일 모의 122건, 공개 모의 122건, 공개 실제 API 5건 통과, 실패·건너뜀 0건입니다. 13:33:38 KST에 `ENOTFOUND`를 확인해 117개 공개 레코드와 기존 검증 시각을 유지했습니다. 신규 검증 0개입니다. 공식 공유 URL과 공개 인덱스 모두 HTTP 200, 새 운영 관측 기록을 제외한 전체 인덱스 내용이 이전 공개본과 일치했습니다. [공개 QA 아티팩트](https://github.com/dnfl1999/memediff/actions/runs/44674755435/artifacts/14601623158).
+
+[첫 읽기 전용 실행](https://github.com/dnfl1999/memediff/actions/runs/44674795984)은 이슈 생성 예정, notify 건너뜀, 이슈 0건이었습니다. [실제 쓰기 실행](https://github.com/dnfl1999/memediff/actions/runs/44675326010)은 연속 실패 근거로 [운영 이슈 #1](https://github.com/dnfl1999/memediff/issues/1)을 생성했습니다. [쓰기 모드 재실행](https://github.com/dnfl1999/memediff/actions/runs/44675451404)은 변경 없음으로 성공했고 운영 이슈 1건·댓글 0건을 확인했습니다. `dnfl1999`의 저장소 범위 GitHub 알림 API에서 해당 이슈의 `mention` 스레드를 확인했습니다. 이메일과 푸시 수신은 미검증입니다. 만료·복구 상태 변경과 이슈 종료·재열기는 모의 테스트에서 검증했습니다. [QA 증거](docs/v17-qa.json).
+
 ## v1.6 Index Health (2026-11-20)
 
 기준 커밋 `c92867b904ce35e569b0d066bc2fa9ec642f0b25`와 원격 `main` 일치, 인증 계정 `dnfl1999`, 미커밋 변경 0건, 직전 Pages 실행 44660317318 성공을 확인했습니다. 11:44:57 KST 공개 인덱스에는 117개 연결이 있었고 공식 MEMEDIFF 검증 시각은 `2026-11-18T20:43:46.517Z`였습니다. 같은 시각 공식 Forks DNS와 HTTPS 시도 모두 `ENOTFOUND`를 반환했습니다.
