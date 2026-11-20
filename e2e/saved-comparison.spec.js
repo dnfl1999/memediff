@@ -10,6 +10,7 @@ const upload = (buffer = historical, name = 'memediff-period-comparison-dnfl1999
 });
 
 test('opens the actual v2.1 file offline before analysis and releases it when closed', async ({ page }, info) => {
+  if (info.project.name === 'mobile') await page.setViewportSize({ width: 360, height: 800 });
   await page.goto('./');
   await page.evaluate(() => localStorage.setItem('saved-preview-test-sentinel', 'untouched'));
   const initialStorage = await page.evaluate(() => JSON.stringify(localStorage));
@@ -17,6 +18,8 @@ test('opens the actual v2.1 file offline before analysis and releases it when cl
   page.on('request', request => requests.push(request.url()));
   await page.context().setOffline(true);
   const open = page.getByRole('button', { name: 'Open Saved Comparison' });
+  expect(await open.evaluate(button => button.scrollWidth <= button.clientWidth + 1 &&
+    button.getBoundingClientRect().right <= window.innerWidth)).toBe(true);
   const pending = page.waitForEvent('filechooser');
   await open.focus();
   await open.press('Enter');

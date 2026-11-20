@@ -203,6 +203,15 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 .hero-actions {
   flex-wrap: wrap;
 }
+#saved-comparison-open {
+  max-width: 100%;
+  white-space: normal;
+}
+@media (max-width: 760px) {
+  .hero-actions #saved-comparison-open {
+    flex: 1 0 100%;
+  }
+}
 .saved-comparison-meta {
   display: grid;
   grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
