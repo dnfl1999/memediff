@@ -1,0 +1,97 @@
+{
+  "version": "1.5.0",
+  "dateKST": "2026-11-20",
+  "baselineCommit": "b703d0c7dc63544ca792d20f723109ff20c1358c",
+  "maintenanceCommit": "ed39628d7845abba0f12a1bda0167e151f869074",
+  "releaseCommit": "41189545e5b0e224f958ddeab198043403725e6a",
+  "historical": {
+    "forksRecentFailures": [
+      { "runId": 44481359812, "at": "2026-11-19T07:40:05.732Z", "categoryRecordedAtTheTime": "network" },
+      { "runId": 44612527688, "at": "2026-11-19T20:49:22.519Z", "categoryRecordedAtTheTime": "network" }
+    ],
+    "github422": {
+      "runId": 43819604716,
+      "publicQAArtifactId": 14203833878,
+      "evidenceSource": "Playwright trace network entry and response body from the failed Advanced Search browser test",
+      "at": "2026-11-16T06:56:43.348Z",
+      "request": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-17T06:56:43.335Z&until=2026-11-16T06:56:43.335Z&per_page=100&page=1",
+      "status": 422,
+      "requestId": "87EC:1AD8B9:CEBD62:293B020:6AFAA92B",
+      "remaining": 9,
+      "body": {
+        "message": "The request is taking too long to process.",
+        "documentation_url": "https://docs.github.com/rest/commits/commits#list-commits",
+        "status": "422"
+      },
+      "matchingQueryReplay": { "source": "GitHub connector", "commitsReturned": 31 }
+    }
+  },
+  "local": {
+    "unit": { "passed": 123, "failed": 0, "skipped": 0 },
+    "build": "success",
+    "mockBrowser": {
+      "passed": 118,
+      "failed": 0,
+      "skipped": 0,
+      "desktop": 59,
+      "mobile": 59,
+      "results": "qa-results/v15-local-mock/results.json"
+    },
+    "realBrowser": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 3,
+      "results": "qa-results/v15-local-live/results.json",
+      "observedAt": "2026-11-20T02:19:45.114Z",
+      "memediffMarketHTTP": 200,
+      "githubHTTP": 403,
+      "githubRateRemaining": 0,
+      "githubRateReset": 1795144267
+    },
+    "actualForksRefresh": {
+      "at": "2026-11-20T02:18:12.958Z",
+      "endpoint": "https://forks.wiki/api/tokens/recent",
+      "category": "dns",
+      "code": "ENOTFOUND",
+      "scheduledMode": "local CLI with scheduled policy: refresh failed; no replacement written",
+      "codeDeployMode": "retained-published-index",
+      "retainedEntryCount": 117,
+      "retainedCheckedAt": "2026-11-18T20:44:01.396Z",
+      "retainedOfficialEntryCheckedAt": "2026-11-18T20:43:46.517Z"
+    }
+  },
+  "githubActions": {
+    "runId": 44660317318,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/44660317318",
+    "completedAt": "2026-11-20T02:28:39Z",
+    "verify": { "jobId": 136036649571, "conclusion": "success", "unitPassed": 123, "mockPassed": 118, "failed": 0, "skipped": 0 },
+    "forksRefresh": { "at": "2026-11-20T02:25:05.190Z", "category": "dns", "code": "ENOTFOUND", "result": "retained-published-index", "entryCount": 117, "checkedAt": "2026-11-18T20:44:01.396Z" },
+    "deploy": { "jobId": 136037777956, "conclusion": "success" },
+    "publicQA": {
+      "jobId": 136037896362,
+      "conclusion": "success",
+      "mockBrowser": { "passed": 118, "failed": 0, "skipped": 0 },
+      "realBrowser": {
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "memediff": { "observedAt": "2026-11-20T02:28:27.217Z", "httpStatuses": [200, 200, 200, 200], "mocked": false, "authenticated": false },
+        "otherCoinCommitHTTP": 409,
+        "otherCoinCommitOutcome": "GitHub verified empty repository response"
+      },
+      "artifact": { "id": 14595073057, "sha256": "1e663593bd93add78a7bfa5b40fa500daff67a70438496f0deed723899c8f64f", "downloadedDigestMatched": true, "explorerScreenshots": 2, "expiresAt": "2026-12-04T02:28:34Z" }
+    }
+  },
+  "publicStatic": {
+    "at": "2026-11-20T02:26:35.2230957Z",
+    "sharedUrlHTTP": 200,
+    "explorerModuleHTTP": 200,
+    "explorerModuleMatchesRelease": true,
+    "indexHTTP": 200,
+    "indexMatchesValidatedFallback": true,
+    "officialVerifiedAt": "2026-11-18T20:43:46.517Z"
+  },
+  "validationLimits": [
+    "Native Share was validated with Chromium API mocks. Physical Android/iOS share menus were not exercised."
+  ]
+}

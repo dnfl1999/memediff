@@ -6,6 +6,12 @@
 
 기존 30일 `compareSnapshots()`의 SHA 분류를 사용해 관측 타임라인 아래에 SHA Explorer를 추가했습니다. 포함한 행에는 SHA, GitHub 원본 링크, 이전·현재의 커밋/관측 UTC 시각, 메시지와 확인 가능한 작성자를 표시합니다. 겹침 필터 3종과 결과 건수, 20개 단위 탐색, 경계/N/A, 부분 수집 및 가져온 미검증 자료 표시를 제공합니다. 기존 브라우저 기준 저장과 PNG/JSON 내보내기는 기존 비교 범위를 사용합니다.
 
+운영 커밋 `ed39628d7845abba0f12a1bda0167e151f869074`, 기능 커밋 `41189545e5b0e224f958ddeab198043403725e6a`를 `main`에 게시했습니다. 배포 전 로컬 단위 123통과, PC·모바일 모의 E2E 118통과(59건씩), 빌드 성공. 로컬 실제 API는 DexScreener 시장 조회 1통과, 비인증 GitHub `403` 및 `remaining=0`으로 3건 건너뜀, 실패 0건입니다.
+
+[Actions 44660317318](https://github.com/dnfl1999/memediff/actions/runs/44660317318)의 `verify`, `deploy`, `public-qa`가 모두 성공했습니다. CI 단위 123통과, 배포 전 PC·모바일 모의 118통과, 공개 모의 118통과, 공개 실제 API 4통과, CI 실패·건너뜀 0건입니다. 기존 MEMEDIFF 공유 URL의 CA 사전 입력과 명시적 조회, 실제 시장 정보 및 자동 GitHub 분석, schema 1 JSON 재가져오기와 SHA Explorer, PNG/JSON 다운로드를 공개 브라우저에서 확인했습니다. PC·모바일 SHA Explorer 화면 증거와 실제 API 응답은 [공개 QA 아티팩트](https://github.com/dnfl1999/memediff/actions/runs/44660317318/artifacts/14595073057) 및 [요약 증거](docs/v15-qa.json)에 기록했습니다. 실제 모바일 OS 공유 메뉴는 미검증입니다.
+
+11월 20일 로컬과 CI의 Forks 최근 목록 조회에서 DNS `ENOTFOUND`가 재현됐습니다. v1.5 배포는 기존 117개 공개 연결을 원래 시각 그대로 재사용했습니다. 공개 공유 URL·Explorer 모듈·인덱스 모두 HTTP 200이며 모듈과 인덱스 내용을 검증했습니다. 공식 MEMEDIFF 연결은 마지막 검증 시각이 11월 19일 05:43:46 KST이므로 재검증 없이 48시간을 넘으면 CA 자동 분석에 사용되지 않습니다.
+
 ## 정기 배포 안정화 (2026-11-20)
 
 [11월 19일 Actions](https://github.com/dnfl1999/memediff/actions/runs/44481359812)과 [11월 20일 Actions](https://github.com/dnfl1999/memediff/actions/runs/44612527688) 모두 `GET https://forks.wiki/api/tokens/recent`에서 `network` 오류로 중단됐습니다. 이전 어댑터가 원인 코드를 버려 DNS, TCP, TLS 등 세부 원인은 해당 로그에서 확인할 수 없습니다.
@@ -14,7 +20,7 @@
 
 Forks 갱신은 원인 분류와 제한 재시도, 검증 후 원자적 교체를 적용했습니다. 정기 갱신 실패 시 기존 배포본을 보존하고, 코드/수동 배포는 검증된 공개 인덱스를 원래 시각으로 재사용할 수 있습니다. [인덱스 운영 문서](docs/DISCOVERY.md).
 
-## 최신 상태 — v1.4 Native Share (2026-11-12)
+## 이전 상태 — v1.4 Native Share (2026-11-12)
 
 시작 main `0572615c552397693f5f40bd1a62838588389d75` 원격 일치, dnfl1999 계정 및 v1.3 Actions 43175301150 성공 확인. 시작 단위 88/88 통과. 기존 analysisLink와 Copy Analysis Link를 재사용해 Share를 추가했습니다. url 하나만 OS에 전달하고 미지원은 복사/수동 선택으로 연결합니다. 취소는 복사하지 않으며 오류는 사용자가 명시적으로 복사를 선택할 수 있게 합니다. 연속 클릭은 두 버튼을 함께 잠그고, 입력 변경 후 이전 응답은 상태를 덮어쓰지 않습니다. 기존 주소·canonical·sitemap·외부 등록·토큰 정보·schema 1·저장 키를 유지합니다. 도메인 관련 작업은 전면 보류하며 추가 조사/설정 변경을 하지 않습니다. v1.5는 배포 후 별도 설계·검증 계획만 기록합니다.
 
