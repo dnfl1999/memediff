@@ -2,6 +2,22 @@
 
 기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v2.2 Saved Period Comparison (2026-11-20)
+
+인증 계정 `dnfl1999`와 로컬·원격 `main`의 기준 SHA `d4607ef8fe0cc5997c23dee11d88e074b19998a5`를 확인했습니다. 시작 시 미커밋 변경은 0건이었습니다. 공개 홈페이지와 117개 연결이 담긴 인덱스는 HTTP 200을 반환했고 공식 Forks DNS는 `ENOTFOUND`였습니다.
+
+홈의 **Open Saved Comparison**에서 최대 2 MiB의 기간 비교 JSON을 선택해 읽기 전용으로 엽니다. UTC 경계·관측 길이·중복·차이를 기존 계산기로 다시 검증하고, 근거 URL은 해당 저장소 및 작성자의 허용된 GitHub 주소로 제한합니다. 기존 스키마 1 가져오기, 실시간 보고서, baseline과 SHA Explorer를 회귀 검사했습니다. 미리보기는 네트워크 요청, 업로드, 로컬 저장소 쓰기 없이 동작합니다.
+
+[v2.1 공개 QA 원본](https://github.com/dnfl1999/memediff/actions/runs/44701320792/artifacts/14613052613)에서 내려받은 실제 15,775바이트 파일을 바이트 그대로 보존했습니다. SHA-256은 `a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5`입니다. 로컬 PC·모바일 집중 검사 4건에서 이 파일과 변형된 테스트 자료의 읽기, 불완전 수집, 시간 경계, 취소 및 닫기를 확인했습니다. 로컬 단위 170건과 실제 API 5건도 모두 통과했습니다.
+
+[첫 Actions 실행](https://github.com/dnfl1999/memediff/actions/runs/44706131901)은 Linux의 360px 화면 너비 검사에서 모의 E2E 131건 통과·1건 실패를 기록했습니다. 배포와 공개 QA는 건너뛰었습니다. [실패 진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/44706131901/artifacts/14615850519)과 원본 브라우저 QA의 360px 스크린샷을 검증했습니다. 모바일에서 새 버튼을 별도 줄에 배치한 뒤 360~1440px 너비 및 미리보기 집중 검사 10건을 모두 통과했습니다.
+
+수정 커밋 `eab02fe25262768d624ce00bc6c3518328dd404b`의 [최종 Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/44707077365)은 verify, deploy, public-qa, diagnostics가 모두 성공했습니다. 수정 후 로컬과 배포 전·공개 PC·모바일 모의 E2E는 각각 132건 통과했습니다. 공개 CI의 실제 API 그룹은 GitHub HTTP 403으로 2건 통과·3건 건너뜀을 기록했고, 별도 공개 사이트 실제 API 재검사에서 5건이 모두 통과했습니다.
+
+공개 주소를 대상으로 미리보기 집중 검사 4건을 독립 실행했습니다. 로드한 페이지를 오프라인으로 전환해 PC와 360px 모바일 모두에서 2026-11-20T08:25:25.774Z의 원본 파일을 열었습니다. 두 화면 모두 A 31건·B 14건·차이 −17건을 표시했고, 추가 요청은 0건이며 저장값이 일치했습니다. 실시간 분석이 시작되지 않았고, 닫을 때 파일 근거가 화면에서 해제됐습니다.
+
+공개 홈·기존 공유 링크·미리보기 모듈·인덱스는 HTTP 200이었습니다. Forks는 `ENOTFOUND`였고 117개 공개 연결과 기존 검증 시각이 일치했습니다. 신규 검증은 0건입니다. [최종 진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/44707077365/artifacts/14615762668)의 해시와 기존 진단 스키마 1·2 판독을 확인했습니다. [읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/44708568391)는 새 진단과 공개 CI 건너뜀을 표시했습니다. 운영 이슈는 #1 한 건이며 열림·댓글 0건입니다. [상세 QA 증거](docs/v22-qa.json)
+
 ## v2.1 Period Comparison Export (2026-11-20)
 
 인증 계정 `dnfl1999`와 로컬·원격 `main`의 기준 SHA `c0b4c51a3a497c7cedcfe863e5d1cc1f0f76003f`를 확인했습니다. 시작 시 미커밋 변경은 0건이었습니다. 공개 홈페이지와 117개 연결이 담긴 인덱스는 HTTP 200을 반환했고, 공식 Forks DNS는 `ENOTFOUND`였습니다.
