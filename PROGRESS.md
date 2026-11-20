@@ -2,6 +2,10 @@
 
 기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v1.5 SHA Explorer (2026-11-20)
+
+기존 30일 `compareSnapshots()`의 SHA 분류를 사용해 관측 타임라인 아래에 SHA Explorer를 추가했습니다. 포함한 행에는 SHA, GitHub 원본 링크, 이전·현재의 커밋/관측 UTC 시각, 메시지와 확인 가능한 작성자를 표시합니다. 겹침 필터 3종과 결과 건수, 20개 단위 탐색, 경계/N/A, 부분 수집 및 가져온 미검증 자료 표시를 제공합니다. 기존 브라우저 기준 저장과 PNG/JSON 내보내기는 기존 비교 범위를 사용합니다.
+
 ## 정기 배포 안정화 (2026-11-20)
 
 [11월 19일 Actions](https://github.com/dnfl1999/memediff/actions/runs/44481359812)과 [11월 20일 Actions](https://github.com/dnfl1999/memediff/actions/runs/44612527688) 모두 `GET https://forks.wiki/api/tokens/recent`에서 `network` 오류로 중단됐습니다. 이전 어댑터가 원인 코드를 버려 DNS, TCP, TLS 등 세부 원인은 해당 로그에서 확인할 수 없습니다.

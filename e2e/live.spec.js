@@ -47,6 +47,15 @@ for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['anothe
    await expect(page.locator('#comparison strong')).toHaveText('0 newly observed');
    await expect(page.locator('.observation-timeline')).toContainText(data.since);
    await expect(page.locator('.observation-timeline')).toContainText('Shared interval');
+   const explorer=page.getByRole('region',{name:'SHA Explorer'});
+   await expect(explorer).toContainText('unverified imported JSON');
+   await expect(explorer.getByRole('button',{name:'Newly observed in overlap (0)'})).toBeVisible();
+   if(data.commits.length){
+     await expect(explorer).toContainText('Observed in both');
+     await expect(explorer.getByRole('link').first()).toHaveAttribute('href',/^https:\/\/github\.com\/dnfl1999\/memediff\/commit\/[a-f0-9]{40}$/);
+   }
+   await explorer.getByRole('button',{name:'Newly observed in overlap (0)'}).click();
+   await expect(explorer.getByRole('status')).toHaveText('No SHA observations match this filter.');
    expect(await page.evaluate(()=>JSON.stringify(localStorage))).toBe(stored);expect(responses.length).toBe(requestCount);
    const imported=await downloadReport(page,'json',info);expect(imported.comparison.baselineOrigin).toBe('imported-json');expect(imported.comparison.windows.overlap.durationMs).toBe(30*86400000);const png=await downloadReport(page,'png',info);expect(png.height).toBe(1260);
  }

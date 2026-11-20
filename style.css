@@ -37,3 +37,46 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 .share-controls{border-top:1px solid var(--line);padding-top:16px;margin:16px 0;overflow-wrap:anywhere}.share-controls button{min-height:44px}.share-controls p{font-size:13px}#share-status{color:var(--cyan)}#share-status.error{color:#ffb6a8}#analysis-link{font:12px/1.8 ui-monospace,monospace;margin-top:8px;width:100%}@media(max-width:760px){.share-controls button{width:100%}}
 
 .share-actions{display:flex;flex-wrap:wrap;gap:10px}.share-actions button{min-height:44px}#native-share{border-color:var(--cyan);color:var(--cyan)}@media(max-width:760px){.share-actions{display:grid;grid-template-columns:1fr}.share-actions button{width:100%}}
+
+.sha-explorer {
+  margin: 16px 0 24px;
+  padding: 16px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #101715;
+}
+.sha-explorer h4 { margin: 0 0 8px; }
+.sha-filters, .sha-pagination { display: flex; flex-wrap: wrap; gap: 8px; }
+.sha-filters button, .sha-pagination button {
+  min-height: 44px;
+  padding: 8px 10px;
+  white-space: normal;
+  text-align: left;
+}
+.sha-filters button[aria-pressed="true"] { border-color: var(--lime); color: var(--lime); }
+.sha-results { margin: 12px 0; padding: 0; list-style: none; }
+.sha-result-count { color: var(--muted); }
+.sha-row { padding: 12px 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.sha-row-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.sha-row-heading code { font-size: 12px; }
+.sha-row-heading a { color: var(--cyan); text-decoration: underline; }
+.sha-category { font-size: 12px; color: var(--cyan); }
+.sha-new { color: var(--lime); }
+.sha-missing { color: #ffb6a8; }
+.sha-observation { padding-left: 10px; border-left: 2px solid var(--line); }
+.sha-observation-label { margin: 10px 0 4px; font-weight: 650; }
+.sha-observation dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 10px;
+  margin: 0;
+  font-size: 12px;
+}
+.sha-observation dt { color: var(--muted); }
+.sha-observation dd { margin: 0; }
+.sha-pagination button:disabled { cursor: default; }
+@media (max-width: 500px) {
+  .sha-explorer { padding: 12px; }
+  .sha-filters button { width: 100%; }
+}

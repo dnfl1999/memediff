@@ -4,8 +4,11 @@ import { drawReceipt } from './receipt.js';
 import { timelineRows, utcRange, windowSummary } from './timeline.js';
 import { parseRepo, parseToken, compareSnapshots, inWindow, safeLink, DAY } from './core.js';
 import { fetchReport } from './github.js';
+import { commitSource } from './sha-explorer.js';
+import { renderSHAExplorer } from './sha-explorer-ui.js';
 const $ = id => document.getElementById(id);
 let report = null, comparison = null, days = 30, controller = null;
+let previousSnapshot = null;
 let externalLock = false;
 let importCandidate = null, importGeneration = 0;
 export function lockAnalysis(value) { externalLock = value; for (const id of ['analyze','repo','token']) $(id).disabled = value || Boolean(controller); }
@@ -13,9 +16,19 @@ function el(tag, text, className) { const n = document.createElement(tag); if (t
 function link(text, url) { const a = el('a', text); const safe = safeLink(url); if (safe) { a.href = safe; a.target = '_blank'; a.rel = 'noopener noreferrer'; } return a; }
 function key() { return `memediff:v1:${report.repo}:${report.branch}:${report.token}`; }
 function status(text, error = false) { $('status').textContent = text; $('status').classList.toggle('error', error); }
+function setComparison(previous = null, imported = false) {
+  comparison = imported ? importedComparison(previous, report) : compareSnapshots(previous, report);
+  previousSnapshot = comparison ? previous : null;
+}
 function loadBaseline() {
-  try { const raw = localStorage.getItem(key()); const baseline = raw ? JSON.parse(raw) : null; comparison = baseline?.baselineOrigin === 'imported-json' ? importedComparison(validateImport(baseline, report), report) : compareSnapshots(baseline, report); }
-  catch { comparison = null; status('Could not read the baseline. Browser storage may be blocked or the saved record damaged.', true); }
+  try {
+    const raw = localStorage.getItem(key()), baseline = raw ? JSON.parse(raw) : null;
+    if (baseline?.baselineOrigin === 'imported-json') setComparison(validateImport(baseline, report), true);
+    else setComparison(baseline);
+  } catch {
+    setComparison();
+    status('Could not read the baseline. Browser storage may be blocked or the saved record damaged.', true);
+  }
 }
 function renderComparison() {
   const box = $('comparison'); box.replaceChildren();
@@ -40,7 +53,7 @@ function renderComparison() {
   }
   timeline.append(el('p', windowSummary(windows), windows.relation === 'overlap' ? 'small' : 'warning'));
   timeline.append(el('p', 'One shared time scale. Hatched area = shared interval; a vertical line = boundary only. Bars show collection periods, not work volume or complete coverage.', 'small'));
-  box.append(timeline);
+  box.append(timeline, renderSHAExplorer(previousSnapshot, report, comparison));
   if (comparison.baselineOrigin === 'imported-json') box.append(el('p', 'Imported JSON baseline · Unverified, editable file. Not an official certificate.', 'warning'));
   box.append(el('strong', `${formatNumber(comparison.observed.length)} newly observed`));
   box.append(el('p', `30-day commit count difference (separate rolling windows): ${comparison.commitDelta >= 0 ? '+' : ''}${formatNumber(comparison.commitDelta)} · No longer observed in overlap: ${windows.relation === 'disjoint' ? 'N/A — no shared interval' : formatNumber(comparison.missing.length)}`));
@@ -49,12 +62,12 @@ function renderComparison() {
   box.append(el('p', comparison.note, 'small'));
   if (comparison.observed.length) {
     const list = el('ul', null, 'source-list');
-    comparison.observed.slice(0, 5).forEach(sha => { const li = el('li'); li.append(link(sha.slice(0, 12), `https://github.com/${report.repo}/commit/${sha}`)); list.append(li); });
+    comparison.observed.slice(0, 5).forEach(sha => { const li = el('li'); const url = commitSource(report.repo, sha); li.append(url ? link(sha.slice(0, 12), url) : el('span', 'Commit SHA unavailable')); list.append(li); });
     box.append(list, el('p', 'Showing up to 5 newly observed SHA values · Export JSON for the full comparison', 'small'));
   }
   if (comparison.missing.length) {
     const list = el('ul', null, 'source-list');
-    comparison.missing.slice(0, 5).forEach(sha => { const li = el('li'); li.append(link(sha.slice(0, 12), `https://github.com/${report.repo}/commit/${sha}`)); list.append(li); });
+    comparison.missing.slice(0, 5).forEach(sha => { const li = el('li'); const url = commitSource(report.repo, sha); li.append(url ? link(sha.slice(0, 12), url) : el('span', 'Commit SHA unavailable')); list.append(li); });
     box.append(el('h4', 'No longer observed in the overlapping window'), list, el('p', 'Showing up to 5 SHA values. This is not proof of deletion. Export JSON for the full comparison.', 'small'));
   }
 }
@@ -88,19 +101,18 @@ function render() {
   if (authors.length > 50) $('contributors').append(el('span', 'Showing up to 50 accounts', 'small'));
   $('coverage').textContent = `${report.methodology} Commit collection: ${report.coverage.commits ? 'complete' : 'incomplete'}, Release collection: ${report.coverage.releases ? 'complete' : 'incomplete'}. API requests remaining: ${report.remaining ?? 'unknown'}.`;
   $('sources').replaceChildren(...report.evidence.map(url => { const li = el('li'); li.append(link(url, url)); return li; }));
-  renderComparison();
 }
-export function clearReport() { resetImport(); report = null; comparison = null; $('report').hidden = true; $('empty').hidden = true; }
+export function clearReport() { resetImport(); report = null; setComparison(); $('comparison').replaceChildren(); $('report').hidden = true; $('empty').hidden = true; }
 export function cancelAnalysis() { controller?.abort(); }
 export async function analyzeRepository(repoInput, tokenInput = '') {
   let repo, token;
   try { repo = parseRepo(repoInput); token = parseToken(tokenInput); } catch(e) { status(e.message, true); return false; }
   if (controller) return;
-  resetImport();
+  clearReport();
   controller = new AbortController(); const timer = setTimeout(() => controller?.abort(), 45000);
   $('analyze').disabled = true; $('cancel').hidden = false; $('repo').disabled = true; $('token').disabled = true;
   $('report').hidden = true; status('Collecting public GitHub evidence…');
-  try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); return true; }
+  try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); renderComparison(); return true; }
   catch(e) { report = null; $('empty').hidden = false; status(e.message, true); return false; }
   finally { clearTimeout(timer); controller = null; lockAnalysis(externalLock); $('cancel').hidden = true; }
 }
@@ -108,7 +120,7 @@ $('query').addEventListener('submit', async event => { event.preventDefault(); i
 $('cancel').addEventListener('click', () => controller?.abort());
 document.querySelectorAll('[data-days]').forEach(b => b.addEventListener('click', () => { days = Number(b.dataset.days); document.querySelectorAll('[data-days]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); if (report) render(); }));
 $('save').addEventListener('click', () => { if (!report) return; try { localStorage.setItem(key(), JSON.stringify(report)); resetImport(); loadBaseline(); renderComparison(); status('Report saved as the baseline in this browser. It will be used for the next query.'); } catch { status('Could not save the baseline. Check browser storage and privacy settings.', true); } });
-$('clear').addEventListener('click', () => { if (!report) return; try { localStorage.removeItem(key()); resetImport(); comparison = null; renderComparison(); status('Local baseline cleared for this project.'); } catch { status('Could not access browser storage.', true); } });
+$('clear').addEventListener('click', () => { if (!report) return; try { localStorage.removeItem(key()); resetImport(); setComparison(); renderComparison(); status('Local baseline cleared for this project.'); } catch { status('Could not access browser storage.', true); } });
 function download(blob, extension, snapshot = report) { const url = URL.createObjectURL(blob); const a = el('a'); a.href = url; a.download = `memediff-${snapshot.repo.replace('/', '-')}-${snapshot.fetchedAt.slice(0,10)}.${extension}`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000); }
 $('json').addEventListener('click', () => { if (report) { download(new Blob([JSON.stringify({ ...report, comparison, selectedDays: days }, null, 2)], { type:'application/json' }), 'json'); status('JSON export requested. Check your browser downloads.'); } });
 $('png').addEventListener('click', () => {
@@ -156,7 +168,7 @@ $('import-file').addEventListener('change', async () => {
 });
 $('import-apply').addEventListener('click', () => {
   if (!report || !importCandidate || controller || externalLock) return;
-  comparison = importedComparison(importCandidate, report); renderComparison(); $('import-save').disabled = false;
+  setComparison(importCandidate, true); renderComparison(); $('import-save').disabled = false;
   importStatus('Comparing with imported JSON in memory only. The existing browser baseline is unchanged.');
 });
 $('import-save').addEventListener('click', () => {

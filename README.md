@@ -26,6 +26,12 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v1.5 — SHA Explorer
+
+Save a browser baseline or compare an imported schema 1 report to open **SHA Explorer** beneath the UTC timeline. Choose **All observations in overlap**, **Newly observed in overlap**, or **No longer observed in overlap**. Rows include full SHA links, commit messages, linked authors when available, and the timestamps recorded by the previous and current observations. When one SHA has conflicting dates, its records are displayed with their source labels. A record shown for reference outside the shared interval is labeled as such.
+
+The explorer classifies SHA values across the full 30-day snapshots, then shows rows with a commit timestamp in the shared interval. Matching at a single boundary instant is possible. Separated windows show **N/A**. Partial collection and imported JSON warnings remain visible for every filter. The 7/30-day switch controls the activity report and receipts. Paging and filtering use local data, and the PNG and schema 1 JSON still export the full comparison.
+
 ## v1.4 — Native Share
 
 Select **Share** beside **Copy Analysis Link** to open your device's sharing menu when Web Share is supported. The payload contains only the URL produced by the existing `analysisLink()`: the unchanged GitHub Pages address and one exact Solana CA. No title, extra text, files, report, imported JSON or browser baseline is sent.
@@ -33,8 +39,6 @@ Select **Share** beside **Copy Analysis Link** to open your device's sharing men
 If sharing is unsupported (including a negative `canShare()` result), the same click falls back to the existing copy/manual-selection flow. Canceling never triggers a copy. A native error leaves an explicit Copy Analysis Link/manual-copy choice; it does not retry or post automatically. Both buttons are disabled while an operation is pending, and results from an earlier input cannot overwrite the message for an edited CA. Current analysis, schema 1 and local storage are unchanged.
 
 A resolved Web Share request does **not** prove delivery to a recipient: platform behavior differs. See [Web Share behavior](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share). Browser support and available targets depend on the device. Desktop/mobile Chromium tests simulate native success, cancellation and failure; a real Android/iOS share sheet has **not been exercised in this environment**. Clipboard and manual copying remain available. This release retains the existing website, canonical, sitemap and external registration requests.
-
-The next [v1.5 SHA explorer plan](ROADMAP.md) defines overlap filters, source links and compatibility checks. It is design-only; v1.4 does not implement that explorer.
 
 ## v1.3 — Share a token analysis link
 
@@ -78,7 +82,7 @@ New SHA values do not prove new work. Missing observations do not prove deletion
 - Contributors are distinct linked `author.login` accounts in observed commits, including bots and excluding unlinked authors. Co-author metadata is not analyzed. This is not the complete project contributor count.
 - Public releases use `published_at`, include prereleases and exclude drafts. API ordering and collection caps may limit coverage.
 - Fork status comes from GitHub metadata; it does not establish originality, work performed or token ownership.
-- Unauthenticated GitHub access typically permits 60 requests per hour per IP. An analysis can use 3–16 requests. Errors, limits and empty repositories are distinguished; queries support cancellation and a 45-second timeout.
+- Unauthenticated GitHub access typically permits 60 requests per hour per IP. An analysis can use up to 16 requests, plus one retry for a confirmed GitHub commit processing timeout. Errors, limits and empty repositories are distinguished. Queries support cancellation and a 45-second timeout.
 - Separate API calls are not an atomic snapshot. Repositories, releases and account attribution may change during or after observation.
 
 ## Official project token — Solana Mainnet
@@ -123,7 +127,7 @@ To test the public site, set `E2E_BASE_URL=https://dnfl1999.github.io/memediff/`
 
 ## Deployment
 
-GitHub Pages uses GitHub Actions. [pages.yml](.github/workflows/pages.yml) runs unit tests and Linux Chromium desktop/mobile tests before deploying `dist/` from main. After deployment it separately runs mocked and live API tests against the public URL. Reports, downloads and screenshots are retained as Actions artifacts for 14 days. Pull requests cannot deploy. Relative asset paths also support other static hosts.
+GitHub Pages uses GitHub Actions. The workflow runs unit tests and Linux Chromium desktop/mobile tests before preparing the Forks index and deploying `dist/` from main. A failed scheduled refresh preserves the published site. Code and manual deploys can reuse the validated published index with its prior timestamps. The workflow then runs mocked and live API tests against the public URL. Reports, downloads and screenshots are retained as Actions artifacts for 14 days. [Pages workflow](.github/workflows/pages.yml) · [Index operation](docs/DISCOVERY.md)
 
 The repository administration helper checks the authenticated account is `dnfl1999`. Its default `inspect` action is read-only. It uses existing Git credentials in memory and does not create login sessions or tokens.
 

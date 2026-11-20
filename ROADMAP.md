@@ -4,15 +4,15 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
-## v1.5 — design only, not implemented
+## v1.5 — SHA Explorer
 
-Prepared after the v1.4 deployment. This is a separate future version: package/runtime version stays 1.4.0. No v1.5 UI, comparison changes or new requests are shipped here.
+The explorer displays overlap observations from the active comparison. Release results are tracked in [PROGRESS](PROGRESS.md).
 
 ### Scope and exact meaning
 
-Add a client-side SHA explorer beneath the existing observation timeline. Use the active previous snapshot and current live report, preserving `compareSnapshots()` and its 30-day basis. The shared interval is the existing `comparison.windows.overlap`, with inclusive UTC endpoints. The 7/30-day selector continues to control the current report, not this explorer.
+The client-side SHA Explorer sits beneath the observation timeline. It uses the active previous snapshot, current live report and existing 30-day `compareSnapshots()` result. The shared interval includes both UTC endpoints and stays fixed when changing the activity report between 7 and 30 days.
 
-Proposed filters: **All observations in overlap**, **Newly observed in overlap**, and **No longer observed in overlap**. Determine global SHA membership using the full snapshots first; then filter source records by the shared interval. Do not compute a new set difference from two filtered lists, which could incorrectly relabel observations. A newly observed row must belong to `comparison.observed` and have its current-record date in the overlap. A missing row must belong to `comparison.missing` and have its previous-record date in the overlap. The existing overall newly-observed count may exceed the filtered count; explain both scopes.
+The three filters are **All observations in overlap**, **Newly observed in overlap**, and **No longer observed in overlap**. The explorer uses the full snapshots to classify SHA membership before applying the interval. Common SHA rows can show both source records if at least one falls inside the interval. The existing overall newly-observed count may exceed the filtered count.
 
 Keep source provenance for each row: previous/current observation time, source record's committer timestamp, SHA, bounded message and linked author if available. Retained SHA rows can carry both provenances. If an editable import contains conflicting timestamps for the same SHA, show the recorded provenance without inventing a reconciliation or treating the file as authenticated. Legacy records without sufficient detail should show that detail as unavailable, not fabricate it or change the comparison summary.
 
@@ -58,7 +58,7 @@ Local schema 1 JSON import with strict validation, preview, in-memory 30-day com
 
 ## Next useful improvements
 
-- Gather feedback on the observation timeline and consider a separate, clearly scoped shared-interval SHA view without presenting it as a work or safety score.
+- Gather feedback on the SHA Explorer, especially navigation between pages, the source labels and the interpretation of a zero-duration boundary.
 - Gather feedback on v1.1 local JSON import, identity mismatch messages, and comparison provenance.
 - Add focused accessibility and internationalization improvements without changing report meaning or inventing quality scores.
 
