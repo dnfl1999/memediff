@@ -23,8 +23,8 @@ export const test = base.extend({
 });
 export async function mockGitHub(page, options = {}) {
   const state = { revision: 0, requests: [], ...options };
-  const now = Date.now(), day = 86400000;
-  const c = (digit, age, author) => ({ sha: digit.repeat(40), commit: { committer: { date: new Date(now - age * day).toISOString() }, author: { email: 'fixture-private@example.com' }, message: digit === 'a' ? '<img src=x onerror="window.__xss=1">' : `Fixture commit ${digit}` }, author: { login: author } });
+  const now = state.now ?? Date.now(), day = 86400000;
+  const c = (digit, age, author) => ({ sha: digit.repeat(40), commit: { committer: { date: new Date(now - age * day).toISOString() }, author: { email: 'fixture-private@example.com' }, message: digit === 'a' ? state.commitMessage ?? '<img src=x onerror="window.__xss=1">' : `Fixture commit ${digit}` }, author: { login: author } });
   await page.route('https://api.github.com/**', async route => {
     const url = new URL(route.request().url()); state.requests.push(url.href);
     const headers = { 'access-control-allow-origin': '*', 'x-ratelimit-remaining': '50', 'access-control-expose-headers': 'x-ratelimit-remaining,link,retry-after' };

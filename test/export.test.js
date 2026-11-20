@@ -19,7 +19,8 @@ test('deferred PNG export retains the original filename after another query fail
   }
   const nodes = new Map();
   const node = id => { if (!nodes.has(id)) nodes.set(id, new Element('div')); return nodes.get(id); };
-  globalThis.document = { getElementById: node, querySelectorAll: () => [], createElement: tag => new Element(tag), body: new Element('body') };
+  globalThis.document = { getElementById: id => id === 'period-comparison' ? null : node(id), querySelectorAll: () => [],
+    createElement: tag => new Element(tag), body: new Element('body') };
   globalThis.localStorage = { getItem: () => null };
   globalThis.setTimeout = () => 1;
   globalThis.clearTimeout = () => {};

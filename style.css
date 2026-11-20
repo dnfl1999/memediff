@@ -111,3 +111,120 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
   .index-health dl { display: block; }
   .index-health dd { margin: 0 0 6px; }
 }
+.period-comparison {
+  margin: 16px 0;
+}
+.period-comparison h3 {
+  color: var(--lime);
+}
+.period-comparison h4 {
+  margin: 0;
+}
+.period-comparison .small {
+  margin-left: 0;
+}
+.period-range {
+  color: var(--muted);
+  font: 12px/1.7 var(--mono);
+  overflow-wrap: anywhere;
+}
+.period-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.period-comparison fieldset, .period-activity, .period-chart {
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #111816;
+}
+.period-comparison legend, .period-chart figcaption {
+  padding: 0 3px;
+  font-weight: 650;
+}
+.period-date-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.period-date-fields input {
+  min-width: 0;
+  padding: 9px 8px;
+  color-scheme: dark;
+}
+.period-date-fields input[aria-invalid="true"] {
+  border-color: #ffb3a1;
+}
+.period-comparison button[type="submit"] {
+  margin-top: 12px;
+}
+.period-chart-row {
+  display: grid;
+  grid-template-columns: 1.2em minmax(0, 1fr) 7.2em;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+  font: 12px/1.5 var(--mono);
+}
+.period-chart-row a {
+  text-align: right;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+.period-chart-key {
+  font-weight: 700;
+}
+.period-chart-track {
+  height: 10px;
+  border-radius: 6px;
+  background: #293330;
+  overflow: hidden;
+}
+.period-chart-bar {
+  height: 100%;
+  border-radius: inherit;
+}
+.period-chart-a { background: var(--lime); }
+.period-chart-b { background: var(--cyan); }
+#period-results .period-pair + .period-pair {
+  margin-top: 12px;
+}
+.period-activity p {
+  margin: 6px 0;
+}
+.period-activity {
+  align-self: start;
+}
+.period-release-types, .period-unlinked {
+  font-size: 12px;
+}
+.period-evidence {
+  padding-top: 8px;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.period-evidence summary {
+  font-size: 13px;
+}
+.period-evidence .evidence-list {
+  margin-top: 8px;
+  max-height: 28rem;
+  overflow: auto;
+  padding-right: 8px;
+}
+.period-evidence a {
+  text-decoration: underline;
+}
+.period-sha {
+  font: 12px var(--mono);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .period-pair { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 400px) {
+  .period-date-fields { grid-template-columns: minmax(0, 1fr); }
+}

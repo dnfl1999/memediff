@@ -116,6 +116,18 @@ test('LIVE MEMEDIFF expiry boundary blocks auto-analysis with the real index and
  await evidence(responses,diagnostics,info);
  await assertActualMarket(page,responses,official,info);
  await indexHealth(page).screenshot({path:info.outputPath('LIVE-index-expired.png')});
+ if (!githubLimited) {
+   await indexHealth(page).getByRole('button',{name:'Open Advanced Search'}).click();
+   await page.clock.setFixedTime(Date.now());
+   await page.locator('#repo').fill('dnfl1999/memediff');
+   await page.locator('#analyze').click();
+   await expect(page.locator('#analyze')).toBeEnabled({timeout:50000});
+   await evidence(responses,diagnostics,info);
+   await expect(page.locator('#report-title')).toHaveText('dnfl1999/memediff');
+   await expect(page.getByRole('region',{name:'Compare Two Periods'})).toBeVisible();
+   await info.attach('LIVE-expired-direct-report',{contentType:'application/json',body:JSON.stringify({expiredIndexChecked:true,
+     repo:'dnfl1999/memediff',directReportVisible:true,periodComparisonVisible:true})});
+ }
 });
 test('LIVE general Solana meme token shows exact-CA market information without invented repository',async({page,diagnostics},info)=>{
  const mint='DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',responses=capture(page);await page.goto('./');await page.locator('#token-ca').fill(mint);await page.locator('#analyze-token').click();await expect(page.locator('#analyze-token')).toBeEnabled({timeout:20000});const observed=await evidence(responses,diagnostics,info);
@@ -123,6 +135,51 @@ test('LIVE general Solana meme token shows exact-CA market information without i
  await page.screenshot({path:info.outputPath('LIVE-ca-unlinked.png'),fullPage:true});
 });
 test('LIVE Advanced Search preserves direct GitHub and name search',async({page,diagnostics},info)=>{
- test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');const responses=capture(page);await page.goto('./');await openAdvanced(page);await page.locator('#repo').fill('dnfl1999/memediff');await page.locator('#analyze').click();await expect(page.locator('#analyze')).toBeEnabled({timeout:50000});await evidence(responses,diagnostics,info);await expect(page.locator('#report-title')).toHaveText('dnfl1999/memediff');
+ test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');const responses=capture(page);const requests=[];
+ page.on('request',request=>{if(/^https:\/\/(api.github.com|api.dexscreener.com)\//.test(request.url()))requests.push(request.url());});
+ await page.goto('./');await openAdvanced(page);await page.locator('#repo').fill('dnfl1999/memediff');await page.locator('#analyze').click();await expect(page.locator('#analyze')).toBeEnabled({timeout:50000});await evidence(responses,diagnostics,info);await expect(page.locator('#report-title')).toHaveText('dnfl1999/memediff');
+ const downloaded=await downloadReport(page,'json',info);
+ const day=86400000,end=Date.parse(downloaded.fetchedAt),since=Date.parse(downloaded.since);
+ const dayStart=Date.parse(downloaded.fetchedAt.slice(0,10));
+ const utcDay=offset=>new Date(dayStart+offset*day).toISOString().slice(0,10);
+ const choices=[['A',utcDay(-13),utcDay(-7)],['B',utcDay(-6),utcDay(0)]];
+ const raw=async path=>(await Promise.all(responses
+   .filter(response=>response.status()===200&&new URL(response.url()).pathname===`/repos/dnfl1999/memediff/${path}`)
+   .map(response=>response.json()))).flat();
+ const commits=await raw('commits'), releases=await raw('releases');
+ const requestCount=requests.length;
+ const comparison=page.getByRole('region',{name:'Compare Two Periods'});
+ for(const [key,start,last] of choices){
+   await comparison.getByLabel(`Period ${key} start date`).fill(start);
+   await comparison.getByLabel(`Period ${key} end date`).fill(last);
+ }
+ await comparison.getByRole('button',{name:'Compare periods'}).click();
+ const number=(n,complete)=>n?new Intl.NumberFormat('en-US').format(n)+(complete?'':' observed'):complete?'0':'Unknown';
+ const verified=[];
+ for(const [key,start,last] of choices){
+   const from=Math.max(since,Date.parse(start)),until=Math.min(end+1,Date.parse(last)+day);
+   const contains=value=>Date.parse(value)>=from&&Date.parse(value)<until;
+   const shas=new Map(commits.filter(row=>contains(row.commit.committer.date)).map(row=>[row.sha.toLowerCase(),row]));
+   const publicReleases=new Map(releases.filter(row=>!row.draft&&contains(row.published_at)).map(row=>[row.id,row]));
+   const linkedAuthors=new Set([...shas.values()].map(row=>row.author?.login?.toLowerCase()).filter(Boolean));
+   await expect(comparison.getByRole('link',{name:`Period ${key} commits evidence: ${number(shas.size,downloaded.coverage.commits)}`,exact:true})).toBeVisible();
+   await expect(comparison.getByRole('link',{name:`Period ${key} releases evidence: ${number(publicReleases.size,downloaded.coverage.releases)}`,exact:true})).toBeVisible();
+   const card=comparison.getByRole('article',{name:`Period ${key} evidence`});
+   await expect(card.locator('summary').last()).toHaveText(`Linked GitHub authors · ${number(linkedAuthors.size,downloaded.coverage.commits)}`);
+   if(shas.size){
+     const items=card.locator('details').first();
+     await items.locator('summary').click();
+     await expect(items.locator('.period-sha')).toHaveCount(shas.size);
+     const actual=await items.locator('.period-sha').evaluateAll(links=>links.map(link=>link.href.split('/').at(-1).toLowerCase()));
+     expect(actual.sort()).toEqual([...shas.keys()].sort());
+   }
+   verified.push({period:key,startDate:start,endDate:last,from:new Date(from).toISOString(),through:new Date(until-1).toISOString(),
+     durationMs:Math.min(end,Date.parse(last)+day)-from,commits:shas.size,releases:publicReleases.size,authors:linkedAuthors.size,
+     unlinkedCommits:[...shas.values()].filter(row=>!row.author?.login).length});
+ }
+ expect(requests).toHaveLength(requestCount);
+ await info.attach('LIVE-period-comparison',{contentType:'application/json',body:JSON.stringify({repo:downloaded.repo,branch:downloaded.branch,
+   since:downloaded.since,observedAt:downloaded.fetchedAt,coverage:downloaded.coverage,verifiedAgainstGitHubResponses:true,
+   additionalAPIRequests:requests.length-requestCount,periods:verified})});
  await page.locator('#advanced details > summary').click();await page.locator('#search-name').fill('memediff');await page.locator('#search-submit').click();await expect(page.locator('#search-submit')).toBeEnabled({timeout:20000});await evidence(responses,diagnostics,info);await expect(page.locator('#discovery-results button').first()).toBeVisible();
 });

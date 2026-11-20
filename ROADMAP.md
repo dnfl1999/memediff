@@ -4,6 +4,13 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v2.0 — Compare Two Periods
+
+- Compare two UTC date ranges using the current report’s default-branch commits, linked GitHub authors and public releases.
+- Show observed counts, UTC boundaries, unequal durations, overlapping evidence and unknown counts from incomplete collection.
+- Offer source links for observed SHAs, release IDs and linked GitHub accounts.
+- For v2.1, consider an explicit Period Comparison export that includes both effective UTC ranges and their coverage, alongside the existing report exports.
+
 ## v1.9 — QA evidence in Pages diagnostics
 
 - Attach validated Node and Playwright counts and observed HTTP status totals to the attempt-specific Pages diagnostic.

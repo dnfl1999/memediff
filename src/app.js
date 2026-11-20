@@ -2,18 +2,19 @@ import { readImportFile, importedComparison, validateImport } from './import.js'
 import { formatDate, formatNumber } from './format.js';
 import { drawReceipt } from './receipt.js';
 import { timelineRows, utcRange, windowSummary } from './timeline.js';
-import { parseRepo, parseToken, compareSnapshots, inWindow, safeLink, DAY } from './core.js';
+import { parseRepo, parseToken, compareSnapshots, inWindow, DAY } from './core.js';
 import { fetchReport } from './github.js';
 import { commitSource } from './sha-explorer.js';
 import { renderSHAExplorer } from './sha-explorer-ui.js';
+import { bindPeriodComparison } from './period-comparison-ui.js';
+import { el, link } from './report-dom.js';
 const $ = id => document.getElementById(id);
+const setPeriodReport = bindPeriodComparison($('period-comparison'));
 let report = null, comparison = null, days = 30, controller = null;
 let previousSnapshot = null;
 let externalLock = false;
 let importCandidate = null, importGeneration = 0;
 export function lockAnalysis(value) { externalLock = value; for (const id of ['analyze','repo','token']) $(id).disabled = value || Boolean(controller); }
-function el(tag, text, className) { const n = document.createElement(tag); if (text != null) n.textContent = text; if (className) n.className = className; return n; }
-function link(text, url) { const a = el('a', text); const safe = safeLink(url); if (safe) { a.href = safe; a.target = '_blank'; a.rel = 'noopener noreferrer'; } return a; }
 function key() { return `memediff:v1:${report.repo}:${report.branch}:${report.token}`; }
 function status(text, error = false) { $('status').textContent = text; $('status').classList.toggle('error', error); }
 function setComparison(previous = null, imported = false) {
@@ -102,7 +103,7 @@ function render() {
   $('coverage').textContent = `${report.methodology} Commit collection: ${report.coverage.commits ? 'complete' : 'incomplete'}, Release collection: ${report.coverage.releases ? 'complete' : 'incomplete'}. API requests remaining: ${report.remaining ?? 'unknown'}.`;
   $('sources').replaceChildren(...report.evidence.map(url => { const li = el('li'); li.append(link(url, url)); return li; }));
 }
-export function clearReport() { resetImport(); report = null; setComparison(); $('comparison').replaceChildren(); $('report').hidden = true; $('empty').hidden = true; }
+export function clearReport() { resetImport(); report = null; setPeriodReport(null); setComparison(); $('comparison').replaceChildren(); $('report').hidden = true; $('empty').hidden = true; }
 export function cancelAnalysis() { controller?.abort(); }
 export async function analyzeRepository(repoInput, tokenInput = '') {
   let repo, token;
@@ -112,7 +113,7 @@ export async function analyzeRepository(repoInput, tokenInput = '') {
   controller = new AbortController(); const timer = setTimeout(() => controller?.abort(), 45000);
   $('analyze').disabled = true; $('cancel').hidden = false; $('repo').disabled = true; $('token').disabled = true;
   $('report').hidden = true; status('Collecting public GitHub evidence…');
-  try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); renderComparison(); return true; }
+  try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); renderComparison(); setPeriodReport(report); return true; }
   catch(e) { report = null; $('empty').hidden = false; status(e.message, true); return false; }
   finally { clearTimeout(timer); controller = null; lockAnalysis(externalLock); $('cancel').hidden = true; }
 }

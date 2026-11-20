@@ -26,6 +26,14 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v2.0 — Compare Two Periods
+
+Open **Compare Two Periods** in a live GitHub report. Select two UTC date ranges inside the report’s 30-day collection and choose **Compare periods**. The end date is inclusive. The first and last collection dates are clipped to the timestamps the report captured. The initial selection compares two adjacent seven-day periods ending yesterday UTC.
+
+Separate bars show observed default-branch commits by unique SHA and public releases by release ID. The counts open source evidence with GitHub links, release publishing times and types, linked GitHub authors, and the count of commits without linked authors. Overlapping periods disclose which observed records both totals include. Differences use observed totals and the interface shows unequal durations and incomplete collection. An unconfirmed count is shown as **Unknown**.
+
+Comparisons run in memory from the current GitHub response. The rolling 7/30-day report, baseline comparison, JSON Import and PNG/JSON exports retain their existing scope. Comparisons add zero API requests.
+
 ## v1.9 — QA evidence in Pages diagnostics
 
 Each Pages attempt records the test counts from Node and Playwright for unit, pre-deployment desktop/mobile, public desktop/mobile and public real-API QA. Statuses distinguish tests that passed, failed or were skipped, checks that did not run and unavailable reports. Browser HTTP evidence separates successful responses, expected API errors, unexpected errors and confirmed HTTP 422 → 200 recovery within a request sequence. Index Health Monitor shows these counts in its Actions summary. GitHub Actions handles ordinary QA failure notifications. [Operations guide](docs/INDEX_MONITOR.md#pages-operation-diagnostics)

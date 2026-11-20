@@ -53,6 +53,32 @@
     <section id="report" hidden aria-label="Activity report"><div class="report-top"><div><div class="eyebrow">LIVE GITHUB OBSERVATION</div><h2 id="report-title"></h2><p id="report-meta"></p></div><div class="actions"><button id="import-open" type="button">Import Previous Report</button><input id="import-file" type="file" accept=".json,application/json" hidden aria-label="Previous MemeDiff JSON report"><button id="save">Save baseline</button><button id="json">JSON ↓</button><button id="png">PNG Receipt ↓</button></div></div><p id="description"></p><p id="token-note" class="break"></p><div id="warnings" role="note"></div><div class="periods" role="group" aria-label="Observation window"><button data-days="7" aria-pressed="false">7 days</button><button data-days="30" aria-pressed="true">30 days</button></div><div id="metrics" class="metrics"></div>
       <div class="report-grid"><section class="panel"><div class="section-head"><h3>Daily commits</h3><span class="muted">UTC · Default branch</span></div><div id="chart" class="chart" role="img"></div><div class="chart-labels"><span id="chart-start"></span><span id="chart-end"></span></div></section><section class="panel comparison"><div class="section-head"><h3><span class="step">Δ</span> Compare evidence</h3><span class="tag">MEMEDIFF</span></div><div id="comparison"></div><div class="import-controls"><p class="small">Import a previous schema 1 JSON report (up to 2 MiB) for this exact repository, branch and CA. Comparison always uses the 30-day dataset.</p><p id="import-status" role="status" aria-live="polite">Files stay on this device. No upload or network request is made.</p><section id="import-preview" hidden aria-labelledby="import-title"><h4 id="import-title" tabindex="-1">Previous report preview</h4><dl id="import-details"></dl><p class="warning">Imported JSON is editable and unverified. Matching structure does not authenticate its contents.</p><div class="import-actions"><button id="import-apply" type="button" disabled>Compare without saving</button><button id="import-dismiss" type="button">Cancel preview</button><button id="import-save" type="button" disabled>Save imported baseline</button></div><p class="small">Save imported baseline replaces the saved baseline for this repository, branch and CA only.</p></section><button id="import-restore" type="button" class="text-button">Use saved browser baseline</button></div><p class="small">Baselines stay in this browser. Nothing is stored until you select Save baseline or Save imported baseline.</p><button id="clear" class="text-button">Clear this project baseline</button></section></div>
       <div class="report-grid"><section class="panel"><h3>Recent commits <span class="muted">Up to 20 shown</span></h3><ol id="commits" class="evidence-list"></ol></section><section class="panel"><h3>Public releases <span class="muted">Selected window · Includes prereleases</span></h3><ul id="releases" class="evidence-list"></ul><h3 class="contributors-title">Observed contributors</h3><div id="contributors" class="chips"></div><p class="small">Counts include authors with linked GitHub accounts, including bots. This is not the complete project contributor list.</p></section></div>
+      <section id="period-comparison" class="panel period-comparison" aria-labelledby="period-comparison-title">
+        <h3 id="period-comparison-title">Compare Two Periods</h3>
+        <p id="period-range" class="period-range"></p>
+        <p id="period-help" class="small">Dates use UTC and include the end date. The first and last collection dates use only the time captured in the report.</p>
+        <form novalidate aria-describedby="period-range period-help">
+          <div class="period-pair">
+            <fieldset>
+              <legend>Period A</legend>
+              <div class="period-date-fields">
+                <label>Start date<input id="period-a-start" type="date" aria-label="Period A start date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+                <label>End date<input id="period-a-end" type="date" aria-label="Period A end date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Period B</legend>
+              <div class="period-date-fields">
+                <label>Start date<input id="period-b-start" type="date" aria-label="Period B start date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+                <label>End date<input id="period-b-end" type="date" aria-label="Period B end date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+              </div>
+            </fieldset>
+          </div>
+          <button type="submit">Compare periods</button>
+        </form>
+        <p id="period-status" class="small" role="status" aria-live="polite"></p>
+        <div id="period-results" hidden></div>
+      </section>
       <details class="panel"><summary>Original API evidence and collection scope</summary><p id="coverage"></p><ul id="sources" class="source-list"></ul></details>
     </section>
     <section id="empty" class="empty-state"><span class="empty-glyph">[ ± ]</span><h2>Follow the changes. Check the evidence.</h2><p>Commits · Releases · Contributors · Changes since your last observation<br>Follow the source behind each observation.</p><div class="empty-steps"><span>01 Enter a token CA</span><span>02 Inspect evidence</span><span>03 Save and compare</span></div></section>
