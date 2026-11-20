@@ -1,0 +1,60 @@
+name: Index Health Monitor
+on:
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
+    inputs:
+      publish:
+        type: boolean
+        description: Apply actionable issue transitions (unchecked runs read-only)
+        default: false
+
+permissions: {}
+concurrency:
+  group: memediff-index-health-monitor
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    if: github.repository == 'dnfl1999/memediff' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+      issues: read
+    outputs:
+      observation: ${{ steps.observe.outputs.observation }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - id: observe
+        name: Read production index, scheduled refreshes and issue state
+        run: node scripts/index-health-monitor.mjs observe
+        env:
+          GH_TOKEN: ${{ github.token }}
+  notify:
+    if: github.repository == 'dnfl1999/memediff' && github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.publish == true)
+    needs: observe
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply actionable operations issue transition
+        run: node scripts/index-health-monitor.mjs publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MONITOR_WRITE: 'true'
+          MONITOR_OBSERVATION: ${{ needs.observe.outputs.observation }}

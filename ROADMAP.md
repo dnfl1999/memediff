@@ -4,6 +4,12 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v1.7 — Index Health Monitor
+
+- Check published verification status and scheduled Pages refresh steps independently.
+- Record actionable changes in a single repository issue and close it after a newer official verification is published.
+- Rehearse changes with a read-only workflow dispatch. Review operations and account notification settings in the [monitor guide](docs/INDEX_MONITOR.md).
+
 ## v1.6 — Index health
 
 - Show exact-CA verification state and age in the token result, with a path to Advanced Search when automatic analysis is unavailable.

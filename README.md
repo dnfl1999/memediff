@@ -26,6 +26,10 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v1.7 — Index Health Monitor
+
+An independent GitHub Actions monitor checks scheduled Forks refresh failures and the published verification clock every hour. It uses one operations issue for consecutive failures, the final six hours, expiry and confirmed recovery. Manual runs are read-only by default. See the operating guide for evidence rules and notification settings. [Index Health Monitor](docs/INDEX_MONITOR.md)
+
 ## v1.6 — Index health
 
 After a CA lookup, **Index health** shows the last verification in UTC, its age, the 48-hour validity period, remaining time and the published source. **Fresh** associations can start automatic GitHub analysis. **Expiring soon** covers the final six hours of validity and routes users to Advanced Search for direct repository analysis. **Expired** applies after 48 hours. **Not indexed**, **Unavailable**, and **Invalid / Ambiguous** cover absent, unreadable, malformed and duplicate records. Timing is based on the browser clock. Market lookup is independent of the index, and a direct GitHub report does not establish a CA association.
