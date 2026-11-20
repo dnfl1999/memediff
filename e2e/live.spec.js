@@ -1,16 +1,31 @@
 import {test,expect,downloadReport,openAdvanced} from './helpers.js';
+import {isCommitProcessingTimeout} from '../src/github.js';
 test.setTimeout(70000);
 const official='DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork';
 let githubLimited=false;
 function capture(page){const responses=[];page.on('response',r=>{if(/^https:\/\/(api.github.com|api.dexscreener.com)\//.test(r.url()))responses.push(r);});return responses;}
 async function evidence(responses,diagnostics,info){
- const data=await Promise.all(responses.map(async r=>({url:r.url(),status:r.status(),remaining:r.headers()['x-ratelimit-remaining'],reset:r.headers()['x-ratelimit-reset'],...(r.status()===409?{message:(await r.json()).message}:{})})));
+ const data=await Promise.all(responses.map(async r=>{
+   const status=r.status(),headers=r.headers();
+   const body=status>=400?await r.json().catch(()=>null):null;
+   const text=value=>typeof value==='string'?value.slice(0,500):undefined;
+   const errors=Array.isArray(body?.errors)?body.errors.slice(0,10).map(e=>({resource:text(e?.resource),field:text(e?.field),code:text(e?.code)})):undefined;
+   return {url:r.url(),status,remaining:headers['x-ratelimit-remaining'],reset:headers['x-ratelimit-reset'],requestId:headers['x-github-request-id'],
+     message:text(body?.message),documentation:text(body?.documentation_url),errors};
+ }));
  await info.attach('LIVE-api-evidence',{body:JSON.stringify({mocked:false,authenticated:false,observedAt:new Date().toISOString(),responses:data}),contentType:'application/json'});
- const limited=data.filter(r=>[403,429].includes(r.status));
- if(limited.length){diagnostics.expectedStatuses=[403,429];diagnostics.expectedURLs=['https://api.dexscreener.com/'];if(limited.some(r=>r.url.includes('api.github.com/')))githubLimited=true;test.skip(true,'Real API limited; evidence attached, no retry.');}
- const empty=r=>r.status===409&&/^https:\/\/api.github.com\/repos\/[^/]+\/[^/]+\/commits\?/.test(r.url)&&/^Git Repository is empty\.?$/i.test(r.message||'');
- if(data.some(empty))diagnostics.expectedStatuses=[409];
- expect(data.every(r=>r.status===200||empty(r))).toBe(true);return data;
+ const commitList=r=>/^https:\/\/api.github.com\/repos\/[^/]+\/[^/]+\/commits\?/.test(r.url);
+ const empty=r=>r.status===409&&commitList(r)&&/^Git Repository is empty\.?$/i.test(r.message||'');
+ const limited=r=>[403,429].includes(r.status);
+ const recovered=(r,i)=>r.status===422&&commitList(r)&&isCommitProcessingTimeout(r.message)&&data.slice(i+1).some(later=>later.url===r.url&&later.status===200);
+ const expected=data.filter((r,i)=>empty(r)||limited(r)||recovered(r,i));
+ diagnostics.expectedResponses=expected.map(({url,status})=>({url,status}));
+ expect(data.filter(r=>r.status!==200&&!expected.includes(r)), 'Unrecovered real API responses').toEqual([]);
+ if(data.some(limited)){
+   if(data.some(r=>limited(r)&&r.url.includes('api.github.com/')))githubLimited=true;
+   test.skip(true,'Real API limited; evidence attached, no retry.');
+ }
+ return data;
 }
 for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['another Forks coin','ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork','riansj2290/remote-ikan']])test(`LIVE CA-only ${name} auto-analysis and development exports`,async({page,diagnostics},info)=>{
  test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');

@@ -39,7 +39,7 @@ $('token-query').addEventListener('submit',async event=>{
      githubOK=await analyzeRepository(association.repo,mint);
      if(!githubOK&&!signal.aborted){$('association').append(el('p',`Association found, but GitHub activity is unavailable. ${$('status').textContent}`));}
    }else{
-     $('association').replaceChildren(el('h3','No verified GitHub repository found.'),el('p',`The index is limited, not a complete registry. ${resolved.reason==='stale'?'This association is older than 48 hours and was not used.':'No fresh, unambiguous exact-CA association was available.'} Missing coverage does not prove no relationship exists.`),source('Check this CA on Forks Wiki ↗',`https://forks.wiki/coin/${mint}`));
+     $('association').replaceChildren(el('h3','No verified GitHub repository found.'),el('p',`Association status: Unknown. ${resolved.reason==='stale'?'This association is older than 48 hours and was not used.':'No fresh, unambiguous exact-CA association was available.'} The index covers only part of the registry.`),source('Check this CA on Forks Wiki ↗',`https://forks.wiki/coin/${mint}`));
    }
  }catch(e){lookupError=true;if(!signal.aborted)$('association').replaceChildren(el('h3','No verified GitHub repository found.'),el('p',`Association lookup Unavailable. ${e.message} This does not prove that no association exists.`));}
  finally{

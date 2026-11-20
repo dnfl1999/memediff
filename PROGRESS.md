@@ -1,6 +1,14 @@
 # MemeDiff 진행 기록
 
-기준일: **2026-11-12 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
+기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
+
+## 정기 배포 안정화 (2026-11-20)
+
+[11월 19일 Actions](https://github.com/dnfl1999/memediff/actions/runs/44481359812)과 [11월 20일 Actions](https://github.com/dnfl1999/memediff/actions/runs/44612527688) 모두 `GET https://forks.wiki/api/tokens/recent`에서 `network` 오류로 중단됐습니다. 이전 어댑터가 원인 코드를 버려 DNS, TCP, TLS 등 세부 원인은 해당 로그에서 확인할 수 없습니다.
+
+[11월 16일 Actions](https://github.com/dnfl1999/memediff/actions/runs/43819604716)의 보존된 Playwright 트레이스에는 `sha=main`, `since=2026-10-17T06:56:43.335Z`, `until=2026-11-16T06:56:43.335Z`, `per_page=100`, `page=1`인 GitHub 커밋 조회의 422와 응답 메시지 `The request is taking too long to process.`가 남아 있습니다. 같은 파라미터로 GitHub 커넥터 조회 시 커밋 31개가 반환됐습니다. [GitHub REST 문서](https://docs.github.com/en/rest/commits/commits#list-commits)의 초 단위 요청 형식과 로컬 밀리초 범위를 분리하고, 이 처리 시간 초과에 한해 한 번 재시도합니다. 유효성 오류나 반복 실패는 불완전한 수집으로 남기며, 공개 E2E는 실제 회복 응답까지 확인합니다.
+
+Forks 갱신은 원인 분류와 제한 재시도, 검증 후 원자적 교체를 적용했습니다. 정기 갱신 실패 시 기존 배포본을 보존하고, 코드/수동 배포는 검증된 공개 인덱스를 원래 시각으로 재사용할 수 있습니다. [인덱스 운영 문서](docs/DISCOVERY.md).
 
 ## 최신 상태 — v1.4 Native Share (2026-11-12)
 

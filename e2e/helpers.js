@@ -4,7 +4,7 @@ import { PNG } from 'pngjs';
 export { expect };
 export const test = base.extend({
   diagnostics: [async ({ page }, use, testInfo) => {
-    const d = { pageErrors: [], consoleErrors: [], failures: [], responses: [], expectedStatuses: [], allowApiAbort: false, expectedURLs: [] };
+    const d = { pageErrors: [], consoleErrors: [], failures: [], responses: [], expectedStatuses: [], expectedResponses: [], allowApiAbort: false, expectedURLs: [] };
     page.on('pageerror', e => d.pageErrors.push(e.message));
     page.on('console', m => { if (m.type() === 'error') d.consoleErrors.push(m.text()); });
     page.on('requestfailed', r => d.failures.push({ url: r.url(), error: r.failure()?.errorText }));
@@ -12,9 +12,10 @@ export const test = base.extend({
     await use(d);
     await testInfo.attach('browser-diagnostics', { body: JSON.stringify(d, null, 2), contentType: 'application/json' });
     expect(d.pageErrors, 'uncaught JavaScript errors').toEqual([]);
-    expect(d.responses.filter(r => !(r.url.startsWith('https://api.github.com/') || d.expectedURLs.some(u=>r.url.startsWith(u))) || !d.expectedStatuses.includes(r.status)), 'unexpected HTTP errors').toEqual([]);
+    expect(d.responses.filter(r => !d.expectedResponses.some(e => e.url === r.url && e.status === r.status) &&
+      (!(r.url.startsWith('https://api.github.com/') || d.expectedURLs.some(u=>r.url.startsWith(u))) || !d.expectedStatuses.includes(r.status))), 'unexpected HTTP errors').toEqual([]);
     expect(d.failures.filter(r => !d.allowApiAbort || !(r.url.startsWith('https://api.github.com/') || d.expectedURLs.some(u=>r.url.startsWith(u)))), 'unexpected network failures').toEqual([]);
-    expect(d.consoleErrors.filter(m => !((d.expectedStatuses.length || d.allowApiAbort) && /Failed to load resource:/.test(m))), 'unexpected console/CSP errors').toEqual([]);
+    expect(d.consoleErrors.filter(m => !((d.expectedStatuses.length || d.allowApiAbort || d.expectedResponses.some(r => m.includes(String(r.status)))) && /Failed to load resource:/.test(m))), 'unexpected console/CSP errors').toEqual([]);
   }, { auto: true }]
 });
 export async function mockGitHub(page, options = {}) {

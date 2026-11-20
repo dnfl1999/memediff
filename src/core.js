@@ -1,4 +1,9 @@
 export const DAY = 86400000;
+export function isGitBranch(value) {
+  return typeof value === 'string' && value.length > 0 && value.length <= 1024 && !value.startsWith('-') &&
+    !/[\x00-\x20\x7f~^:?*\[\\]|\.\.|@\{|\/\/|\/$|^\/|\.$/.test(value) &&
+    !value.split('/').some(part => part.startsWith('.') || part.endsWith('.lock'));
+}
 export function parseRepo(value) {
   let input = String(value).trim();
   if (input.startsWith('https://')) {

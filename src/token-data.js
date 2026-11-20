@@ -1,22 +1,33 @@
 import { parseRepo, parseToken } from './core.js';
 export const OFFICIAL_CA='DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork';
 export const MAX_ASSOCIATION_AGE=48*60*60*1000;
-export class LookupError extends Error { constructor(kind,message){super(message);this.name='LookupError';this.kind=kind;} }
+export class LookupError extends Error {
+  constructor(kind, message, { status, retryAfter, cause } = {}) {
+    super(message, { cause });
+    this.name = 'LookupError';
+    this.kind = kind;
+    this.status = status;
+    this.retryAfter = retryAfter;
+  }
+}
 export async function readJSON(url,{fetcher=fetch,signal,timeout=10000}={}) {
   const controller=new AbortController(); let timedOut=false;
   const abort=()=>controller.abort(); if(signal?.aborted)abort();else signal?.addEventListener('abort',abort,{once:true});
   const timer=setTimeout(()=>{timedOut=true;controller.abort();},timeout);
   try {
     const r=await fetcher(url,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer',headers:{Accept:'application/json'}});
-    if(r.status===403)throw new LookupError('forbidden','Access denied (403). This source is unavailable.');
-    if(r.status===429)throw new LookupError('rate-limit',`API request limit (429). ${r.headers.get('retry-after')?`Retry after ${r.headers.get('retry-after')}.`:'Please try again later.'} No automatic retry was made.`);
-    if(!r.ok)throw new LookupError('http',`Source unavailable (HTTP ${r.status}).`);
+    if(!r.ok){
+      const details={status:r.status,retryAfter:r.headers.get('retry-after')};
+      if(r.status===403)throw new LookupError('forbidden','Access denied (403). This source is unavailable.',details);
+      if(r.status===429)throw new LookupError('rate-limit',`API request limit (429). ${details.retryAfter?`Retry after ${details.retryAfter}.`:'Please try again later.'} No automatic retry was made.`,details);
+      throw new LookupError('http',`Source unavailable (HTTP ${r.status}).`,details);
+    }
     try{return await r.json();}catch(e){if(controller.signal.aborted)throw e;throw new LookupError('data','Source returned unreadable data.');}
   }catch(e){
     if(timedOut)throw new LookupError('timeout','Source timed out. Please try again later.');
     if(signal?.aborted)throw new LookupError('canceled','Token analysis canceled.');
     if(e instanceof LookupError)throw e;
-    throw new LookupError('network','Source unavailable: a network or browser CORS failure prevented access.');
+    throw new LookupError('network','Source unavailable: a network or browser CORS failure prevented access.',{cause:e});
   }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
 }
 export function verifyForksCoin(input,data,checkedAt=new Date().toISOString()){

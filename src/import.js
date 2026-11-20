@@ -1,4 +1,4 @@
-import { DAY, parseRepo, parseToken, summarize, compareSnapshots } from './core.js';
+import { DAY, isGitBranch, parseRepo, parseToken, summarize, compareSnapshots } from './core.js';
 
 export const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 const fail = message => { throw new Error(message); };
@@ -27,7 +27,7 @@ export function validateImport(data, current) {
   if (parseRepo(data.repo) !== data.repo || data.repo.includes('://')) fail('Invalid canonical repository.');
   text(data.token, 44, 'token CA');
   if (parseToken(data.token) !== data.token) fail('Invalid token CA.');
-  if (data.branch !== null) { text(data.branch, 1024, 'branch'); if (!data.branch || data.branch.startsWith('-') || /[\x00-\x20\x7f~^:?*\[\\]|\.\.|@\{|\/\/|\/$|^\/|\.$/.test(data.branch) || data.branch.split('/').some(p=>p.startsWith('.') || p.endsWith('.lock'))) fail('Invalid branch.'); }
+  if (data.branch !== null && !isGitBranch(data.branch)) fail('Invalid branch.');
   if (!current || current.source !== 'github-live') fail('Load a current live GitHub report first.');
   for (const [key, label] of [['repo','repository'],['token','token CA'],['branch','branch']]) if (data[key] !== current[key]) fail(`Different ${label}. Import must match the current report exactly, including an empty CA.`);
   const observed = date(data.fetchedAt), since = date(data.since);

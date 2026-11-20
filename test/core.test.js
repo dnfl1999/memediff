@@ -21,7 +21,7 @@ test('404 fails without fabricating a report',async()=>{await assert.rejects(fet
 test('rate limit includes recovery information',async()=>{await assert.rejects(fetchReport('a/b','',{fetcher:async()=>response({},429,{'retry-after':'60'})}),/60/);});
 test('partial failure is explicitly incomplete rather than zero activity',async()=>{const r=await fetchReport('a/b','',{now,fetcher:async url=>url.endsWith('/a/b')?response(info):response({},500)}); assert.equal(r.coverage.commits,false); assert.equal(r.coverage.releases,false); assert.ok(r.warnings.length);});
 test('pagination cap never claims full collection',async()=>{const r=await fetchReport('a/b','',{now,fetcher:async url=>url.endsWith('/a/b')?response(info):url.includes('releases')?response([]):response([commit],200,{link:'<https://api.github.com/next>; rel="next"'})}); assert.equal(r.coverage.commits,false); assert.equal(r.commits.length,1);});
-test('empty repository 409 is valid empty activity',async()=>{const r=await fetchReport('a/b','',{now,fetcher:async url=>url.endsWith('/a/b')?response(info):url.includes('commits')?response({},409):response([])}); assert.equal(r.metrics[30].commits,0); assert.ok(r.coverage.commits);});
+test('empty repository 409 is valid empty activity',async()=>{const r=await fetchReport('a/b','',{now,fetcher:async url=>url.endsWith('/a/b')?response(info):url.includes('commits')?response({message:'Git Repository is empty.'},409):response([])}); assert.equal(r.metrics[30].commits,0); assert.ok(r.coverage.commits);});
 test('release window filters drafts, future and old releases',async()=>{const releases=[{id:1,published_at:new Date(now).toISOString(),name:'v1',html_url:'https://github.com/a/b/releases/tag/v1'},{id:2,draft:true,published_at:new Date(now).toISOString()},{id:3,published_at:new Date(now+DAY).toISOString()},{id:4,published_at:new Date(now-31*DAY).toISOString()}]; const r=await fetchReport('a/b','',{now,fetcher:async url=>url.endsWith('/a/b')?response(info):response(url.includes('releases')?releases:[])}); assert.equal(r.releases.length,1);});
 test('abort is not converted to a partial successful report',async()=>{const controller=new AbortController();controller.abort(); await assert.rejects(fetchReport('a/b','',{signal:controller.signal,fetcher:async()=>{throw new Error('abort')}}),/45/);});
 
@@ -46,4 +46,51 @@ test('release conflict is not interpreted as complete empty data', async () => {
   assert.equal(r.coverage.releases, false);
   assert.ok(r.warnings.some(x => x.includes('409')));
 });
+
+test('commit queries encode a valid branch and use whole seconds without changing exact report bounds', async () => {
+  const observed = now + 350;
+  const snapshot = await fetchReport('a/b', '', { now: observed, fetcher: async raw => {
+    const url = new URL(raw);
+    if (url.pathname.endsWith('/commits')) {
+      assert.equal(url.searchParams.get('sha'), 'topic/a+b');
+      assert.equal(url.searchParams.get('since'), '2026-10-12T12:00:00Z');
+      assert.equal(url.searchParams.get('until'), '2026-11-11T12:00:01Z');
+      const dated = (sha, date) => ({ ...commit, sha: sha.repeat(40), commit: { committer: { date: new Date(date).toISOString() } } });
+      return response([dated('b', now - 30 * DAY), dated('c', observed - 30 * DAY), dated('d', observed), dated('e', now + 1000)]);
+    }
+    return response(url.pathname.endsWith('/releases') ? [] : { ...info, default_branch: 'topic/a+b' });
+  }});
+  assert.equal(snapshot.fetchedAt, '2026-11-11T12:00:00.350Z');
+  assert.equal(snapshot.since, '2026-10-12T12:00:00.350Z');
+  assert.deepEqual(snapshot.commits.map(c => c.sha[0]), ['c', 'd']);
+  await assert.rejects(fetchReport('a/b', '', { now: 0, fetcher: () => assert.fail('no request expected') }), /dates/);
+  await assert.rejects(fetchReport('a/b', '', { now, fetcher: async url => {
+    assert.match(url, /\/repos\/a\/b$/);
+    return response({ ...info, default_branch: 'bad..branch' });
+  }}), /default branch/);
+});
+
+for (const [name, message, status, expectedCalls, complete, headers, recover] of [
+  ['recovers from the recorded upstream 422', 'The request is taking too long to process.', 422, 2, true, {}, true],
+  ['keeps a repeated upstream 422 incomplete', 'The request is taking too long to process.', 422, 2, false, {}, false],
+  ['never retries a validation 422', 'Validation Failed', 422, 1, false, {}, false],
+  ['respects a retry delay on a 422', 'The request is taking too long to process.', 422, 1, false, {'retry-after':'60'}, false],
+  ['does not retry a rate limit', 'API rate limit exceeded', 429, 1, false, {}, false],
+  ['does not treat an arbitrary commit conflict as empty', 'Conflict', 409, 1, false, {}, false]
+]) {
+  test(name, async () => {
+    const urls = [];
+    const snapshot = await fetchReport('a/b', '', { now, fetcher: async url => {
+      if (url.endsWith('/a/b')) return response(info);
+      if (url.includes('/releases')) return response([]);
+      urls.push(url);
+      return recover && urls.length > 1 ? response([commit]) : response({ message }, status, headers);
+    }});
+    assert.equal(urls.length, expectedCalls);
+    assert.equal(snapshot.coverage.commits, complete);
+    assert.equal(snapshot.commits.length, complete ? 1 : 0);
+    assert.equal(snapshot.evidence.filter(url => url.includes('/commits')).length, 1);
+    assert.ok(snapshot.warnings.some(w => w.includes(String(status))));
+  });
+}
 
