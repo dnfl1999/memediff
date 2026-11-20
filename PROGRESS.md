@@ -8,6 +8,14 @@
 
 Pages 실행별 진단 JSON을 별도 아티팩트에 14일간 보관합니다. JSON은 갱신 상태, 확인된 검증 수·시각, 실패 분류와 verify/deploy/public-qa 결과를 각각 담습니다. 기록 작업과 업로드 결과는 별도 요약에 남습니다. 기존 Monitor는 아티팩트와 실행·시도·단계를 대조해 근거로 사용하고, 기록이 없거나 만료되면 로그에 있는 확인 가능한 진단을 사용합니다. 진단 출처만 달라지는 경우 운영 이슈를 갱신하지 않습니다. [운영 문서](docs/INDEX_MONITOR.md#pages-operation-diagnostics).
 
+기능 커밋 `505157fd3b739957a7b640ebf0fbd8f7b055f816`. 로컬 단위 151건, PC·모바일 모의 E2E 122건 통과, 빌드 성공입니다. 로컬 실제 API는 2건 통과, 비인증 GitHub 403·한도 0으로 3건 건너뜀, 실패 0건입니다. 실제 실패 경로에서 `failed`와 `ENOTFOUND`를 출력하고 인덱스 파일을 생성하지 않는 것을 확인했습니다.
+
+[첫 Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/44684768948)은 verify/deploy가 성공했고, 공개 모의 QA는 `src/import.js` HTTP 503으로 121통과·1실패, 공개 실제 API는 5통과였습니다. [첫 진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/44684768948/artifacts/14606406562)은 업로드와 실제 다운로드 검증을 통과했습니다. JSON 737바이트, ZIP 544바이트이며 `forks=retained`, `newlyVerified=0`, `retained=117`, `publicQA=failure`를 기록했습니다. 정적 파일은 이후 HTTP 200과 소스 일치를 확인했고 공개 사이트의 동일 PC·모바일 집중 검사 2건이 모두 통과했습니다.
+
+[읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/44685870731)는 첫 실행의 새 아티팩트를 공개 인덱스 근거로 채택했습니다. 이전 정기 갱신 실패에는 기존 로그를 사용했습니다. notify는 건너뛰었고 기존 운영 이슈 #1은 열린 상태, 댓글 0건, 동일 갱신 시각으로 확인됐습니다. [QA 증거](docs/v18-qa.json).
+
+같은 SHA로 [전체 재검증 실행 44685874281](https://github.com/dnfl1999/memediff/actions/runs/44685874281)을 진행해 verify, deploy, public-qa, diagnostics 모두 성공했습니다. CI 단위 151건, 배포 전 PC·모바일 모의 122건, 공개 모의 122건, 공개 실제 API 5건 통과, 실패·건너뜀 0건입니다. Forks는 15:16:14 KST에 다시 `ENOTFOUND`였고 공개 인덱스 117개와 공식 CA의 원래 검증 시각을 보존했습니다. 공유 URL과 인덱스 모두 HTTP 200을 확인했습니다. [최종 진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/44685874281/artifacts/14607415408)은 JSON 750바이트, ZIP 549바이트입니다. 실제 다운로드에서 해시와 내용 및 실행 ID를 확인했습니다. [최종 읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/44687234923)는 이 아티팩트를 사용했고, 이슈 #1은 열린 상태와 댓글 0건을 유지했습니다. 실제 공식 신규 검증 또는 복구는 관측되지 않았습니다.
+
 ## v1.7 Index Health Monitor (2026-11-20)
 
 시작 HEAD·원격 `main` `3b2dc6c3c225184d8663ae822900206232752a5c` 일치, 인증 계정 `dnfl1999`, 미커밋 변경 0건, 운영 이슈 0건을 확인했습니다. 기존 저장소 구독 조회는 HTTP 404였습니다. 13:18:03 KST에 공식 Forks DNS와 HTTPS 시도에서 `ENOTFOUND`를 확인했습니다. 공개 인덱스 117개, 공식 CA 마지막 실제 검증 `2026-11-18T20:43:46.517Z`를 확인했습니다.

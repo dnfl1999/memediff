@@ -1,0 +1,119 @@
+{
+  "version": "1.8.0",
+  "dateKST": "2026-11-20",
+  "baseCommit": "242d03664fe4c75860380a5dc299abfef4b00421",
+  "releaseCommit": "505157fd3b739957a7b640ebf0fbd8f7b055f816",
+  "preflight": {
+    "account": "dnfl1999",
+    "localAndRemoteMainMatched": true,
+    "cleanWorktree": true,
+    "previousPagesRun": 44674755435,
+    "previousMonitorNoChangeRun": 44675451404,
+    "issue": { "number": 1, "state": "open", "comments": 0, "updatedAt": "2026-11-20T04:34:47Z" },
+    "publishedIndex": {
+      "observedAt": "2026-11-20T05:47:28.7663097Z",
+      "entries": 117,
+      "checkedAt": "2026-11-18T20:44:01.396Z",
+      "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+      "officialExpiresAfter": "2026-11-20T20:43:46.517Z"
+    },
+    "forks": { "observedAt": "2026-11-20T05:47:28.887Z", "dns": "ENOTFOUND", "httpsAttempt": "ENOTFOUND before TLS and HTTP" }
+  },
+  "local": {
+    "unit": { "passed": 151, "failed": 0, "skipped": 0, "newDiagnosticCases": 11 },
+    "developmentRecheck": "Corrected the simulated recovery run to occur after the failed refresh. Final expiry and recovery checks passed.",
+    "build": "success",
+    "mockBrowser": { "passed": 122, "failed": 0, "skipped": 0, "desktop": 61, "mobile": 61 },
+    "realBrowser": { "passed": 2, "failed": 0, "skipped": 3, "githubHTTP": 403, "rateLimitRemaining": 0, "retries": 0 },
+    "failedRefreshDiagnostic": {
+      "observedAt": "2026-11-20T05:55:57.403Z",
+      "state": "failed",
+      "failure": { "stage": "forks-refresh", "category": "dns", "codes": ["ENOTFOUND"], "status": null },
+      "newlyVerified": 0,
+      "retained": 117,
+      "indexOutputWritten": false
+    },
+    "legacyMonitor": {
+      "observedAt": "2026-11-20T05:57:09.793Z",
+      "issue": 1,
+      "scheduledRun": 44612527688,
+      "evidence": "job log",
+      "cause": "network",
+      "result": "No issue change"
+    }
+  },
+  "pages": {
+    "runId": 44684768948,
+    "conclusion": "failure",
+    "verify": { "jobId": 136116367775, "conclusion": "success", "unitPassed": 151, "mockPassed": 122 },
+    "deploy": { "jobId": 136117661908, "conclusion": "success" },
+    "publicQA": { "jobId": 136117746832, "conclusion": "failure",
+      "mockBrowser": { "passed": 121, "failed": 1, "skipped": 0 }, "realBrowser": { "passed": 5, "failed": 0, "skipped": 0 },
+      "failure": { "status": 503, "url": "https://dnfl1999.github.io/memediff/src/import.js" },
+      "assetRecheck": { "observedAt": "2026-11-20T06:09:57.6368939Z", "httpStatus": 200, "matchedSource": true },
+      "focusedPublicBrowserRecheck": { "passed": 2, "failed": 0, "skipped": 0, "projects": ["desktop", "mobile"] } },
+    "diagnostics": {
+      "jobId": 136119281085,
+      "conclusion": "success",
+      "artifact": { "id": 14606406562, "attempt": 1, "zipBytes": 544, "jsonBytes": 737,
+        "sha256": "86311897c2d0eef7ad7e3143db2e9299b41a1d33eacac0194bd0fe1f639211d0", "expiresAt": "2026-12-04T06:08:24Z", "downloadVerified": true },
+      "record": { "schemaVersion": 1, "runId": "44684768948", "runAttempt": 1, "workflow": "Verify and deploy Pages", "event": "push",
+        "recordedAt": "2026-11-20T06:08:24.071Z", "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/44684768948",
+        "stages": { "verify": "success", "deploy": "success", "publicQA": "failure" },
+        "forks": { "state": "retained", "observedAt": "2026-11-20T06:03:53.055Z", "newlyVerified": 0, "retained": 117,
+          "latestVerifiedAt": "2026-11-18T20:44:01.390Z", "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+          "failure": { "stage": "forks-refresh", "category": "dns", "codes": ["ENOTFOUND"], "status": null } } }
+    },
+    "refresh": { "observedAt": "2026-11-20T06:03:53.051Z", "state": "retained", "category": "dns", "code": "ENOTFOUND", "newlyVerified": 0, "retained": 117 },
+    "static": { "observedAt": "2026-11-20T06:04:58.2352110Z", "indexHTTP": 200, "sharedURLHTTP": 200, "entries": 117,
+      "matchedOriginalSnapshotExcludingOperation": true, "officialVerifiedAt": "2026-11-18T20:43:46.517Z" }
+  },
+  "monitor": {
+    "runId": 44685870731,
+    "observeJobId": 136119953946,
+    "observedAt": "2026-11-20T06:10:07.924Z",
+    "observe": "success",
+    "notify": "skipped",
+    "publishedSnapshotEvidence": "validated diagnostic artifact",
+    "publishedSnapshotArtifactId": 14606406562,
+    "legacyScheduleEvidence": "job log",
+    "result": "No issue change",
+    "issue": { "number": 1, "state": "open", "comments": 0, "updatedAt": "2026-11-20T04:34:47Z" },
+    "finalReadOnlyRun": {
+      "runId": 44687234923, "observeJobId": 136124360429, "observedAt": "2026-11-20T06:21:44.424Z",
+      "observe": "success", "notify": "skipped", "publishedSnapshotArtifactId": 14607415408,
+      "legacyScheduleEvidence": "job log", "result": "No issue change",
+      "issue": { "number": 1, "state": "open", "comments": 0, "updatedAt": "2026-11-20T04:34:47Z" }
+    }
+  },
+  "pagesRevalidation": {
+    "runId": 44685874281,
+    "event": "workflow_dispatch",
+    "sameReleaseCommit": true,
+    "conclusion": "success",
+    "completedAt": "2026-11-20T06:20:56Z",
+    "verify": { "jobId": 136119961002, "conclusion": "success", "unitPassed": 151, "mockPassed": 122 },
+    "deploy": { "jobId": 136122362130, "conclusion": "success" },
+    "publicQA": { "jobId": 136122445866, "conclusion": "success",
+      "mockBrowser": { "passed": 122, "failed": 0, "skipped": 0 }, "realBrowser": { "passed": 5, "failed": 0, "skipped": 0 },
+      "artifactId": 14606956824 },
+    "diagnostics": {
+      "jobId": 136124019878, "conclusion": "success",
+      "artifact": { "id": 14607415408, "attempt": 1, "zipBytes": 549, "jsonBytes": 750,
+        "sha256": "14deadd11302fdeca9b42af7777b3a027b7546f9bf8a735719c1b3572c6fce32", "expiresAt": "2026-12-04T06:20:51Z", "downloadVerified": true },
+      "record": { "schemaVersion": 1, "runId": "44685874281", "runAttempt": 1, "workflow": "Verify and deploy Pages", "event": "workflow_dispatch",
+        "recordedAt": "2026-11-20T06:20:51.625Z", "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/44685874281",
+        "stages": { "verify": "success", "deploy": "success", "publicQA": "success" },
+        "forks": { "state": "retained", "observedAt": "2026-11-20T06:16:14.956Z", "newlyVerified": 0, "retained": 117,
+          "latestVerifiedAt": "2026-11-18T20:44:01.390Z", "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+          "failure": { "stage": "forks-refresh", "category": "dns", "codes": ["ENOTFOUND"], "status": null } } }
+    },
+    "refresh": { "observedAt": "2026-11-20T06:16:14.954Z", "state": "retained", "category": "dns", "code": "ENOTFOUND", "newlyVerified": 0, "retained": 117 },
+    "static": { "observedAt": "2026-11-20T06:17:34.7247405Z", "indexHTTP": 200, "sharedURLHTTP": 200, "entries": 117,
+      "matchedOriginalSnapshotExcludingOperation": true, "officialVerifiedAt": "2026-11-18T20:43:46.517Z" }
+  },
+  "limits": [
+    "No newer real Forks verification was observed during release QA. New verification and recovery were exercised with controlled fixtures.",
+    "Diagnostic and browser QA artifacts have a 14-day retention period. A reference can become unavailable after expiry."
+  ]
+}
