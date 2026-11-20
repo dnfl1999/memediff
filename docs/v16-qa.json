@@ -1,0 +1,105 @@
+{
+  "version": "1.6.0",
+  "dateKST": "2026-11-20",
+  "baselineCommit": "c92867b904ce35e569b0d066bc2fa9ec642f0b25",
+  "baselineAction": 44660317318,
+  "releaseCommit": "93d3a82861f21884f8961dff59798c65fc6f9f44",
+  "preflight": {
+    "account": "dnfl1999",
+    "cleanWorktree": true,
+    "publishedIndex": {
+      "observedAt": "2026-11-20T02:44:57.1086833Z",
+      "checkedAt": "2026-11-18T20:44:01.396Z",
+      "entries": 117,
+      "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+      "officialExpiringSoonAt": "2026-11-20T14:43:46.517Z",
+      "officialExpiresAfter": "2026-11-20T20:43:46.517Z"
+    },
+    "forksProbe": {
+      "observedAt": "2026-11-20T02:44:57.189Z",
+      "endpoint": "https://forks.wiki/api/tokens/recent",
+      "dns": "ENOTFOUND",
+      "httpsAttempt": "ENOTFOUND before TLS or HTTP response",
+      "httpStatus": null
+    }
+  },
+  "local": {
+    "unit": { "passed": 129, "failed": 0, "skipped": 0 },
+    "build": "success",
+    "mockBrowser": { "passed": 122, "failed": 0, "skipped": 0, "desktop": 61, "mobile": 61 },
+    "selectedRealBrowser": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Actual DexScreener with published index and controlled-clock MEMEDIFF expiry, plus independent BONK market lookup. GitHub cases were left to public QA to respect the previously observed local rate limit.",
+      "memediffMarket": { "httpStatus": 200, "exactPairs": 0, "display": "Unknown" },
+      "memediffForcedExpiry": { "browserTime": "2026-11-20T20:43:46.518Z", "githubRequests": 0 },
+      "firstAttempt": { "passed": 1, "failed": 1, "skipped": 0, "reason": "The assertion assumed a populated MEMEDIFF market result. Final regression validates the actual source response and expected Unknown fields when empty." }
+    },
+    "actualFallback": {
+      "at": "2026-11-20T02:52:20.565Z",
+      "category": "dns",
+      "code": "ENOTFOUND",
+      "newlyVerified": 0,
+      "retained": 117,
+      "lastSuccessfulRecordVerification": "2026-11-18T20:44:01.390Z",
+      "matchesPreviousPublicSnapshot": true
+    }
+  },
+  "githubActions": {
+    "id": 44664298501,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/44664298501",
+    "completedAt": "2026-11-20T03:04:19Z",
+    "verify": { "jobId": 136049730044, "conclusion": "success", "unitPassed": 129, "mockPassed": 122, "failed": 0, "skipped": 0 },
+    "deploy": { "jobId": 136051247816, "conclusion": "success" },
+    "publicQA": {
+      "jobId": 136051354068,
+      "conclusion": "success",
+      "mockBrowser": { "passed": 122, "failed": 0, "skipped": 0 },
+      "liveBrowser": {
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "memediff": {
+          "actualBrowserTime": "2026-11-20T03:04:04.373Z",
+          "state": "fresh",
+          "automaticGithubAnalysis": "passed",
+          "evidencedFailureNotice": "DNS resolution failure",
+          "market": { "httpStatus": 200, "exactPairs": 0, "display": "Unknown" }
+        },
+        "memediffControlledBrowserClock": { "browserTime": "2026-11-20T20:43:46.518Z", "state": "expired", "githubRequests": 0, "marketHTTP": 200 }
+      },
+      "artifact": { "id": 14597272446, "sha256": "072a2406bd862372b42bab198a3e11f3931371e587961feee02fbef08151b504", "downloadedDigestMatched": true, "indexHealthScreenshots": 3, "expiresAt": "2026-12-04T03:04:13Z" }
+    },
+    "refresh": {
+      "at": "2026-11-20T03:00:42.268Z",
+      "state": "retained-published-index",
+      "category": "dns",
+      "code": "ENOTFOUND",
+      "newlyVerified": 0,
+      "retained": 117,
+      "ageCounts": { "fresh": 117, "expiring": 0, "expired": 0, "invalid": 0 },
+      "lastSuccessfulRecordVerification": "2026-11-18T20:44:01.390Z"
+    }
+  },
+  "publicStatic": {
+    "observedAt": "2026-11-20T03:01:37.9643999Z",
+    "sharedURLHTTP": 200,
+    "indexHealthModuleHTTP": 200,
+    "indexHTTP": 200,
+    "moduleMatchesRelease": true,
+    "snapshotExcludingOperationMatchesPreviousPublicSnapshot": true,
+    "operation": {
+      "at": "2026-11-20T03:00:42.269Z",
+      "runId": "44664298501",
+      "outcome": "retained",
+      "category": "dns",
+      "code": "ENOTFOUND",
+      "indexCheckedAt": "2026-11-18T20:44:01.396Z"
+    }
+  },
+  "limits": [
+    "Forks upstream recovery and a fresh real re-verification were unavailable during development. Recovery was exercised with controlled fixtures.",
+    "Physical Android/iOS native share menus were not exercised. Desktop and mobile Chromium regression used native API mocks."
+  ]
+}
