@@ -26,6 +26,10 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v1.8 — Pages operation diagnostics
+
+Each Pages run on `main` saves a small attempt-specific diagnostic artifact when GitHub finishes the recording job. It records Forks refresh, verification, deployment and public QA independently. The Monitor checks the run and attempt before using the artifact. Its fallback is the recorded job log, with unavailable evidence shown explicitly. [Diagnostic schema and operations](docs/INDEX_MONITOR.md#pages-operation-diagnostics)
+
 ## v1.7 — Index Health Monitor
 
 An independent GitHub Actions monitor checks scheduled Forks refresh failures and the published verification clock every hour. It uses one operations issue for consecutive failures, the final six hours, expiry and confirmed recovery. Manual runs are read-only by default. See the operating guide for evidence rules and notification settings. [Index Health Monitor](docs/INDEX_MONITOR.md)

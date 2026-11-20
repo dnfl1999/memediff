@@ -14,6 +14,9 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    outputs:
+      forks_step_outcome: ${{ steps.forks_refresh.outcome }}
+      forks_diagnostic: ${{ steps.forks_refresh.outputs.diagnostic }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,6 +32,7 @@ jobs:
         env:
           QA_RUN: linux-build-mock
       - name: Prepare exact-mint index and report verification health
+        id: forks_refresh
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: node scripts/update-forks-index.mjs dist/data/forks-index.json
         env:
@@ -43,6 +47,50 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: dist
+  diagnostics:
+    if: always() && github.repository == 'dnfl1999/memediff' && (github.ref == 'refs/heads/main' || github.event_name == 'pull_request')
+    needs: [verify, deploy, public-qa]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Assemble and validate operation diagnostic
+        id: record
+        run: node scripts/write-index-diagnostic.mjs
+        env:
+          VERIFY_RESULT: ${{ needs.verify.result }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          PUBLIC_QA_RESULT: ${{ needs.public-qa.result }}
+          FORKS_STEP_OUTCOME: ${{ needs.verify.outputs.forks_step_outcome }}
+          FORKS_DIAGNOSTIC: ${{ needs.verify.outputs.forks_diagnostic }}
+      - name: Upload Pages diagnostic JSON
+        id: diagnostic_upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-index-diagnostic-attempt-${{ github.run_attempt }}
+          path: diagnostics/index-diagnostic.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Report diagnostic upload result
+        if: always()
+        shell: bash
+        env:
+          RECORD_RESULT: ${{ steps.record.outcome }}
+          UPLOAD_RESULT: ${{ steps.diagnostic_upload.outcome }}
+        run: |
+          message="Diagnostic recording: ${RECORD_RESULT:-unavailable}. Artifact upload: ${UPLOAD_RESULT:-unavailable}."
+          printf '%s\n' "$message" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$UPLOAD_RESULT" != 'success' ]; then
+            printf '::warning::%s\n' "$message"
+          fi
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: verify

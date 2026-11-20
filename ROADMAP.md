@@ -4,6 +4,12 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v1.8 — Pages operation diagnostics
+
+- Record an attempt-specific JSON artifact for Forks refresh, verification, deployment and public QA outcomes.
+- Validate the archive and its run metadata in Index Health Monitor, with the confirmed job log as a fallback.
+- Preserve prior verification timestamps in fallback deployments and require new published validation for recovery. [Operations guide](docs/INDEX_MONITOR.md#pages-operation-diagnostics)
+
 ## v1.7 — Index Health Monitor
 
 - Check published verification status and scheduled Pages refresh steps independently.

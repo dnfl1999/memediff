@@ -1,5 +1,6 @@
 import { appendFile, readFile } from 'node:fs/promises';
 import { refreshForksIndex } from './forks-refresh.mjs';
+import { forkDiagnostic } from './index-diagnostic.mjs';
 
 const path = process.argv[2] ?? 'data/forks-index.json';
 const local = JSON.parse(await readFile('data/forks-index.json', 'utf8'));
@@ -29,10 +30,19 @@ async function publishSummary(message, health, failure) {
   const details = [message, failureSummary(failure), healthSummary(health),
     'Automatic repository analysis requires a Fresh association. Market lookup and direct repository analysis remain separate.'].filter(Boolean).join('\n\n');
   console.log(details);
-  if (summary) await appendFile(summary, `### Forks index health\n\n${details}\n`);
+  if (summary) {
+    try { await appendFile(summary, `### Forks index health\n\n${details}\n`); }
+    catch { console.log('::warning::The Forks job summary could not be written. See the step log.'); }
+  }
   if (health?.counts.expiring || health?.counts.expired) {
     console.log(`::warning title=Forks verification expiry::${health.counts.expiring} associations expiring within six hours and ${health.counts.expired} expired. MEMEDIFF expiry: ${health.official?.expiresAt ?? 'unavailable'}.`);
   }
+}
+
+async function publishDiagnostic(input) {
+  if (!process.env.GITHUB_OUTPUT) return;
+  try { await appendFile(process.env.GITHUB_OUTPUT, `diagnostic=${JSON.stringify(forkDiagnostic(input))}\n`); }
+  catch { console.log('::warning::Forks diagnostic output could not be recorded.'); }
 }
 
 try {
@@ -43,11 +53,13 @@ try {
   const message = retained ? 'Forks refresh failed. The deployment artifact reuses the published records and their original timestamps.'
     : 'Forks refresh completed and the validated index was written.';
   if (retained) console.log(`::warning::${message}`);
+  await publishDiagnostic({ state: retained ? 'retained' : 'refreshed', health, failure, newlyVerified: freshlyVerified, retained: retainedCount });
   await publishSummary(`${message}\n\nNewly verified: ${freshlyVerified}. Retained: ${retainedCount}. Pages deployment and public QA are reported in their own jobs.`, health, failure);
 } catch (error) {
   const message = 'Forks index refresh failed. The existing Pages deployment was preserved.';
   console.error(`::error::${message}`);
   const health = error.refresh?.health;
+  await publishDiagnostic({ state: 'failed', health, failure: error.refresh?.failure, retained: health?.entryCount });
   await publishSummary(`${message}\n\nApplied to deployment artifact: 0 newly verified. ${health ? `${health.entryCount} previously published associations remain in place.` : 'Published association count unavailable.'}`,
     health, error.refresh?.failure);
   process.exitCode = 1;

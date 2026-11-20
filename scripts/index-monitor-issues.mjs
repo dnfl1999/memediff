@@ -71,10 +71,10 @@ function evidenceLines({ at, index, schedule, recovery }) {
     `- Official MEMEDIFF checkedAt ${value(index.verifiedAt)} · 48-hour expiry ${value(index.expiresAt)} · Remaining ${remainingLabel}`,
     `- Total verified records ${value(index.entries)} · Newly verified ${value(index.verified)} · Retained ${value(index.retained)}`,
     last ? `- Latest scheduled Pages run [#${last.id}](${runURL(last.id)}) · Workflow ${last.conclusion} · Index step ${last.refresh}` : '- Latest scheduled Pages run unavailable',
-    attempt?.refresh === 'failure' ? `- Confirmed consecutive failed index attempts ${schedule.streak} · [Latest failed index attempt](${runURL(attempt.id)}) · ${diagnostic(attempt.failure)}` : null,
+    attempt?.refresh === 'failure' ? `- Confirmed consecutive failed index attempts ${schedule.streak} · [Latest failed index attempt](${runURL(attempt.id)}) · ${diagnostic(attempt.failure)} · ${attempt.artifactURL ? `[Diagnostic artifact](${attempt.artifactURL})` : `Evidence ${attempt.evidence ?? 'unavailable'}`}` : null,
     schedule.status === 'unavailable' ? `- Scheduled history read incomplete (${schedule.error})` : null,
-    operation?.outcome === 'retained' ? `- Published snapshot reuse [#${operation.runId}](${runURL(operation.runId)}) · ${diagnostic(operation.failure)}` : null,
-    recovery ? `- Confirmed new official verification ${recovery.verifiedAt} · [Publishing Pages run](${runURL(recovery.id)})` : null
+    operation?.outcome === 'retained' ? `- Published snapshot reuse [#${operation.runId}](${runURL(operation.runId)}) · ${diagnostic(operation.failure)}${operation.artifactURL ? ` · [Diagnostic artifact](${operation.artifactURL})` : ' · Evidence published index'}` : null,
+    recovery ? `- Confirmed new official verification ${recovery.verifiedAt} · [Publishing Pages run](${runURL(recovery.id)})${recovery.artifactURL ? ` · [Diagnostic artifact](${recovery.artifactURL})` : ''}` : null
   ].filter(Boolean);
 }
 

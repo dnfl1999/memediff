@@ -1,6 +1,9 @@
 import { utcMillis } from '../src/core.js';
 import { associationHealth } from '../src/index-health.js';
 import { OFFICIAL_CA, verifyForksCoin } from '../src/token-data.js';
+import { diagnosticName, diagnosticStage, maxDiagnosticArchiveBytes, sanitizeFailure } from './index-diagnostic.mjs';
+import { readDiagnosticArchive } from './index-diagnostic-archive.mjs';
+export { sanitizeFailure } from './index-diagnostic.mjs';
 
 export const repository = 'dnfl1999/memediff';
 export const repoURL = `https://github.com/${repository}`;
@@ -11,9 +14,6 @@ const refreshSteps = new Set([
   'Prepare exact-mint index for Pages',
   'Prepare exact-mint index and report verification health'
 ]);
-const categories = new Set(['dns', 'tcp', 'tls', 'timeout', 'http', 'forbidden', 'rate-limit', 'network', 'data', 'verification', 'canceled', 'unavailable']);
-const stages = new Set(['published-index', 'forks-refresh', 'artifact-write']);
-const knownCodes = /^(?:ENOTFOUND|EAI_(?:AGAIN|FAIL|NONAME)|ECONN(?:RESET|REFUSED|ABORTED)|E(?:NET|HOST)(?:DOWN|UNREACH)|EPIPE|ETIMEDOUT|UND_ERR_(?:SOCKET|(?:CONNECT|HEADERS|BODY)_TIMEOUT)|ERR_(?:TLS|SSL)_[A-Z_]{1,55}|CERT_[A-Z_]{1,55}|DEPTH_ZERO_SELF_SIGNED_CERT|SELF_SIGNED_CERT_IN_CHAIN|UNABLE_TO_VERIFY_LEAF_SIGNATURE|UNABLE_TO_GET_ISSUER_CERT(?:_LOCALLY)?)$/;
 
 export const validId = value => /^[1-9]\d{0,19}$/.test(String(value));
 export const runURL = id => `${repoURL}/actions/runs/${id}`;
@@ -28,36 +28,48 @@ export class MonitorReadError extends Error {
 }
 
 export function monitorClient({ fetcher = fetch, token } = {}) {
-  return async function request(path, { method = 'GET', body, text = false, label = 'GitHub API' } = {}) {
+  let rateLimit;
+  return async function request(path, { method = 'GET', body, text = false, binary = false, label = 'GitHub API' } = {}) {
     const isIndex = path === indexURL;
     if (!isIndex && (!path.startsWith('/') || path.startsWith('//'))) throw new MonitorReadError(label, 'invalid path');
+    if (!isIndex && rateLimit) throw new MonitorReadError(label, rateLimit);
     const headers = { Accept: 'application/vnd.github+json' };
     if (!isIndex && token) headers.Authorization = `Bearer ${token}`;
     if (body) headers['Content-Type'] = 'application/json';
     let response;
     try {
       response = await fetcher(isIndex ? indexURL : api + path, { method, headers,
-        body: body ? JSON.stringify(body) : undefined, redirect: text ? 'follow' : 'error', signal: AbortSignal.timeout(12000) });
+        body: body ? JSON.stringify(body) : undefined, redirect: text || binary ? 'follow' : 'error', signal: AbortSignal.timeout(12000) });
     } catch (error) {
       throw new MonitorReadError(label, error?.name === 'TimeoutError' ? 'timeout' : 'network error');
     }
-    if (!response.ok) throw new MonitorReadError(label, `HTTP ${response.status}`);
-    try { return text ? await response.text() : await response.json(); }
+    if (!response.ok) {
+      const status = `HTTP ${response.status}`;
+      if (!isIndex && (response.status === 429 || (response.status === 403 &&
+          (response.headers.get('x-ratelimit-remaining') === '0' || response.headers.has('retry-after'))))) rateLimit = status;
+      throw new MonitorReadError(label, status);
+    }
+    try { return binary ? await readArchiveBody(response) : text ? await response.text() : await response.json(); }
     catch { throw new MonitorReadError(label, 'invalid response'); }
   };
 }
 
-const readCode = error => error instanceof MonitorReadError ? error.signal : 'invalid response';
-
-export function sanitizeFailure(failure) {
-  if (!categories.has(failure?.category)) return null;
-  return {
-    stage: stages.has(failure.stage) ? failure.stage : null,
-    category: failure.category,
-    codes: Array.isArray(failure.codes) ? [...new Set(failure.codes.filter(code => typeof code === 'string' && knownCodes.test(code)))].slice(0, 5).sort() : [],
-    status: Number.isInteger(failure.status) && failure.status >= 400 && failure.status <= 599 ? failure.status : null
-  };
+async function readArchiveBody(response) {
+  if (Number(response.headers.get('content-length')) > maxDiagnosticArchiveBytes) {
+    await response.body?.cancel();
+    return null;
+  }
+  const parts = [];
+  let size = 0;
+  for await (const part of response.body) {
+    size += part.byteLength;
+    if (size > maxDiagnosticArchiveBytes) return null;
+    parts.push(part);
+  }
+  return Buffer.concat(parts, size);
 }
+
+const readCode = error => error instanceof MonitorReadError ? error.signal : 'invalid response';
 
 export function failureFromLog(log) {
   for (const line of log.split(/\r?\n/).reverse()) {
@@ -105,10 +117,8 @@ function parsePublishedIndex(index, now) {
 
 const knownRun = run => validId(run?.id) && run.path === '.github/workflows/pages.yml' && run.head_branch === 'main' &&
   run.status === 'completed' && Number.isFinite(utcMillis(run.created_at));
-const beforeRunEnds = (reportedIndex, run) => {
-  const verifiedAt = utcMillis(reportedIndex.verifiedAt), operationAt = utcMillis(reportedIndex.operation.at);
-  return verifiedAt >= utcMillis(run.run_started_at ?? run.created_at) && operationAt <= utcMillis(run.updated_at);
-};
+const startedAt = run => utcMillis(run.run_started_at ?? run.created_at);
+const withinRun = (at, run) => utcMillis(at) >= startedAt(run) && utcMillis(at) < utcMillis(run.updated_at) + 1000;
 
 function refreshStep(jobs) {
   const verify = jobs.find(job => job.name === 'verify');
@@ -122,7 +132,49 @@ async function readJobs(request, id) {
   return result.jobs;
 }
 
-async function scheduledHealth(request) {
+function matchesRun(record, run, jobs) {
+  if (!record || record.runId !== String(run.id) || record.runAttempt !== run.run_attempt || record.event !== run.event ||
+      !withinRun(record.recordedAt, run) || (record.forks.observedAt && !withinRun(record.forks.observedAt, run))) return false;
+  for (const [field, name] of [['verify', 'verify'], ['deploy', 'deploy'], ['publicQA', 'public-qa']]) {
+    const job = jobs.find(item => item.name === name);
+    if (record.stages[field] !== diagnosticStage(job ? job.conclusion : 'skipped')) return false;
+  }
+  const step = refreshStep(jobs).state;
+  if (step === 'failure') return record.forks.state === 'failed';
+  if (step === 'success') return record.forks.state === 'refreshed' || (record.forks.state === 'retained' && run.event !== 'schedule');
+  return false;
+}
+
+async function pagesDiagnostic(request, run, jobs, now) {
+  if (!Number.isInteger(run.run_attempt) || run.run_attempt < 1) return null;
+  const name = diagnosticName(run.run_attempt);
+  try {
+    const result = await request(`/actions/runs/${run.id}/artifacts?name=${name}&per_page=100`, { label: 'Pages diagnostic list' });
+    const candidates = Array.isArray(result?.artifacts) ? result.artifacts.filter(item => item.name === name) : [];
+    if (candidates.length !== 1) return null;
+    const [artifact] = candidates;
+    if (artifact.expired !== false || !(utcMillis(artifact.expires_at) > now) || !validId(artifact.id) ||
+        String(artifact.workflow_run?.id) !== String(run.id) || !Number.isInteger(artifact.size_in_bytes) ||
+        artifact.size_in_bytes < 1 || artifact.size_in_bytes > maxDiagnosticArchiveBytes) return null;
+    // The GitHub REST endpoint controls the signed storage redirect. Artifact-supplied URLs are ignored.
+    const bytes = await request(`/actions/artifacts/${artifact.id}/zip`, { binary: true, label: 'Pages diagnostic archive' });
+    if (bytes?.length !== artifact.size_in_bytes) return null;
+    const record = readDiagnosticArchive(bytes, artifact.digest);
+    return matchesRun(record, run, jobs) ? { record, url: `${runURL(run.id)}/artifacts/${artifact.id}` } : null;
+  } catch { return null; }
+}
+
+async function scheduledFailure(request, run, jobs, step, now) {
+  const diagnostic = await pagesDiagnostic(request, run, jobs, now);
+  if (diagnostic?.record.forks.failure) return { failure: diagnostic.record.forks.failure, evidence: 'diagnostic artifact', artifactURL: diagnostic.url };
+  if (!validId(step.jobId)) return { failure: null, evidence: 'unavailable' };
+  try {
+    const failure = failureFromLog(await request(`/actions/jobs/${step.jobId}/logs`, { text: true, label: 'Pages refresh log' }));
+    return { failure, evidence: failure ? 'job log' : 'unavailable' };
+  } catch (error) { return { failure: null, evidence: 'unavailable', diagnosticError: readCode(error) }; }
+}
+
+async function scheduledHealth(request, now) {
   let latest = null, attempt = null, streak = 0;
   try {
     const result = await request('/actions/workflows/pages.yml/runs?branch=main&event=schedule&status=completed&per_page=10', { label: 'Scheduled Pages runs' });
@@ -134,16 +186,13 @@ async function scheduledHealth(request) {
       const current = { id: String(run.id), at: Number.isFinite(utcMillis(run.updated_at)) ? run.updated_at : run.created_at,
         conclusion: ['success','failure','cancelled','timed_out','skipped','neutral','action_required','stale','startup_failure'].includes(run.conclusion) ? run.conclusion : 'unknown' };
       if (!latest) latest = { ...current, refresh: 'unknown' };
-      const step = refreshStep(await readJobs(request, current.id));
+      const jobs = await readJobs(request, current.id);
+      const step = refreshStep(jobs);
       if (latest.id === current.id) latest.refresh = step.state;
       if (step.state === 'not-run') continue;
       if (!attempt) {
-        let failure = null, diagnosticError = null;
-        if (step.state === 'failure' && validId(step.jobId)) {
-          try { failure = failureFromLog(await request(`/actions/jobs/${step.jobId}/logs`, { text: true, label: 'Pages refresh log' })); }
-          catch (error) { diagnosticError = readCode(error); }
-        }
-        attempt = { ...current, refresh: step.state, failure, diagnosticError };
+        const diagnostic = step.state === 'failure' ? await scheduledFailure(request, run, jobs, step, now) : {};
+        attempt = { ...current, refresh: step.state, ...diagnostic };
       }
       if (step.state === 'success') break;
       streak++;
@@ -154,16 +203,27 @@ async function scheduledHealth(request) {
   }
 }
 
-async function publishedRecovery(request, index) {
+async function publishedEvidence(request, index, now) {
   const id = index.operation?.runId;
-  if (index.operation?.outcome !== 'refreshed' || index.verified === 0 || index.verified === null) return null;
+  if (!id) return { index, recovery: null };
   try {
     const run = await request(`/actions/runs/${id}`, { label: 'Published verification run' });
-    if (!knownRun(run) || String(run.id) !== id || !beforeRunEnds(index, run)) return null;
+    if (!knownRun(run) || String(run.id) !== id || !withinRun(index.operation.at, run)) return { index, recovery: null };
     const jobs = await readJobs(request, id);
-    if (refreshStep(jobs).state !== 'success' || !jobs.some(job => job.name === 'deploy' && job.conclusion === 'success')) return null;
-    return { id, verifiedAt: index.verifiedAt, indexCheckedAt: index.checkedAt };
-  } catch { return null; }
+    if (refreshStep(jobs).state !== 'success' || !jobs.some(job => job.name === 'deploy' && job.conclusion === 'success')) return { index, recovery: null };
+    const diagnostic = await pagesDiagnostic(request, run, jobs, now);
+    const forks = diagnostic?.record.forks;
+    const matchesIndex = forks?.state === index.operation.outcome && forks.officialVerifiedAt === index.verifiedAt &&
+      forks.latestVerifiedAt === index.lastVerifiedAt && forks.newlyVerified === index.verified && forks.retained === index.retained;
+    if (diagnostic && !matchesIndex) return { index, recovery: null };
+    if (matchesIndex) {
+      index = { ...index, operation: { ...index.operation, failure: forks.failure, artifactURL: diagnostic.url } };
+    }
+    const recovered = index.operation.outcome === 'refreshed' && index.verified > 0 && withinRun(index.verifiedAt, run);
+    const recovery = recovered ? { id, verifiedAt: index.verifiedAt, indexCheckedAt: index.checkedAt,
+      ...(matchesIndex ? { artifactURL: diagnostic.url } : {}) } : null;
+    return { index, recovery };
+  } catch { return { index, recovery: null }; }
 }
 
 export async function observeMonitor(request, now = Date.now()) {
@@ -171,8 +231,8 @@ export async function observeMonitor(request, now = Date.now()) {
     try { return parsePublishedIndex(await request(indexURL, { label: 'Published index' }), now); }
     catch (error) { return { state: 'unavailable', error: readCode(error) }; }
   };
-  const [index, schedule] = await Promise.all([readIndex(), scheduledHealth(request)]);
-  const recovery = await publishedRecovery(request, index);
+  const [published, schedule] = await Promise.all([readIndex(), scheduledHealth(request, now)]);
+  const { index, recovery } = await publishedEvidence(request, published, now);
   const activeFailure = schedule.streak >= 2 && (!recovery || utcMillis(recovery.verifiedAt) <= utcMillis(schedule.attempt.at));
   return { at: iso(now), index, schedule, recovery, activeFailure };
 }
