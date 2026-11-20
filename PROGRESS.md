@@ -2,6 +2,20 @@
 
 기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v1.9 Pages QA 증거 (2026-11-20)
+
+인증 계정 `dnfl1999`와 로컬·원격 `main`의 기준 SHA `59bc525b22f55651b7c81e46f3b1ac5f4aa8676c`를 확인했습니다. 시작 시 미커밋 변경은 0건이었습니다. 공개 인덱스의 117개 연결과 공식 CA 검증 시각 `2026-11-18T20:43:46.517Z`를 확인했고 공식 Forks DNS와 HTTPS 조회는 `ENOTFOUND`를 반환했습니다.
+
+Node와 Playwright의 리포터에서 실행별 검사 건수와 가능한 UTC 시각을 읽어 스키마 2에 기록합니다. Playwright가 관측한 HTTP 상태는 성공, 예상 오류, 예상 밖 오류로 집계합니다. 확인된 같은 요청의 422 → 200 복구는 두 응답 건수와 복구 횟수를 함께 보존합니다. 로컬에서 단위 155건, PC 61건·모바일 61건의 모의 E2E, 실제 API 5건을 통과했습니다.
+
+v1.8의 [첫 공개 QA 원본](https://github.com/dnfl1999/memediff/actions/runs/44684768948/artifacts/14606780503)에서 모의 E2E 121건 통과·1건 실패와 `src/import.js`의 예상 밖 HTTP 503 한 건을 재집계했습니다. 같은 SHA의 [후속 QA 원본](https://github.com/dnfl1999/memediff/actions/runs/44685874281/artifacts/14606956824)에서 122건 통과를 확인했습니다. 양쪽 실제 API 검사는 각각 5건 통과했고, 스키마 1 진단 ZIP도 각각 다시 읽었습니다. GitHub가 403으로 제한한 v1.8 로컬 원본은 2건 통과·3건 건너뜀으로 재집계했습니다.
+
+기능 커밋 `c48ec986538bcf9d5cc3ad117506b1365c53952a`의 [Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/44689623654)에서 verify, deploy, public-qa, diagnostics가 모두 성공했습니다. 단위 155건, 배포 전 PC·모바일 122건, 공개 PC·모바일 122건, 공개 실제 API 5건이 통과했고 각각 실패·건너뜀은 0건입니다. 공개 실제 API 검사에서는 HTTP 200 122건과 빈 저장소의 예상된 409 한 건을 관측했습니다. 422 → 200 복구는 테스트용 응답으로 확인했고 이 공개 실행의 복구 관측은 0건입니다.
+
+[진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/44689623654/artifacts/14607833458)을 내려받아 ZIP 758바이트, JSON 1,811바이트, SHA-256, 체크섬, 스키마 2와 실행 ID·attempt를 검증했습니다. [읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/44690722445)는 이 아티팩트의 QA를 요약에 표시했습니다. 오래된 정기 갱신에는 기존 로그를 사용했고, notify는 건너뛰었습니다. [운영 이슈 #1](https://github.com/dnfl1999/memediff/issues/1)은 열림·댓글 0건입니다.
+
+배포 후 홈페이지, 기존 공유 URL, `src/import.js`, 공개 인덱스가 HTTP 200을 반환했습니다. Forks는 여전히 `ENOTFOUND`였고 신규 검증은 0건이었습니다. 배포 전 공개본과 기존 117개 연결 및 검증 시각이 일치했습니다. 공식 CA의 48시간 만료 시각은 `2026-11-20T20:43:46.517Z`입니다. [상세 QA 증거](docs/v19-qa.json)
+
 ## v1.8 Pages 운영 진단 (2026-11-20)
 
 시작 로컬·원격 `main`은 `242d03664fe4c75860380a5dc299abfef4b00421`, 계정은 `dnfl1999`, 미커밋 변경은 0건이었습니다. 기존 [운영 이슈 #1](https://github.com/dnfl1999/memediff/issues/1)은 열려 있었고 댓글 0건이었습니다. 14:47:28 KST에 공개 117개 연결과 공식 검증 `2026-11-18T20:43:46.517Z` 보존, 공식 Forks 조회 `ENOTFOUND`를 확인했습니다.
