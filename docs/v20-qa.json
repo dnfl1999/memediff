@@ -1,0 +1,562 @@
+{
+  "version": "2.0.0",
+  "dateKST": "2026-11-20",
+  "baseCommit": "51e690bd2ff00641866ce681bc6aea7d115d70b2",
+  "releaseCommit": "fb00daf5a9ce103cab82a34109ed01da839a2f78",
+  "preflight": {
+    "account": "dnfl1999",
+    "localAndRemoteMainMatched": true,
+    "cleanWorktree": true,
+    "previousPagesRun": 44689623654,
+    "previousReadOnlyMonitorRun": 44690722445,
+    "at": "2026-11-20T07:16:32.957Z",
+    "site": 200,
+    "indexHTTP": 200,
+    "entries": 117,
+    "checkedAt": "2026-11-18T20:44:01.396Z",
+    "operation": {
+      "at": "2026-11-20T06:45:08.980Z",
+      "runId": "44689623654",
+      "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+      "outcome": "retained",
+      "failure": {
+        "stage": "forks-refresh",
+        "endpoint": "https://forks.wiki/api/tokens/recent",
+        "category": "dns",
+        "codes": [
+          "ENOTFOUND"
+        ],
+        "status": null
+      }
+    },
+    "fork": {
+      "resolved": false,
+      "code": "ENOTFOUND"
+    }
+  },
+  "local": {
+    "build": "success",
+    "unit": {
+      "passed": 161,
+      "failed": 0,
+      "skipped": 0,
+      "status": "success"
+    },
+    "mockBrowser": {
+      "passed": 126,
+      "failed": 0,
+      "skipped": 0,
+      "status": "success"
+    },
+    "finalFeatureBrowser": {
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "status": "success"
+    },
+    "realBrowserFirstAttempt": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 3,
+      "status": "skipped"
+    },
+    "rateLimit": {
+      "status": 403,
+      "remaining": 0,
+      "resetAt": "2026-11-20T07:38:41.000Z"
+    },
+    "developmentFailure": {
+      "suite": "test/export.test.js",
+      "reason": "The unit DOM double provided an element for a section absent from its fixture.",
+      "correctedAndRechecked": true
+    }
+  },
+  "pages": {
+    "runId": 44695232805,
+    "runAttempt": 1,
+    "headSha": "fb00daf5a9ce103cab82a34109ed01da839a2f78",
+    "event": "push",
+    "conclusion": "success",
+    "completedAt": "2026-11-20T07:36:35Z",
+    "jobs": {
+      "verify": {
+        "id": 136150295920,
+        "conclusion": "success"
+      },
+      "deploy": {
+        "id": 136151633983,
+        "conclusion": "success"
+      },
+      "public-qa": {
+        "id": 136151776477,
+        "conclusion": "success"
+      },
+      "diagnostics": {
+        "id": 136153441956,
+        "conclusion": "success"
+      }
+    },
+    "artifact": {
+      "id": 14609879296,
+      "zipBytes": 762,
+      "jsonBytes": 1811,
+      "digest": "sha256:f4367e2a4f5c77799a7b5491d49e55e77981faac49f6568f25018979417ba91d",
+      "expiresAt": "2026-12-04T07:36:32Z"
+    },
+    "diagnostic": {
+      "schemaVersion": 2,
+      "runId": "44695232805",
+      "runAttempt": 1,
+      "workflow": "Verify and deploy Pages",
+      "event": "push",
+      "recordedAt": "2026-11-20T07:36:31.910Z",
+      "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/44695232805",
+      "stages": {
+        "verify": "success",
+        "deploy": "success",
+        "publicQA": "success"
+      },
+      "forks": {
+        "state": "retained",
+        "observedAt": "2026-11-20T07:31:51.407Z",
+        "newlyVerified": 0,
+        "retained": 117,
+        "latestVerifiedAt": "2026-11-18T20:44:01.390Z",
+        "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+        "failure": {
+          "stage": "forks-refresh",
+          "category": "dns",
+          "codes": [
+            "ENOTFOUND"
+          ],
+          "status": null
+        }
+      },
+      "qa": {
+        "unit": {
+          "passed": 161,
+          "failed": 0,
+          "skipped": 0,
+          "startedAt": "2026-11-20T07:28:43.737Z",
+          "completedAt": "2026-11-20T07:28:44.522Z",
+          "failure": null,
+          "http": null,
+          "status": "success",
+          "evidence": "node-test-json",
+          "runId": "44695232805",
+          "runAttempt": 1
+        },
+        "preDeploy": {
+          "passed": 126,
+          "failed": 0,
+          "skipped": 0,
+          "startedAt": "2026-11-20T07:28:59.679Z",
+          "completedAt": "2026-11-20T07:31:50.872Z",
+          "failure": null,
+          "http": {
+            "ok": [
+              [
+                200,
+                3842
+              ]
+            ],
+            "expected": [
+              [
+                403,
+                4
+              ],
+              [
+                404,
+                4
+              ],
+              [
+                429,
+                8
+              ],
+              [
+                500,
+                4
+              ],
+              [
+                503,
+                4
+              ]
+            ],
+            "unexpected": [],
+            "recovered": 0
+          },
+          "status": "success",
+          "evidence": "playwright-json",
+          "runId": "44695232805",
+          "runAttempt": 1
+        },
+        "publicMock": {
+          "passed": 126,
+          "failed": 0,
+          "skipped": 0,
+          "startedAt": "2026-11-20T07:33:25.284Z",
+          "completedAt": "2026-11-20T07:36:15.892Z",
+          "failure": null,
+          "http": {
+            "ok": [
+              [
+                200,
+                3842
+              ]
+            ],
+            "expected": [
+              [
+                403,
+                4
+              ],
+              [
+                404,
+                4
+              ],
+              [
+                429,
+                8
+              ],
+              [
+                500,
+                4
+              ],
+              [
+                503,
+                4
+              ]
+            ],
+            "unexpected": [],
+            "recovered": 0
+          },
+          "status": "success",
+          "evidence": "playwright-json",
+          "runId": "44695232805",
+          "runAttempt": 1
+        },
+        "publicLive": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 3,
+          "startedAt": "2026-11-20T07:36:16.472Z",
+          "completedAt": "2026-11-20T07:36:19.814Z",
+          "failure": null,
+          "http": {
+            "ok": [
+              [
+                200,
+                102
+              ]
+            ],
+            "expected": [
+              [
+                403,
+                1
+              ]
+            ],
+            "unexpected": [],
+            "recovered": 0
+          },
+          "status": "skipped",
+          "evidence": "playwright-json",
+          "runId": "44695232805",
+          "runAttempt": 1
+        }
+      }
+    }
+  },
+  "publicBrowserArtifact": {
+    "id": 14610747463,
+    "zipBytes": 66430242,
+    "digest": "sha256:28dd1676e4c1eb29d48b18538367166b8fda2c423cc03aa199751c6140b5c77e",
+    "expiresAt": "2026-12-04T07:36:20Z"
+  },
+  "publicLiveEvidence": {
+    "workflowRateLimit": {
+      "status": 403,
+      "remaining": 0,
+      "resetAt": "2026-11-20T08:03:01.000Z"
+    },
+    "recheck": {
+      "source": "Independent Chromium run against the public Pages URL",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "status": "success"
+    },
+    "comparison": {
+      "repo": "dnfl1999/memediff",
+      "branch": "main",
+      "since": "2026-10-21T07:39:31.450Z",
+      "observedAt": "2026-11-20T07:39:31.450Z",
+      "coverage": {
+        "commits": true,
+        "releases": true,
+        "maxCommits": 1000,
+        "maxReleases": 500
+      },
+      "verifiedAgainstGitHubResponses": true,
+      "additionalAPIRequests": 0,
+      "periods": [
+        {
+          "period": "A",
+          "startDate": "2026-11-07",
+          "endDate": "2026-11-13",
+          "from": "2026-11-07T00:00:00.000Z",
+          "through": "2026-11-13T23:59:59.999Z",
+          "durationMs": 604800000,
+          "commits": 31,
+          "releases": 0,
+          "authors": 1,
+          "unlinkedCommits": 0
+        },
+        {
+          "period": "B",
+          "startDate": "2026-11-14",
+          "endDate": "2026-11-20",
+          "from": "2026-11-14T00:00:00.000Z",
+          "through": "2026-11-20T07:39:31.450Z",
+          "durationMs": 545971450,
+          "commits": 12,
+          "releases": 0,
+          "authors": 1,
+          "unlinkedCommits": 0
+        }
+      ]
+    },
+    "expiredIndexDirectAnalysis": {
+      "expiredIndexChecked": true,
+      "repo": "dnfl1999/memediff",
+      "directReportVisible": true,
+      "periodComparisonVisible": true
+    },
+    "heldBrowserExpiry": {
+      "observedAt": "2026-11-20T07:40:22.502Z",
+      "clockMode": "Held browser time through direct analysis",
+      "heldUtc": "2026-11-20T20:43:46.518Z",
+      "expiredStateObserved": true,
+      "githubRequestsDuringCALookup": 0,
+      "directResult": true,
+      "githubHTTP": [
+        200,
+        200,
+        200
+      ],
+      "periodComparisonVisible": true
+    },
+    "existingShareLink": {
+      "initialCAFound": true,
+      "initialAnalysisDidNotRun": true,
+      "source": "Public real API QA"
+    }
+  },
+  "website": {
+    "observedAt": "2026-11-20T07:41:43.840Z",
+    "siteHTTP": 200,
+    "sharedLinkHTTP": 200,
+    "indexHTTP": 200,
+    "comparisonModuleHTTP": 200,
+    "comparisonModuleMatchedSource": true,
+    "sharedLinkServesHomepage": true,
+    "entries": 117,
+    "sameIndexExceptOperation": true,
+    "checkedAt": "2026-11-18T20:44:01.396Z",
+    "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+    "expiresAt": "2026-11-20T20:43:46.517Z",
+    "state": "fresh",
+    "operation": {
+      "at": "2026-11-20T07:31:51.405Z",
+      "runId": "44695232805",
+      "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+      "outcome": "retained",
+      "failure": {
+        "stage": "forks-refresh",
+        "endpoint": "https://forks.wiki/api/tokens/recent",
+        "category": "dns",
+        "codes": [
+          "ENOTFOUND"
+        ],
+        "status": null
+      }
+    },
+    "forks": {
+      "dns": {
+        "resolved": false,
+        "code": "ENOTFOUND"
+      },
+      "https": {
+        "code": "ENOTFOUND"
+      }
+    }
+  },
+  "diagnosticsReadCompatibility": [
+    {
+      "schemaVersion": 1,
+      "runId": "44685874281",
+      "attempt": 1
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "44689623654",
+      "attempt": 1
+    }
+  ],
+  "followUpScheduledRefresh": {
+    "artifactId": 14610444203,
+    "zipBytes": 757,
+    "digest": "sha256:3744085f1136eb50f8285c55d98d471df05ac71cef7b243e802d39092cd2cd6c",
+    "artifactVerified": true,
+    "record": {
+      "schemaVersion": 2,
+      "runId": "44695567454",
+      "runAttempt": 1,
+      "workflow": "Verify and deploy Pages",
+      "event": "schedule",
+      "recordedAt": "2026-11-20T07:41:00.121Z",
+      "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/44695567454",
+      "stages": {
+        "verify": "failure",
+        "deploy": "not-run",
+        "publicQA": "not-run"
+      },
+      "forks": {
+        "state": "failed",
+        "observedAt": "2026-11-20T07:40:47.759Z",
+        "newlyVerified": 0,
+        "retained": 117,
+        "latestVerifiedAt": "2026-11-18T20:44:01.390Z",
+        "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+        "failure": {
+          "stage": "forks-refresh",
+          "category": "dns",
+          "codes": [
+            "ENOTFOUND"
+          ],
+          "status": null
+        }
+      },
+      "qa": {
+        "unit": {
+          "passed": 161,
+          "failed": 0,
+          "skipped": 0,
+          "startedAt": "2026-11-20T07:36:54.462Z",
+          "completedAt": "2026-11-20T07:36:55.455Z",
+          "failure": null,
+          "http": null,
+          "status": "success",
+          "evidence": "node-test-json",
+          "runId": "44695567454",
+          "runAttempt": 1
+        },
+        "preDeploy": {
+          "passed": 126,
+          "failed": 0,
+          "skipped": 0,
+          "startedAt": "2026-11-20T07:38:07.332Z",
+          "completedAt": "2026-11-20T07:40:47.383Z",
+          "failure": null,
+          "http": {
+            "ok": [
+              [
+                200,
+                3842
+              ]
+            ],
+            "expected": [
+              [
+                403,
+                4
+              ],
+              [
+                404,
+                4
+              ],
+              [
+                429,
+                8
+              ],
+              [
+                500,
+                4
+              ],
+              [
+                503,
+                4
+              ]
+            ],
+            "unexpected": [],
+            "recovered": 0
+          },
+          "status": "success",
+          "evidence": "playwright-json",
+          "runId": "44695567454",
+          "runAttempt": 1
+        },
+        "publicMock": {
+          "status": "skipped",
+          "passed": null,
+          "failed": null,
+          "skipped": null,
+          "startedAt": null,
+          "completedAt": null,
+          "evidence": null,
+          "failure": null,
+          "http": null,
+          "runId": "44695567454",
+          "runAttempt": 1
+        },
+        "publicLive": {
+          "status": "skipped",
+          "passed": null,
+          "failed": null,
+          "skipped": null,
+          "startedAt": null,
+          "completedAt": null,
+          "evidence": null,
+          "failure": null,
+          "http": null,
+          "runId": "44695567454",
+          "runAttempt": 1
+        }
+      }
+    },
+    "monitor": {
+      "runId": 44696863564,
+      "observeJobId": 136155591619,
+      "observedAt": "2026-11-20T07:41:58.449Z",
+      "observe": "success",
+      "notify": "skipped",
+      "adoptedDiagnosticArtifactId": 14610444203,
+      "issuePlan": "Would comment on existing issue #1",
+      "actualIssue": {
+        "number": 1,
+        "state": "open",
+        "comments": 0,
+        "updatedAt": "2026-11-20T04:34:47Z"
+      }
+    }
+  },
+  "monitor": {
+    "runId": 44696391248,
+    "observeJobId": 136154043580,
+    "observe": "success",
+    "notify": "skipped",
+    "observedAt": "2026-11-20T07:38:02.669Z",
+    "artifactId": 14609879296,
+    "qaInSummary": true,
+    "qaSkippedReported": true,
+    "plan": "No issue change"
+  },
+  "issue": {
+    "number": 1,
+    "state": "open",
+    "comments": 0,
+    "updatedAt": "2026-11-20T04:34:47Z"
+  },
+  "limits": [
+    "The comparison uses date-bounded observations from the existing 30-day report. Coverage flags describe the collection, without identifying exact missing dates.",
+    "The public browser suite uses Chromium. Expiry boundary checks use the published index and a controlled browser clock.",
+    "No official Forks revalidation or account notification receipt was observed. Workflow artifacts have limited GitHub retention."
+  ]
+}

@@ -2,6 +2,22 @@
 
 기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v2.0 Compare Two Periods (2026-11-20)
+
+인증 계정 `dnfl1999`, 로컬·원격 기준 커밋 `51e690bd2ff00641866ce681bc6aea7d115d70b2`, 미커밋 변경 0건을 확인했습니다. 시작 시 공개 홈페이지와 117개 연결이 담긴 인덱스는 HTTP 200이었고, 공식 Forks는 DNS `ENOTFOUND`를 반환했습니다. [이전 Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/44689623654)
+
+현재 GitHub 보고서 안에서 두 UTC 기간의 커밋, 공개 릴리스, 연결된 작성자를 비교합니다. 종료일을 포함하고 수집 첫날과 마지막 날의 경계를 실제 UTC 시각에 맞춥니다. 고유 SHA와 릴리스 ID를 집계하며, 겹치는 기록과 길이 차이를 표시합니다. 수집이 불완전한 구간에서 확인할 수 없는 건수는 `Unknown`입니다. 숫자에서 증거 목록을 열고 원본 SHA·릴리스·작성자 링크를 따라갈 수 있습니다.
+
+로컬 단위 161건, PC·모바일 모의 E2E 126건, 최종 집중 E2E 4건이 통과했습니다. 기존 PNG 단위 검사 대역이 새 섹션을 처리하도록 수정 후 전체 단위를 재실행했습니다. 첫 로컬 실제 API 검사에서는 GitHub의 HTTP 403, 남은 요청 0건을 확인했고 2건 통과·3건 건너뜀으로 기록했습니다.
+
+기능 커밋 `fb00daf5a9ce103cab82a34109ed01da839a2f78`의 [Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/44695232805)에서 verify, deploy, public-qa, diagnostics가 성공했습니다. 배포 전·공개 모의 E2E는 각각 126건이 통과했습니다. 첫 공개 실제 API는 HTTP 403으로 2건 통과·3건 건너뜀을 기록했습니다. 제한 해제 후 공개 URL에서 독립적으로 재실행해 실제 API 검사 5건을 모두 통과했습니다.
+
+실제 GitHub 응답을 대조한 11월 20일 07:39:31.450 UTC 보고서에서 기간 A(11월 7–13일)는 고유 커밋 31건, 기간 B(11월 14–20일, 조회 시각까지)는 12건이었습니다. 두 기간의 공개 릴리스는 각각 0건, 연결된 작성자는 각각 1명이었습니다. 비교 중 추가 API 요청은 0건이었습니다. 브라우저 시계를 공개 인덱스 만료 직후로 고정한 별도 검증에서 CA 자동 분석은 차단됐고 직접 GitHub 분석과 기간 비교는 열렸습니다.
+
+공개 홈·기존 공유 링크·비교 모듈·인덱스가 HTTP 200을 반환했습니다. Forks DNS는 `ENOTFOUND`였고 기존 인덱스의 117개 연결과 검증 시각이 일치했습니다. [스키마 2 진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/44695232805/artifacts/14609879296)과 [원본 공개 QA ZIP](https://github.com/dnfl1999/memediff/actions/runs/44695232805/artifacts/14610747463)의 해시를 검증했습니다. [읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/44696391248)는 새 진단과 건너뜀 수치를 표시했고, 운영 이슈 #1은 열림·댓글 0건입니다. [상세 QA 증거](docs/v20-qa.json)
+
+[후속 정기 갱신](https://github.com/dnfl1999/memediff/actions/runs/44695567454)은 Forks `ENOTFOUND`를 기록하고 배포를 건너뛰었습니다. 진단 ZIP을 확인했고, 이후에도 공개 사이트와 117개 인덱스가 이전 성공 실행의 결과를 제공하는 것을 확인했습니다. [후속 읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/44696863564)는 새 실패 진단을 채택해 Issue #1 댓글 예정으로 표시했습니다. 실제 댓글은 0건입니다.
+
 ## v1.9 Pages QA 증거 (2026-11-20)
 
 인증 계정 `dnfl1999`와 로컬·원격 `main`의 기준 SHA `59bc525b22f55651b7c81e46f3b1ac5f4aa8676c`를 확인했습니다. 시작 시 미커밋 변경은 0건이었습니다. 공개 인덱스의 117개 연결과 공식 CA 검증 시각 `2026-11-18T20:43:46.517Z`를 확인했고 공식 Forks DNS와 HTTPS 조회는 `ENOTFOUND`를 반환했습니다.
