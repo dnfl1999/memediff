@@ -1,0 +1,409 @@
+{
+  "format": "memediff-period-comparison",
+  "version": 1,
+  "repository": {
+    "name": "dnfl1999/memediff",
+    "branch": "main",
+    "url": "https://github.com/dnfl1999/memediff"
+  },
+  "userSuppliedTokenCA": null,
+  "source": "github-live",
+  "observedAtUtc": "2026-11-20T09:12:15.748Z",
+  "collection": {
+    "startUtc": "2026-10-21T09:12:15.748Z",
+    "endInclusiveUtc": "2026-11-20T09:12:15.748Z",
+    "durationDays": 30,
+    "coverage": {
+      "commitsComplete": true,
+      "releasesComplete": true
+    },
+    "limits": {
+      "commits": 1000,
+      "releases": 500
+    },
+    "apiEvidence": [
+      "https://api.github.com/repos/dnfl1999/memediff",
+      "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-21T09%3A12%3A15Z&until=2026-11-20T09%3A12%3A16Z&per_page=100&page=1",
+      "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1"
+    ]
+  },
+  "periods": {
+    "a": {
+      "selected": {
+        "startDateUtc": "2026-11-07",
+        "endDateUtc": "2026-11-13"
+      },
+      "effective": {
+        "startUtc": "2026-11-07T00:00:00.000Z",
+        "endExclusiveUtc": "2026-11-14T00:00:00.000Z",
+        "lastIncludedUtc": "2026-11-13T23:59:59.999Z"
+      },
+      "durationMs": 604800000,
+      "clipped": false,
+      "coverage": {
+        "commitsComplete": true,
+        "releasesComplete": true,
+        "releaseTypesComplete": true
+      },
+      "counts": {
+        "commits": 31,
+        "releases": 0,
+        "authors": 1,
+        "unlinkedCommits": 0,
+        "generalReleases": 0,
+        "prereleases": 0
+      },
+      "commits": [
+        {
+          "sha": "b703d0c7dc63544ca792d20f723109ff20c1358c",
+          "committedAtUtc": "2026-11-12T09:32:33.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/b703d0c7dc63544ca792d20f723109ff20c1358c",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "45b8bf0b0b432525c97a84b4cd74f85fa561122b",
+          "committedAtUtc": "2026-11-12T09:23:13.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/45b8bf0b0b432525c97a84b4cd74f85fa561122b",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "0572615c552397693f5f40bd1a62838588389d75",
+          "committedAtUtc": "2026-11-12T06:54:17.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/0572615c552397693f5f40bd1a62838588389d75",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "111e3d64ac4f0800fd875f23e3ca97866af2d395",
+          "committedAtUtc": "2026-11-12T06:44:05.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/111e3d64ac4f0800fd875f23e3ca97866af2d395",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "2365d49faa1fafa0b3ade85c74ae5369b330a36f",
+          "committedAtUtc": "2026-11-12T05:57:02.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/2365d49faa1fafa0b3ade85c74ae5369b330a36f",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "1df959b8dadc2c2aab58b2703a18c8f6646054bb",
+          "committedAtUtc": "2026-11-12T05:49:51.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/1df959b8dadc2c2aab58b2703a18c8f6646054bb",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "cc457bf1eca1a1ab6e64db58f39c3f435eda27a2",
+          "committedAtUtc": "2026-11-12T05:16:08.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/cc457bf1eca1a1ab6e64db58f39c3f435eda27a2",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "ca4148abd1f4098490ef7c0b11a23f3bee5cb85c",
+          "committedAtUtc": "2026-11-12T05:08:04.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/ca4148abd1f4098490ef7c0b11a23f3bee5cb85c",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "f6cfe962c96a3f1cbaabc4afe9b561646d05a689",
+          "committedAtUtc": "2026-11-12T04:29:41.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/f6cfe962c96a3f1cbaabc4afe9b561646d05a689",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "983ab0bdb8c26bff3d345ce2fd88d84a3fbee671",
+          "committedAtUtc": "2026-11-12T03:34:09.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/983ab0bdb8c26bff3d345ce2fd88d84a3fbee671",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "0cbf8d13115d680a61e157643e00f147aadbdd92",
+          "committedAtUtc": "2026-11-12T03:27:14.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/0cbf8d13115d680a61e157643e00f147aadbdd92",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "6f5f06dcb3dc5464bf1d5c978e021cec0df3758f",
+          "committedAtUtc": "2026-11-11T09:45:41.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/6f5f06dcb3dc5464bf1d5c978e021cec0df3758f",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "89738d1bef0aa13d0dc39b934c4e97ab210af1ec",
+          "committedAtUtc": "2026-11-11T09:40:03.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/89738d1bef0aa13d0dc39b934c4e97ab210af1ec",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "80260dee400bcd89f47b2184788236c6e0ded0c1",
+          "committedAtUtc": "2026-11-11T09:33:50.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/80260dee400bcd89f47b2184788236c6e0ded0c1",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "facc52d0efc2b8c0a27d56beae22eba9042226ec",
+          "committedAtUtc": "2026-11-11T08:30:05.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/facc52d0efc2b8c0a27d56beae22eba9042226ec",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "66c24c706ace849b2922ddf4d8695cd45e963bd0",
+          "committedAtUtc": "2026-11-11T08:25:15.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/66c24c706ace849b2922ddf4d8695cd45e963bd0",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "eb67fc23c254cab20276746486867c812e71d756",
+          "committedAtUtc": "2026-11-11T08:15:07.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/eb67fc23c254cab20276746486867c812e71d756",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "54e084631a403576e438ef5845426762a09fa0b0",
+          "committedAtUtc": "2026-11-11T08:10:37.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/54e084631a403576e438ef5845426762a09fa0b0",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "44255782fd3a3bd8b11f52b407286ef32f6d8e31",
+          "committedAtUtc": "2026-11-11T08:01:52.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/44255782fd3a3bd8b11f52b407286ef32f6d8e31",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "2faf68de2ac1d6dafcb7e9783d009092d04ff3fd",
+          "committedAtUtc": "2026-11-11T07:57:15.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/2faf68de2ac1d6dafcb7e9783d009092d04ff3fd",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "1378e46534abb71b5cd3be704602d2d62f19feac",
+          "committedAtUtc": "2026-11-11T07:46:29.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/1378e46534abb71b5cd3be704602d2d62f19feac",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "c16395666ebeefa8817915b3d9089ab3600749e6",
+          "committedAtUtc": "2026-11-11T07:34:34.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/c16395666ebeefa8817915b3d9089ab3600749e6",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "0fd38d6c88fc3c71c29c1c2aaa410f7d625a090e",
+          "committedAtUtc": "2026-11-11T07:29:27.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/0fd38d6c88fc3c71c29c1c2aaa410f7d625a090e",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "7cae8a19dcdd84d7982dcf97fe8570207a68e3ec",
+          "committedAtUtc": "2026-11-11T07:12:08.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/7cae8a19dcdd84d7982dcf97fe8570207a68e3ec",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "900edbf74e651b356c7254c9688d7964ae705a89",
+          "committedAtUtc": "2026-11-11T07:07:33.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/900edbf74e651b356c7254c9688d7964ae705a89",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "a8e62361272c81a04873776ff63a758aea50e96f",
+          "committedAtUtc": "2026-11-11T04:54:45.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/a8e62361272c81a04873776ff63a758aea50e96f",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "b6b959c7317c07108896a6d3cd3bc40cf584e109",
+          "committedAtUtc": "2026-11-11T04:50:32.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/b6b959c7317c07108896a6d3cd3bc40cf584e109",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "01057e744943acbd6b7e61f2a6f259b27e978736",
+          "committedAtUtc": "2026-11-11T04:42:57.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/01057e744943acbd6b7e61f2a6f259b27e978736",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "58a2a9713857cfc1b7a8bb9a359365362434afa7",
+          "committedAtUtc": "2026-11-11T04:40:53.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/58a2a9713857cfc1b7a8bb9a359365362434afa7",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "0cf0495257fc2a2af58758b0afc43c67d0ec7e9d",
+          "committedAtUtc": "2026-11-11T04:36:47.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/0cf0495257fc2a2af58758b0afc43c67d0ec7e9d",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "7a13f1c9887822b5e19c91cbbb9049e9c4f05468",
+          "committedAtUtc": "2026-11-11T04:33:32.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/7a13f1c9887822b5e19c91cbbb9049e9c4f05468",
+          "author": "dnfl1999"
+        }
+      ],
+      "releases": [],
+      "authors": [
+        {
+          "login": "dnfl1999",
+          "url": "https://github.com/dnfl1999"
+        }
+      ]
+    },
+    "b": {
+      "selected": {
+        "startDateUtc": "2026-11-14",
+        "endDateUtc": "2026-11-20"
+      },
+      "effective": {
+        "startUtc": "2026-11-14T00:00:00.000Z",
+        "endExclusiveUtc": "2026-11-20T09:12:15.749Z",
+        "lastIncludedUtc": "2026-11-20T09:12:15.748Z"
+      },
+      "durationMs": 551535748,
+      "clipped": true,
+      "coverage": {
+        "commitsComplete": true,
+        "releasesComplete": true,
+        "releaseTypesComplete": true
+      },
+      "counts": {
+        "commits": 17,
+        "releases": 0,
+        "authors": 1,
+        "unlinkedCommits": 0,
+        "generalReleases": 0,
+        "prereleases": 0
+      },
+      "commits": [
+        {
+          "sha": "eab02fe25262768d624ce00bc6c3518328dd404b",
+          "committedAtUtc": "2026-11-20T09:00:35.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/eab02fe25262768d624ce00bc6c3518328dd404b",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "36438e668358d178a608f8592017eff9aabf6388",
+          "committedAtUtc": "2026-11-20T08:53:24.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/36438e668358d178a608f8592017eff9aabf6388",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "d4607ef8fe0cc5997c23dee11d88e074b19998a5",
+          "committedAtUtc": "2026-11-20T08:30:37.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/d4607ef8fe0cc5997c23dee11d88e074b19998a5",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "c042f036de6b77906af6a4bb46ee02b3709769ae",
+          "committedAtUtc": "2026-11-20T08:17:09.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/c042f036de6b77906af6a4bb46ee02b3709769ae",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "c0b4c51a3a497c7cedcfe863e5d1cc1f0f76003f",
+          "committedAtUtc": "2026-11-20T07:43:03.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/c0b4c51a3a497c7cedcfe863e5d1cc1f0f76003f",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "fb00daf5a9ce103cab82a34109ed01da839a2f78",
+          "committedAtUtc": "2026-11-20T07:28:32.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/fb00daf5a9ce103cab82a34109ed01da839a2f78",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "51e690bd2ff00641866ce681bc6aea7d115d70b2",
+          "committedAtUtc": "2026-11-20T06:52:47.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/51e690bd2ff00641866ce681bc6aea7d115d70b2",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "c48ec986538bcf9d5cc3ad117506b1365c53952a",
+          "committedAtUtc": "2026-11-20T06:41:47.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/c48ec986538bcf9d5cc3ad117506b1365c53952a",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "59bc525b22f55651b7c81e46f3b1ac5f4aa8676c",
+          "committedAtUtc": "2026-11-20T06:22:59.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/59bc525b22f55651b7c81e46f3b1ac5f4aa8676c",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "505157fd3b739957a7b640ebf0fbd8f7b055f816",
+          "committedAtUtc": "2026-11-20T06:00:28.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/505157fd3b739957a7b640ebf0fbd8f7b055f816",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "242d03664fe4c75860380a5dc299abfef4b00421",
+          "committedAtUtc": "2026-11-20T04:39:06.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/242d03664fe4c75860380a5dc299abfef4b00421",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "b9dff50600ff3e8230898f1243891aa1928d0290",
+          "committedAtUtc": "2026-11-20T04:29:31.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/b9dff50600ff3e8230898f1243891aa1928d0290",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "3b2dc6c3c225184d8663ae822900206232752a5c",
+          "committedAtUtc": "2026-11-20T03:07:35.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/3b2dc6c3c225184d8663ae822900206232752a5c",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "93d3a82861f21884f8961dff59798c65fc6f9f44",
+          "committedAtUtc": "2026-11-20T02:56:33.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/93d3a82861f21884f8961dff59798c65fc6f9f44",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "c92867b904ce35e569b0d066bc2fa9ec642f0b25",
+          "committedAtUtc": "2026-11-20T02:32:18.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/c92867b904ce35e569b0d066bc2fa9ec642f0b25",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "41189545e5b0e224f958ddeab198043403725e6a",
+          "committedAtUtc": "2026-11-20T02:22:22.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/41189545e5b0e224f958ddeab198043403725e6a",
+          "author": "dnfl1999"
+        },
+        {
+          "sha": "ed39628d7845abba0f12a1bda0167e151f869074",
+          "committedAtUtc": "2026-11-20T02:14:06.000Z",
+          "url": "https://github.com/dnfl1999/memediff/commit/ed39628d7845abba0f12a1bda0167e151f869074",
+          "author": "dnfl1999"
+        }
+      ],
+      "releases": [],
+      "authors": [
+        {
+          "login": "dnfl1999",
+          "url": "https://github.com/dnfl1999"
+        }
+      ]
+    }
+  },
+  "difference": {
+    "direction": "b-minus-a",
+    "commits": -14,
+    "releases": 0
+  },
+  "unequalDurations": true,
+  "overlap": {
+    "exists": false,
+    "effective": null,
+    "observedSharedCommits": 0,
+    "observedSharedReleases": 0
+  },
+  "notes": [
+    "Commits use default-branch committer timestamps. Public releases use their published time.",
+    "UTC end dates are included. The effective end is exclusive; the final captured millisecond is recorded separately.",
+    "Counts reflect observations. Partial counts are lower bounds; null means a value could not be confirmed.",
+    "Count differences describe the selected durations and do not measure work performed or token safety.",
+    "A token address, when present, is user-supplied. This comparison does not establish a token association."
+  ]
+}

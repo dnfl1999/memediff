@@ -1,6 +1,6 @@
 import { readSavedComparison } from './saved-comparison.js';
-import { el, link } from './report-dom.js';
 import { renderPeriodResults } from './period-comparison-view.js';
+import { renderSavedMetadata, renderSavedSources } from './saved-comparison-view.js';
 
 const byId = id => document.getElementById(id);
 const open = byId('saved-comparison-open');
@@ -40,25 +40,9 @@ function closePreview() {
 }
 
 function render(preview) {
-  const { repository, token, observedAt, collection, comparison } = preview;
-  meta.replaceChildren();
-  const fields = [
-    ['Report observed at (UTC)', observedAt], ['Repository', link(repository.name, repository.url)],
-    ['Branch', repository.branch ?? 'Unavailable'], ['Recorded collection (UTC)', `${collection.startUtc} → ${collection.endInclusiveUtc}`]
-  ];
-  if (token) fields.push(['User-supplied token CA', token]);
-  for (const [label, value] of fields) {
-    const description = el('dd');
-    description.append(value);
-    meta.append(el('dt', label), description);
-  }
-  renderPeriodResults(results, comparison, repository.name, 'saved-period');
-  const evidence = [repository.url, ...collection.apiEvidence];
-  sources.replaceChildren(...evidence.map(url => {
-    const item = el('li');
-    item.append(link(url, url));
-    return item;
-  }));
+  renderSavedMetadata(meta, preview);
+  renderPeriodResults(results, preview.comparison, preview.repository.name, 'saved-period');
+  renderSavedSources(sources, preview);
   details.querySelector('details').open = false;
   details.hidden = false;
 }

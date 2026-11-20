@@ -196,7 +196,7 @@ function validateSavedComparison(file) {
     fail('Overlap does not match the UTC periods and evidence.');
   }
   return { repository: file.repository, token: file.userSuppliedTokenCA, observedAt: file.observedAtUtc,
-    collection: file.collection, comparison };
+    collection: file.collection, selected, comparison };
 }
 
 export function parseSavedComparison(raw) {

@@ -203,12 +203,12 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 .hero-actions {
   flex-wrap: wrap;
 }
-#saved-comparison-open {
+#saved-comparison-open, #compare-saved-open {
   max-width: 100%;
   white-space: normal;
 }
 @media (max-width: 760px) {
-  .hero-actions #saved-comparison-open {
+  .hero-actions #saved-comparison-open, .hero-actions #compare-saved-open {
     flex: 1 0 100%;
   }
 }
@@ -227,6 +227,57 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 }
 .saved-comparison-evidence {
   margin-top: 14px;
+}
+.saved-file-comparison {
+  margin: 16px 0;
+  overflow-wrap: anywhere;
+}
+.saved-file-comparison .section-head button,
+.saved-file-comparison .actions button,
+.saved-file-comparison .sha-filters button {
+  white-space: normal;
+}
+.saved-file-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+  margin: 12px 0 16px;
+}
+.saved-file-slots .period-activity {
+  min-width: 0;
+}
+.saved-file-slots legend {
+  padding: 0 4px;
+  font-weight: 650;
+}
+.saved-file-periods {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+.saved-file-original-periods {
+  margin-top: 10px;
+}
+.saved-file-original-periods .period-pair {
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 8px;
+}
+.saved-file-observations {
+  min-width: 0;
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.saved-file-observations h4, .saved-file-comparison h4 {
+  margin: 0;
+}
+.saved-file-observations .sha-filters button {
+  width: auto;
+}
+@media (max-width: 760px) {
+  .saved-file-slots { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 600px) {
   .saved-comparison-meta {

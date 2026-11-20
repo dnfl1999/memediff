@@ -26,6 +26,14 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v2.3 — Compare Two Saved Files
+
+Choose **Compare Two Saved Files** on the homepage and open two version 1 Period Comparison JSON exports, up to 2 MiB each. Each file is checked independently and shown as **Local file · Unverified**. Expand **Original period totals and records** for its saved A/B selections and **Original GitHub links** for its sources. Use two exports that record the same GitHub repository and branch.
+
+The comparison intersects the UTC ranges covered by the saved A/B selections and preserves gaps and millisecond boundaries. Filter SHA and release ID observations by source and page through 20 records at a time. Each source keeps its recorded observation time and any conflicting dates, authors or release details. Records outside the shared ranges and missing evidence from incomplete collection have their own labels. **Unknown** means a count could not be confirmed. **N/A** means the saved selections share no UTC interval.
+
+Once the page is loaded, file reading, comparison and filters work offline without uploads, network requests or storage writes. Clearing a file removes its evidence and the combined result. Closing clears both files. A later recorded timestamp does not verify a data refresh, and an unobserved SHA does not establish a deletion.
+
 ## v2.2 — Saved Period Comparison
 
 Choose **Open Saved Comparison** on the homepage and select a version 1 Period Comparison JSON up to 2 MiB. The browser checks the format, UTC boundaries, observed counts, overlap and GitHub evidence links. The preview shows the file's recorded observation and identifies it as **Local file · Unverified**. Open the individual commit, release and author lists to inspect evidence. Links are visited when you select them.

@@ -1,7 +1,6 @@
-import { formatNumber } from './format.js';
 import { commitSource, overlapSHAs } from './sha-explorer.js';
+import { pagedObservations } from './observation-pagination.js';
 
-const pageSize = 20;
 const filters = {
   all: 'All observations in overlap',
   new: 'Newly observed in overlap',
@@ -75,66 +74,7 @@ export function renderSHAExplorer(previous, current, comparison) {
   }
   section.append(element('p', 'These filters show the shared UTC interval. The 30-day comparison below counts all newly observed SHA values.', 'small'),
     element('p', 'Newly observed does not establish new work. No longer observed does not establish deletion.', 'small'));
-  const lists = { all: rows, new: rows.filter(row => row.category === 'new'), missing: rows.filter(row => row.category === 'missing') };
-  const buttons = element('div', null, 'sha-filters');
-  buttons.setAttribute('role', 'group');
-  buttons.setAttribute('aria-label', 'Filter SHA observations');
-  const count = element('p', null, 'sha-result-count');
-  count.setAttribute('role', 'status');
-  count.setAttribute('aria-live', 'polite');
-  count.setAttribute('aria-atomic', 'true');
-  const list = element('ol', null, 'sha-results');
-  list.id = 'sha-results';
-  list.setAttribute('role', 'list');
-  list.setAttribute('aria-label', 'SHA observations');
-  const nav = element('div', null, 'sha-pagination');
-  const back = element('button', 'Previous page'), forward = element('button', 'Next page');
-  nav.append(back, forward);
-  for (const button of [back, forward]) {
-    button.type = 'button';
-    button.setAttribute('aria-controls', list.id);
-  }
-
-  let active = 'all', page = 0;
-  const filterButtons = Object.entries(filters).map(([key, label]) => {
-    const button = element('button', `${label} (${formatNumber(lists[key].length)})`);
-    button.type = 'button';
-    button.setAttribute('aria-controls', list.id);
-    button.addEventListener('click', () => {
-      active = key;
-      page = 0;
-      update();
-    });
-    buttons.append(button);
-    return [key, button];
-  });
-  back.addEventListener('click', () => {
-    page--;
-    update();
-    if (back.disabled) forward.focus();
-  });
-  forward.addEventListener('click', () => {
-    page++;
-    update();
-    if (forward.disabled) back.focus();
-  });
-
-  function update() {
-    const selected = lists[active];
-    const pages = Math.ceil(selected.length / pageSize);
-    const start = page * pageSize, end = Math.min(start + pageSize, selected.length);
-    for (const [key, button] of filterButtons) button.setAttribute('aria-pressed', String(key === active));
-    list.start = start + 1;
-    list.replaceChildren(...selected.slice(start, end).map(row => renderRow(row, current.repo)));
-    list.hidden = !selected.length;
-    count.textContent = selected.length ? `${formatNumber(selected.length)} ${selected.length === 1 ? 'SHA' : 'SHAs'}. Showing ${start + 1}–${end} · Page ${page + 1} of ${pages}.`
-      : 'No SHA observations match this filter.';
-    nav.hidden = pages < 2;
-    back.disabled = page === 0;
-    forward.disabled = page + 1 >= pages;
-  }
-
-  section.append(buttons, count, list, nav);
-  update();
+  section.append(pagedObservations({ rows, filters, label: 'SHA observations', unit: 'SHA', listId: 'sha-results',
+    renderRow: row => renderRow(row, current.repo) }));
   return section;
 }
