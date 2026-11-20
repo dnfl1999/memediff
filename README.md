@@ -26,6 +26,12 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v2.2 — Saved Period Comparison
+
+Choose **Open Saved Comparison** on the homepage and select a version 1 Period Comparison JSON up to 2 MiB. The browser checks the format, UTC boundaries, observed counts, overlap and GitHub evidence links. The preview shows the file's recorded observation and identifies it as **Local file · Unverified**. Open the individual commit, release and author lists to inspect evidence. Links are visited when you select them.
+
+The preview can open on an already loaded page while offline. It runs independently of the live GitHub report and browser baseline. **Close preview** clears the file's displayed data. Use **Import Previous Report** for a schema 1 snapshot baseline.
+
 ## v2.1 — Period Comparison Export
 
 After applying two UTC periods, choose **Export Comparison JSON** or **Export Comparison PNG**. Editing a date requires applying the selection again. A new GitHub report starts with its own applied defaults.

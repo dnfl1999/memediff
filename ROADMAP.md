@@ -4,11 +4,16 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v2.2 — Saved Period Comparison
+
+- Open a version 1 period export from the homepage in a read-only preview.
+- Recompute observed totals, UTC boundaries, overlap and differences locally, and restrict evidence links to the recorded GitHub sources.
+- For v2.3, consider comparing two saved period files side by side, with a clear source timestamp and collection coverage for each.
+
 ## v2.1 — Period Comparison Export
 
 - Download the applied comparison as a separately versioned JSON with UTC boundaries, coverage and GitHub evidence.
 - Download an independent branded comparison PNG and keep the existing report exports available.
-- For v2.2, consider a local read-only preview for saved Period Comparison files, with format and evidence-link validation.
 
 ## v2.0 — Compare Two Periods
 

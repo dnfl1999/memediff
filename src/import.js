@@ -1,5 +1,6 @@
 import { DAY, isGitBranch, parseRepo, parseToken, summarize, compareSnapshots } from './core.js';
 import { periodExportFormat } from './period-evidence.js';
+import { parseUntrustedJSON, readLocalJSONText } from './local-json.js';
 
 export const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 const fail = message => { throw new Error(message); };
@@ -78,15 +79,12 @@ export function validateImport(data, current) {
 export function parseImport(raw, current) {
   if (typeof raw !== 'string' || new TextEncoder().encode(raw).byteLength > MAX_IMPORT_BYTES) fail('File exceeds the 2 MiB limit.');
   let data;
-  try { data = JSON.parse(raw, (k, v) => { if (['__proto__','prototype','constructor'].includes(k)) fail('Unsafe JSON key.'); return v; }); }
+  try { data = parseUntrustedJSON(raw); }
   catch { fail('Invalid JSON or unsafe structure. Choose an unmodified MemeDiff export.'); }
   return validateImport(data, current);
 }
 export async function readImportFile(file, current) {
-  if (!file || file.size === 0 || file.size > MAX_IMPORT_BYTES) fail('Choose a non-empty JSON file up to 2 MiB.');
-  if (!/\.json$/i.test(file.name)) fail('Choose a .json report file.');
-  let raw; try { raw = await file.text(); } catch { fail('Could not read the selected file.'); }
-  return parseImport(raw, current);
+  return parseImport(await readLocalJSONText(file, MAX_IMPORT_BYTES), current);
 }
 export function importedComparison(previous, current) {
   const result = compareSnapshots(previous, current);

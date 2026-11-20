@@ -196,8 +196,36 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 }
 .period-chart-a { background: var(--lime); }
 .period-chart-b { background: var(--cyan); }
-#period-results .period-pair + .period-pair {
+#period-results .period-pair + .period-pair,
+#saved-comparison-results .period-pair + .period-pair {
   margin-top: 12px;
+}
+.hero-actions {
+  flex-wrap: wrap;
+}
+.saved-comparison-meta {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  gap: 4px 20px;
+  font: 13px/1.7 var(--mono);
+}
+.saved-comparison-meta dt {
+  color: var(--muted);
+}
+.saved-comparison-meta dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.saved-comparison-evidence {
+  margin-top: 14px;
+}
+@media (max-width: 600px) {
+  .saved-comparison-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .saved-comparison-meta dd {
+    margin-bottom: 8px;
+  }
 }
 .period-activity p {
   margin: 6px 0;
