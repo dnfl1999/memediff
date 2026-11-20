@@ -1,4 +1,4 @@
-import {test,expect,downloadReport,openAdvanced} from './helpers.js';
+import {test,expect,downloadReport,downloadPeriodExports,openAdvanced} from './helpers.js';
 import {classifyLiveResponses,limited} from './http-evidence.js';
 import {associationHealth,recordedRefreshFailure} from '../src/index-health.js';
 import {marketObservation,MAX_ASSOCIATION_AGE} from '../src/token-data.js';
@@ -154,6 +154,10 @@ test('LIVE Advanced Search preserves direct GitHub and name search',async({page,
    await comparison.getByLabel(`Period ${key} end date`).fill(last);
  }
  await comparison.getByRole('button',{name:'Compare periods'}).click();
+ const files=await downloadPeriodExports(page,info);
+ expect(files.json.repository).toMatchObject({name:downloaded.repo,branch:downloaded.branch,url:'https://github.com/dnfl1999/memediff'});
+ expect(files.json.collection).toMatchObject({startUtc:downloaded.since,endInclusiveUtc:downloaded.fetchedAt});
+ expect(files.json.observedAtUtc).toBe(downloaded.fetchedAt);
  const number=(n,complete)=>n?new Intl.NumberFormat('en-US').format(n)+(complete?'':' observed'):complete?'0':'Unknown';
  const verified=[];
  for(const [key,start,last] of choices){
@@ -162,6 +166,18 @@ test('LIVE Advanced Search preserves direct GitHub and name search',async({page,
    const shas=new Map(commits.filter(row=>contains(row.commit.committer.date)).map(row=>[row.sha.toLowerCase(),row]));
    const publicReleases=new Map(releases.filter(row=>!row.draft&&contains(row.published_at)).map(row=>[row.id,row]));
    const linkedAuthors=new Set([...shas.values()].map(row=>row.author?.login?.toLowerCase()).filter(Boolean));
+   const unlinked=[...shas.values()].filter(row=>!row.author?.login).length;
+   const exported=files.json.periods[key.toLowerCase()];
+   const confirmed=(count,complete)=>count||complete?count:null;
+   expect(exported.selected).toEqual({startDateUtc:start,endDateUtc:last});
+   expect(exported.effective).toEqual({startUtc:new Date(from).toISOString(),endExclusiveUtc:new Date(until).toISOString(),lastIncludedUtc:new Date(until-1).toISOString()});
+   expect(exported.counts).toMatchObject({commits:confirmed(shas.size,downloaded.coverage.commits),
+     releases:confirmed(publicReleases.size,downloaded.coverage.releases),authors:confirmed(linkedAuthors.size,downloaded.coverage.commits),
+     unlinkedCommits:confirmed(unlinked,downloaded.coverage.commits)});
+   expect(exported.commits.map(row=>row.sha.toLowerCase()).sort()).toEqual([...shas.keys()].sort());
+   for(const row of exported.commits)expect(row.url).toBe(`https://github.com/dnfl1999/memediff/commit/${row.sha}`);
+   expect(exported.releases.map(row=>row.id).sort()).toEqual([...publicReleases.keys()].sort());
+   for(const row of exported.releases)expect(row.url).toBe(publicReleases.get(row.id).html_url);
    await expect(comparison.getByRole('link',{name:`Period ${key} commits evidence: ${number(shas.size,downloaded.coverage.commits)}`,exact:true})).toBeVisible();
    await expect(comparison.getByRole('link',{name:`Period ${key} releases evidence: ${number(publicReleases.size,downloaded.coverage.releases)}`,exact:true})).toBeVisible();
    const card=comparison.getByRole('article',{name:`Period ${key} evidence`});
@@ -180,6 +196,6 @@ test('LIVE Advanced Search preserves direct GitHub and name search',async({page,
  expect(requests).toHaveLength(requestCount);
  await info.attach('LIVE-period-comparison',{contentType:'application/json',body:JSON.stringify({repo:downloaded.repo,branch:downloaded.branch,
    since:downloaded.since,observedAt:downloaded.fetchedAt,coverage:downloaded.coverage,verifiedAgainstGitHubResponses:true,
-   additionalAPIRequests:requests.length-requestCount,periods:verified})});
+   additionalAPIRequests:requests.length-requestCount,periods:verified,json:files.jsonFile,png:files.pngFile})});
  await page.locator('#advanced details > summary').click();await page.locator('#search-name').fill('memediff');await page.locator('#search-submit').click();await expect(page.locator('#search-submit')).toBeEnabled({timeout:20000});await evidence(responses,diagnostics,info);await expect(page.locator('#discovery-results button').first()).toBeVisible();
 });

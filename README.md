@@ -26,6 +26,14 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v2.1 — Period Comparison Export
+
+After applying two UTC periods, choose **Export Comparison JSON** or **Export Comparison PNG**. Editing a date requires applying the selection again. A new GitHub report starts with its own applied defaults.
+
+The JSON format is `memediff-period-comparison` version 1. It records the selected dates, effective UTC timestamps, elapsed duration, overlap, coverage, observed counts, and GitHub evidence. `endExclusiveUtc` and `lastIncludedUtc` preserve millisecond boundaries. A count of `null` means the collection could not confirm it. The separate schema 1 report is the file accepted by baseline import.
+
+The branded 1400 × 1080 PNG prints each period, both charts, GitHub source and coverage. Its URLs are plain text. Use the comparison JSON for source links. Both files are created in the browser from the current observation without additional API requests. The size limits are 2 MiB for JSON and 8 MiB for PNG.
+
 ## v2.0 — Compare Two Periods
 
 Open **Compare Two Periods** in a live GitHub report. Select two UTC date ranges inside the report’s 30-day collection and choose **Compare periods**. The end date is inclusive. The first and last collection dates are clipped to the timestamps the report captured. The initial selection compares two adjacent seven-day periods ending yesterday UTC.

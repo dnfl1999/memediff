@@ -1,5 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
 import { expectedBrowserError } from './http-evidence.js';
 export { expect };
@@ -48,15 +49,20 @@ export async function analyze(page, repo = 'fixture/project') {
   await expect(page.locator('#report')).toBeVisible();
   await expect(page.locator('#analyze')).toBeEnabled();
 }
-export async function downloadReport(page, type, testInfo) {
+async function readDownload(page, button, type, testInfo, attachment = `download-${type}`) {
   const pending = page.waitForEvent('download');
-  await page.locator(`#${type}`).click();
+  await button.click();
   const file = await pending;
   expect(await file.failure()).toBeNull();
-  const path = testInfo.outputPath(file.suggestedFilename());
+  const name = file.suggestedFilename();
+  const path = testInfo.outputPath(name);
   await file.saveAs(path);
-  await testInfo.attach(`download-${type}`, { path, contentType: type === 'png' ? 'image/png' : 'application/json' });
-  const bytes = await readFile(path);
+  await testInfo.attach(attachment, { path, contentType: type === 'png' ? 'image/png' : 'application/json' });
+  return { name, path, bytes: await readFile(path) };
+}
+
+export async function downloadReport(page, type, testInfo) {
+  const { bytes, path } = await readDownload(page, page.locator(`#${type}`), type, testInfo);
   if (type === 'json') return JSON.parse(bytes.toString('utf8'));
   const png = PNG.sync.read(bytes, { checkCRC: true });
   expect(png.width).toBe(1400); expect([1020,1260]).toContain(png.height);
@@ -65,4 +71,57 @@ export async function downloadReport(page, type, testInfo) {
   for (let i = 0; i < png.data.length; i += 4) colors.add(png.data.readUInt32BE(i));
   expect(colors.size, 'PNG must contain rendered content, not a blank canvas').toBeGreaterThan(100);
   return { path, width: png.width, height: png.height, colors: colors.size };
+}
+
+export async function downloadPeriodExports(page, info) {
+  const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+  const file = await readDownload(page, page.locator('#period-export-json'), 'json', info, 'period-export-json');
+  const json = JSON.parse(file.bytes.toString('utf8'));
+  expect(file.name).toMatch(/^memediff-period-comparison-.+\.json$/);
+  expect([json.format, json.version]).toEqual(['memediff-period-comparison', 1]);
+  await expect.poll(() => page.locator('header .brand-icon').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
+  await page.evaluate(() => {
+    const text = CanvasRenderingContext2D.prototype.fillText, drawImage = CanvasRenderingContext2D.prototype.drawImage;
+    window.periodCanvasProof = { text: [], images: 0 };
+    CanvasRenderingContext2D.prototype.fillText = function (value, x, y, ...rest) {
+      if (this.canvas.width === 1400 && this.canvas.height === 1080) window.periodCanvasProof.text.push({ value, x, y });
+      return text.call(this, value, x, y, ...rest);
+    };
+    CanvasRenderingContext2D.prototype.drawImage = function (...args) {
+      if (this.canvas.width === 1400 && this.canvas.height === 1080) window.periodCanvasProof.images++;
+      return drawImage.apply(this, args);
+    };
+  });
+  const pngFile = await readDownload(page, page.locator('#period-export-png'), 'png', info, 'period-export-png');
+  expect(pngFile.name).toBe(file.name.replace(/\.json$/, '.png'));
+  const png = PNG.sync.read(pngFile.bytes, { checkCRC: true });
+  expect([png.width, png.height]).toEqual([1400, 1080]);
+  const trace = await page.evaluate(() => window.periodCanvasProof);
+  expect(trace.images).toBe(1);
+  const number = (value, complete) => value === null ? 'Unknown' : new Intl.NumberFormat('en-US').format(value) + (complete ? '' : '+');
+  const at = (x, y) => trace.text.find(call => call.x === x && call.y === y)?.value;
+  const renderedCounts = {};
+  for (const [i, key] of ['a', 'b'].entries()) {
+    const period = json.periods[key], x = [60, 710][i];
+    expect(at(x + 20, 336)).toBe(period.effective.startUtc);
+    expect(at(x + 20, 362)).toBe(`through ${period.effective.lastIncludedUtc}`);
+    const values = [at(x + 20, 455), at(x + 218, 455), at(x + 416, 455)];
+    expect(values).toEqual([number(period.counts.commits, period.coverage.commitsComplete),
+      number(period.counts.releases, period.coverage.releasesComplete), number(period.counts.authors, period.coverage.commitsComplete)]);
+    renderedCounts[key] = values;
+    for (const [chart, kind] of ['commits', 'releases'].entries()) {
+      const value = period.counts[kind], start = [103, 753][chart], y = 598 + i * 36;
+      const color = [[168, 255, 50], [99, 216, 223]][i];
+      const scale = Math.max(1, json.periods.a.counts[kind] ?? 0, json.periods.b.counts[kind] ?? 0);
+      let colored = 0;
+      for (let pixel = start; pixel < start + 438; pixel++) {
+        const offset = (y * png.width + pixel) * 4;
+        if (color.every((component, offsetInPixel) => component === png.data[offset + offsetInPixel])) colored++;
+      }
+      expect(Math.abs(colored - 438 * (value ?? 0) / scale)).toBeLessThanOrEqual(1);
+    }
+  }
+  return { json, jsonFile: { name: file.name, bytes: file.bytes.length, sha256: sha256(file.bytes) },
+    pngFile: { name: pngFile.name, bytes: pngFile.bytes.length, sha256: sha256(pngFile.bytes), width: png.width,
+      height: png.height, renderedCounts, measuredBars: true, logoDrawn: trace.images === 1 } };
 }

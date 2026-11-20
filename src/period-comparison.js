@@ -1,11 +1,11 @@
 import { DAY, utcMillis } from './core.js';
+import { githubLogin } from './period-evidence.js';
 
 const dateOnly = value => new Date(value).toISOString().slice(0, 10);
 const dateStart = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)
   ? utcMillis(`${value}T00:00:00Z`) : NaN;
 const shaKey = value => typeof value === 'string' && /^[0-9a-f]{40}$/i.test(value) ? value.toLowerCase() : null;
 const releaseKey = value => Number.isSafeInteger(value) && value > 0 ? value : null;
-const account = value => typeof value === 'string' && /^[a-z0-9](?:[a-z0-9-]{0,99})(?:\[bot\])?$/i.test(value) ? value : null;
 
 export function periodBounds(report) {
   const start = utcMillis(report?.since), end = utcMillis(report?.fetchedAt);
@@ -56,7 +56,7 @@ function periodActivity(window, commits, releases) {
   const inside = row => row.at >= window.from && row.at < window.until;
   const byTime = (a, b) => b.at - a.at;
   const observedCommits = [...commits.rows.values()].filter(inside).sort(byTime)
-    .map(row => ({ ...row, author: account(row.author) }));
+    .map(row => ({ ...row, author: githubLogin(row.author) }));
   const observedReleases = [...releases.rows.values()].filter(inside).sort(byTime);
   const authors = new Map();
   let unlinked = 0;

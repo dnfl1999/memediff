@@ -161,6 +161,13 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 .period-comparison button[type="submit"] {
   margin-top: 12px;
 }
+.period-exports {
+  margin: 12px 0 16px;
+}
+.period-exports button {
+  white-space: normal;
+  text-align: left;
+}
 .period-chart-row {
   display: grid;
   grid-template-columns: 1.2em minmax(0, 1fr) 7.2em;

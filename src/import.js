@@ -1,4 +1,5 @@
 import { DAY, isGitBranch, parseRepo, parseToken, summarize, compareSnapshots } from './core.js';
+import { periodExportFormat } from './period-evidence.js';
 
 export const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 const fail = message => { throw new Error(message); };
@@ -20,6 +21,7 @@ function url(value, host, prefix) {
   if (u.protocol !== 'https:' || u.hostname !== host || u.port || u.username || u.password || !u.pathname.toLowerCase().startsWith(prefix.toLowerCase())) fail('Invalid or unrelated evidence URL.');
 }
 export function validateImport(data, current) {
+  if (data?.format === periodExportFormat) fail('This file is a Period Comparison export. Choose a MemeDiff schema 1 report to import a baseline.');
   shape(data, ['schema','source','repo','token','branch','fetchedAt','since','description','fork','parent','archived','commits','releases','metrics','coverage','remaining','evidence','warnings','methodology'], ['comparison','selectedDays','baselineOrigin']);
   if (data.schema !== 1) fail('Unsupported schema. Choose a MemeDiff schema 1 JSON report.');
   if (data.source !== 'github-live') fail('Unsupported source. Expected github-live. This label does not authenticate a file.');

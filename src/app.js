@@ -8,6 +8,7 @@ import { commitSource } from './sha-explorer.js';
 import { renderSHAExplorer } from './sha-explorer-ui.js';
 import { bindPeriodComparison } from './period-comparison-ui.js';
 import { el, link } from './report-dom.js';
+import { downloadBlob, pngCanvas } from './download.js';
 const $ = id => document.getElementById(id);
 const setPeriodReport = bindPeriodComparison($('period-comparison'));
 let report = null, comparison = null, days = 30, controller = null;
@@ -122,14 +123,16 @@ $('cancel').addEventListener('click', () => controller?.abort());
 document.querySelectorAll('[data-days]').forEach(b => b.addEventListener('click', () => { days = Number(b.dataset.days); document.querySelectorAll('[data-days]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); if (report) render(); }));
 $('save').addEventListener('click', () => { if (!report) return; try { localStorage.setItem(key(), JSON.stringify(report)); resetImport(); loadBaseline(); renderComparison(); status('Report saved as the baseline in this browser. It will be used for the next query.'); } catch { status('Could not save the baseline. Check browser storage and privacy settings.', true); } });
 $('clear').addEventListener('click', () => { if (!report) return; try { localStorage.removeItem(key()); resetImport(); setComparison(); renderComparison(); status('Local baseline cleared for this project.'); } catch { status('Could not access browser storage.', true); } });
-function download(blob, extension, snapshot = report) { const url = URL.createObjectURL(blob); const a = el('a'); a.href = url; a.download = `memediff-${snapshot.repo.replace('/', '-')}-${snapshot.fetchedAt.slice(0,10)}.${extension}`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000); }
+function download(blob, extension, snapshot = report) {
+  downloadBlob(blob, `memediff-${snapshot.repo.replace('/', '-')}-${snapshot.fetchedAt.slice(0,10)}.${extension}`);
+}
 $('json').addEventListener('click', () => { if (report) { download(new Blob([JSON.stringify({ ...report, comparison, selectedDays: days }, null, 2)], { type:'application/json' }), 'json'); status('JSON export requested. Check your browser downloads.'); } });
 $('png').addEventListener('click', () => {
   if (!report) return;
   const snapshot = report;
   try {
-    const canvas = document.createElement('canvas'); canvas.width = 1400; canvas.height = comparison ? 1260 : 1020;
-    drawReceipt(canvas.getContext('2d'), snapshot, days, comparison);
+    const { canvas, context } = pngCanvas(1400, comparison ? 1260 : 1020);
+    drawReceipt(context, snapshot, days, comparison);
     canvas.toBlob(blob => { if (blob) { download(blob,'png',snapshot); status('PNG export requested. Check your browser downloads.'); } else status('Could not generate the PNG.',true); },'image/png');
   } catch { status('This browser could not generate the PNG. Use JSON export instead.', true); }
 });

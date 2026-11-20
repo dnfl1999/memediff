@@ -1,6 +1,7 @@
 import { DAY, inWindow, safeLink } from './core.js';
 import { formatNumber } from './format.js';
 import { timelineRows, utcRange } from './timeline.js';
+import { canvasText, canvasLines } from './canvas-text.js';
 
 // Reuses the observed report. This is a shareable summary, not a new data source.
 export function receiptData(report, days, comparison) {
@@ -33,21 +34,11 @@ export function drawReceipt(ctx, report, days, comparison) {
   const ink = '#eaf4df', green = '#a8ff32', muted = '#b5c4c7', amber = '#f1cc8c';
   const extra = comparison ? 240 : 0;
   ctx.fillStyle = '#080a0b'; ctx.fillRect(0, 0, 1400, 1020 + extra);
-  function text(value, x, y, size = 22, color = ink, width = 1280) {
-    ctx.fillStyle = color; ctx.font = `${size}px "Segoe UI", sans-serif`;
-    let display = String(value);
-    while (ctx.measureText(display).width > width && display.length > 1) display = display.slice(0, -2) + '…';
-    ctx.fillText(display, x, y);
-  }
+  const text = canvasText(ctx, ink);
   function urlLines(value, y) {
     // Split long URLs without ellipsis: the entire source must remain readable.
     ctx.fillStyle = green; ctx.font = '18px ui-monospace, monospace';
-    let line = '', row = 0;
-    for (const char of value) {
-      if (ctx.measureText(line + char).width > 1280) { ctx.fillText(line, 60, y + row++ * 24); line = ''; }
-      line += char;
-    }
-    ctx.fillText(line, 60, y + row * 24);
+    canvasLines(ctx, value, 1280).forEach((line, row) => ctx.fillText(line, 60, y + row * 24));
   }
   text('± MemeDiff / PUBLIC GITHUB OBSERVATION', 60, 48, 22, green);
   text('Development Receipt', 60, 98, 38);

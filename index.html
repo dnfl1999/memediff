@@ -77,6 +77,14 @@
           <button type="submit">Compare periods</button>
         </form>
         <p id="period-status" class="small" role="status" aria-live="polite"></p>
+        <div class="period-exports">
+          <div class="actions" role="group" aria-label="Period comparison downloads">
+            <button id="period-export-json" type="button" aria-describedby="period-export-help" disabled>Export Comparison JSON</button>
+            <button id="period-export-png" type="button" aria-describedby="period-export-help" disabled>Export Comparison PNG</button>
+          </div>
+          <p id="period-export-help" class="small">Comparison files cover the applied periods. JSON contains the source links and uses a separate format from baseline snapshots. PNG links are printed text.</p>
+          <p id="period-export-status" class="small" aria-live="polite"></p>
+        </div>
         <div id="period-results" hidden></div>
       </section>
       <details class="panel"><summary>Original API evidence and collection scope</summary><p id="coverage"></p><ul id="sources" class="source-list"></ul></details>
