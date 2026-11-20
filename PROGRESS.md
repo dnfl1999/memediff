@@ -2,6 +2,20 @@
 
 기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v2.1 Period Comparison Export (2026-11-20)
+
+인증 계정 `dnfl1999`와 로컬·원격 `main`의 기준 SHA `c0b4c51a3a497c7cedcfe863e5d1cc1f0f76003f`를 확인했습니다. 시작 시 미커밋 변경은 0건이었습니다. 공개 홈페이지와 117개 연결이 담긴 인덱스는 HTTP 200을 반환했고, 공식 Forks DNS는 `ENOTFOUND`였습니다.
+
+Compare Two Periods의 적용된 결과를 별도 JSON과 1400 × 1080 PNG로 내보냅니다. JSON은 `memediff-period-comparison` 버전 1을 사용하며, 선택 날짜와 실제 UTC 밀리초 경계, 관측 수치, 중복, 수집 상태, GitHub 원본 링크를 기록합니다. PNG는 두 기간과 차트, 수집 상태, 일반 텍스트 URL을 담습니다. 날짜 변경이나 새 분석 시 이전 결과의 내보내기를 무효화하고, 이미 인코딩 중인 이전 이미지도 다운로드되지 않도록 확인합니다.
+
+로컬 단위 164건, 전체 PC·모바일 모의 E2E 128건, 내보내기 집중 E2E 6건이 통과했습니다. 모의 브라우저의 JSON을 재파싱하고 PNG를 디코딩해 수치와 막대 픽셀을 검사했습니다. 로컬 첫 실제 API 실행은 GitHub HTTP 403·잔여 요청 0건으로 2건 통과·3건 건너뜀이었습니다.
+
+기능 커밋 `c042f036de6b77906af6a4bb46ee02b3709769ae`의 [공개 배포](https://github.com/dnfl1999/memediff/actions/runs/44701320792)에서 verify, deploy, public-qa, diagnostics가 성공했습니다. 단위 164건, 배포 전·공개 모의 E2E 각각 128건, 공개 실제 API 5건이 통과했습니다. 각 실패·건너뜀은 0건입니다.
+
+공개 사이트에서 실제로 내려받은 파일을 [브라우저 QA 원본](https://github.com/dnfl1999/memediff/actions/runs/44701320792/artifacts/14613052613)에서 추출했습니다. 11월 20일 08:25:25.774 UTC의 MEMEDIFF `main` 관측에서 A(11월 7–13일)는 고유 커밋 31건, B(11월 14–20일, 조회 시각까지)는 14건이었습니다. 공개 릴리스는 각각 0건, 연결된 작성자는 각각 1명이었습니다. JSON 15,775바이트, PNG 211,004바이트의 SHA-256을 확인했습니다. 실제 JSON을 GitHub 응답과 대조하고, 1400 × 1080 PNG 숫자·막대 픽셀·로고를 확인했습니다. 내보내기 중 추가 GitHub·DexScreener API 요청은 0건이었습니다.
+
+공개 홈, 기존 공유 링크, 새 내보내기 모듈, 인덱스가 HTTP 200이었습니다. 공식 Forks는 여전히 `ENOTFOUND`였고 신규 검증은 0건입니다. 기존 117개 연결과 검증 시각은 배포 전 공개본과 일치했습니다. [스키마 2 진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/44701320792/artifacts/14613318391)과 과거 스키마 1·2 ZIP을 다시 읽었습니다. [읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/44702581959)는 새 진단을 표시하고 Issue #1 댓글 예정으로 판정했습니다. 실제 Issue는 열림·댓글 0건입니다. [상세 QA 증거](docs/v21-qa.json)
+
 ## v2.0 Compare Two Periods (2026-11-20)
 
 인증 계정 `dnfl1999`, 로컬·원격 기준 커밋 `51e690bd2ff00641866ce681bc6aea7d115d70b2`, 미커밋 변경 0건을 확인했습니다. 시작 시 공개 홈페이지와 117개 연결이 담긴 인덱스는 HTTP 200이었고, 공식 Forks는 DNS `ENOTFOUND`를 반환했습니다. [이전 Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/44689623654)
