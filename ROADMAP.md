@@ -4,6 +4,12 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v1.6 — Index health
+
+- Show exact-CA verification state and age in the token result, with a path to Advanced Search when automatic analysis is unavailable.
+- Report fresh verifications, retained records, expiry and diagnosed failures in Actions. Protect the published index during incomplete or unavailable upstream responses.
+- Verify the current public state and the 48-hour guard separately. Capture actual API and fallback evidence in [PROGRESS](PROGRESS.md).
+
 ## v1.5 — SHA Explorer
 
 The explorer displays overlap observations from the active comparison. Release results are tracked in [PROGRESS](PROGRESS.md).

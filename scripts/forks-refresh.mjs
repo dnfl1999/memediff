@@ -4,6 +4,7 @@ import { dirname } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 import { parseToken } from '../src/core.js';
 import { LookupError, OFFICIAL_CA, readJSON, verifyForksCoin } from '../src/token-data.js';
+import { verificationWindow } from '../src/index-health.js';
 
 const forkAPI = 'https://forks.wiki/api';
 const recentURL = `${forkAPI}/tokens/recent`;
@@ -35,9 +36,9 @@ async function request(url, { fetcher, log, signal, wait, timeout }) {
       const transient = category === 'timeout' || category === 'tcp' || category === 'network' || codes.includes('EAI_AGAIN');
       const retry = attempt === 1 && !signal.aborted && !error.retryAfter && (transient || temporaryHTTP.has(error.status));
       const endpoint = new URL(url);
-      log({ event: 'request-error', at: new Date().toISOString(), endpoint: endpoint.origin + endpoint.pathname,
-        attempt, category, codes, status: error.status ?? null, retry });
-      if (!retry) throw error;
+      const failure = { endpoint: endpoint.origin + endpoint.pathname, category, codes, status: error.status ?? null };
+      log({ event: 'request-error', at: new Date().toISOString(), ...failure, attempt, retry });
+      if (!retry) { error.failure = failure; throw error; }
       await wait(750, undefined, { signal });
     }
   }
@@ -73,23 +74,50 @@ async function writeIndex(path, index) {
   }
 }
 
+export function summarizeIndexHealth(index, now = Date.now()) {
+  if (!index) return null;
+  const observations = index.entries.map(entry => ({ entry, window: verificationWindow(entry.checkedAt, now) }));
+  const counts = { fresh: 0, expiring: 0, expired: 0, invalid: 0 };
+  const next = [];
+  let latestVerifiedAt = null;
+  for (const { entry, window } of observations) {
+    counts[window?.state ?? 'invalid']++;
+    if (!window) continue;
+    if (!latestVerifiedAt || entry.checkedAt > latestVerifiedAt) latestVerifiedAt = entry.checkedAt;
+    if (window.state !== 'expired') next.push(window.expiresAt);
+  }
+  const official = observations.find(({ entry }) => entry.mint === OFFICIAL_CA);
+  return { indexCheckedAt: index.checkedAt, lastVerifiedAt: latestVerifiedAt, counts, entryCount: observations.length,
+    nextExpiry: next.length ? new Date(Math.min(...next)).toISOString() : null,
+    official: official?.window ? { state: official.window.state, verifiedAt: official.entry.checkedAt,
+      expiresAt: new Date(official.window.expiresAt).toISOString() } : null };
+}
+
 export async function refreshForksIndex({ path, local, allowDeployedFallback = false, fetcher = fetch,
-  log = value => console.log(JSON.stringify(value)), wait = delay, timeout = 8000, signal = AbortSignal.timeout(120000) }) {
+  log = value => console.log(JSON.stringify(value)), wait = delay, timeout = 8000, signal = AbortSignal.timeout(120000), runId }) {
   const options = { fetcher, log, signal, wait, timeout };
-  let published;
-  let previous;
+  const warn = event => log({ ...event, at: new Date().toISOString() });
+  const failed = (error, stage, index = null) => {
+    const failure = { stage, ...(error.failure ?? { category: error.kind ?? 'unavailable', status: null }) };
+    error.refresh = { failure, health: summarizeIndexHealth(index) };
+    warn({ event: 'index-refresh-failed', ...error.refresh });
+    return failure;
+  };
+  let published, previous;
   try {
     published = await request(publishedURL, options);
     previous = indexEntries(published);
-  } catch { /* The request recorded the reason. A fresh index can still be built. */ }
-  const history = new Map([...(indexEntries(local) ?? []), ...(previous ?? [])]);
-  const warn = event => log({ ...event, at: new Date().toISOString() });
+    if (!previous) throw new LookupError('data', 'Published index failed validation. The deployment artifact was left untouched.');
+  } catch (error) {
+    failed(error, 'published-index');
+    throw error;
+  }
 
   async function collect() {
     const recent = await request(recentURL, options);
     if (recent?.ok !== true || !Array.isArray(recent.tokens)) throw new LookupError('data', 'Invalid recent Forks listing.');
     const candidates = new Set([OFFICIAL_CA]);
-    for (const item of [...recent.tokens, ...history.values()]) {
+    for (const item of [...previous.values(), ...recent.tokens, ...(indexEntries(local)?.values() ?? [])]) {
       try {
         const mint = parseToken(item?.mint);
         if (mint) candidates.add(mint);
@@ -99,8 +127,13 @@ export async function refreshForksIndex({ path, local, allowDeployedFallback = f
     const entries = [], failures = [];
     const verify = async mint => {
       const data = await request(`${forkAPI}/coin?mint=${mint}`, options);
-      if (data?.ok !== true || !data.coin) throw new LookupError('data', 'Invalid Forks coin response.');
-      return verifyForksCoin(mint, data);
+      if (data?.ok !== true || data.coin?.mint !== mint || typeof data.coin.kind !== 'string' || !data.coin.kind) {
+        throw new LookupError('data', 'Incomplete Forks coin response.');
+      }
+      if (data.coin.kind !== 'forks') return null;
+      const record = verifyForksCoin(mint, data);
+      if (!record) throw new LookupError('data', 'Invalid Forks repository association in response.');
+      return record;
     };
     const official = await verify(OFFICIAL_CA);
     if (official?.repo !== officialRepo) throw new LookupError('verification', 'Official MemeDiff association could not be reverified.');
@@ -120,7 +153,7 @@ export async function refreshForksIndex({ path, local, allowDeployedFallback = f
           }
         } catch (error) {
           if (error.status === 403 || error.status === 429) stop = error;
-          const prior = history.get(mint);
+          const prior = previous.get(mint);
           if (prior) entries.push(prior);
           failures.push({ mint, reason: error.kind ?? 'unavailable', retained: Boolean(prior) });
         }
@@ -137,24 +170,34 @@ export async function refreshForksIndex({ path, local, allowDeployedFallback = f
       sources: [recentURL, `${forkAPI}/coin?mint={CA}`],
       coverage: { recentCount: recent.tokens.length, candidateCount: candidates.size, attempted: mints.length,
         verified, retained: entries.length - verified, cap, capped: candidates.size > cap, pagination: 'Unconfirmed' },
-      warnings: previous ? [] : ['Published index unavailable or invalid. The checked-in history was used.'],
+      warnings: [],
       failures, entries
     };
   }
 
-  let index;
+  let index, failure;
   let status = 'refreshed';
   try {
     index = await collect();
     if (!indexEntries(index)) throw new LookupError('verification', 'Generated index failed validation.');
   } catch (error) {
-    warn({ event: 'index-refresh-failed', category: error.kind ?? 'unavailable', status: error.status ?? null });
-    if (!allowDeployedFallback || !previous) throw error;
+    failure = failed(error, 'forks-refresh', published);
+    if (!allowDeployedFallback) throw error;
     index = published;
     status = 'retained-published-index';
   }
 
-  await writeIndex(path, index);
-  warn({ event: 'index-result', status, checkedAt: index.checkedAt, coverage: index.coverage, entryCount: index.entries.length });
-  return { status, index };
+  const at = new Date().toISOString(), retained = status === 'retained-published-index';
+  if (typeof runId === 'string' && /^[1-9]\d{0,19}$/.test(runId)) {
+    index = { ...index, operation: { at, runId, indexCheckedAt: index.checkedAt,
+      outcome: retained ? 'retained' : 'refreshed', ...(failure ? { failure } : {}) } };
+  }
+  const health = summarizeIndexHealth(index, Date.parse(at));
+  const freshlyVerified = retained ? 0 : index.coverage.verified;
+  const retainedCount = retained ? health.entryCount : index.coverage.retained;
+  try { await writeIndex(path, index); }
+  catch (error) { failed(error, 'artifact-write', published); throw error; }
+  const result = { status, index, failure, health, freshlyVerified, retainedCount };
+  warn({ event: 'index-result', status, failure, health, freshlyVerified, retainedCount });
+  return result;
 }

@@ -20,11 +20,17 @@ See the [website-link audit and platform update guide](docs/WEBSITE_LINKS.md) fo
 
 **Advanced Search — GitHub repository** keeps direct GitHub URL / `owner/repo` analysis, the optional recorded token address, and repository-name search. A manually entered address does not verify a token relationship.
 
-Forks currently blocks cross-origin browser reads. A limited index is refreshed on deployment and scheduled every six hours by GitHub Actions. Recent listings and previously observed CA history are individually rechecked against `coin.mint`, `coin.kind=forks` and explicit `coin.repo`; associations older than 48 hours are not auto-used. Neither full-list pagination nor exhaustive coverage is confirmed. No name/ticker matching is used. See [data flow, evidence and limitations](docs/DISCOVERY.md).
+Forks currently blocks cross-origin browser reads. GitHub Actions refreshes a limited index from recent listings and previously observed CA history, checking `coin.mint`, `coin.kind=forks` and the explicit `coin.repo`. Full-list pagination remains unconfirmed. See [data flow, evidence and limitations](docs/DISCOVERY.md).
 
 The public app uses no wallet, paid API or login. An optional restrictive [read-only Worker design](serverless/README.md) is supplied for future arbitrary live Forks lookups, but is **not deployed or called by this site**. External account connection and deployment require owner approval.
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
+
+## v1.6 — Index health
+
+After a CA lookup, **Index health** shows the last verification in UTC, its age, the 48-hour validity period, remaining time and the published source. **Fresh** associations can start automatic GitHub analysis. **Expiring soon** covers the final six hours of validity and routes users to Advanced Search for direct repository analysis. **Expired** applies after 48 hours. **Not indexed**, **Unavailable**, and **Invalid / Ambiguous** cover absent, unreadable, malformed and duplicate records. Timing is based on the browser clock. Market lookup is independent of the index, and a direct GitHub report does not establish a CA association.
+
+A dated refresh warning appears when the published snapshot includes an Actions record for a failed refresh and reuse of that snapshot. The warning links to the run. CI tracks fresh verifications, retained records and upcoming expiry. It validates the existing public index before preparing a replacement. JSON schema 1 and browser baseline storage retain their existing formats. [Operations and coverage](docs/DISCOVERY.md#refresh-and-coverage)
 
 ## v1.5 — SHA Explorer
 
@@ -127,7 +133,7 @@ To test the public site, set `E2E_BASE_URL=https://dnfl1999.github.io/memediff/`
 
 ## Deployment
 
-GitHub Pages uses GitHub Actions. The workflow runs unit tests and Linux Chromium desktop/mobile tests before preparing the Forks index and deploying `dist/` from main. A failed scheduled refresh preserves the published site. Code and manual deploys can reuse the validated published index with its prior timestamps. The workflow then runs mocked and live API tests against the public URL. Reports, downloads and screenshots are retained as Actions artifacts for 14 days. [Pages workflow](.github/workflows/pages.yml) · [Index operation](docs/DISCOVERY.md)
+GitHub Pages uses GitHub Actions. The workflow runs unit tests and Linux Chromium desktop/mobile tests before preparing the Forks index and deploying `dist/` from main. A failed scheduled refresh preserves the published site. Code and manual deploys can reuse the validated published index with its prior timestamps. The workflow then runs mocked and live API tests against the public URL. Live QA tests automatic analysis when the observed CA is Fresh, checks the blocked path when the record is no longer Fresh, and exercises the 48-hour expiry guard with the browser clock controlled and the actual published index. Reports, downloads and screenshots are retained as Actions artifacts for 14 days. [Pages workflow](.github/workflows/pages.yml) · [Index operation](docs/DISCOVERY.md)
 
 The repository administration helper checks the authenticated account is `dnfl1999`. Its default `inspect` action is read-only. It uses existing Git credentials in memory and does not create login sessions or tokens.
 

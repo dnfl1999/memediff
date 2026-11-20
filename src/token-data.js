@@ -22,7 +22,7 @@ export async function readJSON(url,{fetcher=fetch,signal,timeout=10000}={}) {
       if(r.status===429)throw new LookupError('rate-limit',`API request limit (429). ${details.retryAfter?`Retry after ${details.retryAfter}.`:'Please try again later.'} No automatic retry was made.`,details);
       throw new LookupError('http',`Source unavailable (HTTP ${r.status}).`,details);
     }
-    try{return await r.json();}catch(e){if(controller.signal.aborted)throw e;throw new LookupError('data','Source returned unreadable data.');}
+    try{return await r.json();}catch(e){if(controller.signal.aborted||!(e instanceof SyntaxError))throw e;throw new LookupError('data','Source returned unreadable data.');}
   }catch(e){
     if(timedOut)throw new LookupError('timeout','Source timed out. Please try again later.');
     if(signal?.aborted)throw new LookupError('canceled','Token analysis canceled.');
@@ -34,17 +34,6 @@ export function verifyForksCoin(input,data,checkedAt=new Date().toISOString()){
   const mint=parseToken(input),coin=data?.coin;
   if(!mint||data?.ok!==true||coin?.kind!=='forks'||coin.mint!==mint||typeof coin.repo!=='string'||coin.repo.includes('://'))return null;
   try{return{mint,repo:parseRepo(coin.repo),kind:'forks',checkedAt,source:`https://forks.wiki/api/coin?mint=${mint}`,name:typeof coin.name==='string'?coin.name.slice(0,120):null,symbol:typeof coin.symbol==='string'?coin.symbol.slice(0,40):null};}catch{return null;}
-}
-export function verifiedAssociation(input,index,now=Date.now()){
-  const mint=parseToken(input);
-  if(index?.schema!==2||!Array.isArray(index.entries))throw new LookupError('data','Verified association index unavailable or incompatible.');
-  const entries=index.entries.filter(e=>e.mint===mint);
-  if(entries.length!==1)return{match:null,reason:entries.length?'ambiguous':'not-indexed',indexAt:index.checkedAt};
-  const entry=entries[0],time=Date.parse(entry.checkedAt);
-  if(!Number.isFinite(time)||time>now+60000||now-time>MAX_ASSOCIATION_AGE)return{match:null,reason:'stale',indexAt:index.checkedAt};
-  const validated=verifyForksCoin(mint,{ok:true,coin:entry},entry.checkedAt);
-  if(!validated||entry.source!==validated.source)return{match:null,reason:'invalid',indexAt:index.checkedAt};
-  return{match:validated,reason:'indexed',indexAt:index.checkedAt};
 }
 function number(value){if(value===null||value===undefined||value===''||typeof value==='boolean')return null;if(typeof value!=='number'&&(typeof value!=='string'||!/^\d+(?:\.\d+)?(?:e[+-]?\d+)?$/i.test(value)))return null;const n=Number(value);return Number.isFinite(n)&&n>=0?n:null;}
 export function marketObservation(input,data,observedAt=new Date().toISOString()){

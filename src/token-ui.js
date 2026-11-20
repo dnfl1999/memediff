@@ -1,6 +1,7 @@
 import {parseToken} from './core.js';
 import {formatDate} from './format.js';
-import {readJSON,fetchMarket,verifiedAssociation,OFFICIAL_CA} from './token-data.js';
+import {readJSON,fetchMarket,OFFICIAL_CA} from './token-data.js';
+import {mountIndexHealth} from './index-health-ui.js';
 import {analyzeRepository,clearReport,cancelAnalysis,lockAnalysis} from './app.js';
 const $=id=>document.getElementById(id),el=(tag,text)=>{const n=document.createElement(tag);n.textContent=text;return n;};
 function status(text,error=false){$('token-status').textContent=text;$('token-status').classList.toggle('error',error);}
@@ -14,14 +15,25 @@ function renderMarket(data){
  if(data.pairUrl)$('market-source').append(source('Selected pool ↗',data.pairUrl));
 }
 let controller=null;
+let stopHealth=()=>{};
+function displayAssociation(mint,index,error){
+ stopHealth();
+ const content=el('div',''),notice=el('p','');notice.hidden=true;notice.setAttribute('role','status');
+ $('association').replaceChildren(content,notice);
+ const result=mountIndexHealth(content,mint,index,{error,visible:()=>!$('token-result').hidden,openAdvanced:()=>{
+   $('advanced').open=true;$('repo').focus();
+ }});
+ stopHealth=result.stop;
+ return {health:result.health,notice};
+}
 $('token-query').addEventListener('submit',async event=>{
  event.preventDefault();if(controller)return;if($('analyze').disabled){status('Wait for the current GitHub analysis or cancel it first.',true);return;}
  let mint;try{mint=parseToken($('token-ca').value);if(!mint)throw Error('Enter a Solana token CA.');}catch(e){status(e.message,true);return;}
  controller=new AbortController();const signal=controller.signal;
  lockAnalysis(true);$('analyze-token').disabled=true;$('live-demo').disabled=true;$('cancel-token').hidden=false;$('token-ca').disabled=true;
- clearReport();$('token-result').hidden=false;$('observed-ca').textContent=`Solana CA: ${mint}`;$('token-result-title').textContent='Token observation';
+ stopHealth();clearReport();$('token-result').hidden=false;$('observed-ca').textContent=`Solana CA: ${mint}`;$('token-result-title').textContent='Token observation';
  $('market-metrics').replaceChildren();$('market-source').replaceChildren();$('market-status').textContent='Loading exact-CA market information…';$('association').replaceChildren(el('p','Checking the official Forks association index…'));status('Looking up token information and a verified GitHub association…');
- let githubOK=false,association=null,lookupError=false;
+ let githubOK=false,association=null,indexState;
  const marketTask=fetchMarket(mint,{signal}).then(data=>{if(!signal.aborted)renderMarket(data);}).catch(e=>{
    if(signal.aborted)return;
    $('market-status').textContent=`Market information Unavailable. ${e.message}`;
@@ -31,21 +43,20 @@ $('token-query').addEventListener('submit',async event=>{
  try{
    const index=await readJSON('./data/forks-index.json',{signal,timeout:10000});
    if(signal.aborted)return;
-   const resolved=verifiedAssociation(mint,index);association=resolved.match;
+   const {health,notice}=displayAssociation(mint,index);
+   indexState=health.state;
+   association=indexState==='fresh'?health.record:null;
    if(association){
-     $('association').replaceChildren(el('h3','GitHub association — recorded by Forks Wiki'),source(association.repo,`https://github.com/${association.repo}`),el('p',`Exact CA and coin.kind=forks verified at ${formatDate(association.checkedAt)}. This is a dated API association, not repository-owner endorsement or an on-chain ownership claim.`),source('Association evidence ↗',association.source));
      status(`Verified indexed association: ${association.repo}. Analyzing GitHub automatically…`);
      $('repo').value=association.repo;$('token').value=mint;
      githubOK=await analyzeRepository(association.repo,mint);
-     if(!githubOK&&!signal.aborted){$('association').append(el('p',`Association found, but GitHub activity is unavailable. ${$('status').textContent}`));}
-   }else{
-     $('association').replaceChildren(el('h3','No verified GitHub repository found.'),el('p',`Association status: Unknown. ${resolved.reason==='stale'?'This association is older than 48 hours and was not used.':'No fresh, unambiguous exact-CA association was available.'} The index covers only part of the registry.`),source('Check this CA on Forks Wiki ↗',`https://forks.wiki/coin/${mint}`));
+     if(!githubOK&&!signal.aborted){notice.textContent=`GitHub activity is unavailable. ${$('status').textContent}`;notice.hidden=false;}
    }
- }catch(e){lookupError=true;if(!signal.aborted)$('association').replaceChildren(el('h3','No verified GitHub repository found.'),el('p',`Association lookup Unavailable. ${e.message} This does not prove that no association exists.`));}
+ }catch(e){indexState='unavailable';if(!signal.aborted)displayAssociation(mint,null,e.message);}
  finally{
    await marketTask;
    if(signal.aborted)status('Token analysis canceled. Completed observations, if any, are shown.',true);
-   else status(githubOK?'Token lookup and GitHub analysis complete. Development Receipt exports are ready.':association?'Token lookup complete. The repository association is known, but GitHub analysis failed.':lookupError?'Token lookup finished with unavailable association data. See the source messages.':'Token lookup complete. No verified GitHub repository found; development exports are unavailable.');
+   else status(githubOK?'Token lookup and GitHub analysis complete. Development Receipt exports are ready.':association?'Token lookup complete. The repository association is known, but GitHub analysis failed.':indexState==='unavailable'?'Token lookup finished with unavailable association data.':'Token lookup complete. See Index health for repository analysis availability.');
    controller=null;lockAnalysis(false);$('analyze-token').disabled=false;$('live-demo').disabled=false;$('cancel-token').hidden=true;$('token-ca').disabled=false;
  }
 });

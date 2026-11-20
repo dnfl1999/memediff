@@ -1,5 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {OFFICIAL_CA as ca,readJSON,verifyForksCoin,verifiedAssociation,marketObservation,fetchMarket} from '../src/token-data.js';
+import {OFFICIAL_CA as ca,readJSON,verifyForksCoin,marketObservation,fetchMarket} from '../src/token-data.js';
+import {associationHealth,recordedRefreshFailure,verificationWindow} from '../src/index-health.js';
 import {createWorker} from '../serverless/worker.js';
 const coin={mint:ca,kind:'forks',repo:'dnfl1999/memediff',name:'MemeDiff',symbol:'MEMEDIFF'};
 const pair={chainId:'solana',baseToken:{address:ca,name:'MemeDiff',symbol:'MEMEDIFF'},pairAddress:'GJhnfPkf1mNw1jaoZBmQKi4jT41vhi6XQgSQxx7C9kh4',priceUsd:'0.000002',fdv:2000,marketCap:null,liquidity:{usd:null},volume:{h24:0}};
@@ -9,13 +10,32 @@ test('association requires exact CA, forks kind, explicit valid repository',()=>
  assert.equal(verifyForksCoin(ca,{ok:false,coin}),null);
 });
 test('index rejects old schema, duplicate, stale and future associations without guessing',()=>{
- const now=Date.now(),entry=verifyForksCoin(ca,{ok:true,coin},new Date(now).toISOString());const index={schema:2,entries:[entry]};
- assert.equal(verifiedAssociation(ca,index,now).match.repo,'dnfl1999/memediff');
- assert.equal(verifiedAssociation(ca,{...index,entries:[entry,entry]},now).reason,'ambiguous');
- assert.equal(verifiedAssociation(ca,{...index,entries:[{...entry,checkedAt:new Date(now-49*3600000).toISOString()}]},now).reason,'stale');
- assert.equal(verifiedAssociation(ca,{...index,entries:[{...entry,checkedAt:new Date(now+3600000).toISOString()}]},now).reason,'stale');
- assert.equal(verifiedAssociation(ca,{...index,entries:[]}).reason,'not-indexed');
- assert.throws(()=>verifiedAssociation(ca,{schema:1,entries:[entry]}),/incompatible/);
+ const now=Date.now(),entry=verifyForksCoin(ca,{ok:true,coin},new Date(now).toISOString());const index={schema:2,checkedAt:entry.checkedAt,entries:[entry]};
+ assert.equal(associationHealth(ca,index,now).record.repo,'dnfl1999/memediff');
+ assert.equal(associationHealth(ca,{...index,entries:[entry,entry]},now).state,'ambiguous');
+ assert.equal(associationHealth(ca,{...index,entries:[{...entry,checkedAt:new Date(now-49*3600000).toISOString()}]},now).state,'expired');
+ assert.equal(associationHealth(ca,{...index,entries:[{...entry,checkedAt:new Date(now+1).toISOString()}]},now).state,'invalid');
+ assert.equal(associationHealth(ca,{...index,entries:[{...entry,source:'https://example.com/'}]},now).state,'invalid');
+ assert.equal(associationHealth(ca,{...index,entries:[{...entry,checkedAt:'bad'}]},now).state,'invalid');
+ assert.equal(associationHealth(ca,{...index,entries:[]}).state,'not-indexed');
+ assert.equal(associationHealth(ca,{schema:1,entries:[entry]}).state,'unavailable');
+});
+test('verification age uses exact UTC, six-hour warning and inclusive 48-hour expiry boundary',()=>{
+ const iso='2026-11-18T20:43:46.517Z',at=Date.parse(iso),hour=3600000;
+ for(const [delta,state,remaining] of [[0,'fresh',48*hour],[42*hour-1,'fresh',6*hour+1],[42*hour,'expiring',6*hour],
+   [48*hour,'expiring',0],[48*hour+1,'expired',-1]]) assert.deepEqual(verificationWindow(iso,at+delta),{state,ageMs:delta,remainingMs:remaining,expiresAt:at+48*hour});
+ for(const malformed of ['2026-11-31T00:00:00.000Z','2026-11-18T20:43:46+00:00','bad',42]) assert.equal(verificationWindow(malformed,at),null);
+ assert.equal(verificationWindow(iso,at-1),null);
+});
+test('browser failure notice requires a published operations record tied to the index with a valid Actions run',()=>{
+ const checkedAt='2026-11-18T20:44:01.396Z', at='2026-11-20T02:44:57.189Z', now=Date.parse(at)+100;
+ const operation={outcome:'retained',at,indexCheckedAt:checkedAt,runId:'44660317318',failure:{category:'dns',status:null}};
+ const index={schema:2,checkedAt,entries:[],operation};
+ assert.equal(recordedRefreshFailure(index,now).reason,'DNS resolution failure');
+ assert.match(recordedRefreshFailure(index,now).url,/\/actions\/runs\/44660317318$/);
+ assert.equal(recordedRefreshFailure({...index,operation:undefined},now),null);
+ for(const mutation of [{runId:'javascript:0'},{indexCheckedAt:at},{at:'2026-11-20T02:44:58.189Z'},
+   {outcome:'refreshed'},{failure:{category:'<script>'}}]) assert.equal(recordedRefreshFailure({...index,operation:{...operation,...mutation}},now),null);
 });
 test('market identity validates chain and exact base CA, preserves unknown versus zero',()=>{
  const r=marketObservation(ca,[{...pair,chainId:'ethereum'},{...pair,baseToken:{address:'other'},quoteToken:{address:ca}},pair]);

@@ -1,9 +1,10 @@
 import {test,expect,mockGitHub,downloadReport,analyze} from './helpers.js';
 const ca='DPcyk5GUWkjtZV6PXzrxsAyAUKGZ4pkUsHb9cFnBfork',other='11111111111111111111111111111111';
-async function setup(page,{entries,market=[],...options}={}){
+async function setup(page,{entries,market=[],operation,...options}={}){
  const api=await mockGitHub(page,options);
  const entry={mint:ca,repo:'fixture/project',kind:'forks',checkedAt:new Date().toISOString(),source:`https://forks.wiki/api/coin?mint=${ca}`};
- await page.route('**/data/forks-index.json',r=>r.fulfill({json:{schema:2,checkedAt:entry.checkedAt,complete:false,entries:entries??[entry]}}));
+ await page.route('**/data/forks-index.json',r=>r.fulfill({json:{schema:2,checkedAt:entry.checkedAt,complete:false,entries:entries??[entry],
+   ...(operation?{operation:{...operation,indexCheckedAt:entry.checkedAt}}:{})}}));
  await page.route('https://api.dexscreener.com/**',r=>r.fulfill({json:market}));
  await page.goto('./');return api;
 }
@@ -37,10 +38,61 @@ test('index failure keeps token information and blocks guessed GitHub requests',
  const api=await setup(page);diagnostics.expectedStatuses=[503];diagnostics.expectedURLs=[new URL('data/forks-index.json',page.url()).href];await page.route('**/data/forks-index.json',r=>r.fulfill({status:503,json:{}}));await token(page);await expect(page.locator('#association')).toContainText('Association lookup Unavailable');await expect(page.locator('#token-result')).toBeVisible();expect(api.requests).toHaveLength(0);
 });
 test('stale association is not auto-analyzed and direct GitHub still works',async({page})=>{
- const api=await setup(page,{entries:[{mint:ca,kind:'forks',repo:'fixture/project',source:`https://forks.wiki/api/coin?mint=${ca}`,checkedAt:new Date(Date.now()-49*3600000).toISOString()}]});await token(page);await expect(page.locator('#association')).toContainText('older than 48 hours');expect(api.requests).toHaveLength(0);await analyze(page);await expect(page.locator('#report')).toBeVisible();await expect(page.locator('#token-result')).toBeHidden();
+ const checkedAt=new Date(Date.now()-49*3600000).toISOString();
+ const api=await setup(page,{entries:[{...linked(checkedAt)}],market:[marketPair]});
+ await token(page);const health=page.getByRole('region',{name:'Index health'});
+ await expect(health.getByRole('status')).toHaveText('Expired');await expect(health).toContainText('older than 48 hours');await expect(health).toContainText(checkedAt);
+ await expect(health).toContainText('Last verified at (UTC)');await expect(health).toContainText('Verification validity');
+ await expect(health.locator('.index-health-operation')).toBeHidden();
+ await expect(page.locator('#market-status')).toContainText('Market data observed');expect(api.requests).toHaveLength(0);
+ const button=health.getByRole('button',{name:'Open Advanced Search'});
+ await button.focus();await page.keyboard.press('Enter');await expect(page.locator('#repo')).toBeFocused();await expect(page.locator('#repo')).toHaveValue('');
+ await analyze(page);await expect(page.locator('#report')).toBeVisible();await expect(page.locator('#token-result')).toBeHidden();
+ await expect(page.locator('#token-note')).toHaveText(/No token address recorded/);
 });
 test('GitHub 404 preserves observed token information and explains development failure',async({page,diagnostics})=>{
  diagnostics.expectedStatuses=[404];await setup(page,{error:404});await token(page);await expect(page.locator('#association')).toContainText('404');await expect(page.locator('#token-result')).toBeVisible();await expect(page.locator('#report')).toBeHidden();
+});
+
+const linked=checkedAt=>({mint:ca,kind:'forks',repo:'fixture/project',source:`https://forks.wiki/api/coin?mint=${ca}`,checkedAt});
+const marketPair={chainId:'solana',baseToken:{address:ca,name:'Fixture token'},pairAddress:other,priceUsd:'0.1'};
+
+test('fresh and expiring index health update on the browser clock without fetching or storing new data',async({page},info)=>{
+ const now=Date.now(),hour=3600000,checkedAt=new Date(now-42*hour+10000).toISOString();
+ await page.clock.install({time:now});
+ const api=await setup(page,{entries:[linked(checkedAt)],market:[marketPair]});
+ const state=page.getByRole('region',{name:'Index health'});
+ await token(page);
+ await expect(state.getByRole('status')).toHaveText('Fresh');
+ await expect(state).toContainText('Verification age');await expect(state).toContainText('Remaining valid time');
+ const priorRequests=api.requests.length,storage=await page.evaluate(()=>JSON.stringify(localStorage));
+ await page.clock.fastForward(15000);
+ await expect(state.getByRole('status')).toHaveText('Expiring soon');
+ await expect(state).toContainText('final six hours');
+ expect(api.requests).toHaveLength(priorRequests);
+ expect(await page.evaluate(()=>JSON.stringify(localStorage))).toBe(storage);
+ await token(page);
+ await expect(state.getByRole('status')).toHaveText('Expiring soon');
+ await expect(page.locator('#report')).toBeHidden();expect(api.requests).toHaveLength(priorRequests);
+ await expect(page.locator('#market-status')).toContainText('Market data observed');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await state.screenshot({path:info.outputPath('index-health-expiring.png')});
+ await page.clock.fastForward(6*hour);
+ await expect(state.getByRole('status')).toHaveText('Expired');
+ expect(api.requests).toHaveLength(priorRequests);
+});
+
+test('ambiguous records are blocked and the outage notice links only a dated workflow record',async({page})=>{
+ const checkedAt=new Date(Date.now()-7*3600000).toISOString();
+ const operation={outcome:'retained',at:new Date(Date.now()-1000).toISOString(),runId:'44660317318',failure:{category:'dns',status:null}};
+ const api=await setup(page,{entries:[linked(checkedAt),linked(checkedAt)],operation});
+ // The persisted attempt took place after this snapshot; the published timestamps are independent of the browser clock.
+ await page.route('**/data/forks-index.json',r=>r.fulfill({json:{schema:2,checkedAt,entries:[linked(checkedAt),linked(checkedAt)],operation:{...operation,indexCheckedAt:checkedAt}}}));
+ await token(page);const state=page.getByRole('region',{name:'Index health'});
+ await expect(state.getByRole('status')).toHaveText('Invalid / Ambiguous');
+ await expect(state).toContainText('DNS resolution failure');
+ await expect(state.getByRole('link',{name:'Workflow record'})).toHaveAttribute('href','https://github.com/dnfl1999/memediff/actions/runs/44660317318');
+ expect(api.requests).toHaveLength(0);
 });
 test('timeout and cancellation restore controls without stale development exports',async({page,diagnostics})=>{
  await setup(page,{entries:[]});diagnostics.allowApiAbort=true;diagnostics.expectedURLs=['https://api.dexscreener.com/'];

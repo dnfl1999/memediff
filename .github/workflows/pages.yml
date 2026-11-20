@@ -28,7 +28,7 @@ jobs:
         run: npm run test:e2e
         env:
           QA_RUN: linux-build-mock
-      - name: Prepare exact-mint index for Pages
+      - name: Prepare exact-mint index and report verification health
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: node scripts/update-forks-index.mjs dist/data/forks-index.json
         env:

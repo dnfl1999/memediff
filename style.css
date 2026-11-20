@@ -80,3 +80,34 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
   .sha-explorer { padding: 12px; }
   .sha-filters button { width: 100%; }
 }
+
+.index-health { min-width: 0; overflow-wrap: anywhere; }
+.index-health h3, .index-health-state { display: inline-block; margin: 0 10px 0 0; }
+.index-health-state {
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.index-health[data-index-state="fresh"] .index-health-state { color: var(--lime); }
+.index-health[data-index-state="expiring"] .index-health-state { color: #ffd17b; }
+.index-health[data-index-state="expired"] .index-health-state,
+.index-health[data-index-state="unavailable"] .index-health-state,
+.index-health[data-index-state="invalid"] .index-health-state,
+.index-health[data-index-state="ambiguous"] .index-health-state { color: #ffb6a8; }
+.index-health dl {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  gap: 4px 16px;
+  margin: 12px 0;
+}
+.index-health dt { color: var(--muted); }
+.index-health dd { margin: 0; }
+.index-health a { text-decoration: underline; }
+.index-health button { min-height: 44px; white-space: normal; }
+@media (max-width: 500px) {
+  .index-health dl { display: block; }
+  .index-health dd { margin: 0 0 6px; }
+}
