@@ -26,11 +26,17 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v2.5 — Saved Files Comparison Viewer
+
+Choose **Open Saved Files Comparison** on the homepage, then open a version 1 Saved Files Comparison JSON up to 8 MiB. The browser reconstructs both sources from the saved observations and recalculates UTC intervals, gaps, counts, classifications and conflicts before displaying them. Review file-specific periods and source links, then filter or page through the SHA and release records.
+
+The viewer works offline after the page loads. It labels the comparison **Local file · Unverified**. Verifying the recorded SHA-256 values requires the original files, and the report still carries unverified GitHub observations. **Close viewer** clears the opened report. The original 2 MiB Period Comparison files remain supported by **Open Saved Comparison** and **Compare Two Saved Files**.
+
 ## v2.4 — Saved Files Comparison Export
 
 After comparing two saved Period Comparison files, select **Export Saved Files Comparison JSON** or **Export Saved Files Comparison PNG**. Both downloads work offline on an already loaded page. Replacing or clearing either input requires applying a new comparison.
 
-The JSON uses `memediff-saved-files-comparison` version 1 and includes all SHA and release records, even when the view is filtered or paginated. It preserves each file's observation time, selected periods, evidence links, coverage and SHA-256 when available. Shared UTC intervals and gaps have exact millisecond boundaries. A `null` shared count means **N/A** when there is no shared interval, or **Unknown** when collection could not confirm the count. Use the original Period Comparison files to reopen the comparison.
+The JSON uses `memediff-saved-files-comparison` version 1 and includes all SHA and release records, even when the view is filtered or paginated. It preserves each file's observation time, selected periods, evidence links, coverage and SHA-256 when available. Shared UTC intervals and gaps have exact millisecond boundaries. A `null` shared count means **N/A** when there is no shared interval, or **Unknown** when collection could not confirm the count. Open the export using **Open Saved Files Comparison**.
 
 The branded PNG summarizes shared counts, each separate UTC interval, coverage and plain-text source URLs. Both downloads label the local evidence **Unverified**. The browser exports only on request and reads up to 2 MiB per input. Each download has an 8 MiB limit.
 

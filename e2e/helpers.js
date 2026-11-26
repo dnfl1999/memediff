@@ -49,6 +49,28 @@ export async function analyze(page, repo = 'fixture/project') {
   await expect(page.locator('#report')).toBeVisible();
   await expect(page.locator('#analyze')).toBeEnabled();
 }
+
+export async function trackIsolation(page) {
+  const storage = await page.evaluate(() => {
+    window.comparisonStorageWrites = [];
+    for (const method of ['setItem', 'removeItem', 'clear']) {
+      const original = Storage.prototype[method];
+      Storage.prototype[method] = function (...args) {
+        if (this === localStorage) window.comparisonStorageWrites.push(method);
+        return original.apply(this, args);
+      };
+    }
+    return JSON.stringify(localStorage);
+  });
+  const requests = [];
+  page.on('request', request => requests.push(request.url()));
+  return async () => {
+    expect(requests).toEqual([]);
+    expect(await page.evaluate(() => ({ storage: JSON.stringify(localStorage), writes: window.comparisonStorageWrites })))
+      .toEqual({ storage, writes: [] });
+    return { networkRequests: requests.length, storageWrites: 0, storageUnchanged: true };
+  };
+}
 export async function readDownload(page, button, type, testInfo, attachment = `download-${type}`) {
   const pending = page.waitForEvent('download');
   await button.click();

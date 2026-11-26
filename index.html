@@ -21,6 +21,7 @@
   <script type="module" src="./src/share-ui.js"></script>
   <script type="module" src="./src/saved-comparison-ui.js"></script>
   <script type="module" src="./src/compare-saved-files-ui.js"></script>
+  <script type="module" src="./src/saved-files-viewer-ui.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to main content</a>
@@ -30,7 +31,7 @@
       <div class="hero-copy"><div class="eyebrow"><span class="dot"></span> BUILT FOR THE CURIOUS. BACKED BY CODE.</div>
         <h1 id="hero-title">Less Hype.<br><em>More Evidence.</em></h1>
         <p>Track real GitHub activity behind crypto projects.</p><p class="hero-detail">Go beyond the timeline. Inspect commits, compare snapshots, and share the source behind the story.</p>
-        <div class="hero-actions"><a class="button primary" href="#analyzer">Analyze a token <span aria-hidden="true">↗</span></a><button id="live-demo" type="button">Try Live Demo <span aria-hidden="true">→</span></button><button id="saved-comparison-open" type="button" aria-controls="saved-comparison">Open Saved Comparison</button><button id="compare-saved-open" type="button" aria-controls="compare-saved-files">Compare Two Saved Files</button><input id="saved-comparison-file" type="file" aria-label="Saved Period Comparison JSON" accept=".json,application/json" hidden></div>
+        <div class="hero-actions"><a class="button primary" href="#analyzer">Analyze a token <span aria-hidden="true">↗</span></a><button id="live-demo" type="button">Try Live Demo <span aria-hidden="true">→</span></button><button id="saved-comparison-open" type="button" aria-controls="saved-comparison">Open Saved Comparison</button><button id="compare-saved-open" type="button" aria-controls="compare-saved-files">Compare Two Saved Files</button><button id="saved-files-viewer-open" type="button" aria-controls="saved-files-viewer">Open Saved Files Comparison</button><input id="saved-comparison-file" type="file" aria-label="Saved Period Comparison JSON" accept=".json,application/json" hidden></div>
         <p class="demo-caption">Live demo: the official MEMEDIFF CA, token information and GitHub activity. API limits apply.</p>
         <div class="hero-note"><span>No wallet required</span><span>Free &amp; open source</span><span>No trust scores</span></div>
       </div>
@@ -94,6 +95,20 @@
         <p id="saved-files-export-status" class="small" aria-live="polite"></p>
       </div>
       <div id="compare-saved-result" hidden></div>
+    </section>
+    <section id="saved-files-viewer" class="panel saved-file-comparison" aria-labelledby="saved-files-viewer-title" hidden>
+      <div class="section-head">
+        <h2 id="saved-files-viewer-title" tabindex="-1">Saved Files Comparison Viewer</h2>
+        <button id="saved-files-viewer-close" type="button">Close viewer</button>
+      </div>
+      <p class="small">Open a Saved Files Comparison JSON up to 8 MiB to review its recorded evidence.</p>
+      <div class="actions">
+        <button id="saved-files-viewer-choose" type="button">Choose comparison JSON</button>
+        <button id="saved-files-viewer-cancel" type="button" hidden>Cancel reading</button>
+        <input id="saved-files-viewer-file" type="file" aria-label="Saved Files Comparison JSON" accept=".json,application/json" hidden>
+      </div>
+      <p id="saved-files-viewer-status" class="small" role="status" aria-live="polite"></p>
+      <div id="saved-files-viewer-content" hidden></div>
     </section>
     <details class="panel english-guide" lang="en"><summary>Quick start — share a Development Receipt</summary><p>MemeDiff is a free, open-source tool for inspecting public GitHub development activity. No wallet, token ownership or login is required.</p><ol><li>Paste a Solana token CA and select <strong>Analyze Token</strong>. Available market data appears even without a GitHub link. A fresh, exact official Forks association starts GitHub analysis automatically.</li><li>For a linked repository, choose <strong>7 days</strong> or <strong>30 days</strong>. Review collection warnings and source links.</li><li>Select <strong>PNG Receipt</strong> for an English shareable card with the observed time, UTC window and source evidence. Export <strong>JSON</strong> too for all evidence URLs and collection errors. Image links are printed text, not clickable.</li><li>Use <strong>Save baseline</strong> to save a baseline on this device. Analyze again to compare 30-day SHA observations; the comparison remains 30-day even on a 7-day card.</li></ol><p>Advanced Search retains direct GitHub URL analysis and repository-name search. Forks associations use a limited dated index; omission is not evidence of no relationship. Counts are observations, not proof of work, quality or token safety. A <strong>+</strong> means incomplete collection. Receipts are locally generated and editable, not signed certificates. After a live analysis, select Import Previous Report to preview and compare a previous JSON export locally. Saving the imported baseline is a separate, explicit choice. There is no hosted report or automatic social posting.</p></details>
     <section id="analyzer" class="query-panel" aria-labelledby="query-title"><div class="section-head"><h2 id="query-title"><span class="step">01 / TOKEN ANALYZER</span> Analyze a Token</h2><span class="tag">SOLANA / PUBLIC EVIDENCE</span></div>

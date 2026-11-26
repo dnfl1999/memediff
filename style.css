@@ -203,12 +203,12 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 .hero-actions {
   flex-wrap: wrap;
 }
-#saved-comparison-open, #compare-saved-open {
+#saved-comparison-open, #compare-saved-open, #saved-files-viewer-open {
   max-width: 100%;
   white-space: normal;
 }
 @media (max-width: 760px) {
-  .hero-actions #saved-comparison-open, .hero-actions #compare-saved-open {
+  .hero-actions #saved-comparison-open, .hero-actions #compare-saved-open, .hero-actions #saved-files-viewer-open {
     flex: 1 0 100%;
   }
 }

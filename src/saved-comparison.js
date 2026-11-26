@@ -2,12 +2,11 @@ import { DAY, isGitBranch, parseRepo, parseToken, safeLink, utcMillis } from './
 import { comparePeriods } from './period-comparison.js';
 import { authorSource, githubLogin, iso, periodExportFormat, periodKeys, releaseSource, savedFilesExportFormat } from './period-evidence.js';
 import { MAX_PERIOD_JSON_BYTES, periodExportData } from './period-export.js';
-import { parseUntrustedJSON, readLocalJSONText } from './local-json.js';
+import { checkJsonDepth, hasExactKeys as exact, parseUntrustedJSON, readLocalJSONText } from './local-json.js';
 import { commitSource } from './sha-explorer.js';
 
 const fail = message => { throw new Error(message); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const exact = (value, keys) => object(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 const same = (value, expected) => exact(value, Object.keys(expected)) && Object.entries(expected).every(([key, other]) => value[key] === other);
 const timestamp = value => {
   const number = utcMillis(value);
@@ -17,20 +16,6 @@ const boundedText = (value, max) => typeof value === 'string' && value.length <=
 const boundedList = (value, max) => Array.isArray(value) && value.length <= max;
 const safeInteger = value => Number.isSafeInteger(value) && value > 0;
 const flag = value => typeof value === 'boolean';
-
-function checkDepth(raw) {
-  let depth = 0, quoted = false, escaped = false;
-  for (const char of raw) {
-    if (quoted) {
-      if (escaped) escaped = false;
-      else if (char === '\\') escaped = true;
-      else if (char === '"') quoted = false;
-    } else if (char === '"') quoted = true;
-    else if (char === '{' || char === '[') {
-      if (++depth > 8) fail('The comparison JSON is nested too deeply.');
-    } else if (char === '}' || char === ']') depth--;
-  }
-}
 
 function validAPI(value, { repo, branch, since, fetchedAt }) {
   if (!boundedText(value, 2048) || safeLink(value) !== value || value.includes('#')) return false;
@@ -124,13 +109,17 @@ function recordMap(rows, max, label, decode, identity, report) {
 
 const keysOf = (a, b) => a.size === b.length && b.every(id => a.has(id));
 
+export function validSavedPeriodCoverage(coverage, collection) {
+  return exact(coverage, ['commitsComplete', 'releasesComplete', 'releaseTypesComplete']) &&
+    Object.values(coverage).every(flag) &&
+    (!coverage.commitsComplete || collection.coverage.commitsComplete) &&
+    (!coverage.releasesComplete || collection.coverage.releasesComplete);
+}
+
 function inspectPeriod(period, report, collection) {
   if (!exact(period, ['selected', 'effective', 'durationMs', 'clipped', 'coverage', 'counts', 'commits', 'releases', 'authors']) ||
       !exact(period.selected, ['startDateUtc', 'endDateUtc']) ||
-      !exact(period.coverage, ['commitsComplete', 'releasesComplete', 'releaseTypesComplete']) ||
-      !Object.values(period.coverage).every(flag) ||
-      (period.coverage.commitsComplete && !collection.coverage.commitsComplete) ||
-      (period.coverage.releasesComplete && !collection.coverage.releasesComplete)) fail('Invalid period structure or collection coverage.');
+      !validSavedPeriodCoverage(period.coverage, collection)) fail('Invalid period structure or collection coverage.');
   return {
     dates: { start: period.selected.startDateUtc, end: period.selected.endDateUtc },
     commits: recordMap(period.commits, collection.limits.commits ?? 1000, 'commit SHA', commitRecord, row => row.sha.toLowerCase(), report),
@@ -203,7 +192,7 @@ function validateSavedComparison(file) {
 export function parseSavedComparison(raw) {
   if (typeof raw !== 'string' || !raw.trim()) fail('Choose a non-empty Period Comparison JSON.');
   if (raw.length > MAX_PERIOD_JSON_BYTES || new TextEncoder().encode(raw).byteLength > MAX_PERIOD_JSON_BYTES) fail('File exceeds the 2 MiB limit.');
-  checkDepth(raw);
+  checkJsonDepth(raw, 8);
   let file;
   try { file = parseUntrustedJSON(raw); }
   catch { fail('Invalid JSON or unsafe object keys.'); }
@@ -213,3 +202,5 @@ export function parseSavedComparison(raw) {
 export async function readSavedComparison(file) {
   return parseSavedComparison(await readLocalJSONText(file, MAX_PERIOD_JSON_BYTES));
 }
+
+export { reportFields as savedReportFields, commitRecord as savedCommitRecord, releaseRecord as savedReleaseRecord, timestamp as isRecordedUtc };

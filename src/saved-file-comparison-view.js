@@ -31,9 +31,10 @@ const orderNote = {
 
 const utcBounds = ({ from, until }) => `${iso(from)} → ${iso(until)} (end exclusive)`;
 
-export function renderSavedFile(slot, file, number) {
+export function renderSavedFile(slot, file, number, { namespace = 'saved-file', recorded = false } = {}) {
   const meta = el('dl', null, 'saved-comparison-meta');
   renderSavedMetadata(meta, file, true);
+  if (recorded) meta.append(el('dt', 'Recorded SHA-256'), el('dd', file.fingerprint ?? 'Not recorded'));
   const summaries = el('div', null, 'saved-file-periods');
   for (const key of periodKeys) {
     const { start, end } = file.selected[key];
@@ -53,7 +54,7 @@ export function renderSavedFile(slot, file, number) {
   const content = el('div', null, 'saved-file-original-periods');
   records.append(el('summary', 'Original period totals and records'), content);
   records.addEventListener('toggle', () => {
-    if (records.open && !content.childElementCount) renderPeriodResults(content, file.comparison, file.repository.name, `saved-file-${number}`);
+    if (records.open && !content.childElementCount) renderPeriodResults(content, file.comparison, file.repository.name, `${namespace}-${number}`);
   });
   slot.replaceChildren(el('p', unverified, 'warning'), meta, summaries, source, records);
   slot.hidden = false;
@@ -96,11 +97,11 @@ function observation(row, files, kind) {
   return item;
 }
 
-function evidenceSection(files, data, kind, hasShared) {
+function evidenceSection(files, data, kind, hasShared, namespace) {
   const commits = kind === 'commits';
   const label = commits ? 'SHA observations' : 'Release observations';
   const section = el('section', null, 'saved-file-observations');
-  const id = commits ? 'saved-files-shas' : 'saved-files-releases';
+  const id = `${namespace}-${commits ? 'shas' : 'releases'}`;
   const title = el('h4', commits ? 'Common and file-specific SHA observations' : 'Release observations');
   title.id = `${id}-heading`;
   section.setAttribute('aria-labelledby', title.id);
@@ -120,12 +121,12 @@ function evidenceSection(files, data, kind, hasShared) {
   return section;
 }
 
-export function renderSavedFileComparison(box, files, comparison) {
+export function renderSavedFileComparison(box, files, comparison, { namespace = 'saved-files', recorded = false } = {}) {
   const title = el('h3', 'Recorded observation comparison');
   title.tabIndex = -1;
   box.replaceChildren(title, el('p', unverified, 'warning'), el('p', orderNote[comparison.observationOrder], 'small'),
     el('p', caNote[comparison.ca], 'small'));
-  if (comparison.sameFile) box.append(el('p', 'Both selections are the same file (identical SHA-256).', 'small'));
+  if (comparison.sameFile) box.append(el('p', recorded ? 'Both sources record the same SHA-256.' : 'Both selections are the same file (identical SHA-256).', 'small'));
   if (comparison.blocked) box.append(el('p', comparison.blocked, 'warning'));
   else {
     box.append(el('h4', 'Shared UTC coverage'));
@@ -133,10 +134,16 @@ export function renderSavedFileComparison(box, files, comparison) {
       const list = el('ul', null, 'saved-file-windows');
       list.append(...comparison.shared.map(interval => el('li', utcBounds(interval), 'period-range')));
       box.append(list);
+      if (recorded && comparison.shared.length > 1) {
+        const gaps = el('ul', null, 'saved-file-gaps');
+        gaps.append(...comparison.shared.slice(1).map(({ from }, index) => el('li',
+          `Observation gap · ${utcBounds({ from: comparison.shared[index].until, until: from })}`, 'period-range')));
+        box.append(gaps);
+      }
     } else box.append(el('p', 'N/A · No shared UTC interval in the saved selections.', 'warning'));
     box.append(el('p', 'Recorded activity does not establish productivity, and an unobserved SHA does not establish deletion. GitHub links do not authenticate either file.', 'small'),
-      evidenceSection(files, comparison.commits, 'commits', comparison.shared.length > 0),
-      evidenceSection(files, comparison.releases, 'releases', comparison.shared.length > 0));
+      evidenceSection(files, comparison.commits, 'commits', comparison.shared.length > 0, namespace),
+      evidenceSection(files, comparison.releases, 'releases', comparison.shared.length > 0, namespace));
   }
   box.hidden = false;
   title.focus();

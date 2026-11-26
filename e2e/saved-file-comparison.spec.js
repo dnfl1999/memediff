@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
 import { comparePeriods } from '../src/period-comparison.js';
 import { periodExportData } from '../src/period-export.js';
-import { test, expect, analyze, mockGitHub, readDownload } from './helpers.js';
+import { test, expect, analyze, mockGitHub, readDownload, trackIsolation } from './helpers.js';
 
 const files = ['v21-period-comparison.json', 'v22-public-period-comparison.json'].map(name => {
   const buffer = readFileSync(new URL(`../test/fixtures/${name}`, import.meta.url));
@@ -74,28 +74,6 @@ async function savedDownloads(page, info, shared, observations) {
     json: { filename: jsonFile.name, bytes: jsonFile.bytes.length, sha256: sha256(jsonFile.bytes), shaRows: json.commits.records.length },
     png: { filename: pngFile.name, bytes: pngFile.bytes.length, sha256: sha256(pngFile.bytes), width: png.width,
       height: png.height, decoded: true, colors: colors.size, logoDrawn: true, renderedCounts: [45, 0, 0, 0, 0, 0] }
-  };
-}
-
-async function trackIsolation(page) {
-  const storage = await page.evaluate(() => {
-    window.comparisonStorageWrites = [];
-    for (const method of ['setItem', 'removeItem', 'clear']) {
-      const original = Storage.prototype[method];
-      Storage.prototype[method] = function (...args) {
-        if (this === localStorage) window.comparisonStorageWrites.push(method);
-        return original.apply(this, args);
-      };
-    }
-    return JSON.stringify(localStorage);
-  });
-  const requests = [];
-  page.on('request', request => requests.push(request.url()));
-  return async () => {
-    expect(requests).toEqual([]);
-    expect(await page.evaluate(() => ({ storage: JSON.stringify(localStorage), writes: window.comparisonStorageWrites })))
-      .toEqual({ storage, writes: [] });
-    return { networkRequests: requests.length, storageWrites: 0, storageUnchanged: true };
   };
 }
 
