@@ -9,6 +9,7 @@ import { renderSHAExplorer } from './sha-explorer-ui.js';
 import { bindPeriodComparison } from './period-comparison-ui.js';
 import { el, link } from './report-dom.js';
 import { downloadBlob, pngCanvas } from './download.js';
+import { recordAnalysis } from './analytics.js';
 const $ = id => document.getElementById(id);
 const setPeriodReport = bindPeriodComparison($('period-comparison'));
 let report = null, comparison = null, days = 30, controller = null;
@@ -112,23 +113,38 @@ function render() {
 }
 export function clearReport() { resetImport(); report = null; setPeriodReport(null); setComparison(); $('comparison').replaceChildren(); $('report').hidden = true; $('empty').hidden = true; }
 export function cancelAnalysis() { controller?.abort(); }
-export async function analyzeRepository(repoInput, tokenInput = '') {
+export async function analyzeRepository(repoInput, tokenInput = '', { trackDirect = false } = {}) {
   let repo, token;
   try { repo = parseRepo(repoInput); token = parseToken(tokenInput); } catch(e) { status(e.message, true); return false; }
   if (controller) return;
   clearReport();
-  controller = new AbortController(); const timer = setTimeout(() => controller?.abort(), 45000);
+  controller = new AbortController();
+  let timedOut = false;
+  const timer = setTimeout(() => { timedOut = true; controller?.abort(); }, 45000);
   lockAnalysis(externalLock); $('cancel').hidden = false;
   $('report').hidden = true; status('Collecting public GitHub evidence…');
-  try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); renderComparison(); setPeriodReport(report); return true; }
-  catch(e) { report = null; $('empty').hidden = false; status(e.message, true); return false; }
+  if (trackDirect) recordAnalysis('analysis_start', 'github');
+  try {
+    report = await fetchReport(repo, token, { signal: controller.signal });
+    status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`);
+    loadBaseline(); render(); renderComparison(); setPeriodReport(report);
+    if (trackDirect) recordAnalysis('analysis_success', 'github');
+    return true;
+  }
+  catch (error) {
+    if (trackDirect && (!controller.signal.aborted || timedOut)) recordAnalysis('analysis_failure', 'github');
+    report = null;
+    $('empty').hidden = false;
+    status(error.message, true);
+    return false;
+  }
   finally { clearTimeout(timer); controller = null; lockAnalysis(externalLock); $('cancel').hidden = true; }
 }
 $('query').addEventListener('submit', async event => {
   event.preventDefault();
   if (externalLock || controller) return;
   $('token-result').hidden = true;
-  if (await analyzeRepository($('repo').value, $('token').value)) $('report-title').focus();
+  if (await analyzeRepository($('repo').value, $('token').value, { trackDirect: true })) $('report-title').focus();
 });
 $('live-github-demo')?.addEventListener('click', () => {
   if (externalLock || controller) return;

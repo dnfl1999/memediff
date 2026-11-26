@@ -1,4 +1,5 @@
 import { el } from './report-dom.js';
+import { recordReportDownload } from './analytics.js';
 
 export function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
@@ -8,6 +9,8 @@ export function downloadBlob(blob, filename) {
   try {
     document.body.append(anchor);
     anchor.click();
+    if (blob.type === 'image/png') recordReportDownload('png');
+    if (blob.type === 'application/json') recordReportDownload('json');
   } finally {
     anchor.remove();
     setTimeout(() => URL.revokeObjectURL(url), 10000);
