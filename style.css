@@ -203,15 +203,7 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 .hero-actions {
   flex-wrap: wrap;
 }
-#saved-comparison-open, #compare-saved-open, #saved-files-viewer-open {
-  max-width: 100%;
-  white-space: normal;
-}
-@media (max-width: 760px) {
-  .hero-actions #saved-comparison-open, .hero-actions #compare-saved-open, .hero-actions #saved-files-viewer-open {
-    flex: 1 0 100%;
-  }
-}
+.saved-tools .actions button { max-width: 100%; white-space: normal; text-align: left; }
 .saved-comparison-meta {
   display: grid;
   grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
@@ -322,4 +314,63 @@ h2,h3{line-height:1.4}h2{font-size:24px;letter-spacing:-.6px}h3{font-size:16px}.
 }
 @media (max-width: 400px) {
   .period-date-fields { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+/* First-use repository analysis and recorded examples. */
+.hero { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 46px; padding: 52px 0 40px; }
+.hero h1 { margin: 0 0 16px; font-size: clamp(44px, 5.2vw, 70px); }
+.hero h1 em { display: block; }
+.hero-query { margin-top: 25px; }
+.hero-input { display: flex; align-items: stretch; gap: 8px; margin-top: 6px; }
+.hero-input input { flex: 1; min-width: 0; margin: 0; }
+.hero-input .primary { min-width: 0; justify-content: center; }
+.hero-query p { margin: 5px 0 0; }
+.hero #status { margin: 10px 0 0; }
+.hero #status:empty { margin: 0; }
+.hero-actions { margin-top: 14px; }
+.hero-actions .sample-action { color: var(--lime); border-color: #40583b; }
+.hero .hero-copy > p.demo-caption { margin-top: 7px; }
+.hero-links, .footer-links { display: flex; flex-wrap: wrap; gap: 7px 20px; }
+.hero-links { margin-top: 18px; }
+.hero-links a, .sample-source, .footer-links a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+.hero .hero-copy > p.hero-access { margin-top: 12px; font-size: 13px; color: var(--muted); }
+.hero #advanced { padding-top: 12px; margin-top: 16px; }
+.hero #advanced > label { display: block; margin-top: 14px; }
+.hero-art img { max-width: 350px; }
+.sample-reports, .how-to { margin: 36px 0; }
+.sample-reports > p, .how-to p { color: var(--muted); margin: 6px 0 18px; }
+.sample-grid, .how-to ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.sample-card { display: flex; flex-direction: column; align-items: flex-start; border-top: 2px solid #45653d; }
+.sample-card h3, .sample-card time { overflow-wrap: anywhere; }
+.sample-card .sample-context { margin: 10px 0 4px; }
+.sample-card time, .sample-card .sample-detail { color: var(--muted); font-size: 13px; }
+.sample-card .sample-metrics { display: flex; flex-wrap: wrap; gap: 3px 15px; margin: 16px 0 8px; }
+.sample-card .sample-metrics strong { color: var(--lime); }
+.sample-card .sample-detail { margin: 4px 0 16px; }
+.sample-card .actions { margin-top: auto; }
+.sample-card .actions a { min-height: 38px; padding: 7px 10px; }
+.sample-source { margin-top: 12px; font-size: 13px; }
+.how-to ol { margin-bottom: 0; padding-left: 22px; }
+.how-to li { padding-left: 2px; padding-right: 12px; }
+.how-to li::marker { color: var(--lime); font-weight: 700; }
+.how-to p { font-size: 14px; margin-bottom: 0; }
+.saved-tools { margin: 24px 0 16px; }
+.saved-tools summary { color: var(--cyan); }
+.saved-tools .actions { margin-top: 14px; }
+#feedback a { display: inline-block; padding: 7px 0; }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 0; }
+  .hero-art { display: none; }
+  .hero-copy { max-width: 650px; }
+  .sample-grid, .how-to ol { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .hero { padding: 30px 0 22px; }
+  .hero h1 { font-size: clamp(34px, 10.6vw, 46px); margin-bottom: 12px; }
+  .hero .hero-copy > p { font-size: 16px; }
+  .hero-query { margin-top: 19px; }
+  .hero-input { flex-wrap: wrap; }
+  .hero-input input, .hero-input .primary { flex-basis: 100%; }
+  .sample-reports, .how-to { margin: 26px 0; }
 }

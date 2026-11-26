@@ -1,6 +1,14 @@
-# Analyze a Solana token
+# Get started with MemeDiff
 
-Open [MemeDiff](https://dnfl1999.github.io/memediff/). Paste a full Solana CA into **Solana Token CA** and select **Analyze Token** once. No GitHub address, wallet, SOL, login or API key is needed. **Try Live Demo** uses the official MEMEDIFF CA.
+1. Paste a public GitHub URL or `owner/repo` in the first screen and select **Analyze GitHub**. **Live GitHub Demo** queries MemeDiff. **Try Sample Report** opens recorded reports with their observation times and coverage.
+2. Inspect original GitHub evidence. Check whether the collection is complete before comparing counts.
+3. Download PNG or JSON, save a browser baseline, or open **Saved Reports** to review a previous comparison.
+
+[Open MemeDiff](https://dnfl1999.github.io/memediff/) · [Try a recorded sample](https://dnfl1999.github.io/memediff/#samples)
+
+## Analyze a Solana token
+
+Open **Solana Token Analyzer**, paste a full Solana CA, and select **Analyze Token**. **Look up the MEMEDIFF CA** runs the same workflow with the official address. Analysis is free and requires no wallet, login or API key.
 
 ## Read the two kinds of evidence separately
 
@@ -16,13 +24,13 @@ Select **PNG Receipt** and **JSON** after GitHub analysis succeeds. JSON retains
 
 ## Analyze a repository directly
 
-Expand **Advanced Search — GitHub repository**, enter a public URL or `owner/repo`, optionally record a token address, and select **Analyze**. This preserves the original flow and existing saved baselines. Name search can help locate a repository but does not verify a token connection. Clearing browser storage or changing devices loses access to local baselines; JSON import is not implemented.
+Enter a repository in the homepage form. **Advanced GitHub tools** offers name search and an optional token address for the report. Repository-name search and a manually recorded address provide inputs for analysis. Review any independently verified connection in **Index health**. Export a JSON before switching devices if you want to import that observation later.
 
 ## Limits and help
 
 The Forks index is limited and dated. Scheduled refresh is attempted every six hours; GitHub may delay or disable scheduled runs. Associations older than 48 hours are not automatically used. A missing entry does not prove no relationship exists. Source errors, throttling and timeout are shown without automatic retries. Browser JavaScript cannot reliably distinguish a CORS denial from a general network failure; that ambiguity is stated.
 
-Read [FAQ](FAQ.md) and [data sources](DISCOVERY.md). Report reproducible bugs through [GitHub Issues](https://github.com/dnfl1999/memediff/issues/new/choose); remove secrets and unnecessary personal data. The app does not trade, connect wallets, claim fees or publish to X.
+Read [FAQ](FAQ.md) and [data sources](DISCOVERY.md). Share feedback on what helped, where analysis was hard, or any error you saw. Redact secrets and personal data before submitting. [Feedback form](https://github.com/dnfl1999/memediff/issues/new?template=feedback.md)
 
 ## Compare a downloaded JSON report
 

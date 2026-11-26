@@ -1,24 +1,26 @@
 # ± MemeDiff
 
-**Less Hype. More Evidence.**
+MemeDiff is a free, open-source tool for inspecting public GitHub activity. Look up commits and releases, compare recorded periods, and download evidence as PNG or JSON. No wallet or login is required.
 
-Track real GitHub activity behind crypto projects. MemeDiff is a free, open-source web tool for inspecting public repository activity, comparing observed SHA values, and sharing evidence with a Development Receipt.
+[Analyze a GitHub repository](https://dnfl1999.github.io/memediff/#query) · [Try a sample report](https://dnfl1999.github.io/memediff/#samples) · [Solana Token Analyzer](https://dnfl1999.github.io/memediff/#analyzer) · [Give feedback](https://github.com/dnfl1999/memediff/issues/new?template=feedback.md)
 
-The interface uses the official MemeDiff hooded mascot with a near-black, neon lime, cyan and coral palette. The same logo anchors the header, hero and official-token card; a dedicated social preview and favicon keep shared links consistent. See [brand assets and provenance](assets/README.md). The redesign changes presentation, not evidence collection, report schemas or saved baselines.
+1. Paste a public GitHub URL and select **Analyze GitHub**, or select **Live GitHub Demo** to query MemeDiff itself.
+2. Inspect the original commit and release links and check collection coverage.
+3. Download a report or compare it with earlier observations. Open **Saved Reports** to inspect saved comparison files.
 
-[Open MemeDiff](https://dnfl1999.github.io/memediff/) · [GitHub](https://github.com/dnfl1999/memediff) · [Quick start](docs/GETTING_STARTED.md) · [FAQ](docs/FAQ.md) · [Real historical example](docs/examples/README.md)
+[Quick start](docs/GETTING_STARTED.md) · [Sample provenance](docs/examples/README.md) · [FAQ](docs/FAQ.md) · [Brand assets](assets/README.md)
 
 See the [website-link audit and platform update guide](docs/WEBSITE_LINKS.md) for immutable metadata findings, official registration paths, and fees. The GitHub repository homepage now points to this official site.
 
-## How to use
+## Solana token analysis
 
-1. Paste a **Solana Token CA** and select **Analyze Token**. You do not need a GitHub URL. **Try Live Demo** runs this flow for the official MEMEDIFF CA.
+1. Open **Solana Token Analyzer**, paste a **Solana Token CA**, and select **Analyze Token**. **Look up the MEMEDIFF CA** fills the official address and runs this flow.
 2. Read the separate token-information panel: name/ticker, exact CA, USD price, FDV, market cap, one pool's liquidity and 24-hour volume, source links and observation time. Missing data is **Unknown**; failed sources are **Unavailable**, never fabricated zeros.
 3. A fresh, exact CA association verified from the official Forks `/api/coin` response automatically starts GitHub analysis. No repository selection or second Analyze click is required. Read the association's separate verification time and source.
 4. Select **7 days** or **30 days**, inspect original commit/release evidence, then export **PNG Receipt** and **JSON**. **Save baseline** and **Clear this project baseline** retain their existing behavior. Exports are development observations, available only after GitHub analysis succeeds.
 5. If no fresh verified mapping is available, token information remains visible with **No verified GitHub repository found.** This is a coverage limitation, not a token safety assessment or proof that no repository exists.
 
-**Advanced Search — GitHub repository** keeps direct GitHub URL / `owner/repo` analysis, the optional recorded token address, and repository-name search. A manually entered address does not verify a token relationship.
+**Advanced GitHub tools** contains repository-name search and the optional token address field for direct reports.
 
 Forks currently blocks cross-origin browser reads. GitHub Actions refreshes a limited index from recent listings and previously observed CA history, checking `coin.mint`, `coin.kind=forks` and the explicit `coin.repo`. Full-list pagination remains unconfirmed. See [data flow, evidence and limitations](docs/DISCOVERY.md).
 
@@ -26,9 +28,13 @@ The public app uses no wallet, paid API or login. An optional restrictive [read-
 
 The interface is English, dates use UTC, and numbers use English (US) formatting. GitHub source text retains its language. Existing storage keys and JSON **schema 1** are unchanged; market and association observations stay in their own panel and are not silently mixed into legacy development exports. PNG links are printed text, not clickable. Receipts remain editable observations, not signed certificates. v1.1 supports local JSON snapshot import; no automatic social posting exists.
 
+## v2.6 — Start with GitHub
+
+**Analyze GitHub** and **Live GitHub Demo** query GitHub directly. **Try Sample Report** opens recorded results for Vite, Hello-World, and MemeDiff without a live query. Sample times and coverage appear alongside each result. The original CA lookup remains available in **Solana Token Analyzer**.
+
 ## v2.5 — Saved Files Comparison Viewer
 
-Choose **Open Saved Files Comparison** on the homepage, then open a version 1 Saved Files Comparison JSON up to 8 MiB. The browser reconstructs both sources from the saved observations and recalculates UTC intervals, gaps, counts, classifications and conflicts before displaying them. Review file-specific periods and source links, then filter or page through the SHA and release records.
+Under **Saved Reports**, choose **Open Saved Files Comparison**, then open a version 1 Saved Files Comparison JSON up to 8 MiB. The browser reconstructs both sources from the saved observations and recalculates UTC intervals, gaps, counts, classifications and conflicts before displaying them. Review file-specific periods and source links, then filter or page through the SHA and release records.
 
 The viewer works offline after the page loads. It labels the comparison **Local file · Unverified**. Verifying the recorded SHA-256 values requires the original files, and the report still carries unverified GitHub observations. **Close viewer** clears the opened report. The original 2 MiB Period Comparison files remain supported by **Open Saved Comparison** and **Compare Two Saved Files**.
 

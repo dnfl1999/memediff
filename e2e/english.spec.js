@@ -7,8 +7,8 @@ test.use({locale:'ko-KR', timezoneId:'Asia/Seoul'});
 test('English metadata, UI, validation and UTC dates on a non-English device', async ({page}) => {
   const api=await mockGitHub(page); await page.goto('./');
   await expect(page.locator('html')).toHaveAttribute('lang','en');
-  await expect(page).toHaveTitle('MemeDiff — Less Hype. More Evidence.');
-  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Track real GitHub activity/);
+  await expect(page).toHaveTitle('MemeDiff — Free GitHub Activity Analyzer');
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Analyze public GitHub activity for free/);
   await openAdvanced(page); await page.locator('#analyze').click();
   await expect(page.locator('#status')).toContainText('Enter a GitHub repository URL');
   expect(api.requests).toHaveLength(0);

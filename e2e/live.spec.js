@@ -48,7 +48,7 @@ async function assertActualMarket(page,responses,mint,info){
 for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['another Forks coin','ErSkb1HfhfihdCgqaAztAfWzpNHwLw4AzjA1EVWJfork','riansj2290/remote-ikan']])test(`LIVE CA-only ${name} applies published verification and preserves market information`,async({page,diagnostics},info)=>{
  const responses=capture(page),requests=[];
  page.on('request',r=>requests.push(r.url()));
- await page.goto(name==='MEMEDIFF'?'./?ca='+mint:'./');await expect(page.locator('#repo')).toBeHidden();
+ await page.goto(name==='MEMEDIFF'?'./?ca='+mint:'./');await expect(page.locator('#repo')).toBeVisible();
  if(name==='MEMEDIFF') {
    await expect(page.locator('#token-ca')).toHaveValue(mint);await expect(page.locator('#share-status')).toContainText('No analysis has run');
    await expect(page.locator('#report')).toBeHidden();await expect(page.locator('#token-result')).toBeHidden();expect(responses).toHaveLength(0);
@@ -69,7 +69,7 @@ for(const [name,mint,repo]of [['MEMEDIFF',official,'dnfl1999/memediff'],['anothe
  if(health.state!=='fresh'){
    expect(requests.filter(url=>url.startsWith('https://api.github.com/'))).toEqual([]);
    await expect(page.locator('#report')).toBeHidden();
-   await expect(pane.getByRole('button',{name:'Open Advanced Search'})).toBeVisible();
+   await expect(pane.getByRole('button',{name:'Open GitHub analysis'})).toBeVisible();
  }
  await evidence(responses,diagnostics,info);
  await assertActualMarket(page,responses,mint,info);
@@ -117,7 +117,7 @@ test('LIVE MEMEDIFF expiry boundary blocks auto-analysis with the real index and
  await assertActualMarket(page,responses,official,info);
  await indexHealth(page).screenshot({path:info.outputPath('LIVE-index-expired.png')});
  if (!githubLimited) {
-   await indexHealth(page).getByRole('button',{name:'Open Advanced Search'}).click();
+   await indexHealth(page).getByRole('button',{name:'Open GitHub analysis'}).click();
    await page.clock.setFixedTime(Date.now());
    await page.locator('#repo').fill('dnfl1999/memediff');
    await page.locator('#analyze').click();
@@ -134,7 +134,20 @@ test('LIVE general Solana meme token shows exact-CA market information without i
  expect(observed.some(r=>r.url.includes('api.github.com/'))).toBe(false);await expect(page.locator('#association')).toContainText('No verified GitHub repository found.');await expect(page.locator('#observed-ca')).toContainText(mint);await expect(page.locator('#token-result-title')).toContainText(/bonk/i);await expect(page.locator('#market-status')).toContainText('Market data observed');await expect(page.locator('#report')).toBeHidden();
  await page.screenshot({path:info.outputPath('LIVE-ca-unlinked.png'),fullPage:true});
 });
-test('LIVE Advanced Search preserves direct GitHub and name search',async({page,diagnostics},info)=>{
+test('LIVE GitHub Demo explicitly queries MemeDiff independently of Forks', async ({page,diagnostics}, info) => {
+ test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');
+ const responses=capture(page), requests=[];
+ page.on('request', request=>requests.push(request.url()));
+ await page.goto('./');
+ expect(responses).toEqual([]);
+ await page.getByRole('button', {name:'Live GitHub Demo',exact:true}).click();
+ await expect(page.locator('#analyze')).toBeEnabled({timeout:50000});
+ const observed=await evidence(responses,diagnostics,info);
+ expect(observed.some(row=>row.status===200 && row.url==='https://api.github.com/repos/dnfl1999/memediff')).toBe(true);
+ await expect(page.locator('#report-title')).toHaveText('dnfl1999/memediff');
+ expect(requests.filter(url=>url.includes('forks-index')||url.includes('dexscreener.com'))).toEqual([]);
+});
+test('LIVE front-page GitHub analysis preserves direct reports and name search',async({page,diagnostics},info)=>{
  test.skip(githubLimited,'Previous live GitHub rate limit; no further GitHub requests.');const responses=capture(page);const requests=[];
  page.on('request',request=>{if(/^https:\/\/(api.github.com|api.dexscreener.com)\//.test(request.url()))requests.push(request.url());});
  await page.goto('./');await openAdvanced(page);await page.locator('#repo').fill('dnfl1999/memediff');await page.locator('#analyze').click();await expect(page.locator('#analyze')).toBeEnabled({timeout:50000});await evidence(responses,diagnostics,info);await expect(page.locator('#report-title')).toHaveText('dnfl1999/memediff');
@@ -197,5 +210,5 @@ test('LIVE Advanced Search preserves direct GitHub and name search',async({page,
  await info.attach('LIVE-period-comparison',{contentType:'application/json',body:JSON.stringify({repo:downloaded.repo,branch:downloaded.branch,
    since:downloaded.since,observedAt:downloaded.fetchedAt,coverage:downloaded.coverage,verifiedAgainstGitHubResponses:true,
    additionalAPIRequests:requests.length-requestCount,periods:verified,json:files.jsonFile,png:files.pngFile})});
- await page.locator('#advanced details > summary').click();await page.locator('#search-name').fill('memediff');await page.locator('#search-submit').click();await expect(page.locator('#search-submit')).toBeEnabled({timeout:20000});await evidence(responses,diagnostics,info);await expect(page.locator('#discovery-results button').first()).toBeVisible();
+ await openAdvanced(page);await page.locator('#advanced details > summary').click();await page.locator('#search-name').fill('memediff');await page.locator('#search-submit').click();await expect(page.locator('#search-submit')).toBeEnabled({timeout:20000});await evidence(responses,diagnostics,info);await expect(page.locator('#discovery-results button').first()).toBeVisible();
 });

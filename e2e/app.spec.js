@@ -7,14 +7,14 @@ test('page loads, JavaScript executes, and keyboard navigation works', async ({ 
   await expect(page).toHaveTitle(/MemeDiff/);
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Skip to main content' })).toBeFocused();
-  await openAdvanced(page); await page.locator('#repo').focus();
+  await expect(page.locator('#repo')).toBeVisible();
+  await page.locator('#repo').focus();
   await page.keyboard.type('fixture/project');
-  await page.keyboard.press('Tab');
-  await expect(page.locator('#token')).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(page.locator('#analyze')).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page.locator('#report-title')).toHaveText('fixture/project');
+  await expect(page.locator('#report-title')).toBeFocused();
   expect(api.requests).toHaveLength(3);
 });
 

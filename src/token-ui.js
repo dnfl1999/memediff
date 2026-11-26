@@ -20,9 +20,7 @@ function displayAssociation(mint,index,error){
  stopHealth();
  const content=el('div',''),notice=el('p','');notice.hidden=true;notice.setAttribute('role','status');
  $('association').replaceChildren(content,notice);
- const result=mountIndexHealth(content,mint,index,{error,visible:()=>!$('token-result').hidden,openAdvanced:()=>{
-   $('advanced').open=true;$('repo').focus();
- }});
+ const result=mountIndexHealth(content,mint,index,{error,visible:()=>!$('token-result').hidden,openAdvanced:()=>$('repo').focus()});
  stopHealth=result.stop;
  return {health:result.health,notice};
 }
@@ -50,7 +48,8 @@ $('token-query').addEventListener('submit',async event=>{
      status(`Verified indexed association: ${association.repo}. Analyzing GitHub automatically…`);
      $('repo').value=association.repo;$('token').value=mint;
      githubOK=await analyzeRepository(association.repo,mint);
-     if(!githubOK&&!signal.aborted){notice.textContent=`GitHub activity is unavailable. ${$('status').textContent}`;notice.hidden=false;}
+     if(githubOK){const report=el('a','View GitHub report');report.href='#report';notice.append(report);notice.hidden=false;}
+     else if(!signal.aborted){notice.textContent=`GitHub activity is unavailable. ${$('status').textContent}`;notice.hidden=false;}
    }
  }catch(e){indexState='unavailable';if(!signal.aborted)displayAssociation(mint,null,e.message);}
  finally{

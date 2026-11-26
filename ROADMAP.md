@@ -4,11 +4,17 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v2.6 — First-use experience and user acquisition
+
+- Put direct GitHub analysis, a live GitHub demo and recorded samples on the home page. Keep Solana analysis and saved file tools available through their own entry points.
+- Publish observed sample reports and use GitHub Issues to collect feedback on analysis and report use.
+- Review GitHub discovery metadata and evaluate visitor, analysis and export measurements before connecting any analytics service. [User acquisition plan](docs/USER_ACQUISITION.md)
+- Defer optional SHA-256 matching against original files until user feedback establishes its priority.
+
 ## v2.5 — Saved Files Comparison Viewer
 
 - Open a saved comparison summary locally and recalculate selected UTC coverage, evidence classifications and counts from the two recorded sources.
 - Keep source links, recorded SHA-256 values, evidence filters and pagination available in a read-only viewer.
-- Consider optional local SHA-256 matching against supplied original files in v2.6.
 
 ## v2.4 — Saved Files Comparison Export
 

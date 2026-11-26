@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source": "github-live",
+  "repo": "octocat/hello-world",
+  "token": "",
+  "branch": "master",
+  "fetchedAt": "2026-11-26T06:38:27.022Z",
+  "since": "2026-10-27T06:38:27.022Z",
+  "description": "My first repository on GitHub!",
+  "fork": false,
+  "parent": null,
+  "archived": false,
+  "commits": [],
+  "releases": [],
+  "metrics": {
+    "7": {
+      "commits": 0,
+      "releases": 0,
+      "contributors": 0,
+      "unattributed": 0
+    },
+    "30": {
+      "commits": 0,
+      "releases": 0,
+      "contributors": 0,
+      "unattributed": 0
+    }
+  },
+  "coverage": {
+    "commits": true,
+    "releases": true,
+    "maxCommits": 1000,
+    "maxReleases": 500
+  },
+  "remaining": "39",
+  "evidence": [
+    "https://api.github.com/repos/octocat/hello-world",
+    "https://api.github.com/repos/octocat/hello-world/commits?sha=master&since=2026-10-27T06%3A38%3A27Z&until=2026-11-26T06%3A38%3A28Z&per_page=100&page=1",
+    "https://api.github.com/repos/octocat/hello-world/releases?per_page=100&page=1"
+  ],
+  "warnings": [],
+  "methodology": "Rolling 7/30-day windows ending at the observation time, using default-branch committer timestamps. Contributors are linked GitHub author accounts, including bots and excluding unlinked authors. Public releases use published_at and include prereleases. Code quality, originality, actual work time and token association are not verified.",
+  "comparison": null,
+  "selectedDays": 30
+}

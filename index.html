@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Track real GitHub activity behind Solana tokens. Analyze a CA, compare development snapshots, and export PNG or JSON evidence. Official MemeDiff ($MEMEDIFF) website.">
+  <meta name="description" content="Analyze public GitHub activity for free. Inspect commits and releases, compare development observations, and download evidence as PNG or JSON. Includes a Solana token analyzer.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://api.github.com https://api.dexscreener.com; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer"><meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://dnfl1999.github.io/memediff/">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#080a0b">
-  <meta property="og:type" content="website"><meta property="og:title" content="MemeDiff — Less Hype. More Evidence.">
-  <meta property="og:description" content="Track real GitHub activity behind crypto projects. Inspect the source. Share the evidence.">
+  <meta property="og:type" content="website"><meta property="og:title" content="MemeDiff — Free GitHub Activity Analyzer">
+  <meta property="og:description" content="Inspect real commits and public releases, compare observations, and download GitHub evidence. Try a live query or open a recorded sample.">
   <meta property="og:url" content="https://dnfl1999.github.io/memediff/"><meta property="og:image" content="https://dnfl1999.github.io/memediff/assets/social-preview.png">
   <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="MemeDiff lime hooded mascot beside Less Hype. More Evidence.">
-  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="MemeDiff — Less Hype. More Evidence."><meta name="twitter:description" content="Track real GitHub activity behind crypto projects."><meta name="twitter:image" content="https://dnfl1999.github.io/memediff/assets/social-preview.png"><meta name="twitter:image:alt" content="MemeDiff lime hooded mascot beside Less Hype. More Evidence.">
-  <title>MemeDiff — Less Hype. More Evidence.</title><link rel="icon" href="./assets/favicon.png" type="image/png"><link rel="stylesheet" href="./style.css">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="MemeDiff — Free GitHub Activity Analyzer"><meta name="twitter:description" content="Inspect commits and releases, compare observations, and download public GitHub evidence."><meta name="twitter:image" content="https://dnfl1999.github.io/memediff/assets/social-preview.png"><meta name="twitter:image:alt" content="MemeDiff lime hooded mascot beside Less Hype. More Evidence.">
+  <title>MemeDiff — Free GitHub Activity Analyzer</title><link rel="icon" href="./assets/favicon.png" type="image/png"><link rel="stylesheet" href="./style.css">
   <script type="module" src="./src/app.js"></script>
   <script type="module" src="./src/token.js"></script>
   <script type="module" src="./src/discovery-ui.js"></script>
@@ -25,18 +25,132 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to main content</a>
-  <header><a class="brand" href="./"><img class="brand-icon" src="./assets/memediff-logo.jpg" width="44" height="44" alt=""> <span>Meme<span class="brand-lime">Diff</span></span><span class="version">OPEN SOURCE</span></a><nav aria-label="Main navigation"><a href="#official-token">MEMEDIFF</a><a href="#method">Methodology</a><a href="https://github.com/dnfl1999/memediff" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>
+  <header><a class="brand" href="./"><img class="brand-icon" src="./assets/memediff-logo.jpg" width="44" height="44" alt=""> <span>Meme<span class="brand-lime">Diff</span></span><span class="version">OPEN SOURCE</span></a><nav aria-label="Main navigation"><a href="#samples">Samples</a><a href="#method">Methodology</a><a href="#feedback">Feedback</a></nav></header>
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy"><div class="eyebrow"><span class="dot"></span> BUILT FOR THE CURIOUS. BACKED BY CODE.</div>
-        <h1 id="hero-title">Less Hype.<br><em>More Evidence.</em></h1>
-        <p>Track real GitHub activity behind crypto projects.</p><p class="hero-detail">Go beyond the timeline. Inspect commits, compare snapshots, and share the source behind the story.</p>
-        <div class="hero-actions"><a class="button primary" href="#analyzer">Analyze a token <span aria-hidden="true">↗</span></a><button id="live-demo" type="button">Try Live Demo <span aria-hidden="true">→</span></button><button id="saved-comparison-open" type="button" aria-controls="saved-comparison">Open Saved Comparison</button><button id="compare-saved-open" type="button" aria-controls="compare-saved-files">Compare Two Saved Files</button><button id="saved-files-viewer-open" type="button" aria-controls="saved-files-viewer">Open Saved Files Comparison</button><input id="saved-comparison-file" type="file" aria-label="Saved Period Comparison JSON" accept=".json,application/json" hidden></div>
-        <p class="demo-caption">Live demo: the official MEMEDIFF CA, token information and GitHub activity. API limits apply.</p>
-        <div class="hero-note"><span>No wallet required</span><span>Free &amp; open source</span><span>No trust scores</span></div>
+      <div class="hero-copy">
+        <h1 id="hero-title">Is your crypto project <em>being built?</em></h1>
+        <p>Inspect real GitHub activity. Check commits, releases and source evidence.</p>
+        <form id="query" class="hero-query" novalidate>
+          <label for="repo">Public GitHub repository</label>
+          <div class="hero-input"><input id="repo" name="repo" placeholder="https://github.com/owner/repo" required maxlength="250" autocomplete="off" spellcheck="false" aria-describedby="repo-help"><button id="analyze" class="primary" type="submit">Analyze GitHub</button><button id="cancel" type="button" hidden>Cancel</button></div>
+          <p id="repo-help" class="small">Paste a GitHub URL or enter owner/repo.</p>
+        </form>
+        <p id="status" role="status" aria-live="polite"></p>
+        <div class="hero-actions"><a class="button sample-action" href="#samples">Try Sample Report</a><button id="live-github-demo" type="button" aria-describedby="demo-caption">Live GitHub Demo</button></div>
+        <p id="demo-caption" class="demo-caption">Live demo queries the public MemeDiff repository. GitHub API limits apply.</p>
+        <div class="hero-links"><a href="#analyzer">Solana Token Analyzer <span aria-hidden="true">↗</span></a><a href="#saved-tools">Saved Reports <span aria-hidden="true">↗</span></a></div>
+        <p class="hero-access">No wallet. No login. Free and open source.</p>
+        <details id="advanced" class="discovery"><summary>Advanced GitHub tools</summary>
+          <label for="token">Solana token address (optional)</label><input id="token" form="query" name="token" placeholder="Optional token mint address" maxlength="44" autocomplete="off" spellcheck="false" aria-describedby="repo-token-help"><p id="repo-token-help" class="small">The address is recorded in the report. GitHub analysis checks the repository independently.</p>
+          <details class="discovery"><summary>Find a repository by project name</summary>
+            <form id="repo-search" novalidate><label for="search-name">GitHub project name</label><div class="search-row"><input id="search-name" placeholder="e.g. memediff" maxlength="80" autocomplete="off"><button id="search-submit" type="submit">Search GitHub</button></div><p class="small">Up to 10 public name matches. Choose the owner and repository you intended. Search has a separate GitHub rate limit.</p></form>
+            <div id="discovery-status" role="status" aria-live="polite"></div><ul id="discovery-results" class="discovery-results"></ul>
+          </details>
+        </details>
       </div>
-      <div class="hero-art"><div class="art-label"><span>MEMEDIFF / SOURCE MATTERS</span><span class="cyan">&lt;/&gt;</span></div><img src="./assets/memediff-logo.jpg" width="512" height="512" alt="Official MemeDiff mascot: a neon lime hooded developer with cyan and coral diff accents" fetchpriority="high" decoding="async"><div class="diff-strip"><span class="remove">− hype</span><span class="add">+ evidence</span><span class="cyan">{ inspect }</span></div></div>
+      <div class="hero-art"><img src="./assets/memediff-logo.jpg" width="512" height="512" alt="MemeDiff’s neon lime hooded developer mascot" fetchpriority="high" decoding="async"></div>
     </section>
+    <section id="report" hidden aria-label="Activity report"><div class="report-top"><div><div class="eyebrow">LIVE GITHUB OBSERVATION</div><h2 id="report-title" tabindex="-1"></h2><p id="report-meta"></p></div><div class="actions"><button id="import-open" type="button">Import Previous Report</button><input id="import-file" type="file" accept=".json,application/json" hidden aria-label="Previous MemeDiff JSON report"><button id="save">Save baseline</button><button id="json">JSON ↓</button><button id="png">PNG Receipt ↓</button></div></div><p id="description"></p><p id="token-note" class="break"></p><div id="warnings" role="note"></div><div class="periods" role="group" aria-label="Observation window"><button data-days="7" aria-pressed="false">7 days</button><button data-days="30" aria-pressed="true">30 days</button></div><div id="metrics" class="metrics"></div>
+      <div class="report-grid"><section class="panel"><div class="section-head"><h3>Daily commits</h3><span class="muted">UTC · Default branch</span></div><div id="chart" class="chart" role="img"></div><div class="chart-labels"><span id="chart-start"></span><span id="chart-end"></span></div></section><section class="panel comparison"><div class="section-head"><h3><span class="step">Δ</span> Compare evidence</h3><span class="tag">MEMEDIFF</span></div><div id="comparison"></div><div class="import-controls"><p class="small">Import a previous schema 1 JSON report (up to 2 MiB) for this exact repository, branch and CA. Comparison always uses the 30-day dataset.</p><p id="import-status" role="status" aria-live="polite">Files stay on this device. No upload or network request is made.</p><section id="import-preview" hidden aria-labelledby="import-title"><h4 id="import-title" tabindex="-1">Previous report preview</h4><dl id="import-details"></dl><p class="warning">Imported JSON is editable and unverified. Matching structure does not authenticate its contents.</p><div class="import-actions"><button id="import-apply" type="button" disabled>Compare without saving</button><button id="import-dismiss" type="button">Cancel preview</button><button id="import-save" type="button" disabled>Save imported baseline</button></div><p class="small">Save imported baseline replaces the saved baseline for this repository, branch and CA only.</p></section><button id="import-restore" type="button" class="text-button">Use saved browser baseline</button></div><p class="small">Baselines stay in this browser. Nothing is stored until you select Save baseline or Save imported baseline.</p><button id="clear" class="text-button">Clear this project baseline</button></section></div>
+      <div class="report-grid"><section class="panel"><h3>Recent commits <span class="muted">Up to 20 shown</span></h3><ol id="commits" class="evidence-list"></ol></section><section class="panel"><h3>Public releases <span class="muted">Selected window · Includes prereleases</span></h3><ul id="releases" class="evidence-list"></ul><h3 class="contributors-title">Observed contributors</h3><div id="contributors" class="chips"></div><p class="small">Counts include authors with linked GitHub accounts, including bots. This is not the complete project contributor list.</p></section></div>
+      <section id="period-comparison" class="panel period-comparison" aria-labelledby="period-comparison-title">
+        <h3 id="period-comparison-title">Compare Two Periods</h3>
+        <p id="period-range" class="period-range"></p>
+        <p id="period-help" class="small">Dates use UTC and include the end date. The first and last collection dates use only the time captured in the report.</p>
+        <form novalidate aria-describedby="period-range period-help">
+          <div class="period-pair">
+            <fieldset>
+              <legend>Period A</legend>
+              <div class="period-date-fields">
+                <label>Start date<input id="period-a-start" type="date" aria-label="Period A start date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+                <label>End date<input id="period-a-end" type="date" aria-label="Period A end date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Period B</legend>
+              <div class="period-date-fields">
+                <label>Start date<input id="period-b-start" type="date" aria-label="Period B start date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+                <label>End date<input id="period-b-end" type="date" aria-label="Period B end date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
+              </div>
+            </fieldset>
+          </div>
+          <button type="submit">Compare periods</button>
+        </form>
+        <p id="period-status" class="small" role="status" aria-live="polite"></p>
+        <div class="period-exports">
+          <div class="actions" role="group" aria-label="Period comparison downloads">
+            <button id="period-export-json" type="button" aria-describedby="period-export-help" disabled>Export Comparison JSON</button>
+            <button id="period-export-png" type="button" aria-describedby="period-export-help" disabled>Export Comparison PNG</button>
+          </div>
+          <p id="period-export-help" class="small">Comparison files cover the applied periods. JSON contains the source links and uses a separate format from baseline snapshots. PNG links are printed text.</p>
+          <p id="period-export-status" class="small" aria-live="polite"></p>
+        </div>
+        <div id="period-results" hidden></div>
+      </section>
+      <details class="panel"><summary>Original API evidence and collection scope</summary><p id="coverage"></p><ul id="sources" class="source-list"></ul></details>
+    </section>
+    <section id="empty" class="empty-state" hidden><h2>GitHub report unavailable</h2><p>Check the status by the repository input or <a href="#samples">open a recorded sample</a>.</p></section>
+    <section id="samples" class="sample-reports" aria-labelledby="samples-title">
+      <h2 id="samples-title">Sample reports</h2>
+      <p>Recorded 30-day GitHub observations. Open an example without running a live query.</p>
+      <div class="sample-grid">
+        <article id="sample-vite" class="panel sample-card" aria-labelledby="sample-vite-title">
+          <h3 id="sample-vite-title">vitejs/vite</h3>
+          <p class="sample-context">Active development in the observed window</p>
+          <time datetime="2026-11-26T06:38:20.845Z">Nov 26, 2026 · 06:38:20.845 UTC</time>
+          <p class="sample-metrics"><span><strong>127</strong> commits</span><span><strong>14+</strong> releases</span></p>
+          <p class="sample-detail">Commit collection complete. Release collection reached the 500-record API cap, so 14 is the observed count.</p>
+          <div class="actions"><a class="button" href="./assets/examples/vitejs-vite.png" target="_blank" rel="noopener">View PNG</a><a class="button" href="./assets/examples/vitejs-vite.json" download>Download JSON</a></div>
+          <a class="sample-source" href="https://github.com/vitejs/vite">Source repository ↗</a>
+        </article>
+        <article id="sample-hello-world" class="panel sample-card" aria-labelledby="sample-hello-world-title">
+          <h3 id="sample-hello-world-title">octocat/Hello-World</h3>
+          <p class="sample-context">Quiet 30-day window</p>
+          <time datetime="2026-11-26T06:38:27.022Z">Nov 26, 2026 · 06:38:27.022 UTC</time>
+          <p class="sample-metrics"><span><strong>0</strong> commits</span><span><strong>0</strong> releases</span></p>
+          <p class="sample-detail">This public example repository returned complete collections for both measures in the selected window.</p>
+          <div class="actions"><a class="button" href="./assets/examples/octocat-hello-world.png" target="_blank" rel="noopener">View PNG</a><a class="button" href="./assets/examples/octocat-hello-world.json" download>Download JSON</a></div>
+          <a class="sample-source" href="https://github.com/octocat/Hello-World">Source repository ↗</a>
+        </article>
+        <article id="sample-memediff" class="panel sample-card" aria-labelledby="sample-memediff-title">
+          <h3 id="sample-memediff-title">dnfl1999/memediff</h3>
+          <p class="sample-context">Activity changed between periods</p>
+          <time datetime="2026-11-26T06:38:28.639Z">Nov 26, 2026 · 06:38:28.639 UTC</time>
+          <p class="sample-metrics"><span><strong>55</strong> commits</span><span><strong>0</strong> releases</span></p>
+          <p class="sample-detail">6 commits in the first 15 days and 49 in the next 15, split at Nov 11, 06:38:28.639 UTC.</p>
+          <div class="actions"><a class="button" href="./assets/examples/dnfl1999-memediff.png" target="_blank" rel="noopener">View PNG</a><a class="button" href="./assets/examples/dnfl1999-memediff.json" download>Download JSON</a></div>
+          <a class="sample-source" href="https://github.com/dnfl1999/memediff">Source repository ↗</a>
+        </article>
+      </div>
+    </section>
+    <section class="how-to" aria-labelledby="how-to-title">
+      <h2 id="how-to-title">How it works</h2>
+      <ol>
+        <li><strong>Analyze a repository</strong><p>Paste a public GitHub URL and run an analysis.</p></li>
+        <li><strong>Inspect the evidence</strong><p>Open original commits and releases. Check collection coverage.</p></li>
+        <li><strong>Download or compare reports</strong><p>Export a PNG or JSON, or compare against a saved observation.</p></li>
+      </ol>
+    </section>
+    <details class="panel english-guide" lang="en"><summary>Quick start — share a Development Receipt</summary><p>MemeDiff is a free, open-source tool for inspecting public GitHub development activity. No wallet, token ownership or login is required.</p><ol><li>Paste a Solana token CA and select <strong>Analyze Token</strong>. Available market data appears even without a GitHub link. A fresh, exact official Forks association starts GitHub analysis automatically.</li><li>For a linked repository, choose <strong>7 days</strong> or <strong>30 days</strong>. Review collection warnings and source links.</li><li>Select <strong>PNG Receipt</strong> for an English shareable card with the observed time, UTC window and source evidence. Export <strong>JSON</strong> too for all evidence URLs and collection errors. Image links are printed text, not clickable.</li><li>Use <strong>Save baseline</strong> to save a baseline on this device. Analyze again to compare 30-day SHA observations; the comparison remains 30-day even on a 7-day card.</li></ol><p>Enter a repository URL at the top of the page, or open Advanced GitHub tools to search by name. Forks associations use a limited dated index; omission is not evidence of no relationship. Counts are observations, not proof of work, quality or token safety. A <strong>+</strong> means incomplete collection. Receipts are locally generated and editable, not signed certificates. After a live analysis, select Import Previous Report to preview and compare a previous JSON export locally. Saving the imported baseline is a separate, explicit choice. There is no hosted report or automatic social posting.</p></details>
+    <section id="analyzer" class="query-panel" aria-labelledby="query-title"><div class="section-head"><h2 id="query-title">Solana Token Analyzer</h2></div>
+      <p class="analyzer-intro">Paste a Solana token CA to explore token information and any verifiable GitHub development activity.</p>
+      <form id="token-query" novalidate><label for="token-ca">Solana Token CA</label><div class="ca-query-row"><input id="token-ca" name="ca" placeholder="Paste a Solana token contract address" maxlength="44" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="token-help"><button id="analyze-token" class="primary" type="submit">Analyze Token <span aria-hidden="true">↗</span></button><button id="cancel-token" type="button" hidden>Cancel</button></div><p id="token-help" class="small">No GitHub URL needed. Exact CA matches only; unavailable data stays unknown.</p></form>
+      <p id="token-status" role="status" aria-live="polite">Enter a Solana CA to start.</p>
+      <p class="small">Market lookup can work when a Forks association is expired or unavailable. You can analyze a known repository directly above.</p>
+      <button id="live-demo" type="button">Look up the MEMEDIFF CA</button>
+      <div class="share-controls"><div class="share-actions" role="group" aria-label="Share token analysis"><button id="native-share" type="button" aria-describedby="native-share-help">Share</button><button id="copy-analysis-link" type="button" aria-describedby="share-help">Copy Analysis Link</button></div><p id="native-share-help" class="small">Share opens your device menu when supported, or copies the link if unavailable. Canceling never copies the link.</p><p id="share-status" role="status" aria-live="polite">Share only the CA currently in the input. Recipients choose when to run a fresh query.</p><p id="share-context" class="small">A shared link is not a recommendation or certification. Address format alone does not verify a token or GitHub association.</p><div id="share-fallback" hidden><label for="analysis-link">Analysis link — CA only</label><input id="analysis-link" type="text" readonly spellcheck="false" aria-describedby="share-help"></div><p id="share-help" class="small">No baseline, imported JSON or report data is included. GitHub Pages uses a static MemeDiff preview, not a token-specific image, live price or analysis result.</p></div>
+    </section>
+    <section id="token-result" class="panel token-result" hidden aria-labelledby="token-result-title"><div class="eyebrow">TOKEN INFORMATION / SEPARATE FROM DEVELOPMENT</div><h2 id="token-result-title">Token observation</h2><p id="observed-ca" class="break"></p><div id="market-status" role="status"></div><div id="market-metrics" class="market-metrics"></div><div id="market-source"></div><div id="association" class="association"></div><p class="small">Market data is an observation, not a safety assessment. A missing GitHub link does not establish whether a token is safe. Names and tickers can be copied.</p></section>
+    <details id="saved-tools" class="panel saved-tools">
+      <summary>Saved Reports</summary>
+      <div class="actions">
+        <button id="saved-comparison-open" type="button" aria-controls="saved-comparison">Open Saved Comparison</button>
+        <button id="compare-saved-open" type="button" aria-controls="compare-saved-files">Compare Two Saved Files</button>
+        <button id="saved-files-viewer-open" type="button" aria-controls="saved-files-viewer">Open Saved Files Comparison</button>
+        <input id="saved-comparison-file" type="file" aria-label="Saved Period Comparison JSON" accept=".json,application/json" hidden>
+      </div>
+    </details>
     <section id="saved-comparison" class="panel period-comparison" aria-labelledby="saved-comparison-title" hidden>
       <div class="section-head">
         <h2 id="saved-comparison-title" tabindex="-1">Saved Period Comparison</h2>
@@ -110,62 +224,6 @@
       <p id="saved-files-viewer-status" class="small" role="status" aria-live="polite"></p>
       <div id="saved-files-viewer-content" hidden></div>
     </section>
-    <details class="panel english-guide" lang="en"><summary>Quick start — share a Development Receipt</summary><p>MemeDiff is a free, open-source tool for inspecting public GitHub development activity. No wallet, token ownership or login is required.</p><ol><li>Paste a Solana token CA and select <strong>Analyze Token</strong>. Available market data appears even without a GitHub link. A fresh, exact official Forks association starts GitHub analysis automatically.</li><li>For a linked repository, choose <strong>7 days</strong> or <strong>30 days</strong>. Review collection warnings and source links.</li><li>Select <strong>PNG Receipt</strong> for an English shareable card with the observed time, UTC window and source evidence. Export <strong>JSON</strong> too for all evidence URLs and collection errors. Image links are printed text, not clickable.</li><li>Use <strong>Save baseline</strong> to save a baseline on this device. Analyze again to compare 30-day SHA observations; the comparison remains 30-day even on a 7-day card.</li></ol><p>Advanced Search retains direct GitHub URL analysis and repository-name search. Forks associations use a limited dated index; omission is not evidence of no relationship. Counts are observations, not proof of work, quality or token safety. A <strong>+</strong> means incomplete collection. Receipts are locally generated and editable, not signed certificates. After a live analysis, select Import Previous Report to preview and compare a previous JSON export locally. Saving the imported baseline is a separate, explicit choice. There is no hosted report or automatic social posting.</p></details>
-    <section id="analyzer" class="query-panel" aria-labelledby="query-title"><div class="section-head"><h2 id="query-title"><span class="step">01 / TOKEN ANALYZER</span> Analyze a Token</h2><span class="tag">SOLANA / PUBLIC EVIDENCE</span></div>
-      <p class="analyzer-intro">Paste a Solana token CA to explore token information and any verifiable GitHub development activity.</p>
-      <form id="token-query" novalidate><label for="token-ca">Solana Token CA</label><div class="ca-query-row"><input id="token-ca" name="ca" placeholder="Paste a Solana token contract address" maxlength="44" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="token-help"><button id="analyze-token" class="primary" type="submit">Analyze Token <span aria-hidden="true">↗</span></button><button id="cancel-token" type="button" hidden>Cancel</button></div><p id="token-help" class="small">No GitHub URL needed. Exact CA matches only; unavailable data stays unknown.</p></form>
-      <p id="token-status" role="status" aria-live="polite">Enter a Solana CA or try the live demo.</p>
-      <div class="share-controls"><div class="share-actions" role="group" aria-label="Share token analysis"><button id="native-share" type="button" aria-describedby="native-share-help">Share</button><button id="copy-analysis-link" type="button" aria-describedby="share-help">Copy Analysis Link</button></div><p id="native-share-help" class="small">Share opens your device menu when supported, or copies the link if unavailable. Canceling never copies the link.</p><p id="share-status" role="status" aria-live="polite">Share only the CA currently in the input. Recipients choose when to run a fresh query.</p><p id="share-context" class="small">A shared link is not a recommendation or certification. Address format alone does not verify a token or GitHub association.</p><div id="share-fallback" hidden><label for="analysis-link">Analysis link — CA only</label><input id="analysis-link" type="text" readonly spellcheck="false" aria-describedby="share-help"></div><p id="share-help" class="small">No baseline, imported JSON or report data is included. GitHub Pages uses a static MemeDiff preview, not a token-specific image, live price or analysis result.</p></div>
-      <details id="advanced" class="discovery"><summary>Advanced Search — GitHub repository</summary>
-      <form id="query" novalidate><div class="fields"><label>GitHub repository <span class="required">Required</span><input id="repo" name="repo" placeholder="https://github.com/owner/repo" required maxlength="250" autocomplete="off" spellcheck="false"></label><label>Solana token address <span class="muted">Optional</span><input id="token" name="token" placeholder="Optional token mint address" maxlength="44" autocomplete="off" spellcheck="false"></label></div><div class="form-bottom"><p>Only the address format is checked. Token mint existence and its official relationship to the repository are not verified.</p><button id="analyze" class="primary" type="submit">Analyze <span>↗</span></button><button id="cancel" type="button" hidden>Cancel</button></div></form>
-      <div id="status" role="status" aria-live="polite">Enter a repository to load real public GitHub data.</div>
-      <details class="discovery"><summary>Find a repository by project name</summary>
-        <form id="repo-search" novalidate><label for="search-name">GitHub project name</label><div class="search-row"><input id="search-name" placeholder="e.g. memediff" maxlength="80" autocomplete="off"><button id="search-submit" type="submit">Search GitHub</button></div><p class="small">Up to 10 public name matches. Select the owner/repository you intended. Search runs only when submitted and has a separate GitHub rate limit.</p></form>
-        <div id="discovery-status" role="status" aria-live="polite"></div><ul id="discovery-results" class="discovery-results"></ul>
-      </details>
-      </details>
-    </section>
-    <section id="token-result" class="panel token-result" hidden aria-labelledby="token-result-title"><div class="eyebrow">TOKEN INFORMATION / SEPARATE FROM DEVELOPMENT</div><h2 id="token-result-title">Token observation</h2><p id="observed-ca" class="break"></p><div id="market-status" role="status"></div><div id="market-metrics" class="market-metrics"></div><div id="market-source"></div><div id="association" class="association"></div><p class="small">Market data is an observation, not a safety assessment. A missing GitHub link does not establish whether a token is safe. Names and tickers can be copied.</p></section>
-    <section id="report" hidden aria-label="Activity report"><div class="report-top"><div><div class="eyebrow">LIVE GITHUB OBSERVATION</div><h2 id="report-title"></h2><p id="report-meta"></p></div><div class="actions"><button id="import-open" type="button">Import Previous Report</button><input id="import-file" type="file" accept=".json,application/json" hidden aria-label="Previous MemeDiff JSON report"><button id="save">Save baseline</button><button id="json">JSON ↓</button><button id="png">PNG Receipt ↓</button></div></div><p id="description"></p><p id="token-note" class="break"></p><div id="warnings" role="note"></div><div class="periods" role="group" aria-label="Observation window"><button data-days="7" aria-pressed="false">7 days</button><button data-days="30" aria-pressed="true">30 days</button></div><div id="metrics" class="metrics"></div>
-      <div class="report-grid"><section class="panel"><div class="section-head"><h3>Daily commits</h3><span class="muted">UTC · Default branch</span></div><div id="chart" class="chart" role="img"></div><div class="chart-labels"><span id="chart-start"></span><span id="chart-end"></span></div></section><section class="panel comparison"><div class="section-head"><h3><span class="step">Δ</span> Compare evidence</h3><span class="tag">MEMEDIFF</span></div><div id="comparison"></div><div class="import-controls"><p class="small">Import a previous schema 1 JSON report (up to 2 MiB) for this exact repository, branch and CA. Comparison always uses the 30-day dataset.</p><p id="import-status" role="status" aria-live="polite">Files stay on this device. No upload or network request is made.</p><section id="import-preview" hidden aria-labelledby="import-title"><h4 id="import-title" tabindex="-1">Previous report preview</h4><dl id="import-details"></dl><p class="warning">Imported JSON is editable and unverified. Matching structure does not authenticate its contents.</p><div class="import-actions"><button id="import-apply" type="button" disabled>Compare without saving</button><button id="import-dismiss" type="button">Cancel preview</button><button id="import-save" type="button" disabled>Save imported baseline</button></div><p class="small">Save imported baseline replaces the saved baseline for this repository, branch and CA only.</p></section><button id="import-restore" type="button" class="text-button">Use saved browser baseline</button></div><p class="small">Baselines stay in this browser. Nothing is stored until you select Save baseline or Save imported baseline.</p><button id="clear" class="text-button">Clear this project baseline</button></section></div>
-      <div class="report-grid"><section class="panel"><h3>Recent commits <span class="muted">Up to 20 shown</span></h3><ol id="commits" class="evidence-list"></ol></section><section class="panel"><h3>Public releases <span class="muted">Selected window · Includes prereleases</span></h3><ul id="releases" class="evidence-list"></ul><h3 class="contributors-title">Observed contributors</h3><div id="contributors" class="chips"></div><p class="small">Counts include authors with linked GitHub accounts, including bots. This is not the complete project contributor list.</p></section></div>
-      <section id="period-comparison" class="panel period-comparison" aria-labelledby="period-comparison-title">
-        <h3 id="period-comparison-title">Compare Two Periods</h3>
-        <p id="period-range" class="period-range"></p>
-        <p id="period-help" class="small">Dates use UTC and include the end date. The first and last collection dates use only the time captured in the report.</p>
-        <form novalidate aria-describedby="period-range period-help">
-          <div class="period-pair">
-            <fieldset>
-              <legend>Period A</legend>
-              <div class="period-date-fields">
-                <label>Start date<input id="period-a-start" type="date" aria-label="Period A start date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
-                <label>End date<input id="period-a-end" type="date" aria-label="Period A end date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend>Period B</legend>
-              <div class="period-date-fields">
-                <label>Start date<input id="period-b-start" type="date" aria-label="Period B start date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
-                <label>End date<input id="period-b-end" type="date" aria-label="Period B end date" aria-describedby="period-help" aria-errormessage="period-status" required></label>
-              </div>
-            </fieldset>
-          </div>
-          <button type="submit">Compare periods</button>
-        </form>
-        <p id="period-status" class="small" role="status" aria-live="polite"></p>
-        <div class="period-exports">
-          <div class="actions" role="group" aria-label="Period comparison downloads">
-            <button id="period-export-json" type="button" aria-describedby="period-export-help" disabled>Export Comparison JSON</button>
-            <button id="period-export-png" type="button" aria-describedby="period-export-help" disabled>Export Comparison PNG</button>
-          </div>
-          <p id="period-export-help" class="small">Comparison files cover the applied periods. JSON contains the source links and uses a separate format from baseline snapshots. PNG links are printed text.</p>
-          <p id="period-export-status" class="small" aria-live="polite"></p>
-        </div>
-        <div id="period-results" hidden></div>
-      </section>
-      <details class="panel"><summary>Original API evidence and collection scope</summary><p id="coverage"></p><ul id="sources" class="source-list"></ul></details>
-    </section>
-    <section id="empty" class="empty-state"><span class="empty-glyph">[ ± ]</span><h2>Follow the changes. Check the evidence.</h2><p>Commits · Releases · Contributors · Changes since your last observation<br>Follow the source behind each observation.</p><div class="empty-steps"><span>01 Enter a token CA</span><span>02 Inspect evidence</span><span>03 Save and compare</span></div></section>
     <section id="official-token" class="token-panel panel" lang="en" aria-labelledby="official-token-title">
       <div class="token-heading"><img src="./assets/memediff-logo.jpg" width="96" height="96" alt="" loading="lazy" decoding="async"><div><div class="eyebrow">THE PROJECT TOKEN / SOLANA MAINNET</div><h2 id="official-token-title">MemeDiff <span class="token-ticker">$MEMEDIFF</span></h2><p>Same curiosity. Same source. One official address.</p></div></div>
       <p>MemeDiff is an open-source tool for inspecting public GitHub development activity. Compare 7-day and 30-day observations, save local baselines, follow source evidence, and export PNG or JSON reports.</p>
@@ -179,5 +237,5 @@
       <p class="small">A verified mint is not a safety assessment. No price, return, liquidity, or reward is guaranteed. Match the full CA; names and tickers can be copied. This website does not connect wallets or execute trades.</p>
     </section>
     <section id="method" class="method"><h2>Before you interpret the numbers</h2><div><article><span>01 / SCOPE</span><h3>Observations within a defined scope</h3><p>We observe default-branch commits and public releases within rolling 7-day and 30-day windows. Collection is capped at 1,000 commits and 500 releases. Limits and errors are labeled as incomplete collection. Commit timestamps can be changed by authors.</p></article><article><span>02 / CONTEXT</span><h3>Activity is not a trust score</h3><p>Commit counts do not prove code quality, project originality or token safety. Forks, bots and generated code may contribute to activity. MemeDiff does not provide price predictions or investment recommendations.</p></article><article><span>03 / PRIVACY</span><h3>Queried directly from your browser</h3><p>DexScreener receives the queried CA and your IP address. GitHub receives the repository path and your IP address; token addresses are not sent to GitHub. Forks associations are read from this site’s dated index. There is no analysis server, tracker or API-key input. A baseline is stored on this device only when you choose to save it. Exports include any token address you entered.</p></article></div><p class="small">Unauthenticated GitHub API access typically allows 60 requests per hour per IP. Each analysis uses multiple requests. Windows are calculated from the observation time. Dates use UTC; numbers use English (US) formatting.</p></section>
-  </main><footer><span class="brand">Meme<span class="brand-lime">Diff</span><span class="cyan footer-code">&lt;/&gt;</span></span><p>Public code. Visible changes. <span>MIT licensed.</span></p><a href="https://github.com/dnfl1999/memediff/issues" target="_blank" rel="noopener noreferrer">Report an issue ↗</a></footer>
+  </main><footer id="feedback"><span class="brand">Meme<span class="brand-lime">Diff</span></span><p>MIT licensed.</p><div class="footer-links"><a href="https://github.com/dnfl1999/memediff">Source on GitHub ↗</a><a href="https://github.com/dnfl1999/memediff/issues/new?template=feedback.md">Give feedback ↗</a></div></footer>
 </body></html>

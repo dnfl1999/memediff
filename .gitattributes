@@ -1,3 +1,4 @@
 test/fixtures/v21-period-comparison.json -text
 test/fixtures/v22-public-period-comparison.json -text
 test/fixtures/v24-public-saved-files-comparison.json -text
+assets/examples/*.json -text

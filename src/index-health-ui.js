@@ -46,7 +46,7 @@ export function mountIndexHealth(mount, mint, index, { error, openAdvanced, visi
   links.append(source('Published Forks index', './data/forks-index.json'));
   const associationLink = element('span', '');
   links.append(associationLink, document.createTextNode(' · '), source('CA on Forks Wiki', `https://forks.wiki/coin/${mint}`));
-  const advanced = element('button', 'Open Advanced Search');
+  const advanced = element('button', 'Open GitHub analysis');
   advanced.type = 'button';
   advanced.className = 'text-button';
   advanced.addEventListener('click', openAdvanced);

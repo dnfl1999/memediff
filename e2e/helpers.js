@@ -41,9 +41,11 @@ export async function mockGitHub(page, options = {}) {
   });
   return state;
 }
-export async function openAdvanced(page) { if (!await page.locator('#repo').isVisible()) await page.locator('#advanced > summary').click(); }
+export async function openAdvanced(page) { if (!await page.locator('#token').isVisible()) await page.locator('#advanced > summary').click(); }
+export async function openSavedReports(page) {
+  if (!await page.locator('#saved-comparison-open').isVisible()) await page.locator('#saved-tools > summary').click();
+}
 export async function analyze(page, repo = 'fixture/project') {
-  await openAdvanced(page);
   await page.locator('#repo').fill(repo);
   await page.locator('#analyze').click();
   await expect(page.locator('#report')).toBeVisible();

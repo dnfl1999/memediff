@@ -1,0 +1,1041 @@
+{
+  "schema": 1,
+  "source": "github-live",
+  "repo": "vitejs/vite",
+  "token": "",
+  "branch": "main",
+  "fetchedAt": "2026-11-26T06:38:20.845Z",
+  "since": "2026-10-27T06:38:20.845Z",
+  "description": "Next generation frontend tooling. It's fast!",
+  "fork": false,
+  "parent": null,
+  "archived": false,
+  "commits": [
+    {
+      "sha": "86bf3067e8fcaea2ad6226bb77adc72fbb2ab95a",
+      "date": "2026-11-25T05:09:55Z",
+      "message": "release: v8.4.0-beta.2 (#24208)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/86bf3067e8fcaea2ad6226bb77adc72fbb2ab95a"
+    },
+    {
+      "sha": "1b34d86d957e80532cb7d43897a1692df2bfc42c",
+      "date": "2026-11-25T04:53:41Z",
+      "message": "fix(css): dedupe CSS of inlined common chunks when `cssCodeSplit: false` (#24168)",
+      "author": "hyfdev",
+      "url": "https://github.com/vitejs/vite/commit/1b34d86d957e80532cb7d43897a1692df2bfc42c"
+    },
+    {
+      "sha": "e744b67db5356b30d9f6659be8521690a389f67a",
+      "date": "2026-11-25T04:51:53Z",
+      "message": "docs: clarify that referenced files are served by the dev server (#24207)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/e744b67db5356b30d9f6659be8521690a389f67a"
+    },
+    {
+      "sha": "a78fb8a28db01e83611120012bd5d1189bab68aa",
+      "date": "2026-11-25T03:05:11Z",
+      "message": "fix(dev): register references to safe modules only for `server.fs.strict: 'extended'` (#24206)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/a78fb8a28db01e83611120012bd5d1189bab68aa"
+    },
+    {
+      "sha": "e16ca5a13d74dddd005763df9d4db9fa01c74a4d",
+      "date": "2026-11-24T09:23:12Z",
+      "message": "chore(deps): update vue34 to vue35 (#24199)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/e16ca5a13d74dddd005763df9d4db9fa01c74a4d"
+    },
+    {
+      "sha": "dc058d661a71b68a56f2ee9b1f1dd8a1050ef7b6",
+      "date": "2026-11-24T08:04:43Z",
+      "message": "chore(lint): use tsrs for type-aware linting (#24178)",
+      "author": "fengmk2",
+      "url": "https://github.com/vitejs/vite/commit/dc058d661a71b68a56f2ee9b1f1dd8a1050ef7b6"
+    },
+    {
+      "sha": "87d8a5a96f048ae3bbcd2d19e0449d176e636107",
+      "date": "2026-11-24T06:46:25Z",
+      "message": "fix(deps): update all non-major dependencies (#24190)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/87d8a5a96f048ae3bbcd2d19e0449d176e636107"
+    },
+    {
+      "sha": "e1e1ac831a5f8e5259287796858a854eb2326312",
+      "date": "2026-11-24T05:28:59Z",
+      "message": "feat: add plugin name to module hook errors (#24151)",
+      "author": "materwelonDhruv",
+      "url": "https://github.com/vitejs/vite/commit/e1e1ac831a5f8e5259287796858a854eb2326312"
+    },
+    {
+      "sha": "942f6d73df1c990865550bf4fafae3b8893b0f66",
+      "date": "2026-11-24T03:56:11Z",
+      "message": "build(deps): bump body-parser from 2.3.0 to 2.4.0 (#24198)",
+      "author": "dependabot[bot]",
+      "url": "https://github.com/vitejs/vite/commit/942f6d73df1c990865550bf4fafae3b8893b0f66"
+    },
+    {
+      "sha": "24eb35ad15694f1145b405c20a36a265f37a34f7",
+      "date": "2026-11-24T03:55:47Z",
+      "message": "fix: keep plugin error messages as thrown (#24148)",
+      "author": "materwelonDhruv",
+      "url": "https://github.com/vitejs/vite/commit/24eb35ad15694f1145b405c20a36a265f37a34f7"
+    },
+    {
+      "sha": "826dcb822394b7e8151f745e61f6748865f96c29",
+      "date": "2026-11-24T03:14:14Z",
+      "message": "fix(server): allow closing uninitialized `DevEnvironment` (#24184)",
+      "author": "onmax",
+      "url": "https://github.com/vitejs/vite/commit/826dcb822394b7e8151f745e61f6748865f96c29"
+    },
+    {
+      "sha": "d3f45ef78cad514e187123e7d5f6e6e7025a5b9b",
+      "date": "2026-11-24T03:11:23Z",
+      "message": "docs: clarify `<base>` tag usage (#24162)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/d3f45ef78cad514e187123e7d5f6e6e7025a5b9b"
+    },
+    {
+      "sha": "9f9211b40b949b2cfe3fd1517893755808be7eb4",
+      "date": "2026-11-24T03:11:09Z",
+      "message": "chore(deps): update miniflare (#24179)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/9f9211b40b949b2cfe3fd1517893755808be7eb4"
+    },
+    {
+      "sha": "3eabee5c97e0ea802ebbaed71276d23f73e5b158",
+      "date": "2026-11-24T02:47:20Z",
+      "message": "chore(css): fix typo in `preliminaryNameToChunkMap` (#24195)",
+      "author": "iiio2",
+      "url": "https://github.com/vitejs/vite/commit/3eabee5c97e0ea802ebbaed71276d23f73e5b158"
+    },
+    {
+      "sha": "0a1996890a4f84da995e3d37113a8df5c8e9900b",
+      "date": "2026-11-24T02:46:49Z",
+      "message": "docs: replace stale esbuild references in option JSDoc (#24196)",
+      "author": "abrahamguo",
+      "url": "https://github.com/vitejs/vite/commit/0a1996890a4f84da995e3d37113a8df5c8e9900b"
+    },
+    {
+      "sha": "3567471998e3da315675086f44368e266c9c0e33",
+      "date": "2026-11-20T11:05:06Z",
+      "message": "fix: preserve drive letter case in `safeRealpathSync` on Windows (#24146)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/3567471998e3da315675086f44368e266c9c0e33"
+    },
+    {
+      "sha": "1a065640083cafe5ae8b981b9bbfb4b0ddf93632",
+      "date": "2026-11-20T10:05:20Z",
+      "message": "perf(build): skip build import analysis hooks for unaffected chunks (#24150)",
+      "author": "camc314",
+      "url": "https://github.com/vitejs/vite/commit/1a065640083cafe5ae8b981b9bbfb4b0ddf93632"
+    },
+    {
+      "sha": "3bde8eda6d2d1b2c120a705d3d050b84de2c3e43",
+      "date": "2026-11-20T09:52:31Z",
+      "message": "perf(build): skip terser plugin when terser is not used (#24149)",
+      "author": "camc314",
+      "url": "https://github.com/vitejs/vite/commit/3bde8eda6d2d1b2c120a705d3d050b84de2c3e43"
+    },
+    {
+      "sha": "c7326770e1121733435e0527af972f387d64d344",
+      "date": "2026-11-19T10:11:49Z",
+      "message": "fix: close server on failed start (fix #23965) (#24020)",
+      "author": "materwelonDhruv",
+      "url": "https://github.com/vitejs/vite/commit/c7326770e1121733435e0527af972f387d64d344"
+    },
+    {
+      "sha": "b516bc2f0a0b040a4c4a2fb636bf5bb61d9ad5a2",
+      "date": "2026-11-19T08:27:01Z",
+      "message": "fix(server): keep `this.addWatchFile` in `load` hook on a module's first request (#23861)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/b516bc2f0a0b040a4c4a2fb636bf5bb61d9ad5a2"
+    },
+    {
+      "sha": "ef295d54d56478437112acd7deeb9821d755b90f",
+      "date": "2026-11-19T02:23:10Z",
+      "message": "fix(html): keep entry script side effects when another importer loads it first (#24135)",
+      "author": "h-a-n-a",
+      "url": "https://github.com/vitejs/vite/commit/ef295d54d56478437112acd7deeb9821d755b90f"
+    },
+    {
+      "sha": "760a953fd4b4d1dd58b2652d5962af50a7510d5c",
+      "date": "2026-11-18T09:47:43Z",
+      "message": "fix(optimizer): respect top-level tsconfig option when scanning and bundling deps (#24119)",
+      "author": "imryanthedev",
+      "url": "https://github.com/vitejs/vite/commit/760a953fd4b4d1dd58b2652d5962af50a7510d5c"
+    },
+    {
+      "sha": "d7dfe9b7beedb756f56e509ed425e18af2aa065c",
+      "date": "2026-11-18T09:29:52Z",
+      "message": "fix(optimizer): detect in-place patch file edits in lockfile hash (#24126)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/d7dfe9b7beedb756f56e509ed425e18af2aa065c"
+    },
+    {
+      "sha": "40475e51e785e470b09a67b23d66487649b32226",
+      "date": "2026-11-18T09:10:31Z",
+      "message": "feat: add plugin name to hook errors (#24107)",
+      "author": "materwelonDhruv",
+      "url": "https://github.com/vitejs/vite/commit/40475e51e785e470b09a67b23d66487649b32226"
+    },
+    {
+      "sha": "3c22583f50fc9cef1ec837138b1fe628d86692b0",
+      "date": "2026-11-18T08:16:17Z",
+      "message": "refactor(build): skip license plugin via applyToEnvironment when disabled (#24134)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/3c22583f50fc9cef1ec837138b1fe628d86692b0"
+    },
+    {
+      "sha": "3dfda249604d6b6e13911debe2cc0cf5e4c334f4",
+      "date": "2026-11-18T04:15:26Z",
+      "message": "feat(create-vite): use Solid 2 in solid templates (#24130)",
+      "author": "brenelz",
+      "url": "https://github.com/vitejs/vite/commit/3dfda249604d6b6e13911debe2cc0cf5e4c334f4"
+    },
+    {
+      "sha": "60c260dea1fa9f628c22e32b14dddf6ca3088f2b",
+      "date": "2026-11-17T10:31:04Z",
+      "message": "test: fix flaky assets build watch tests (#24123)",
+      "author": "maschwenk",
+      "url": "https://github.com/vitejs/vite/commit/60c260dea1fa9f628c22e32b14dddf6ca3088f2b"
+    },
+    {
+      "sha": "a3792697fe6dd6a75ed1f9bf769864f831e93a25",
+      "date": "2026-11-17T10:15:49Z",
+      "message": "refactor: simplify some conditions (#24125)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/a3792697fe6dd6a75ed1f9bf769864f831e93a25"
+    },
+    {
+      "sha": "dbce0c6715f26ae602ebf983f87f153a3a8a6e60",
+      "date": "2026-11-17T03:26:04Z",
+      "message": "perf(build): shift source maps for preload rewrites instead of re-tracing them (#24049)",
+      "author": "mattlewis92",
+      "url": "https://github.com/vitejs/vite/commit/dbce0c6715f26ae602ebf983f87f153a3a8a6e60"
+    },
+    {
+      "sha": "9a8d1a98922c5e445e8a618b8c27f84c63b9fbff",
+      "date": "2026-11-16T07:14:46Z",
+      "message": "release: v8.4.0-beta.1 (#24108)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/9a8d1a98922c5e445e8a618b8c27f84c63b9fbff"
+    },
+    {
+      "sha": "8aa52a9a99e5943576827899dd4aad18b4752ceb",
+      "date": "2026-11-16T06:06:32Z",
+      "message": "ci: exclude `maschwenk` from bot detection (#24106)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/8aa52a9a99e5943576827899dd4aad18b4752ceb"
+    },
+    {
+      "sha": "c0d590d697bb21530f687ea094a36c943620232c",
+      "date": "2026-11-16T05:35:47Z",
+      "message": "fix(build): keep `magicString` and `ast` in transform hook meta (#24067)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/c0d590d697bb21530f687ea094a36c943620232c"
+    },
+    {
+      "sha": "dda2a82c357fee0d68b0c2e6f158041c340effa9",
+      "date": "2026-11-16T04:59:39Z",
+      "message": "test(hmr): fix two flaky hmr playground tests (#24092)",
+      "author": "maschwenk",
+      "url": "https://github.com/vitejs/vite/commit/dda2a82c357fee0d68b0c2e6f158041c340effa9"
+    },
+    {
+      "sha": "880f1cf12147e5e14f92492c0771206413adedae",
+      "date": "2026-11-16T04:39:36Z",
+      "message": "chore: add debug log when falling back to powershell for process start time (#24090)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/880f1cf12147e5e14f92492c0771206413adedae"
+    },
+    {
+      "sha": "76f9618ef0d8df285229c96f0968b5689be11571",
+      "date": "2026-11-16T04:37:11Z",
+      "message": "fix(css): match pure css chunk imports by relative path (#24105)",
+      "author": "shulaoda",
+      "url": "https://github.com/vitejs/vite/commit/76f9618ef0d8df285229c96f0968b5689be11571"
+    },
+    {
+      "sha": "c11a671c2af3a0fa8db8345e684798a91fa105d7",
+      "date": "2026-11-16T03:57:04Z",
+      "message": "fix(deps): update all non-major dependencies (#24103)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/c11a671c2af3a0fa8db8345e684798a91fa105d7"
+    },
+    {
+      "sha": "2decae3422bfbb6357e3cc95ec8ee9c97f29e7f0",
+      "date": "2026-11-16T03:03:01Z",
+      "message": "refactor: drop unused capture groups in test-only regexes (#24097)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/2decae3422bfbb6357e3cc95ec8ee9c97f29e7f0"
+    },
+    {
+      "sha": "140416668690c1f21cdf85394376f4764b51b2de",
+      "date": "2026-11-16T02:57:19Z",
+      "message": "fix(deps): update rolldown-related dependencies (#24104)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/140416668690c1f21cdf85394376f4764b51b2de"
+    },
+    {
+      "sha": "f898888222297aa56d6fc281c585d4d4e4d51f58",
+      "date": "2026-11-13T09:27:35Z",
+      "message": "fix(css): no-externalize by default even for SSR (#24075)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/f898888222297aa56d6fc281c585d4d4e4d51f58"
+    },
+    {
+      "sha": "4bf4f32f7ff02d2b08a83688bed0f8d0479c5235",
+      "date": "2026-11-13T09:26:46Z",
+      "message": "perf: use native binary for getting process start time on windows (#24087)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/4bf4f32f7ff02d2b08a83688bed0f8d0479c5235"
+    },
+    {
+      "sha": "4db98449a802abd67a6975fb4fdf260fa8f82979",
+      "date": "2026-11-13T08:17:32Z",
+      "message": "feat(environment): expose build manifest on build environment (#23292)",
+      "author": "jamesopstad",
+      "url": "https://github.com/vitejs/vite/commit/4db98449a802abd67a6975fb4fdf260fa8f82979"
+    },
+    {
+      "sha": "c1cc047e5b7f4158b123e30c16fee53554ff89e0",
+      "date": "2026-11-13T08:17:24Z",
+      "message": "refactor: correct `shouldServe` return type in sirv patch (#24088)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/c1cc047e5b7f4158b123e30c16fee53554ff89e0"
+    },
+    {
+      "sha": "4d21dc4ebcabecc13a35d73ef7dcac704cdbc817",
+      "date": "2026-11-13T06:48:40Z",
+      "message": "feat(create-vite): support Vite+ (vp) package manager (#22788)",
+      "author": "fengmk2",
+      "url": "https://github.com/vitejs/vite/commit/4d21dc4ebcabecc13a35d73ef7dcac704cdbc817"
+    },
+    {
+      "sha": "5ff255e5b9f1460dd844ccf7a82d6f59f8899033",
+      "date": "2026-11-13T06:38:04Z",
+      "message": "feat: support bundled dev mode in ssr (#21626)",
+      "author": "sheremet-va",
+      "url": "https://github.com/vitejs/vite/commit/5ff255e5b9f1460dd844ccf7a82d6f59f8899033"
+    },
+    {
+      "sha": "f0a0b5a42b62289b172632a0103ce2dda78c0829",
+      "date": "2026-11-13T06:02:47Z",
+      "message": "feat(create-vite): add devtools option (#23833)",
+      "author": "webfansplz",
+      "url": "https://github.com/vitejs/vite/commit/f0a0b5a42b62289b172632a0103ce2dda78c0829"
+    },
+    {
+      "sha": "61622b8df68b7a8e657caa6f98d9b70069643abf",
+      "date": "2026-11-12T16:03:00Z",
+      "message": "test: fix use `tinyexec` instead of `execa` (#24082)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/61622b8df68b7a8e657caa6f98d9b70069643abf"
+    },
+    {
+      "sha": "3e1a86e6c87a3c18356252c5d69bf9604cb85950",
+      "date": "2026-11-12T09:44:40Z",
+      "message": "feat: show running process for the same project (#23624)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/3e1a86e6c87a3c18356252c5d69bf9604cb85950"
+    },
+    {
+      "sha": "c5be55f571e418992fd39f34267ec4929e79d014",
+      "date": "2026-11-12T08:04:16Z",
+      "message": "feat(css): skip emitting empty CSS files (#24059)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/c5be55f571e418992fd39f34267ec4929e79d014"
+    },
+    {
+      "sha": "e0fe98a050db0fcfa04c24a09b7d8f72dbbf68e1",
+      "date": "2026-11-12T08:00:43Z",
+      "message": "feat: add `environment.addSafeModule` (#23974)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/e0fe98a050db0fcfa04c24a09b7d8f72dbbf68e1"
+    },
+    {
+      "sha": "7480c547947d0b1dc519815d8f6f670964b15026",
+      "date": "2026-11-12T08:00:42Z",
+      "message": "feat: separate `safeModulePaths` per environment (#23973)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/7480c547947d0b1dc519815d8f6f670964b15026"
+    },
+    {
+      "sha": "e4babd7262256a3c5c383109eb7f7d489760faf5",
+      "date": "2026-11-12T08:00:42Z",
+      "message": "feat: add `server.fs.strict: 'extended'` (#23972)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/e4babd7262256a3c5c383109eb7f7d489760faf5"
+    },
+    {
+      "sha": "ef30399e751740b8ad28f0a7523b3fb42c7cc539",
+      "date": "2026-11-12T08:00:41Z",
+      "message": "feat: register references in HTML to safe modules (#23169)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/ef30399e751740b8ad28f0a7523b3fb42c7cc539"
+    },
+    {
+      "sha": "e258ce140eef64cf89ff38c410125abd8726f274",
+      "date": "2026-11-12T08:00:41Z",
+      "message": "feat: register more references to safe modules (#23168)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/e258ce140eef64cf89ff38c410125abd8726f274"
+    },
+    {
+      "sha": "ae93d9e99a2c326e13862cf809b0a16a237bd831",
+      "date": "2026-11-12T08:00:40Z",
+      "message": "test: use `server.fs.allow: []` (#23167)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/ae93d9e99a2c326e13862cf809b0a16a237bd831"
+    },
+    {
+      "sha": "39c3cb864c5a2c9c2cff5b94455245152cf17228",
+      "date": "2026-11-12T07:10:22Z",
+      "message": "refactor: use `tinyexec` instead of `execa` (#24079)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/39c3cb864c5a2c9c2cff5b94455245152cf17228"
+    },
+    {
+      "sha": "0512d780a3d1046419666e814dd6d28b63bf3bff",
+      "date": "2026-11-12T07:09:59Z",
+      "message": "fix: escape imported name in `transformCjsImport` (#24080)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/0512d780a3d1046419666e814dd6d28b63bf3bff"
+    },
+    {
+      "sha": "d5470c137ecf5c0196612e8fdf6b627ffa658860",
+      "date": "2026-11-12T04:21:10Z",
+      "message": "chore: exclude pnpm test fixture from workspace packages (#24076)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/d5470c137ecf5c0196612e8fdf6b627ffa658860"
+    },
+    {
+      "sha": "9bf5965864a31f9a324ad676caae19e0dc3cbbb7",
+      "date": "2026-11-12T04:19:43Z",
+      "message": "fix: escape import specifiers (#24074)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/9bf5965864a31f9a324ad676caae19e0dc3cbbb7"
+    },
+    {
+      "sha": "bd32fea2cb171cf993c70b4dd12097d5166b3b28",
+      "date": "2026-11-12T01:44:36Z",
+      "message": "feat(module-runner): align stacktrace with v8 (#23690)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/bd32fea2cb171cf993c70b4dd12097d5166b3b28"
+    },
+    {
+      "sha": "39d63b8479c6314caab9b78a05d3aaaf36a86b2c",
+      "date": "2026-11-11T09:49:42Z",
+      "message": "feat(preview): serve wasm compressed (#24051)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/39d63b8479c6314caab9b78a05d3aaaf36a86b2c"
+    },
+    {
+      "sha": "76cb51bba1a8988b00a5becae5829c3e7a49d9ab",
+      "date": "2026-11-11T09:48:03Z",
+      "message": "feat: migrate to `dev.sourcemap.css` from `css.devSourcemap` (#23765)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/76cb51bba1a8988b00a5becae5829c3e7a49d9ab"
+    },
+    {
+      "sha": "d5c79c7a7c7a3794491f67fbb344d08d7ff814ab",
+      "date": "2026-11-11T09:35:42Z",
+      "message": "fix(bundled-dev): load lazy chunks under `base` (#23798)",
+      "author": "h-a-n-a",
+      "url": "https://github.com/vitejs/vite/commit/d5c79c7a7c7a3794491f67fbb344d08d7ff814ab"
+    },
+    {
+      "sha": "69df8ad865b06aa49ea6d7eac530d6f1f072fb43",
+      "date": "2026-11-11T09:35:42Z",
+      "message": "refactor(bundled-dev): serve the rolldown dev runtime as a single file (#23587)",
+      "author": "h-a-n-a",
+      "url": "https://github.com/vitejs/vite/commit/69df8ad865b06aa49ea6d7eac530d6f1f072fb43"
+    },
+    {
+      "sha": "f60fac396c03d1e36f750378f615a1d570ecda90",
+      "date": "2026-11-11T06:02:51Z",
+      "message": "build: look up dts identifier replacements by imported name (#24068)",
+      "author": "hyfdev",
+      "url": "https://github.com/vitejs/vite/commit/f60fac396c03d1e36f750378f615a1d570ecda90"
+    },
+    {
+      "sha": "bc6e03c1d7eb5c2a7e202cd25d9ca1512cd06f6f",
+      "date": "2026-11-11T05:55:55Z",
+      "message": "feat(build): include worker chunks in manifest (#23699)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/bc6e03c1d7eb5c2a7e202cd25d9ca1512cd06f6f"
+    },
+    {
+      "sha": "c110663facf21a8cee199d1c668908e919d6218e",
+      "date": "2026-11-11T05:34:39Z",
+      "message": "feat(css): support subpath imports in CSS `url()` (#23869)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/c110663facf21a8cee199d1c668908e919d6218e"
+    },
+    {
+      "sha": "2155e125cac5792785a485759ecc0e8af18f0438",
+      "date": "2026-11-11T05:29:42Z",
+      "message": "feat(build): support retrying failed CSS preloads (#23710)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/2155e125cac5792785a485759ecc0e8af18f0438"
+    },
+    {
+      "sha": "2dcd391edfa858d8acf99d5585ec98c024e41ba8",
+      "date": "2026-11-11T05:26:03Z",
+      "message": "fix(client): fallback to waiting on main thread for server start when trusted types are enforced (#21483)",
+      "author": "hybrist",
+      "url": "https://github.com/vitejs/vite/commit/2dcd391edfa858d8acf99d5585ec98c024e41ba8"
+    },
+    {
+      "sha": "0651e2cc0f747a8e6ca1f9235dbc9d1fdc464598",
+      "date": "2026-11-11T05:25:08Z",
+      "message": "refactor: remove `optimizeDeps.rollupOptions` (#23760)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/0651e2cc0f747a8e6ca1f9235dbc9d1fdc464598"
+    },
+    {
+      "sha": "785b0add368b212881617ab093cff4c4fde133ea",
+      "date": "2026-11-11T05:17:27Z",
+      "message": "chore(deps): update dependency es-module-lexer to v3 (#23603)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/785b0add368b212881617ab093cff4c4fde133ea"
+    },
+    {
+      "sha": "e719122cf6758086c1c228c14ad016358337cf09",
+      "date": "2026-11-11T05:11:44Z",
+      "message": "feat: stabilize `--configLoader` and deprecate `--configLoader=runner` (#23714)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/e719122cf6758086c1c228c14ad016358337cf09"
+    },
+    {
+      "sha": "c64ba40bc5951eebc266aea4609277e566db3c3c",
+      "date": "2026-11-11T05:05:21Z",
+      "message": "feat(cli): omit `-0` suffix from the first profile file name (#23490)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/c64ba40bc5951eebc266aea4609277e566db3c3c"
+    },
+    {
+      "sha": "97bb00f8f55e18caa5621c1a23dd057f1ca836e8",
+      "date": "2026-11-11T04:57:26Z",
+      "message": "feat(wasm): support source phase imports (#22675)",
+      "author": "guybedford",
+      "url": "https://github.com/vitejs/vite/commit/97bb00f8f55e18caa5621c1a23dd057f1ca836e8"
+    },
+    {
+      "sha": "a1b813be91d48b0a978aaacab875b274770d7bf4",
+      "date": "2026-11-11T04:53:15Z",
+      "message": "fix(deps): update rolldown-related dependencies (#24028)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/a1b813be91d48b0a978aaacab875b274770d7bf4"
+    },
+    {
+      "sha": "b39e6e63dcbfc3cf4be871acf3554efbd6d0e268",
+      "date": "2026-11-11T02:43:39Z",
+      "message": "release: v8.3.8 (#24066)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/b39e6e63dcbfc3cf4be871acf3554efbd6d0e268"
+    },
+    {
+      "sha": "afc44f0957f7ef52d27d5026200a289de374c215",
+      "date": "2026-11-11T01:54:36Z",
+      "message": "chore: revert \"fix(build): keep `magicString` and `ast` in transform hook meta (#24012)\" (#24065)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/afc44f0957f7ef52d27d5026200a289de374c215"
+    },
+    {
+      "sha": "e4ad62ba6523e889f988b6e882d9d81be7f26711",
+      "date": "2026-11-10T11:07:10Z",
+      "message": "fix(css): reject CSS entrypoints when `build.cssCodeSplit: false` (#23112)",
+      "author": "stevematney",
+      "url": "https://github.com/vitejs/vite/commit/e4ad62ba6523e889f988b6e882d9d81be7f26711"
+    },
+    {
+      "sha": "5e50bae4bdfa123c25c4f5afcbb27efd96fcf681",
+      "date": "2026-11-10T10:52:20Z",
+      "message": "fix(bundled-dev): emit assets referenced by inline workers during load (#23103)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/5e50bae4bdfa123c25c4f5afcbb27efd96fcf681"
+    },
+    {
+      "sha": "fbb0a4e719fda240459aa54f872a89dc52473fe2",
+      "date": "2026-11-10T09:44:24Z",
+      "message": "test: avoid joining logs for assertion (#24057)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/fbb0a4e719fda240459aa54f872a89dc52473fe2"
+    },
+    {
+      "sha": "b8eb41163560e291c4f862491ddc38d3adceb674",
+      "date": "2026-11-10T09:43:57Z",
+      "message": "test: remove ineffective dynamic import warning test (#24056)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/b8eb41163560e291c4f862491ddc38d3adceb674"
+    },
+    {
+      "sha": "b8c8270f3f01a9dbf02c336e7468bf6f1df0f5ad",
+      "date": "2026-11-10T08:39:30Z",
+      "message": "chore: enable vitest style rules in Oxlint (#24053)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/b8c8270f3f01a9dbf02c336e7468bf6f1df0f5ad"
+    },
+    {
+      "sha": "ce979e4c4be5f48c5862445ef124d863853e39b1",
+      "date": "2026-11-10T08:10:13Z",
+      "message": "chore: enable vitest plugin in Oxlint (#24052)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/ce979e4c4be5f48c5862445ef124d863853e39b1"
+    },
+    {
+      "sha": "a3b28e8744ffae9abd018696ad4fc01b27ac71ce",
+      "date": "2026-11-10T04:02:04Z",
+      "message": "fix(build): keep `magicString` and `ast` in transform hook meta (#24012)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/a3b28e8744ffae9abd018696ad4fc01b27ac71ce"
+    },
+    {
+      "sha": "dd780cd761221a0c5fa4810335f0190ecb9c7294",
+      "date": "2026-11-10T02:54:38Z",
+      "message": "chore(deps): update dependency @types/node to v26 (#24029)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/dd780cd761221a0c5fa4810335f0190ecb9c7294"
+    },
+    {
+      "sha": "b6430466c57f4783b707fd14a43c237082094081",
+      "date": "2026-11-10T02:52:30Z",
+      "message": "perf: defer `net use` until a UNC path is resolved on Windows (#24014)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/b6430466c57f4783b707fd14a43c237082094081"
+    },
+    {
+      "sha": "a13aa045d1cf2a28e9a5dd2bcb008236f4eaf19a",
+      "date": "2026-11-10T02:13:20Z",
+      "message": "fix(deps): update all non-major dependencies (#24027)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/a13aa045d1cf2a28e9a5dd2bcb008236f4eaf19a"
+    },
+    {
+      "sha": "ef2343355b29a3f389e4af51147b767331bd7a5b",
+      "date": "2026-11-10T01:45:49Z",
+      "message": "refactor(optimizer): use non-capturing group for external types regex (#24048)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/ef2343355b29a3f389e4af51147b767331bd7a5b"
+    },
+    {
+      "sha": "db8b1190abbb7e30aad0055f97dde02d7ed504c7",
+      "date": "2026-11-09T11:39:13Z",
+      "message": "perf(css): import sass once instead of per file (#24041)",
+      "author": "mattlewis92",
+      "url": "https://github.com/vitejs/vite/commit/db8b1190abbb7e30aad0055f97dde02d7ed504c7"
+    },
+    {
+      "sha": "3f6c4cdae3b7984840cc32ff6752a45736025406",
+      "date": "2026-11-09T11:29:21Z",
+      "message": "fix: hide console window when running `yarn config get` on Windows (#24013)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/3f6c4cdae3b7984840cc32ff6752a45736025406"
+    },
+    {
+      "sha": "e5542942715b281ca5803554c43d48448d72d7f2",
+      "date": "2026-11-09T11:21:53Z",
+      "message": "fix(config): skip native loader compat checks for type-only imports (#24021)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/e5542942715b281ca5803554c43d48448d72d7f2"
+    },
+    {
+      "sha": "53f093fac913996327cd58a6696c87f82ce5890b",
+      "date": "2026-11-09T11:12:38Z",
+      "message": "docs(features): recommend sass-embedded for performance (#24022)",
+      "author": "magurotuna",
+      "url": "https://github.com/vitejs/vite/commit/53f093fac913996327cd58a6696c87f82ce5890b"
+    },
+    {
+      "sha": "5def936009d2637a48d056e197aebc6242ac27c6",
+      "date": "2026-11-09T10:20:57Z",
+      "message": "release: v8.3.7 (#24040)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/5def936009d2637a48d056e197aebc6242ac27c6"
+    },
+    {
+      "sha": "517affb174632db347a6a2426f12eab020277946",
+      "date": "2026-11-09T10:16:34Z",
+      "message": "fix(deps): update Rolldown to v1.2.18 (#24038)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/517affb174632db347a6a2426f12eab020277946"
+    },
+    {
+      "sha": "825c00e272e5309fbafd01c9a539b9d82f0c71ce",
+      "date": "2026-11-09T09:21:57Z",
+      "message": "test(wasm): wait for script execution (#24036)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/825c00e272e5309fbafd01c9a539b9d82f0c71ce"
+    },
+    {
+      "sha": "72f86e57dab05e87641599bff041d68821c837f3",
+      "date": "2026-11-09T08:22:58Z",
+      "message": "chore: enable more lint rules (#24035)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/72f86e57dab05e87641599bff041d68821c837f3"
+    },
+    {
+      "sha": "ad04aa78aa07191779de96bab85670ddce6cc20f",
+      "date": "2026-11-09T03:43:45Z",
+      "message": "ci: run CI with Node 26 (#24032)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/ad04aa78aa07191779de96bab85670ddce6cc20f"
+    },
+    {
+      "sha": "c02138c51193fd892025f0c28524dcb9e128446f",
+      "date": "2026-11-09T03:34:35Z",
+      "message": "build: generate sourcemaps in shim-deps plugin (#24023)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/c02138c51193fd892025f0c28524dcb9e128446f"
+    },
+    {
+      "sha": "19feea1a6bc7d82e3113393a73d90ecf05d0600c",
+      "date": "2026-11-09T03:01:45Z",
+      "message": "test: add `pnpm run test-e2e` (#24031)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/19feea1a6bc7d82e3113393a73d90ecf05d0600c"
+    },
+    {
+      "sha": "a579e352a66fbdce6a51d4e1f67006ccf4f91343",
+      "date": "2026-11-06T11:40:00Z",
+      "message": "test: use `onTestFinished` for tear downs (#24003)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/a579e352a66fbdce6a51d4e1f67006ccf4f91343"
+    },
+    {
+      "sha": "483512809bbdb399d66be59af0f5aeb01ccb7181",
+      "date": "2026-11-05T06:01:20Z",
+      "message": "docs(config): clarify `server.fs.deny` overrides default (#23999)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/483512809bbdb399d66be59af0f5aeb01ccb7181"
+    },
+    {
+      "sha": "47321be084bda7f3d777e096b68bc1ddeb45aed4",
+      "date": "2026-11-05T05:56:43Z",
+      "message": "release: create-vite@9.3.4 (#23998)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/47321be084bda7f3d777e096b68bc1ddeb45aed4"
+    },
+    {
+      "sha": "aacc63febfcc98ff201eea9507dc796ab6946d42",
+      "date": "2026-11-05T05:39:20Z",
+      "message": "release: plugin-legacy@8.2.4 (#23997)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/aacc63febfcc98ff201eea9507dc796ab6946d42"
+    },
+    {
+      "sha": "0fd9a29f57d49d496f39c952f44c1b5fc3e90769",
+      "date": "2026-11-05T05:37:00Z",
+      "message": "release: v8.3.6 (#23996)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/0fd9a29f57d49d496f39c952f44c1b5fc3e90769"
+    },
+    {
+      "sha": "eab1dc2752fcccf7f06427afc9915794e256e3bc",
+      "date": "2026-11-05T05:24:23Z",
+      "message": "fix(html): remove adjacent module tags on the first line (#23823)",
+      "author": "Singmin",
+      "url": "https://github.com/vitejs/vite/commit/eab1dc2752fcccf7f06427afc9915794e256e3bc"
+    },
+    {
+      "sha": "a27039101e3726498063c9662da9c0c097016bd1",
+      "date": "2026-11-05T04:51:33Z",
+      "message": "fix(server): escape HTML attributes (#23995)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/a27039101e3726498063c9662da9c0c097016bd1"
+    },
+    {
+      "sha": "7139ef35cf6c9c0979385a467e8499fc19dfd099",
+      "date": "2026-11-05T03:41:21Z",
+      "message": "fix(worker): keep chunks conflicted with unused workers that are still used by a live worker (#23956)",
+      "author": "aaronanish-t",
+      "url": "https://github.com/vitejs/vite/commit/7139ef35cf6c9c0979385a467e8499fc19dfd099"
+    },
+    {
+      "sha": "c7551501e090e797002f8f7e0e4bea80cdcf57b0",
+      "date": "2026-11-05T03:38:49Z",
+      "message": "docs: fix ViteConf tag hover resize loop (#23954)",
+      "author": "halcyon-past",
+      "url": "https://github.com/vitejs/vite/commit/c7551501e090e797002f8f7e0e4bea80cdcf57b0"
+    },
+    {
+      "sha": "1f60d62b83e2ba3d2ca600eac5cf790e84080843",
+      "date": "2026-11-04T12:32:07Z",
+      "message": "build(deps): bump follow-redirects from 1.16.1 to 1.16.2 (#23991)",
+      "author": "dependabot[bot]",
+      "url": "https://github.com/vitejs/vite/commit/1f60d62b83e2ba3d2ca600eac5cf790e84080843"
+    },
+    {
+      "sha": "7a425e8781faffd8f5c82baf2c9c91702d8be97a",
+      "date": "2026-11-04T12:29:34Z",
+      "message": "test: exclude runtime symlink when copying playgrounds to temp dir (#23992)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/7a425e8781faffd8f5c82baf2c9c91702d8be97a"
+    },
+    {
+      "sha": "0fdd81e9460dd44806b2b6290603ee2c8366a54e",
+      "date": "2026-11-04T08:00:44Z",
+      "message": "fix(optimizer): resolve subpath imports (#) with Vite's resolver (#23959)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/0fdd81e9460dd44806b2b6290603ee2c8366a54e"
+    },
+    {
+      "sha": "8069835ac32ae7682b34de55fdba6c5d2484bae0",
+      "date": "2026-11-04T07:48:51Z",
+      "message": "fix(build): use stable module ids in chunk import map hash signatures (fix #23975) (#23976)",
+      "author": "mandyheg",
+      "url": "https://github.com/vitejs/vite/commit/8069835ac32ae7682b34de55fdba6c5d2484bae0"
+    },
+    {
+      "sha": "95c2daf1352b3509ec93e6e08a0eaabe23a61b28",
+      "date": "2026-11-04T04:35:45Z",
+      "message": "fix: ignore pnpm's .modules.yaml as a Vite Task input (#23634)",
+      "author": "lifeiscontent",
+      "url": "https://github.com/vitejs/vite/commit/95c2daf1352b3509ec93e6e08a0eaabe23a61b28"
+    },
+    {
+      "sha": "b3cb0575aff63004a71301a1ec798aeea2aa05d7",
+      "date": "2026-11-02T06:34:43Z",
+      "message": "fix(deps): update all non-major dependencies (#23966)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/b3cb0575aff63004a71301a1ec798aeea2aa05d7"
+    },
+    {
+      "sha": "0105733e610dd5b770bb5397e8d9fbc54a9f6312",
+      "date": "2026-11-02T06:26:52Z",
+      "message": "fix(deps): update rolldown-related dependencies (#23967)",
+      "author": "renovate[bot]",
+      "url": "https://github.com/vitejs/vite/commit/0105733e610dd5b770bb5397e8d9fbc54a9f6312"
+    },
+    {
+      "sha": "90bc034a97e7eccd0f3cbc69904fffa625a4c34d",
+      "date": "2026-10-30T10:47:43Z",
+      "message": "fix: use top-level `input` for SSR build when `build.ssr: true` (#23898)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/90bc034a97e7eccd0f3cbc69904fffa625a4c34d"
+    },
+    {
+      "sha": "28e1710790ac5ef65ed5e84cbb20438bc3218f01",
+      "date": "2026-10-30T10:13:27Z",
+      "message": "fix(create-vite): keep TypeScript 6 when using ESLint (#23931)",
+      "author": "devjaeyoon",
+      "url": "https://github.com/vitejs/vite/commit/28e1710790ac5ef65ed5e84cbb20438bc3218f01"
+    },
+    {
+      "sha": "20d355a00b036499f4b9fd5aa99ff754ca3d4d06",
+      "date": "2026-10-30T09:52:41Z",
+      "message": "build: generate sourcemaps in import-meta-current-dirname plugin (#23904)",
+      "author": "btea",
+      "url": "https://github.com/vitejs/vite/commit/20d355a00b036499f4b9fd5aa99ff754ca3d4d06"
+    },
+    {
+      "sha": "8109efd30319704224db3b7e3b7090348999effb",
+      "date": "2026-10-30T09:48:45Z",
+      "message": "perf(build): remove preload link listeners on settle (fix #23920) (#23922)",
+      "author": "bpuns",
+      "url": "https://github.com/vitejs/vite/commit/8109efd30319704224db3b7e3b7090348999effb"
+    },
+    {
+      "sha": "175bbeb231fe8bbf260b0b3866b30080690c4f5e",
+      "date": "2026-10-30T07:36:40Z",
+      "message": "fix: await overlapping plugin container close calls (#23935)",
+      "author": "L-zeus",
+      "url": "https://github.com/vitejs/vite/commit/175bbeb231fe8bbf260b0b3866b30080690c4f5e"
+    },
+    {
+      "sha": "4f340fdb1b619089bbf8ae5dc56c2c0866224306",
+      "date": "2026-10-30T03:12:37Z",
+      "message": "fix(dev): escape ANSI escape sequence for `server.forwardConsole` (#23933)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/4f340fdb1b619089bbf8ae5dc56c2c0866224306"
+    },
+    {
+      "sha": "cce559ab158cc6b177d0911a0bea73436b48faff",
+      "date": "2026-10-27T09:23:36Z",
+      "message": "release: create-vite@9.3.3 (#23916)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/cce559ab158cc6b177d0911a0bea73436b48faff"
+    },
+    {
+      "sha": "f4abfb51b03b04b16b6322eec1b401dedee56748",
+      "date": "2026-10-27T09:22:04Z",
+      "message": "fix(create-vite): include template files in package (#23915)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/f4abfb51b03b04b16b6322eec1b401dedee56748"
+    },
+    {
+      "sha": "64e24670e49900c33a3d3e3c701a5ec4d76573f2",
+      "date": "2026-10-27T08:50:46Z",
+      "message": "fix(wasm): reject `.wasm` outside `server.fs` (#23914)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/64e24670e49900c33a3d3e3c701a5ec4d76573f2"
+    },
+    {
+      "sha": "cc9bc2131d471bb4d60364614b326ada3ca7d10d",
+      "date": "2026-10-27T07:59:41Z",
+      "message": "fix(optimizer): detect cache dir precisely (#23912)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/cc9bc2131d471bb4d60364614b326ada3ca7d10d"
+    },
+    {
+      "sha": "df365589738866363fff7335ed58948a5c440580",
+      "date": "2026-10-27T06:51:18Z",
+      "message": "fix(build): resolve dynamic imports with queries appended when collecting CSS dependencies (#23909)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/df365589738866363fff7335ed58948a5c440580"
+    },
+    {
+      "sha": "52261e67b81e57a954421174f1fee86f0fca3ead",
+      "date": "2026-10-27T06:50:40Z",
+      "message": "release: create-vite@9.3.2 (#23911)",
+      "author": "github-actions[bot]",
+      "url": "https://github.com/vitejs/vite/commit/52261e67b81e57a954421174f1fee86f0fca3ead"
+    },
+    {
+      "sha": "0cf91e8435df9e984121893963af09965088e6d4",
+      "date": "2026-10-27T06:44:08Z",
+      "message": "feat(create-vite): use typescript v7 where possible (#23910)",
+      "author": "sapphi-red",
+      "url": "https://github.com/vitejs/vite/commit/0cf91e8435df9e984121893963af09965088e6d4"
+    }
+  ],
+  "releases": [
+    {
+      "id": 457680861,
+      "name": "v8.4.0-beta.2",
+      "date": "2026-11-25T05:13:48Z",
+      "prerelease": true,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.4.0-beta.2"
+    },
+    {
+      "id": 446714601,
+      "name": "v8.4.0-beta.1",
+      "date": "2026-11-16T07:18:47Z",
+      "prerelease": true,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.4.0-beta.1"
+    },
+    {
+      "id": 441178253,
+      "name": "v8.3.8",
+      "date": "2026-11-11T02:46:37Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.3.8"
+    },
+    {
+      "id": 439026238,
+      "name": "v6.4.6",
+      "date": "2026-11-09T11:03:41Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v6.4.6"
+    },
+    {
+      "id": 439023680,
+      "name": "v7.3.8",
+      "date": "2026-11-09T11:00:57Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v7.3.8"
+    },
+    {
+      "id": 439021537,
+      "name": "v8.1.7",
+      "date": "2026-11-09T10:58:49Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.1.7"
+    },
+    {
+      "id": 439020635,
+      "name": "v8.2.6",
+      "date": "2026-11-09T10:57:55Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.2.6"
+    },
+    {
+      "id": 439020465,
+      "name": "v8.2.5",
+      "date": "2026-11-09T10:57:45Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.2.5"
+    },
+    {
+      "id": 438988758,
+      "name": "v8.3.7",
+      "date": "2026-11-09T10:23:22Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.3.7"
+    },
+    {
+      "id": 434836036,
+      "name": "create-vite@9.3.4",
+      "date": "2026-11-05T06:02:20Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/create-vite%409.3.4"
+    },
+    {
+      "id": 434823867,
+      "name": "plugin-legacy@8.2.4",
+      "date": "2026-11-05T05:42:26Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/plugin-legacy%408.2.4"
+    },
+    {
+      "id": 434822258,
+      "name": "v8.3.6",
+      "date": "2026-11-05T05:39:36Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/v8.3.6"
+    },
+    {
+      "id": 425247580,
+      "name": "create-vite@9.3.3",
+      "date": "2026-10-27T09:27:16Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/create-vite%409.3.3"
+    },
+    {
+      "id": 425118361,
+      "name": "create-vite@9.3.2",
+      "date": "2026-10-27T06:55:31Z",
+      "prerelease": false,
+      "url": "https://github.com/vitejs/vite/releases/tag/create-vite%409.3.2"
+    }
+  ],
+  "metrics": {
+    "7": {
+      "commits": 20,
+      "releases": 1,
+      "contributors": 12,
+      "unattributed": 0
+    },
+    "30": {
+      "commits": 127,
+      "releases": 14,
+      "contributors": 33,
+      "unattributed": 0
+    }
+  },
+  "coverage": {
+    "commits": true,
+    "releases": false,
+    "maxCommits": 1000,
+    "maxReleases": 500
+  },
+  "remaining": "42",
+  "evidence": [
+    "https://api.github.com/repos/vitejs/vite",
+    "https://api.github.com/repos/vitejs/vite/commits?sha=main&since=2026-10-27T06%3A38%3A20Z&until=2026-11-26T06%3A38%3A21Z&per_page=100&page=1",
+    "https://api.github.com/repos/vitejs/vite/commits?sha=main&since=2026-10-27T06%3A38%3A20Z&until=2026-11-26T06%3A38%3A21Z&per_page=100&page=2",
+    "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=1",
+    "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=2",
+    "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=3",
+    "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=4",
+    "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=5"
+  ],
+  "warnings": [
+    "Release collection is incomplete. Showing observations within the 500-release cap."
+  ],
+  "methodology": "Rolling 7/30-day windows ending at the observation time, using default-branch committer timestamps. Contributors are linked GitHub author accounts, including bots and excluding unlinked authors. Public releases use published_at and include prereleases. Code quality, originality, actual work time and token association are not verified.",
+  "comparison": null,
+  "selectedDays": 30
+}

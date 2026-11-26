@@ -10,7 +10,7 @@ async function setup(page,{entries,market=[],operation,...options}={}){
 }
 async function token(page,value=ca){await page.locator('#token-ca').fill(value);await page.locator('#analyze-token').click();await expect(page.locator('#analyze-token')).toBeEnabled({timeout:20000});}
 test('CA-only one click automatically analyzes GitHub and preserves schema, baselines and exports',async({page},info)=>{
- const api=await setup(page);await expect(page.locator('#repo')).toBeHidden();await token(page);
+ const api=await setup(page);await expect(page.locator('#repo')).toBeVisible();await token(page);
  await expect(page.locator('#report')).toBeVisible();await expect(page.locator('#association')).toContainText('fixture/project');expect(api.requests[0]).toBe('https://api.github.com/repos/fixture/project');
  await page.locator('#save').click();api.revision=1;await token(page);await expect(page.locator('#comparison strong')).toHaveText('1 newly observed');
  await page.locator('[data-days="7"]').click();const data=await downloadReport(page,'json',info);expect(data.schema).toBe(1);expect(data.token).toBe(ca);expect(data.selectedDays).toBe(7);expect(data.comparison.observed).toEqual(['d'.repeat(40)]);expect(data).not.toHaveProperty('market');
@@ -18,7 +18,7 @@ test('CA-only one click automatically analyzes GitHub and preserves schema, base
  await page.screenshot({path:info.outputPath('ca-linked.png'),fullPage:true});
 });
 test('live demo uses the official CA with no repository input or second click',async({page})=>{
- await setup(page);await page.getByRole('button',{name:'Try Live Demo',exact:true}).click();await expect(page.locator('#report')).toBeVisible();await expect(page.locator('#token-ca')).toHaveValue(ca);await expect(page.locator('#repo')).toBeHidden();
+ await setup(page);await page.getByRole('button',{name:'Look up the MEMEDIFF CA',exact:true}).click();await expect(page.locator('#report')).toBeVisible();await expect(page.locator('#token-ca')).toHaveValue(ca);await expect(page.locator('#repo')).toBeVisible();
 });
 test('unlinked exact-CA market data is shown with separate FDV, cap, unknown liquidity and zero volume',async({page},info)=>{
  const api=await setup(page,{entries:[],market:[{chainId:'ethereum',baseToken:{address:other,name:'Wrong chain'}},{chainId:'solana',baseToken:{address:other,name:'Example token',symbol:'EXAMPLE'},pairAddress:ca,priceUsd:'0.01',fdv:123,marketCap:45,liquidity:null,volume:{h24:0}}]});await token(page,other);
@@ -45,7 +45,7 @@ test('stale association is not auto-analyzed and direct GitHub still works',asyn
  await expect(health).toContainText('Last verified at (UTC)');await expect(health).toContainText('Verification validity');
  await expect(health.locator('.index-health-operation')).toBeHidden();
  await expect(page.locator('#market-status')).toContainText('Market data observed');expect(api.requests).toHaveLength(0);
- const button=health.getByRole('button',{name:'Open Advanced Search'});
+ const button=health.getByRole('button',{name:'Open GitHub analysis'});
  await button.focus();await page.keyboard.press('Enter');await expect(page.locator('#repo')).toBeFocused();await expect(page.locator('#repo')).toHaveValue('');
  await analyze(page);await expect(page.locator('#report')).toBeVisible();await expect(page.locator('#token-result')).toBeHidden();
  await expect(page.locator('#token-note')).toHaveText(/No token address recorded/);

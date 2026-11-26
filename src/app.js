@@ -15,7 +15,13 @@ let report = null, comparison = null, days = 30, controller = null;
 let previousSnapshot = null;
 let externalLock = false;
 let importCandidate = null, importGeneration = 0;
-export function lockAnalysis(value) { externalLock = value; for (const id of ['analyze','repo','token']) $(id).disabled = value || Boolean(controller); }
+export function lockAnalysis(value) {
+  externalLock = value;
+  for (const id of ['analyze', 'repo', 'token', 'live-github-demo']) {
+    const control = $(id);
+    if (control) control.disabled = value || Boolean(controller);
+  }
+}
 function key() { return `memediff:v1:${report.repo}:${report.branch}:${report.token}`; }
 function status(text, error = false) { $('status').textContent = text; $('status').classList.toggle('error', error); }
 function setComparison(previous = null, imported = false) {
@@ -112,13 +118,24 @@ export async function analyzeRepository(repoInput, tokenInput = '') {
   if (controller) return;
   clearReport();
   controller = new AbortController(); const timer = setTimeout(() => controller?.abort(), 45000);
-  $('analyze').disabled = true; $('cancel').hidden = false; $('repo').disabled = true; $('token').disabled = true;
+  lockAnalysis(externalLock); $('cancel').hidden = false;
   $('report').hidden = true; status('Collecting public GitHub evidence…');
   try { report = await fetchReport(repo, token, { signal: controller.signal }); status(`Live GitHub query complete · API requests remaining: ${report.remaining ?? 'unknown'}`); loadBaseline(); render(); renderComparison(); setPeriodReport(report); return true; }
   catch(e) { report = null; $('empty').hidden = false; status(e.message, true); return false; }
   finally { clearTimeout(timer); controller = null; lockAnalysis(externalLock); $('cancel').hidden = true; }
 }
-$('query').addEventListener('submit', async event => { event.preventDefault(); if(externalLock)return; $('token-result').hidden = true; await analyzeRepository($('repo').value, $('token').value); });
+$('query').addEventListener('submit', async event => {
+  event.preventDefault();
+  if (externalLock || controller) return;
+  $('token-result').hidden = true;
+  if (await analyzeRepository($('repo').value, $('token').value)) $('report-title').focus();
+});
+$('live-github-demo')?.addEventListener('click', () => {
+  if (externalLock || controller) return;
+  $('repo').value = 'dnfl1999/memediff';
+  $('token').value = '';
+  $('query').requestSubmit();
+});
 $('cancel').addEventListener('click', () => controller?.abort());
 document.querySelectorAll('[data-days]').forEach(b => b.addEventListener('click', () => { days = Number(b.dataset.days); document.querySelectorAll('[data-days]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); if (report) render(); }));
 $('save').addEventListener('click', () => { if (!report) return; try { localStorage.setItem(key(), JSON.stringify(report)); resetImport(); loadBaseline(); renderComparison(); status('Report saved as the baseline in this browser. It will be used for the next query.'); } catch { status('Could not save the baseline. Check browser storage and privacy settings.', true); } });

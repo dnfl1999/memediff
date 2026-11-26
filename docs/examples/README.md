@@ -28,3 +28,15 @@ To make your own: [open MemeDiff](https://dnfl1999.github.io/memediff/), enter a
 ## v1.1 import compatibility sample (2026-11-12)
 
 [Actual schema 1 JSON](memediff-v1.1-2026-11-12.json) was copied unchanged from the MEMEDIFF real-API public QA artifact of [Actions 43159340609](https://github.com/dnfl1999/memediff/actions/runs/43159340609), observed at 2026-11-12T05:12:13.929Z. It includes the official token CA and an imported-baseline comparison from the v1.1 roundtrip test. It is a historical, editable observation, not current statistics or a signed certificate. The v1.2 tests validate and recalculate its comparison without transmitting the file. Unlike the original November 11 repository-only sample, it requires the exact MEMEDIFF CA in the current report.
+
+## Recorded samples on the homepage
+
+These PNG and schema 1 JSON files are original 30-day downloads made from live public GitHub responses on November 26, 2026 UTC. The commit SHA and release ID sets were checked against the collected responses.
+
+| Repository | Observation UTC | Why it was selected | Observation | Files |
+| --- | --- | --- | --- | --- |
+| `vitejs/vite` | `06:38:20.845` | Active window in a public open-source project | 127 default-branch commits and 14 observed releases. Release collection reached the 500-record cap. | [PNG](../../assets/examples/vitejs-vite.png) · [JSON](../../assets/examples/vitejs-vite.json) |
+| `octocat/Hello-World` | `06:38:27.022` | Public example repository with a quiet window | 0 commits and 0 releases in complete collections. | [PNG](../../assets/examples/octocat-hello-world.png) · [JSON](../../assets/examples/octocat-hello-world.json) |
+| `dnfl1999/memediff` | `06:38:28.639` | Activity varies across two equal windows in MemeDiff itself | 6 commits in the first 15 days and 49 in the second. The split is `2026-11-11T06:38:28.639Z`, included in the second interval. | [PNG](../../assets/examples/dnfl1999-memediff.png) · [JSON](../../assets/examples/dnfl1999-memediff.json) |
+
+The observations cover the recorded windows and GitHub sources. Assess code quality, project legitimacy and token risk separately. [Open the homepage samples](https://dnfl1999.github.io/memediff/#samples)

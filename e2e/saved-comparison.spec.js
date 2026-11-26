@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { test, expect, analyze, mockGitHub } from './helpers.js';
+import { test, expect, analyze, mockGitHub, openSavedReports } from './helpers.js';
 import { comparePeriods } from '../src/period-comparison.js';
 import { periodExportData } from '../src/period-export.js';
 
@@ -12,6 +12,7 @@ const upload = (buffer = historical, name = 'memediff-period-comparison-dnfl1999
 test('opens the actual v2.1 file offline before analysis and releases it when closed', async ({ page }, info) => {
   if (info.project.name === 'mobile') await page.setViewportSize({ width: 360, height: 800 });
   await page.goto('./');
+  await openSavedReports(page);
   await page.evaluate(() => localStorage.setItem('saved-preview-test-sentinel', 'untouched'));
   const initialStorage = await page.evaluate(() => JSON.stringify(localStorage));
   const requests = [];
@@ -73,6 +74,7 @@ test('opens the actual v2.1 file offline before analysis and releases it when cl
 test('preserves a live report and baseline through partial, invalid and canceled preview reads', async ({ page }) => {
   await mockGitHub(page);
   await page.goto('./');
+  await openSavedReports(page);
   await analyze(page);
   await page.locator('#save').click();
   await page.getByRole('button', { name: '7 days', exact: true }).click();

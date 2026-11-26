@@ -6,7 +6,7 @@ function message(text,error=false){$('discovery-status').textContent=text;$('dis
 function select(repo,token){
   if($('analyze').disabled){message('Wait for the current analysis or cancel it before selecting another repository.',true);return;}
   $('repo').value=repo; $('token').value=token || '';
-  $('repo').focus(); message(`Selected ${repo}. Review the fields, then select Analyze.`);
+  $('repo').focus(); message(`Selected ${repo}. Review the repository, then select Analyze GitHub.`);
 }
 async function run(action){
   if(busy)return;

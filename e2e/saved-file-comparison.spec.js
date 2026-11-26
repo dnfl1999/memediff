@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
 import { comparePeriods } from '../src/period-comparison.js';
 import { periodExportData } from '../src/period-export.js';
-import { test, expect, analyze, mockGitHub, readDownload, trackIsolation } from './helpers.js';
+import { test, expect, analyze, mockGitHub, readDownload, trackIsolation, openSavedReports } from './helpers.js';
 
 const files = ['v21-period-comparison.json', 'v22-public-period-comparison.json'].map(name => {
   const buffer = readFileSync(new URL(`../test/fixtures/${name}`, import.meta.url));
@@ -80,6 +80,7 @@ async function savedDownloads(page, info, shared, observations) {
 test('compares and downloads two historical public exports offline with filters and original sources', async ({ page }, info) => {
   if (info.project.name === 'mobile') await page.setViewportSize({ width: 360, height: 800 });
   await page.goto('./');
+  await openSavedReports(page);
   await expect.poll(() => page.locator('header .brand-icon').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
   await page.evaluate(() => localStorage.setItem('saved-pair-sentinel', 'unchanged'));
   const checkIsolation = await trackIsolation(page);
@@ -181,6 +182,7 @@ test('compares and downloads two historical public exports offline with filters 
 test('keeps the single-file preview, report and baseline through replacement and late reads', async ({ page }) => {
   await mockGitHub(page);
   await page.goto('./');
+  await openSavedReports(page);
   await analyze(page);
   await page.locator('#save').click();
   await page.getByRole('button', { name: '7 days', exact: true }).click();
@@ -240,6 +242,7 @@ test('keeps the single-file preview, report and baseline through replacement and
 
 test('blocks cross-branch exports and allows N/A downloads for disjoint UTC selections', async ({ page }, info) => {
   await page.goto('./');
+  await openSavedReports(page);
   await page.getByRole('button', { name: 'Compare Two Saved Files' }).click();
   const checkIsolation = await trackIsolation(page);
   const original = JSON.parse(files[0].buffer);
@@ -272,6 +275,7 @@ test('blocks cross-branch exports and allows N/A downloads for disjoint UTC sele
 
 test('cancels superseded PNG encoding and reports invalid blobs without downloading', async ({ page }) => {
   await page.goto('./');
+  await openSavedReports(page);
   await page.getByRole('button', { name: 'Compare Two Saved Files' }).click();
   await page.evaluate(() => {
     window.savedPngEncodes = [];

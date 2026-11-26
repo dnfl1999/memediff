@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { generatedSavedFilesReport, literalReleaseName } from '../test/fixtures/generated-saved-files-viewer.js';
-import { test, expect, analyze, mockGitHub, trackIsolation } from './helpers.js';
+import { test, expect, analyze, mockGitHub, trackIsolation, openSavedReports } from './helpers.js';
 
 function fixture(name) {
   return { name, mimeType: 'application/json', buffer: readFileSync(new URL(`../test/fixtures/${name}`, import.meta.url)) };
@@ -22,6 +22,7 @@ test('opens the original v2.4 summary offline with keyboard filters and exact so
   expect(historical.buffer.length).toBe(53584);
   expect(digest).toBe('b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a');
   await page.goto('./');
+  await openSavedReports(page);
   await page.evaluate(() => localStorage.setItem('viewer-sentinel', 'unchanged'));
   const isolation = await trackIsolation(page);
   await page.context().setOffline(true);
@@ -86,6 +87,7 @@ test('opens the original v2.4 summary offline with keyboard filters and exact so
 
 test('renders generated release conflicts as text and rejects tampered replacement totals', async ({ page }) => {
   await page.goto('./');
+  await openSavedReports(page);
   await open(page).click();
   const isolation = await trackIsolation(page);
   await input(page).setInputFiles(generated({ partial: true }));
@@ -116,6 +118,7 @@ test('renders generated release conflicts as text and rejects tampered replaceme
 test('keeps report and other panels isolated through replacement, canceled reads and closing', async ({ page }) => {
   await mockGitHub(page);
   await page.goto('./');
+  await openSavedReports(page);
   await analyze(page);
   await page.locator('#save').click();
   await page.getByRole('button', { name: '7 days', exact: true }).click();
