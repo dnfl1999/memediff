@@ -2,6 +2,24 @@
 
 기준일: **2026-11-26 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v2.5 Saved Files Comparison Viewer (2026-11-26)
+
+인증 계정 `dnfl1999`, 로컬·원격 `main`의 시작 SHA `5dc9cc31426381404ccdfa004e9d4173ddf37dc1`, 깨끗한 작업 트리를 확인했습니다. 이전 [v2.4 배포](https://github.com/dnfl1999/memediff/actions/runs/45750186106)와 [읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/45751748867)를 확인했습니다. 공개 인덱스는 HTTP 200이었고 117개가 만료 상태였습니다. Forks DNS 조회는 주소 레코드를 반환하지 않았습니다.
+
+홈의 **Open Saved Files Comparison**에서 8 MiB까지의 `memediff-saved-files-comparison` 버전 1 JSON을 읽기 전용으로 엽니다. 파일별 근거를 복원하고 기존 기간 계산기와 저장 파일 비교 엔진을 다시 실행해 UTC 범위·공백·분류·집계·충돌을 대조합니다. 각 출처와 관측 정보, SHA-256 기록 및 GitHub 링크를 확인하고 기존 필터와 20개 단위 페이지를 사용할 수 있습니다. SHA-256 대조에는 원본 파일이 필요하며 보고서는 **Local file · Unverified**로 표시됩니다.
+
+[v2.4 공개 PC 검사](docs/v24-qa.json)의 53,584바이트 다운로드를 그대로 사용했습니다. SHA-256은 `b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a`입니다. 재계산한 공통 UTC 구간은 `2026-11-07T00:00:00.000Z`부터 `2026-11-20T08:25:25.775Z` 직전까지이며, 공통 45개·한쪽에만 기록된 SHA 각각 0개·File 2의 공통 구간 밖 SHA 3개·전체 SHA 근거 48개였습니다. 양쪽 원본에 기록된 공개 릴리스는 0개였습니다.
+
+로컬 단위 190건, PC·모바일 E2E 146건, 뷰어 집중 6건이 통과했습니다. 실제 API는 3건 통과했고 GitHub HTTP 403·남은 요청 0으로 2건을 건너뛰었습니다. PC·360px 모바일에서 오프라인으로 원본을 열어 키보드 필터와 닫기를 검증했고, 추가 요청과 localStorage 쓰기는 각각 0건이었습니다. 별도 생성 자료로 집계·출처 상태 변조 거부와 HTML의 텍스트 렌더링을 확인했습니다. [기능 커밋](https://github.com/dnfl1999/memediff/commit/7719778f6434c992e0ab722196b4ffef1a627c8c)
+
+공개 홈페이지·뷰어 모듈·인덱스가 각각 HTTP 200을 반환했습니다. 공개 주소에서 PC 및 360px 모바일 브라우저로 원본 미리보기 2건을 별도 실행했습니다. 페이지 로드 후 오프라인에서 동일한 48개 SHA 근거와 공통 구간을 확인했고, 추가 요청·localStorage 쓰기는 각각 0건이었습니다. 공개 주소의 독립 실제 API 재검사는 5건 통과했습니다.
+
+배포된 인덱스의 117개 연결과 검증 시각이 배포 전 공개본과 일치했습니다. Forks 갱신은 DNS `ENOTFOUND`로 기존 인덱스를 재사용했고 신규 검증 0건, 유효 연결 0개, 만료 117개였습니다. 공식 CA의 마지막 검증은 `2026-11-18T20:43:46.517Z`, 48시간 만료 시각은 `2026-11-20T20:43:46.517Z`입니다.
+
+[GitHub Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/45755636807)에서 `verify`, `deploy`, `public-qa`, `diagnostics`가 성공했습니다. CI 단위 190건, 배포 전과 공개 PC·모바일 모의 E2E 각각 146건, 공개 실제 API 5건이 통과했습니다. 각 실패와 건너뜀은 0건입니다. [진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/45755636807/artifacts/15088122234)의 SHA-256·체크섬·스키마 2와 실행 번호를 대조했습니다.
+
+[읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/45756922112)는 이번 진단을 읽고 확인 범위 내 정기 갱신 연속 실패 10회를 기록했습니다. `observe`는 성공했고 `notify`는 건너뛰었습니다. [운영 이슈 #1](https://github.com/dnfl1999/memediff/issues/1)은 열림·댓글 2건입니다. 과거 진단 스키마 1·2 ZIP도 다시 판독했습니다. [상세 QA 기록](docs/v25-qa.json)
+
 ## v2.4 Saved Files Comparison Export (2026-11-26)
 
 인증 계정 `dnfl1999`와 시작 시 로컬·원격 `main`의 SHA `b1814f13174e7e52e11793c31db099cae51d4ad1`를 확인했습니다. 기존 미커밋 v2.3 진행 기록을 보존하고 배포·QA 근거를 추가해 [별도 문서 커밋](https://github.com/dnfl1999/memediff/commit/6b40b3b499562ae9dd7c0a55c783ebdb2f5fa1e3)으로 반영했습니다.

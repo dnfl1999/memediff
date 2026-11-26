@@ -1,0 +1,609 @@
+{
+  "version": "2.5.0",
+  "dateKST": "2026-11-26",
+  "account": "dnfl1999",
+  "baseCommit": "5dc9cc31426381404ccdfa004e9d4173ddf37dc1",
+  "releaseCommit": "7719778f6434c992e0ab722196b4ffef1a627c8c",
+  "preflight": {
+    "cleanWorktree": true,
+    "publishedSite": {
+      "atUtc": "2026-11-26T04:21:09.8112914+00:00",
+      "homeHttp": 200,
+      "indexHttp": 200,
+      "hasV24Export": true,
+      "total": 117,
+      "expired": 117,
+      "valid": 0,
+      "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+      "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+      "operation": {
+        "at": "2026-11-26T03:43:53.521Z",
+        "runId": "45750186106",
+        "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+        "outcome": "retained",
+        "failure": {
+          "stage": "forks-refresh",
+          "endpoint": "https://forks.wiki/api/tokens/recent",
+          "category": "dns",
+          "codes": [
+            "ENOTFOUND"
+          ],
+          "status": null
+        }
+      },
+      "forksAddressAnswers": 0
+    },
+    "previousPages": [
+      {
+        "id": 45750186106,
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-26T03:38:12Z",
+        "head_sha": "4dddff7d7644a450ca57848dc189a91bf1da6c13",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45750186106"
+      },
+      {
+        "id": 45708060368,
+        "event": "schedule",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-11-25T21:50:58Z",
+        "head_sha": "b1814f13174e7e52e11793c31db099cae51d4ad1",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45708060368"
+      },
+      {
+        "id": 45580137069,
+        "event": "schedule",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-11-25T08:52:33Z",
+        "head_sha": "b1814f13174e7e52e11793c31db099cae51d4ad1",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45580137069"
+      },
+      {
+        "id": 45502698881,
+        "event": "schedule",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-11-24T22:37:41Z",
+        "head_sha": "b1814f13174e7e52e11793c31db099cae51d4ad1",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45502698881"
+      }
+    ],
+    "previousMonitor": [
+      {
+        "id": 45751748867,
+        "event": "workflow_dispatch",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-26T03:53:31Z",
+        "head_sha": "4dddff7d7644a450ca57848dc189a91bf1da6c13",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45751748867"
+      },
+      {
+        "id": 45716429407,
+        "event": "schedule",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-25T22:49:14Z",
+        "head_sha": "b1814f13174e7e52e11793c31db099cae51d4ad1",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45716429407"
+      },
+      {
+        "id": 45624749272,
+        "event": "schedule",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-25T13:33:09Z",
+        "head_sha": "b1814f13174e7e52e11793c31db099cae51d4ad1",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45624749272"
+      }
+    ]
+  },
+  "source": {
+    "fixture": "test/fixtures/v24-public-saved-files-comparison.json",
+    "bytes": 53584,
+    "sha256": "b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a",
+    "byteIdenticalToV24PublicPcDownload": true,
+    "previousVerification": "docs/v24-qa.json",
+    "previousPagesRun": 45750186106,
+    "regenerated": false,
+    "generatedCases": "Separate synthetic cases exercised disjoint intervals, gaps, incomplete coverage, release conflicts, malformed markup and altered counts."
+  },
+  "evidence": {
+    "repository": {
+      "name": "dnfl1999/memediff",
+      "branch": "main",
+      "url": "https://github.com/dnfl1999/memediff"
+    },
+    "createdAtUtc": "2026-11-26T03:44:26.816Z",
+    "observationsUtc": [
+      "2026-11-20T08:25:25.774Z",
+      "2026-11-20T09:12:15.748Z"
+    ],
+    "recordedFileFingerprints": [
+      "a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5",
+      "2b67ef1e4411de61aa4c75d52a19ec371eba6ea96c3c973da446fb3ce5f5e301"
+    ],
+    "sharedUtc": [
+      {
+        "startUtc": "2026-11-07T00:00:00.000Z",
+        "endExclusiveUtc": "2026-11-20T08:25:25.775Z"
+      }
+    ],
+    "shas": {
+      "both": 45,
+      "first": 0,
+      "second": 0
+    },
+    "totalShaRows": 48,
+    "file2Outside": 3,
+    "releases": {
+      "both": 0,
+      "first": 0,
+      "second": 0
+    }
+  },
+  "local": {
+    "build": "success",
+    "unit": {
+      "counts": {
+        "tests": 190,
+        "failed": 0,
+        "passed": 190,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "topLevel": 190,
+        "suites": 0
+      },
+      "success": true,
+      "startedAt": "2026-11-26T04:26:37.105Z",
+      "completedAt": "2026-11-26T04:26:38.386Z"
+    },
+    "focusedBrowser": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T04:25:06.419Z",
+      "durationMs": 19837.37
+    },
+    "mockBrowser": {
+      "passed": 146,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T04:26:40.000Z",
+      "durationMs": 154543.41
+    },
+    "realBrowser": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 2,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T04:29:17.901Z",
+      "durationMs": 10874.244
+    },
+    "apiLimits": [
+      {
+        "url": "https://api.github.com/repos/dnfl1999/memediff",
+        "status": 403,
+        "remaining": "0",
+        "resetAtUtc": "2026-11-26T04:34:30.000Z"
+      }
+    ],
+    "offlineProof": [
+      {
+        "fixture": {
+          "file": "v24-public-saved-files-comparison.json",
+          "sha256": "b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a",
+          "bytes": 53584
+        },
+        "project": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "recreatedEvidence": {
+          "shared": [
+            "2026-11-07T00:00:00.000Z",
+            "2026-11-20T08:25:25.775Z"
+          ],
+          "both": 45,
+          "first": 0,
+          "second": 0,
+          "outsideFile2": 3,
+          "totalShas": 48,
+          "releases": 0
+        }
+      },
+      {
+        "fixture": {
+          "file": "v24-public-saved-files-comparison.json",
+          "sha256": "b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a",
+          "bytes": 53584
+        },
+        "project": "mobile",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "recreatedEvidence": {
+          "shared": [
+            "2026-11-07T00:00:00.000Z",
+            "2026-11-20T08:25:25.775Z"
+          ],
+          "both": 45,
+          "first": 0,
+          "second": 0,
+          "outsideFile2": 3,
+          "totalShas": 48,
+          "releases": 0
+        }
+      }
+    ]
+  },
+  "pages": {
+    "runId": 45755636807,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/45755636807",
+    "attempt": 1,
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 139693489996,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T04:30:31Z",
+        "completed_at": "2026-11-26T04:35:26Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45755636807/job/139693489996"
+      },
+      {
+        "id": 139695203310,
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T04:35:31Z",
+        "completed_at": "2026-11-26T04:35:41Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45755636807/job/139695203310"
+      },
+      {
+        "id": 139695291072,
+        "name": "public-qa",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T04:35:44Z",
+        "completed_at": "2026-11-26T04:41:52Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45755636807/job/139695291072"
+      },
+      {
+        "id": 139697344531,
+        "name": "diagnostics",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T04:41:55Z",
+        "completed_at": "2026-11-26T04:42:01Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45755636807/job/139697344531"
+      }
+    ],
+    "artifact": {
+      "id": 15088122234,
+      "sha256": "5cb15af17a82810590c68ac4d797738638d1b25a0bc78e73bbe594cb4e189792",
+      "bytes": 760,
+      "diagnostic": {
+        "schemaVersion": 2,
+        "runId": "45755636807",
+        "runAttempt": 1,
+        "workflow": "Verify and deploy Pages",
+        "event": "push",
+        "recordedAt": "2026-11-26T04:41:57.799Z",
+        "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/45755636807",
+        "stages": {
+          "verify": "success",
+          "deploy": "success",
+          "publicQA": "success"
+        },
+        "forks": {
+          "state": "retained",
+          "observedAt": "2026-11-26T04:35:17.605Z",
+          "newlyVerified": 0,
+          "retained": 117,
+          "latestVerifiedAt": "2026-11-18T20:44:01.390Z",
+          "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+          "failure": {
+            "stage": "forks-refresh",
+            "category": "dns",
+            "codes": [
+              "ENOTFOUND"
+            ],
+            "status": null
+          }
+        },
+        "qa": {
+          "unit": {
+            "passed": 190,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T04:30:37.407Z",
+            "completedAt": "2026-11-26T04:30:38.587Z",
+            "failure": null,
+            "http": null,
+            "status": "success",
+            "evidence": "node-test-json",
+            "runId": "45755636807",
+            "runAttempt": 1
+          },
+          "preDeploy": {
+            "passed": 146,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T04:31:15.811Z",
+            "completedAt": "2026-11-26T04:35:16.744Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  7340
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  4
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45755636807",
+            "runAttempt": 1
+          },
+          "publicMock": {
+            "passed": 146,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T04:36:12.961Z",
+            "completedAt": "2026-11-26T04:41:36.917Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  7340
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  4
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45755636807",
+            "runAttempt": 1
+          },
+          "publicLive": {
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T04:41:37.775Z",
+            "completedAt": "2026-11-26T04:41:45.743Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  225
+                ]
+              ],
+              "expected": [],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45755636807",
+            "runAttempt": 1
+          }
+        }
+      }
+    },
+    "historicalSchemas": [
+      {
+        "schemaVersion": 1,
+        "runId": "44685874281",
+        "sha256": "14deadd11302fdeca9b42af7777b3a027b7546f9bf8a735719c1b3572c6fce32"
+      },
+      {
+        "schemaVersion": 2,
+        "runId": "45750186106",
+        "sha256": "518f576576cda447967ed1208a3b5dfab3fdaf0e441204169eb78c33d6bfd28e"
+      }
+    ]
+  },
+  "publicSite": {
+    "checkedAtUtc": "2026-11-26T04:35:37.2205364+00:00",
+    "homeHttp": 200,
+    "indexHttp": 200,
+    "moduleHttp": 200,
+    "viewerControl": true,
+    "viewerFunction": true,
+    "retained": 117,
+    "expired": 117,
+    "valid": 0,
+    "retainedEvidenceUnchanged": true,
+    "indexCheckedAtUnchanged": true,
+    "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+    "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+    "officialExpiry": "2026-11-20T20:43:46.5170000+00:00",
+    "operation": {
+      "at": "2026-11-26T04:35:17.603Z",
+      "runId": "45755636807",
+      "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+      "outcome": "retained",
+      "failure": {
+        "stage": "forks-refresh",
+        "endpoint": "https://forks.wiki/api/tokens/recent",
+        "category": "dns",
+        "codes": [
+          "ENOTFOUND"
+        ],
+        "status": null
+      }
+    },
+    "offlineBrowser": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T04:35:37.981Z",
+      "durationMs": 11823.509
+    },
+    "independentRealBrowser": {
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T04:35:51.106Z",
+      "durationMs": 16699.913
+    },
+    "apiLimits": [],
+    "offlineProof": [
+      {
+        "fixture": {
+          "file": "v24-public-saved-files-comparison.json",
+          "sha256": "b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a",
+          "bytes": 53584
+        },
+        "project": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "recreatedEvidence": {
+          "shared": [
+            "2026-11-07T00:00:00.000Z",
+            "2026-11-20T08:25:25.775Z"
+          ],
+          "both": 45,
+          "first": 0,
+          "second": 0,
+          "outsideFile2": 3,
+          "totalShas": 48,
+          "releases": 0
+        }
+      },
+      {
+        "fixture": {
+          "file": "v24-public-saved-files-comparison.json",
+          "sha256": "b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a",
+          "bytes": 53584
+        },
+        "project": "mobile",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "recreatedEvidence": {
+          "shared": [
+            "2026-11-07T00:00:00.000Z",
+            "2026-11-20T08:25:25.775Z"
+          ],
+          "both": 45,
+          "first": 0,
+          "second": 0,
+          "outsideFile2": 3,
+          "totalShas": 48,
+          "releases": 0
+        }
+      }
+    ]
+  },
+  "monitor": {
+    "runId": 45756922112,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/45756922112",
+    "observedAtUtc": "2026-11-26T04:42:47.568Z",
+    "publish": false,
+    "observe": "success",
+    "notify": "skipped",
+    "indexState": "expired",
+    "newlyVerified": 0,
+    "retained": 117,
+    "consecutiveFailedAttemptsInWindow": 10,
+    "lastScheduledFailure": 45708060368,
+    "latestDeploymentDiagnostic": {
+      "runId": 45755636807,
+      "artifactId": 15088122234,
+      "failure": "ENOTFOUND"
+    },
+    "issue": {
+      "number": 1,
+      "state": "open",
+      "comments": 2,
+      "updatedAtUtc": "2026-11-20T21:34:14Z",
+      "url": "https://github.com/dnfl1999/memediff/issues/1",
+      "changedByReadOnlyRun": false
+    }
+  }
+}
