@@ -1,6 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { test, expect, analyze, mockGitHub } from './helpers.js';
+import { PNG } from 'pngjs';
+import { comparePeriods } from '../src/period-comparison.js';
+import { periodExportData } from '../src/period-export.js';
+import { test, expect, analyze, mockGitHub, readDownload } from './helpers.js';
 
 const files = ['v21-period-comparison.json', 'v22-public-period-comparison.json'].map(name => {
   const buffer = readFileSync(new URL(`../test/fixtures/${name}`, import.meta.url));
@@ -9,6 +12,70 @@ const files = ['v21-period-comparison.json', 'v22-public-period-comparison.json'
 const input = (page, number) => page.locator(`#saved-file-${number}-input`);
 const slot = (page, number) => page.getByRole('group', { name: `Saved File ${number}` });
 const sha256 = buffer => createHash('sha256').update(buffer).digest('hex');
+const jsonButton = page => page.locator('#saved-files-export-json');
+const pngButton = page => page.locator('#saved-files-export-png');
+
+async function savedDownloads(page, info, shared, observations) {
+  const jsonFile = await readDownload(page, jsonButton(page), 'json', info, 'saved-files-export-json');
+  const json = JSON.parse(jsonFile.bytes);
+  expect(jsonFile.name).toMatch(/^memediff-saved-files-comparison-dnfl1999-memediff-\d{4}-\d{2}-\d{2}\.json$/);
+  expect([json.format, json.version, json.source]).toEqual(['memediff-saved-files-comparison', 1, 'Local file · Unverified']);
+  expect(json.files.map(file => file.sha256)).toEqual(files.map(file => sha256(file.buffer)));
+  expect(json.files.map(file => file.observedAtUtc)).toEqual(observations);
+  expect(json.sharedUtc.intervals).toEqual([{ startUtc: shared[0], endExclusiveUtc: shared[1], lastIncludedUtc: observations[0] }]);
+  expect(json.commits.sharedCounts).toEqual({ both: 45, first: 0, second: 0 });
+  expect(json.commits.otherRecordedCounts).toEqual({ outside: 3, differentScope: 0, unknown: 0 });
+  expect(json.releases.sharedCounts).toEqual({ both: 0, first: 0, second: 0 });
+  expect(json.releases.records).toEqual([]);
+  expect(json.commits.records).toHaveLength(48);
+  for (const [index, file] of files.entries()) {
+    const original = JSON.parse(file.buffer);
+    expect(json.files[index].collection).toEqual(original.collection);
+    expect(json.files[index].userSuppliedTokenCA).toEqual(original.userSuppliedTokenCA);
+    const inputRows = Object.values(original.periods).flatMap(period => period.commits);
+    const originalBySha = new Map(inputRows.map(row => [row.sha, row]));
+    const exportedRows = json.commits.records.map(row => row.sources[index].record).filter(Boolean);
+    expect(exportedRows).toHaveLength(originalBySha.size);
+    for (const record of exportedRows) expect(record).toMatchObject(originalBySha.get(record.sha));
+    expect(jsonFile.bytes.toString('utf8')).not.toContain(file.name);
+  }
+
+  await page.evaluate(() => {
+    const text = CanvasRenderingContext2D.prototype.fillText, image = CanvasRenderingContext2D.prototype.drawImage;
+    window.savedFilesCanvas = { texts: [], images: 0 };
+    CanvasRenderingContext2D.prototype.fillText = function (value, x, y) {
+      window.savedFilesCanvas.texts.push({ value, x, y, width: this.measureText(value).width });
+      return text.call(this, value, x, y);
+    };
+    CanvasRenderingContext2D.prototype.drawImage = function (...args) {
+      window.savedFilesCanvas.images++;
+      return image.apply(this, args);
+    };
+  });
+  const pngFile = await readDownload(page, pngButton(page), 'png', info, 'saved-files-export-png');
+  expect(pngFile.name).toMatch(/^memediff-saved-files-comparison-dnfl1999-memediff-\d{4}-\d{2}-\d{2}\.png$/);
+  const png = PNG.sync.read(pngFile.bytes, { checkCRC: true });
+  expect(png.width).toBe(1400);
+  expect(png.height).toBeGreaterThan(700);
+  expect(png.data.length).toBe(png.width * png.height * 4);
+  expect(png.data.subarray(0, 4)).toEqual(Buffer.from([8, 10, 11, 255]));
+  const colors = new Set();
+  for (let offset = 0; offset < png.data.length; offset += 4) colors.add(png.data.readUInt32BE(offset));
+  expect(colors.size).toBeGreaterThan(100);
+  const canvas = await page.evaluate(() => window.savedFilesCanvas);
+  expect(canvas.images).toBe(1);
+  expect(canvas.texts.every(text => text.x + text.width <= png.width - 60 && text.y < png.height)).toBe(true);
+  const text = canvas.texts.map(line => line.value);
+  expect(text).toEqual(expect.arrayContaining(['Saved Files Comparison', 'Local files · Unverified', ...observations,
+    `1.  ${shared.join(' → ')} (end exclusive)`, 'GitHub source  https://github.com/dnfl1999/memediff',
+    'MemeDiff  https://dnfl1999.github.io/memediff/']));
+  expect(text.filter(value => /^\d+$/.test(value))).toEqual(['45', '0', '0', '0', '0', '0']);
+  return {
+    json: { filename: jsonFile.name, bytes: jsonFile.bytes.length, sha256: sha256(jsonFile.bytes), shaRows: json.commits.records.length },
+    png: { filename: pngFile.name, bytes: pngFile.bytes.length, sha256: sha256(pngFile.bytes), width: png.width,
+      height: png.height, decoded: true, colors: colors.size, logoDrawn: true, renderedCounts: [45, 0, 0, 0, 0, 0] }
+  };
+}
 
 async function trackIsolation(page) {
   const storage = await page.evaluate(() => {
@@ -32,9 +99,10 @@ async function trackIsolation(page) {
   };
 }
 
-test('compares two historical public exports offline with keyboard filters and original sources', async ({ page }, info) => {
+test('compares and downloads two historical public exports offline with filters and original sources', async ({ page }, info) => {
   if (info.project.name === 'mobile') await page.setViewportSize({ width: 360, height: 800 });
   await page.goto('./');
+  await expect.poll(() => page.locator('header .brand-icon').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
   await page.evaluate(() => localStorage.setItem('saved-pair-sentinel', 'unchanged'));
   const checkIsolation = await trackIsolation(page);
   await page.context().setOffline(true);
@@ -46,6 +114,8 @@ test('compares two historical public exports offline with keyboard filters and o
   await expect(panel.getByRole('heading', { name: 'Compare Two Saved Files' })).toBeFocused();
   const compare = panel.getByRole('button', { name: 'Compare saved files', exact: true });
   await expect(compare).toBeDisabled();
+  await expect(jsonButton(page)).toBeDisabled();
+  await expect(pngButton(page)).toBeDisabled();
   const choose = slot(page, 1).getByRole('button', { name: 'Choose File 1' });
   const chooser = page.waitForEvent('filechooser');
   await choose.focus();
@@ -55,6 +125,7 @@ test('compares two historical public exports offline with keyboard filters and o
   await expect(compare).toBeDisabled();
   await input(page, 2).setInputFiles(files[1]);
   await expect(slot(page, 2).getByRole('status')).toHaveText('File 2 opened.');
+  await expect(jsonButton(page)).toBeDisabled();
   const observations = ['2026-11-20T08:25:25.774Z', '2026-11-20T09:12:15.748Z'];
   for (const [index, when] of observations.entries()) {
     const card = slot(page, index + 1);
@@ -94,6 +165,8 @@ test('compares two historical public exports offline with keyboard filters and o
   await next.press('Enter');
   await expect(shas.getByRole('status')).toContainText('Page 2 of 3');
   await expect(rows).toHaveCount(20);
+  const downloads = await savedDownloads(page, info, shared, observations);
+  await expect(shas.getByRole('status')).toContainText('Page 2 of 3');
   await next.press('Enter');
   await expect(rows).toHaveCount(5);
   await expect(shas.getByRole('status')).toContainText('Page 3 of 3');
@@ -109,6 +182,8 @@ test('compares two historical public exports offline with keyboard filters and o
   await expect(open).toBeFocused();
   await expect(panel).toBeHidden();
   await expect(result).toBeEmpty();
+  await expect(jsonButton(page)).toBeDisabled();
+  await expect(pngButton(page)).toBeDisabled();
   for (const index of [1, 2]) {
     await expect(input(page, index)).toHaveValue('');
     await expect(page.locator(`#saved-file-${index}-content`)).toBeEmpty();
@@ -120,7 +195,8 @@ test('compares two historical public exports offline with keyboard filters and o
   await info.attach('actual-pair-proof', { contentType: 'application/json', body: JSON.stringify({
     project: info.project.name, viewport: page.viewportSize(), offline: true, closedAndCleared: true, ...isolation,
     files: files.map(({ name, buffer }, index) => ({ name, bytes: buffer.length, sha256: sha256(buffer), observedAtUtc: observations[index] })),
-    shared: { startUtc: shared[0], endExclusiveUtc: shared[1] }, commonShas: 45, file1Only: 0, file2Only: 0, file2Outside: 3, releases: 0
+    shared: { startUtc: shared[0], endExclusiveUtc: shared[1] }, commonShas: 45, file1Only: 0, file2Only: 0, file2Outside: 3, releases: 0,
+    downloads
   }) });
 });
 
@@ -141,12 +217,14 @@ test('keeps the single-file preview, report and baseline through replacement and
   const compare = page.locator('#compare-saved-submit'), result = page.locator('#compare-saved-result');
   await compare.click();
   await expect(result).toContainText('Both selections are the same file (identical SHA-256).');
+  await expect(jsonButton(page)).toBeEnabled();
   await input(page, 1).setInputFiles({ ...files[0], name: 'invalid.json', buffer: Buffer.from('{broken') });
   await expect(slot(page, 1).getByRole('status')).toHaveClass(/error/);
   await expect(slot(page, 1)).not.toContainText('2026-11-20T08:25:25.774Z');
   await expect(slot(page, 2)).toContainText('2026-11-20T08:25:25.774Z');
   await expect(result).toBeEmpty();
   await expect(compare).toBeDisabled();
+  await expect(jsonButton(page)).toBeDisabled();
 
   await page.evaluate(() => {
     const read = File.prototype.text;
@@ -166,6 +244,7 @@ test('keeps the single-file preview, report and baseline through replacement and
   await expect(slot(page, 1).getByRole('button', { name: 'Choose File 1' })).toBeFocused();
   await expect(result).toBeEmpty();
   await expect(compare).toBeDisabled();
+  await expect(pngButton(page)).toBeDisabled();
 
   await input(page, 2).setInputFiles({ ...files[0], name: 'delayed-closed.json' });
   await expect(slot(page, 2).getByRole('status')).toContainText('Checking File 2');
@@ -179,4 +258,75 @@ test('keeps the single-file preview, report and baseline through replacement and
   await expect(page.locator('#report-title')).toHaveText(live);
   await expect(page.getByRole('button', { name: '7 days', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await checkIsolation();
+});
+
+test('blocks cross-branch exports and allows N/A downloads for disjoint UTC selections', async ({ page }, info) => {
+  await page.goto('./');
+  await page.getByRole('button', { name: 'Compare Two Saved Files' }).click();
+  const checkIsolation = await trackIsolation(page);
+  const original = JSON.parse(files[0].buffer);
+  const dates = { a: { start: '2026-10-25', end: '2026-10-25' }, b: { start: '2026-10-27', end: '2026-10-27' } };
+  function generated(branch) {
+    const report = { repo: original.repository.name, branch, source: original.source, since: original.collection.startUtc,
+      fetchedAt: original.observedAtUtc, commits: [], releases: [], coverage: { commits: true, releases: true } };
+    const buffer = Buffer.from(JSON.stringify(periodExportData(report, dates, comparePeriods(report, dates))));
+    return { ...files[0], name: 'generated-disjoint.json', buffer };
+  }
+  await input(page, 1).setInputFiles(files[0]);
+  await input(page, 2).setInputFiles(generated('other-branch'));
+  await page.locator('#compare-saved-submit').click();
+  await expect(page.locator('#compare-saved-result')).toContainText('different GitHub branches');
+  await expect(jsonButton(page)).toBeDisabled();
+  await expect(pngButton(page)).toBeDisabled();
+  await input(page, 2).setInputFiles(generated('main'));
+  await expect(jsonButton(page)).toBeDisabled();
+  await page.locator('#compare-saved-submit').click();
+  await expect(page.locator('#compare-saved-result')).toContainText('N/A · No shared UTC interval');
+  const file = await readDownload(page, jsonButton(page), 'json', info, 'saved-files-export-disjoint-json');
+  const json = JSON.parse(file.bytes);
+  expect(json.sharedUtc).toEqual({ status: 'not-applicable', intervals: [], gaps: [] });
+  expect(json.commits.sharedCounts).toEqual({ both: null, first: null, second: null });
+  expect(json.commits.records).toHaveLength(45);
+  const image = await readDownload(page, pngButton(page), 'png', info, 'saved-files-export-disjoint-png');
+  expect(PNG.sync.read(image.bytes, { checkCRC: true }).width).toBe(1400);
+  await checkIsolation();
+});
+
+test('cancels superseded PNG encoding and reports invalid blobs without downloading', async ({ page }) => {
+  await page.goto('./');
+  await page.getByRole('button', { name: 'Compare Two Saved Files' }).click();
+  await page.evaluate(() => {
+    window.savedPngEncodes = [];
+    window.savedPngClicks = [];
+    HTMLCanvasElement.prototype.toBlob = function (finish) { window.savedPngEncodes.push(finish); };
+    const click = HTMLAnchorElement.prototype.click;
+    HTMLAnchorElement.prototype.click = function () {
+      if (this.download) window.savedPngClicks.push(this.download);
+      else click.call(this);
+    };
+  });
+  for (const index of [1, 2]) await input(page, index).setInputFiles(files[index - 1]);
+  const compare = page.locator('#compare-saved-submit'), status = page.locator('#saved-files-export-status');
+  await compare.click();
+  await pngButton(page).click();
+  await expect(pngButton(page)).toBeDisabled();
+  await input(page, 2).setInputFiles(files[0]);
+  await expect(pngButton(page)).toBeDisabled();
+  await compare.click();
+  await pngButton(page).click();
+  await page.evaluate(() => window.savedPngEncodes.shift()(new Blob(['old png'])));
+  await expect(pngButton(page)).toBeDisabled();
+  await expect(status).toHaveText('Creating saved files comparison PNG…');
+  await page.evaluate(() => window.savedPngEncodes.shift()(new Blob(['x'.repeat(8 * 1024 * 1024 + 1)])));
+  await expect(status).toContainText('exceeds the 8 MiB export limit');
+  await expect(pngButton(page)).toBeEnabled();
+  await pngButton(page).click();
+  await page.evaluate(() => window.savedPngEncodes.shift()(null));
+  await expect(status).toContainText('Could not create the PNG');
+  await pngButton(page).click();
+  await page.getByRole('button', { name: 'Close file comparison' }).click();
+  await page.evaluate(() => window.savedPngEncodes.shift()(new Blob(['closed png'])));
+  await expect(pngButton(page)).toBeDisabled();
+  await expect(status).toBeEmpty();
+  expect(await page.evaluate(() => window.savedPngClicks)).toEqual([]);
 });

@@ -4,12 +4,17 @@ The software remains a free static, open-source GitHub activity research tool. T
 
 2026-11-11 maintenance update: improved the existing PNG export as an English Development Receipt and added English quick-start help. No duplicate export service was built. Next priority is real-user feedback and stable operation, not adding token-related features. See the [product comparison and operations snapshot](docs/OPERATIONS_UPDATE.md).
 
+## v2.4 — Saved Files Comparison Export
+
+- Download the complete applied comparison as version 1 JSON, including shared UTC intervals, gaps, source coverage and all SHA and release evidence.
+- Download a branded PNG summary with separate intervals, observation times, and explicit Unknown and N/A counts.
+- Consider a read-only viewer for version 1 comparison summaries in v2.5 so recipients can inspect evidence directly from a shared JSON file.
+
 ## v2.3 — Compare Two Saved Files
 
 - Read and validate two version 1 period exports independently in the browser. Keep the original selections, exact observation times and evidence links for each source.
 - Compare recorded SHA and release ID evidence inside the intersection of the files' retained UTC intervals. Keep separate intervals, collection gaps and conflicting metadata visible.
 - Support local filtering and 20-record pages on desktop and mobile. Clear in-memory evidence when a file is removed or the comparison closes.
-- For v2.4, consider a downloadable summary of the shared UTC intervals with per-file provenance and incomplete coverage recorded explicitly.
 
 ## v2.2 — Saved Period Comparison
 

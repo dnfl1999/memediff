@@ -3,6 +3,7 @@ import { formatNumber } from './format.js';
 
 export const periodKeys = ['a', 'b'];
 export const periodExportFormat = 'memediff-period-comparison';
+export const savedFilesExportFormat = 'memediff-saved-files-comparison';
 export const githubLogin = value => typeof value === 'string' && /^[a-z0-9](?:[a-z0-9-]{0,99})(?:\[bot\])?$/i.test(value) ? value : null;
 export const iso = millis => new Date(millis).toISOString();
 export const periodRange = (from, until) => `${iso(from)} → ${iso(until - 1)}`;

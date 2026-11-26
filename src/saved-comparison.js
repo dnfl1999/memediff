@@ -1,6 +1,6 @@
 import { DAY, isGitBranch, parseRepo, parseToken, safeLink, utcMillis } from './core.js';
 import { comparePeriods } from './period-comparison.js';
-import { authorSource, githubLogin, iso, periodExportFormat, periodKeys, releaseSource } from './period-evidence.js';
+import { authorSource, githubLogin, iso, periodExportFormat, periodKeys, releaseSource, savedFilesExportFormat } from './period-evidence.js';
 import { MAX_PERIOD_JSON_BYTES, periodExportData } from './period-export.js';
 import { parseUntrustedJSON, readLocalJSONText } from './local-json.js';
 import { commitSource } from './sha-explorer.js';
@@ -151,6 +151,7 @@ function union(first, second, max) {
 
 function validateSavedComparison(file) {
   if (object(file) && file.schema === 1) fail('Choose a Period Comparison JSON. Snapshot files open in Import Previous Report.');
+  if (file?.format === savedFilesExportFormat) fail('This file is a Saved Files Comparison export. Choose an original version 1 Period Comparison JSON.');
   if (!object(file) || file.format !== periodExportFormat) fail('Choose a MemeDiff Period Comparison JSON.');
   if (file.version !== 1) fail('Unsupported Period Comparison version. Choose a version 1 JSON.');
   if (!exact(file, ['format', 'version', 'repository', 'userSuppliedTokenCA', 'source', 'observedAtUtc', 'collection',

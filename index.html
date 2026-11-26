@@ -85,6 +85,14 @@
       </div>
       <button id="compare-saved-submit" type="button" disabled>Compare saved files</button>
       <p id="compare-saved-status" class="small" role="status">Choose two valid Period Comparison JSON files.</p>
+      <div id="saved-files-exports" class="period-exports" hidden>
+        <div class="actions">
+          <button id="saved-files-export-json" type="button" aria-describedby="saved-files-export-help" disabled>Export Saved Files Comparison JSON</button>
+          <button id="saved-files-export-png" type="button" aria-describedby="saved-files-export-help" disabled>Export Saved Files Comparison PNG</button>
+        </div>
+        <p id="saved-files-export-help" class="small">JSON includes all comparison records. PNG summarizes the shared UTC intervals and observed counts.</p>
+        <p id="saved-files-export-status" class="small" aria-live="polite"></p>
+      </div>
       <div id="compare-saved-result" hidden></div>
     </section>
     <details class="panel english-guide" lang="en"><summary>Quick start — share a Development Receipt</summary><p>MemeDiff is a free, open-source tool for inspecting public GitHub development activity. No wallet, token ownership or login is required.</p><ol><li>Paste a Solana token CA and select <strong>Analyze Token</strong>. Available market data appears even without a GitHub link. A fresh, exact official Forks association starts GitHub analysis automatically.</li><li>For a linked repository, choose <strong>7 days</strong> or <strong>30 days</strong>. Review collection warnings and source links.</li><li>Select <strong>PNG Receipt</strong> for an English shareable card with the observed time, UTC window and source evidence. Export <strong>JSON</strong> too for all evidence URLs and collection errors. Image links are printed text, not clickable.</li><li>Use <strong>Save baseline</strong> to save a baseline on this device. Analyze again to compare 30-day SHA observations; the comparison remains 30-day even on a 7-day card.</li></ol><p>Advanced Search retains direct GitHub URL analysis and repository-name search. Forks associations use a limited dated index; omission is not evidence of no relationship. Counts are observations, not proof of work, quality or token safety. A <strong>+</strong> means incomplete collection. Receipts are locally generated and editable, not signed certificates. After a live analysis, select Import Previous Report to preview and compare a previous JSON export locally. Saving the imported baseline is a separate, explicit choice. There is no hosted report or automatic social posting.</p></details>

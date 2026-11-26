@@ -49,7 +49,7 @@ export async function analyze(page, repo = 'fixture/project') {
   await expect(page.locator('#report')).toBeVisible();
   await expect(page.locator('#analyze')).toBeEnabled();
 }
-async function readDownload(page, button, type, testInfo, attachment = `download-${type}`) {
+export async function readDownload(page, button, type, testInfo, attachment = `download-${type}`) {
   const pending = page.waitForEvent('download');
   await button.click();
   const file = await pending;
