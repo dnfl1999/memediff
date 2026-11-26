@@ -1,0 +1,801 @@
+{
+  "version": "2.4.0",
+  "dateKST": "2026-11-26",
+  "account": "dnfl1999",
+  "baseCommit": "b1814f13174e7e52e11793c31db099cae51d4ad1",
+  "previousDocumentationCommit": "6b40b3b499562ae9dd7c0a55c783ebdb2f5fa1e3",
+  "releaseCommit": "4dddff7d7644a450ca57848dc189a91bf1da6c13",
+  "preflight": {
+    "homeHttp": 200,
+    "indexHttp": 200,
+    "totalAssociations": 117,
+    "validAssociations": 0,
+    "expiredAssociations": 117,
+    "newlyVerified": 0,
+    "failure": "ENOTFOUND",
+    "consecutiveFailuresInMonitorWindow": 10,
+    "mostRecentScheduledPagesRun": 45708060368,
+    "monitorRun": 45716429407,
+    "previousRelease": {
+      "artifactId": 14618871831,
+      "sha256": "7ab77eb67375656eca87737cf037f4e603218a835314c803e180c2e25ea46c21",
+      "diagnostic": {
+        "schemaVersion": 2,
+        "runId": "44713356951",
+        "runAttempt": 1,
+        "workflow": "Verify and deploy Pages",
+        "event": "push",
+        "recordedAt": "2026-11-20T09:54:54.712Z",
+        "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/44713356951",
+        "stages": {
+          "verify": "success",
+          "deploy": "success",
+          "publicQA": "success"
+        },
+        "forks": {
+          "state": "retained",
+          "observedAt": "2026-11-20T09:50:19.017Z",
+          "newlyVerified": 0,
+          "retained": 117,
+          "latestVerifiedAt": "2026-11-18T20:44:01.390Z",
+          "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+          "failure": {
+            "stage": "forks-refresh",
+            "category": "dns",
+            "codes": [
+              "ENOTFOUND"
+            ],
+            "status": null
+          }
+        },
+        "qa": {
+          "unit": {
+            "passed": 177,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-20T09:45:14.990Z",
+            "completedAt": "2026-11-20T09:45:16.107Z",
+            "failure": null,
+            "http": null,
+            "status": "success",
+            "evidence": "node-test-json",
+            "runId": "44713356951",
+            "runAttempt": 1
+          },
+          "preDeploy": {
+            "passed": 136,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-20T09:45:34.052Z",
+            "completedAt": "2026-11-20T09:50:18.388Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  6290
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  4
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "44713356951",
+            "runAttempt": 1
+          },
+          "publicMock": {
+            "passed": 136,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-20T09:51:00.898Z",
+            "completedAt": "2026-11-20T09:54:29.615Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  6290
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  4
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "44713356951",
+            "runAttempt": 1
+          },
+          "publicLive": {
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-20T09:54:30.177Z",
+            "completedAt": "2026-11-20T09:54:42.091Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  210
+                ]
+              ],
+              "expected": [
+                [
+                  409,
+                  1
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "44713356951",
+            "runAttempt": 1
+          }
+        }
+      }
+    }
+  },
+  "local": {
+    "build": "success",
+    "unit": {
+      "counts": {
+        "tests": 179,
+        "failed": 0,
+        "passed": 179,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "topLevel": 179,
+        "suites": 0
+      },
+      "success": true,
+      "startedAt": "2026-11-26T03:32:55.077Z",
+      "completedAt": "2026-11-26T03:32:56.142Z"
+    },
+    "focusedBrowser": {
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T03:27:29.996Z",
+      "durationMs": 38025.485
+    },
+    "mockBrowser": {
+      "passed": 140,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T03:35:14.974Z",
+      "durationMs": 145785.092
+    },
+    "realBrowser": {
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T03:39:10.213Z",
+      "durationMs": 15296.534
+    },
+    "fixtureDownloads": [
+      {
+        "project": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "files": [
+          {
+            "name": "v21-period-comparison.json",
+            "bytes": 15775,
+            "sha256": "a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5",
+            "observedAtUtc": "2026-11-20T08:25:25.774Z"
+          },
+          {
+            "name": "v22-public-period-comparison.json",
+            "bytes": 16597,
+            "sha256": "2b67ef1e4411de61aa4c75d52a19ec371eba6ea96c3c973da446fb3ce5f5e301",
+            "observedAtUtc": "2026-11-20T09:12:15.748Z"
+          }
+        ],
+        "shared": {
+          "startUtc": "2026-11-07T00:00:00.000Z",
+          "endExclusiveUtc": "2026-11-20T08:25:25.775Z"
+        },
+        "commonShas": 45,
+        "file1Only": 0,
+        "file2Only": 0,
+        "file2Outside": 3,
+        "releases": 0,
+        "downloads": {
+          "json": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.json",
+            "bytes": 53584,
+            "sha256": "1b4e1b81ac7e670236c6b5c5949fd67f864bb7f8e1479a8c26d4e13497ec987a",
+            "shaRows": 48
+          },
+          "png": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.png",
+            "bytes": 136121,
+            "sha256": "2a00c481bee2335fee200e6eb1520a52c5da2ff4c3ee4e0417967ac2514ad5e4",
+            "width": 1400,
+            "height": 829,
+            "decoded": true,
+            "colors": 2843,
+            "logoDrawn": true,
+            "renderedCounts": [
+              45,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "project": "mobile",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "files": [
+          {
+            "name": "v21-period-comparison.json",
+            "bytes": 15775,
+            "sha256": "a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5",
+            "observedAtUtc": "2026-11-20T08:25:25.774Z"
+          },
+          {
+            "name": "v22-public-period-comparison.json",
+            "bytes": 16597,
+            "sha256": "2b67ef1e4411de61aa4c75d52a19ec371eba6ea96c3c973da446fb3ce5f5e301",
+            "observedAtUtc": "2026-11-20T09:12:15.748Z"
+          }
+        ],
+        "shared": {
+          "startUtc": "2026-11-07T00:00:00.000Z",
+          "endExclusiveUtc": "2026-11-20T08:25:25.775Z"
+        },
+        "commonShas": 45,
+        "file1Only": 0,
+        "file2Only": 0,
+        "file2Outside": 3,
+        "releases": 0,
+        "downloads": {
+          "json": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.json",
+            "bytes": 53584,
+            "sha256": "6d4391e5f1fcee81784b6284d2476fa0ce53caeedc4cc366a2bd1cb7088d2b2e",
+            "shaRows": 48
+          },
+          "png": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.png",
+            "bytes": 136121,
+            "sha256": "2a00c481bee2335fee200e6eb1520a52c5da2ff4c3ee4e0417967ac2514ad5e4",
+            "width": 1400,
+            "height": 829,
+            "decoded": true,
+            "colors": 2843,
+            "logoDrawn": true,
+            "renderedCounts": [
+              45,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "sources": {
+    "fixtures": [
+      {
+        "path": "test/fixtures/v21-period-comparison.json",
+        "bytes": 15775,
+        "sha256": "a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5",
+        "observedAtUtc": "2026-11-20T08:25:25.774Z",
+        "collectionStartUtc": "2026-10-21T08:25:25.774Z",
+        "repository": "dnfl1999/memediff",
+        "branch": "main",
+        "byteIdenticalToArchivedDownload": true,
+        "provenance": {
+          "route": "Original v2.1 public browser QA download",
+          "runId": 44701320792,
+          "artifactId": 14613052613
+        }
+      },
+      {
+        "path": "test/fixtures/v22-public-period-comparison.json",
+        "bytes": 16597,
+        "sha256": "2b67ef1e4411de61aa4c75d52a19ec371eba6ea96c3c973da446fb3ce5f5e301",
+        "observedAtUtc": "2026-11-20T09:12:15.748Z",
+        "collectionStartUtc": "2026-10-21T09:12:15.748Z",
+        "repository": "dnfl1999/memediff",
+        "branch": "main",
+        "byteIdenticalToArchivedDownload": true,
+        "provenance": {
+          "route": "Independent v2.2 public-site real GitHub API retest",
+          "evidence": "docs/v22-qa.json"
+        }
+      }
+    ],
+    "generatedTesting": "Separate synthesized records cover release conflicts, source scope, coverage, disjoint UTC intervals and PNG encoding failures."
+  },
+  "pages": {
+    "runId": 45750186106,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/45750186106",
+    "attempt": 1,
+    "conclusion": "success",
+    "startedAtUtc": "2026-11-26T03:38:12Z",
+    "completedAtUtc": "2026-11-26T03:52:59Z",
+    "jobs": [
+      {
+        "id": 139675808536,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T03:38:15Z",
+        "completed_at": "2026-11-26T03:44:01Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45750186106/job/139675808536"
+      },
+      {
+        "id": 139677772876,
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T03:44:06Z",
+        "completed_at": "2026-11-26T03:44:15Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45750186106/job/139677772876"
+      },
+      {
+        "id": 139677848338,
+        "name": "public-qa",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T03:44:17Z",
+        "completed_at": "2026-11-26T03:52:42Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45750186106/job/139677848338"
+      },
+      {
+        "id": 139680661995,
+        "name": "diagnostics",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T03:52:45Z",
+        "completed_at": "2026-11-26T03:52:58Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45750186106/job/139680661995"
+      }
+    ],
+    "artifact": {
+      "artifactId": 15085607604,
+      "sha256": "518f576576cda447967ed1208a3b5dfab3fdaf0e441204169eb78c33d6bfd28e",
+      "bytes": 761,
+      "diagnostic": {
+        "schemaVersion": 2,
+        "runId": "45750186106",
+        "runAttempt": 1,
+        "workflow": "Verify and deploy Pages",
+        "event": "push",
+        "recordedAt": "2026-11-26T03:52:56.179Z",
+        "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/45750186106",
+        "stages": {
+          "verify": "success",
+          "deploy": "success",
+          "publicQA": "success"
+        },
+        "forks": {
+          "state": "retained",
+          "observedAt": "2026-11-26T03:43:53.524Z",
+          "newlyVerified": 0,
+          "retained": 117,
+          "latestVerifiedAt": "2026-11-18T20:44:01.390Z",
+          "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+          "failure": {
+            "stage": "forks-refresh",
+            "category": "dns",
+            "codes": [
+              "ENOTFOUND"
+            ],
+            "status": null
+          }
+        },
+        "qa": {
+          "unit": {
+            "passed": 179,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T03:38:24.082Z",
+            "completedAt": "2026-11-26T03:38:25.471Z",
+            "failure": null,
+            "http": null,
+            "status": "success",
+            "evidence": "node-test-json",
+            "runId": "45750186106",
+            "runAttempt": 1
+          },
+          "preDeploy": {
+            "passed": 140,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T03:38:50.490Z",
+            "completedAt": "2026-11-26T03:43:52.943Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  6762
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  4
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45750186106",
+            "runAttempt": 1
+          },
+          "publicMock": {
+            "passed": 140,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T03:48:40.126Z",
+            "completedAt": "2026-11-26T03:52:27.769Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  6762
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  4
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45750186106",
+            "runAttempt": 1
+          },
+          "publicLive": {
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T03:52:28.434Z",
+            "completedAt": "2026-11-26T03:52:36.746Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  215
+                ]
+              ],
+              "expected": [],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45750186106",
+            "runAttempt": 1
+          }
+        }
+      }
+    },
+    "historicalSchemas": [
+      {
+        "runId": "44685874281",
+        "schemaVersion": 1,
+        "sha256": "14deadd11302fdeca9b42af7777b3a027b7546f9bf8a735719c1b3572c6fce32"
+      },
+      {
+        "runId": "44707077365",
+        "schemaVersion": 2,
+        "sha256": "efc291853b8bdad829e619442c72f90c853b4bc392c070c7784d038fcda2da0f"
+      }
+    ]
+  },
+  "publicSite": {
+    "checkedAtUtc": "2026-11-26T03:44:20.2218040+00:00",
+    "homeHttp": 200,
+    "indexHttp": 200,
+    "moduleHttp": 200,
+    "exportControl": true,
+    "exportFunction": true,
+    "retained": 117,
+    "expired": 117,
+    "valid": 0,
+    "retainedEvidenceUnchanged": true,
+    "indexCheckedAtUnchanged": true,
+    "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+    "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+    "officialExpiry": "2026-11-20T20:43:46.5170000+00:00",
+    "operation": {
+      "at": "2026-11-26T03:43:53.521Z",
+      "runId": "45750186106",
+      "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+      "outcome": "retained",
+      "failure": {
+        "stage": "forks-refresh",
+        "endpoint": "https://forks.wiki/api/tokens/recent",
+        "category": "dns",
+        "codes": [
+          "ENOTFOUND"
+        ],
+        "status": null
+      }
+    },
+    "offlineBrowser": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T03:44:20.988Z",
+      "durationMs": 17403.461
+    },
+    "fixtureDownloads": [
+      {
+        "project": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "files": [
+          {
+            "name": "v21-period-comparison.json",
+            "bytes": 15775,
+            "sha256": "a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5",
+            "observedAtUtc": "2026-11-20T08:25:25.774Z"
+          },
+          {
+            "name": "v22-public-period-comparison.json",
+            "bytes": 16597,
+            "sha256": "2b67ef1e4411de61aa4c75d52a19ec371eba6ea96c3c973da446fb3ce5f5e301",
+            "observedAtUtc": "2026-11-20T09:12:15.748Z"
+          }
+        ],
+        "shared": {
+          "startUtc": "2026-11-07T00:00:00.000Z",
+          "endExclusiveUtc": "2026-11-20T08:25:25.775Z"
+        },
+        "commonShas": 45,
+        "file1Only": 0,
+        "file2Only": 0,
+        "file2Outside": 3,
+        "releases": 0,
+        "downloads": {
+          "json": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.json",
+            "bytes": 53584,
+            "sha256": "b48b5ff76d5306ad93c53cb665d42968554e285e0b1db245e07320ae4872bd2a",
+            "shaRows": 48
+          },
+          "png": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.png",
+            "bytes": 136121,
+            "sha256": "2a00c481bee2335fee200e6eb1520a52c5da2ff4c3ee4e0417967ac2514ad5e4",
+            "width": 1400,
+            "height": 829,
+            "decoded": true,
+            "colors": 2843,
+            "logoDrawn": true,
+            "renderedCounts": [
+              45,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "project": "mobile",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "offline": true,
+        "closedAndCleared": true,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true,
+        "files": [
+          {
+            "name": "v21-period-comparison.json",
+            "bytes": 15775,
+            "sha256": "a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5",
+            "observedAtUtc": "2026-11-20T08:25:25.774Z"
+          },
+          {
+            "name": "v22-public-period-comparison.json",
+            "bytes": 16597,
+            "sha256": "2b67ef1e4411de61aa4c75d52a19ec371eba6ea96c3c973da446fb3ce5f5e301",
+            "observedAtUtc": "2026-11-20T09:12:15.748Z"
+          }
+        ],
+        "shared": {
+          "startUtc": "2026-11-07T00:00:00.000Z",
+          "endExclusiveUtc": "2026-11-20T08:25:25.775Z"
+        },
+        "commonShas": 45,
+        "file1Only": 0,
+        "file2Only": 0,
+        "file2Outside": 3,
+        "releases": 0,
+        "downloads": {
+          "json": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.json",
+            "bytes": 53584,
+            "sha256": "8064fec036903ba22370bcfb9afb0f8ac23a0c11b71058678a239b6e51ba9c59",
+            "shaRows": 48
+          },
+          "png": {
+            "filename": "memediff-saved-files-comparison-dnfl1999-memediff-2026-11-26.png",
+            "bytes": 136121,
+            "sha256": "2a00c481bee2335fee200e6eb1520a52c5da2ff4c3ee4e0417967ac2514ad5e4",
+            "width": 1400,
+            "height": 829,
+            "decoded": true,
+            "colors": 2843,
+            "logoDrawn": true,
+            "renderedCounts": [
+              45,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    ],
+    "independentRealBrowser": {
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T03:44:40.271Z",
+      "durationMs": 16089.805999999999
+    }
+  },
+  "monitor": {
+    "runId": 45751748867,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/45751748867",
+    "observedAtUtc": "2026-11-26T03:53:37.599Z",
+    "publish": false,
+    "observe": "success",
+    "notify": "skipped",
+    "indexState": "expired",
+    "newlyVerified": 0,
+    "retained": 117,
+    "consecutiveFailedAttemptsInWindow": 10,
+    "lastScheduledFailure": 45708060368,
+    "latestDeploymentDiagnostic": {
+      "runId": 45750186106,
+      "artifactId": 15085607604,
+      "failure": "ENOTFOUND"
+    },
+    "issue": {
+      "number": 1,
+      "state": "open",
+      "comments": 2,
+      "updatedAtUtc": "2026-11-20T21:34:14Z",
+      "url": "https://github.com/dnfl1999/memediff/issues/1",
+      "changedByReadOnlyRun": false
+    }
+  }
+}

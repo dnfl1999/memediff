@@ -1,6 +1,24 @@
 # MemeDiff 진행 기록
 
-기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
+기준일: **2026-11-26 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
+
+## v2.4 Saved Files Comparison Export (2026-11-26)
+
+인증 계정 `dnfl1999`와 시작 시 로컬·원격 `main`의 SHA `b1814f13174e7e52e11793c31db099cae51d4ad1`를 확인했습니다. 기존 미커밋 v2.3 진행 기록을 보존하고 배포·QA 근거를 추가해 [별도 문서 커밋](https://github.com/dnfl1999/memediff/commit/6b40b3b499562ae9dd7c0a55c783ebdb2f5fa1e3)으로 반영했습니다.
+
+유효한 저장 파일 두 개를 비교하면 브라우저에서 `memediff-saved-files-comparison` 버전 1 JSON과 PNG를 내려받을 수 있습니다. JSON은 필터와 페이지에 관계없이 각 파일의 출처, 선택 기간, 정확한 UTC 구간과 공백, 전체 SHA·릴리스 근거를 보존합니다. PNG는 개별 UTC 구간과 관측 수치를 요약합니다. 공통 구간이 없으면 `N/A`, 수집이 불완전해 확인할 수 없으면 `Unknown`입니다. 파일을 교체·제거하거나 비교를 닫으면 이전 다운로드는 무효화됩니다. 입력 한도는 파일당 2 MiB, 출력 한도는 형식당 8 MiB입니다.
+
+실제 v2.1·v2.2 공개 QA 산출물과 테스트 입력이 바이트 단위로 일치했습니다. 공통 UTC 구간은 `2026-11-07T00:00:00.000Z`부터 `2026-11-20T08:25:25.775Z` 직전까지입니다. 공통 SHA 45개, 공통 구간 안에서 한쪽에만 기록된 SHA는 각각 0개, 공통 구간 밖 SHA는 File 2에 3개였습니다. JSON에 전체 SHA 48개가 들어갔고 양쪽 원본의 공개 릴리스는 0개였습니다. 릴리스 속성 충돌과 불완전 수집은 별도 생성 자료로 검증했습니다.
+
+최종 로컬 단위 179건, PC·모바일 모의 E2E 140건, 실제 GitHub·DexScreener API 회귀 5건이 모두 통과했습니다. 파일 내보내기 집중 검사에서는 PC와 360px 모바일에서 다운로드된 JSON을 재파싱하고 PNG를 디코딩했습니다. 추가 네트워크 요청과 localStorage 쓰기는 각각 0건이었습니다. [기능 커밋](https://github.com/dnfl1999/memediff/commit/4dddff7d7644a450ca57848dc189a91bf1da6c13)
+
+공개 홈페이지, 내보내기 모듈, Forks 인덱스가 각각 HTTP 200을 반환했습니다. 공개 주소를 직접 연 PC·360px 모바일 Chromium 검사 2건에서 파일 두 개를 오프라인으로 비교해 JSON(53,584바이트, SHA 근거 48개)과 PNG(136,121바이트, 1400 × 829)를 내려받았습니다. 두 환경의 PNG 해시가 일치했고 추가 요청과 localStorage 쓰기는 각각 0건이었습니다. 공개 주소의 별도 실제 API 검사 5건도 통과했습니다.
+
+배포된 인덱스는 117개 연결과 각 검증 시각을 보존했습니다. 신규 검증 0건, 유효 연결 0개, 만료 117개입니다. 공식 MEMEDIFF 마지막 검증 시각은 `2026-11-18T20:43:46.517Z`, 48시간 만료 시각은 `2026-11-20T20:43:46.517Z`입니다. 공개 인덱스에 이번 배포의 Forks DNS `ENOTFOUND`와 기존 인덱스 재사용이 기록됐습니다.
+
+[GitHub Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/45750186106)의 verify, deploy, public-qa, diagnostics가 성공했습니다. CI 단위 179건, 배포 전과 공개 PC·모바일 모의 E2E 각각 140건, 공개 실제 API 5건이 통과했습니다. 실패와 건너뜀은 각각 0건입니다. [진단 ZIP](https://github.com/dnfl1999/memediff/actions/runs/45750186106/artifacts/15085607604)의 SHA-256·체크섬·스키마 2와 실행 번호를 검증했고, 과거 스키마 1·2 ZIP도 다시 읽었습니다.
+
+[읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/45751748867)는 최신 진단과 QA 결과를 읽었고, 확인 범위 내 정기 갱신 연속 실패 10회를 보고했습니다. `observe`가 성공했고 `notify`는 건너뛰었습니다. [운영 이슈 #1](https://github.com/dnfl1999/memediff/issues/1)은 열림·댓글 2건입니다. [상세 QA 기록](docs/v24-qa.json)
 
 ## v2.3 Compare Two Saved Files (2026-11-20)
 
