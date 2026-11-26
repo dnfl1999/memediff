@@ -2,6 +2,26 @@
 
 기준일: **2026-11-26 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v2.6 홈페이지 첫 사용 경로와 사용자 확보 (2026-11-26)
+
+인증 계정 `dnfl1999`, 시작 로컬·원격 `main` `7d196bf6f514ab4f583e16d64af8ee0c848799da`, 깨끗한 작업 트리를 확인했습니다. 개편 전 공개 PC·360px 모바일에서 GitHub 입력이 접혀 있었고, 첫 화면 주요 동작 5개 중 3개가 파일 도구였습니다. GitHub 저장소 Stars·Forks·Subscribers·Topics는 각각 0이었고, 최근 14일 저장소 조회 3회·고유 조회자 지표 1을 확인했습니다. 홈페이지 방문자 수는 미확인입니다. [개편 전 PC](docs/qa/v26-before-desktop.png) · [개편 전 모바일](docs/qa/v26-before-mobile.png)
+
+홈 첫 화면에 GitHub URL 입력과 **Analyze GitHub**를 배치하고, **Live GitHub Demo**와 **Try Sample Report**를 분리했습니다. Solana Token Analyzer는 별도 진입점으로 유지했고, 파일 도구는 Saved Reports로 묶었습니다. 첫 보고서는 완료 시 제목으로 포커스가 이동합니다. **Give feedback**은 전용 GitHub Issues 템플릿을 엽니다. 원본 SHA-256 대조 기능은 ROADMAP에서 보류했습니다.
+
+세 실제 공개 저장소의 GitHub 응답에서 SHA·릴리스 ID를 대조해 원본 JSON·PNG를 보존했습니다. Vite는 커밋 127개와 관측 릴리스 14개를 기록했으며 릴리스 수집 상한에 도달했습니다. Hello-World는 30일간 커밋과 릴리스가 각각 0개였고, MemeDiff는 연속한 두 15일 구간에서 커밋 6개와 49개였습니다. 세 사례의 관측 시각과 선택 기준은 [예시 기록](docs/examples/README.md)에 있습니다.
+
+GitHub 소개와 관련 토픽 7개를 적용해 다시 읽었고, 홈페이지 title·설명·Open Graph·사이트맵을 갱신했습니다. 방문자 측정 도구 4개 비교, 수집·QA 제외 방안, X 5개·Telegram 2개·Reddit 1개 초안, GitHub 소개문과 30일 계획을 정리했습니다. 추적 설치와 게시 건수는 각각 0건입니다. [사용자 확보 계획](docs/USER_ACQUISITION.md)
+
+로컬 단위 192건, PC·모바일 E2E 152건이 통과했습니다. 비인증 실제 API는 3건 통과·3건 건너뜀(GitHub HTTP 403·남은 요청 0)이었습니다. 기존 계정으로 인증한 별도 로컬 브라우저 데모는 실제 GitHub HTTP 200 세 건으로 보고서를 표시했습니다. 이 데모의 Forks·시장 API 요청은 0건이었습니다. [기능 커밋](https://github.com/dnfl1999/memediff/commit/2264383fcf8d01b04a0015d1e4f8798e78a3f26e)
+
+공개 1440px PC·360px 모바일에서 첫 화면에 저장소 입력과 분석 버튼이 보였습니다. 두 화면 모두 초기 외부 요청이 0건이었고, 로드 후 오프라인에서 샘플 세 개를 열 때 추가 요청과 로컬 저장이 각각 0건이었습니다. 공개 PNG·JSON 6개는 HTTP 200을 반환했고 원본 SHA-256과 일치했습니다. 공개 비인증 실제 API 재검사는 3건 통과·3건 건너뜀이었습니다. 별도 360px 키보드 검사에서 Live GitHub Demo의 실제 HTTP 403 안내와 샘플 이동을 확인했습니다. 기존 GitHub 인증으로 같은 데모를 재검사해 실제 HTTP 200 세 건으로 MemeDiff 보고서를 표시했습니다. 두 데모에서 Forks·시장 API 요청은 0건이었습니다. [개편 후 PC](docs/qa/v26-after-desktop.png) · [개편 후 모바일](docs/qa/v26-after-mobile.png)
+
+공개 인덱스는 HTTP 200을 반환했습니다. Forks 갱신의 DNS `ENOTFOUND`로 기존 117개 연결을 재사용했고, 배포 전후 연결 데이터와 검증 시각이 일치했습니다. 유효 연결 0개, 만료 117개, 신규 검증 0개를 확인했습니다. 공식 CA의 마지막 검증 시각은 `2026-11-18T20:43:46.517Z`, 48시간 만료 시각은 `2026-11-20T20:43:46.517Z`입니다.
+
+GitHub Actions의 `verify`, `deploy`, `public-qa`, `diagnostics`가 모두 성공했습니다. 단위 192건, 배포 전후 PC·모바일 E2E 각 152건, 공개 실제 API 6건이 통과했습니다. 새 진단 ZIP의 크기와 GitHub가 제공한 SHA-256이 일치했고, 과거 스키마 1·2 자료도 읽혔습니다. [Pages 배포](https://github.com/dnfl1999/memediff/actions/runs/45771434673) · [진단 기록](https://github.com/dnfl1999/memediff/actions/runs/45771434673/artifacts/15094518149)
+
+읽기 전용 Monitor는 `observe` 성공과 `notify` 건너뜀을 기록했습니다. 확인 범위의 연속 실패는 10건이며, 이번 배포의 기존 인덱스 재사용 진단을 읽었습니다. 운영 이슈 #1은 열린 상태와 댓글 2개를 유지했습니다. [Monitor 실행](https://github.com/dnfl1999/memediff/actions/runs/45772883670) · [v2.6 QA](docs/v26-qa.json)
+
 ## v2.5 Saved Files Comparison Viewer (2026-11-26)
 
 인증 계정 `dnfl1999`, 로컬·원격 `main`의 시작 SHA `5dc9cc31426381404ccdfa004e9d4173ddf37dc1`, 깨끗한 작업 트리를 확인했습니다. 이전 [v2.4 배포](https://github.com/dnfl1999/memediff/actions/runs/45750186106)와 [읽기 전용 Monitor](https://github.com/dnfl1999/memediff/actions/runs/45751748867)를 확인했습니다. 공개 인덱스는 HTTP 200이었고 117개가 만료 상태였습니다. Forks DNS 조회는 주소 레코드를 반환하지 않았습니다.

@@ -2,7 +2,7 @@
 
 ## Reproduced original limitation
 
-The previous homepage required `#repo` and `parseRepo` before any report. Its CA search required a separate result selection and another Analyze click. Its schema-1 index covered recent official listings plus MemeDiff, not a full registry. The new main form uses a required-format Solana CA only; Advanced Search retains the original repository path and schema-1 development reports.
+The original workflow required a public repository URL or `owner/repo`. The Solana Token Analyzer adds a separate exact-CA workflow using a dated index of recent official listings and retained observations. Since v2.6, direct GitHub analysis is on the first screen and **Advanced GitHub tools** contains name search and the optional address field. Development reports use schema 1.
 
 ## One-click data flow
 
@@ -11,7 +11,7 @@ The previous homepage required `#repo` and `parseRepo` before any report. Its CA
 3. Market responses must match `chainId=solana` and `baseToken.address=CA`. Quote-only matches are not priced as the queried token. Select a single highest-liquidity pool, then volume/address tie-breaks. Do not sum pools. Display source, observed time and nullable fields separately.
 4. Read the verification state for an exact CA from the published index. A unique record requires a valid explicit `coin.repo` and evidence derived from `/api/coin?mint={CA}` with the exact `coin.mint` and `coin.kind=forks`. The final six hours of a 48-hour verification are **Expiring soon**. Time beyond that window is **Expired**. Future and malformed timestamps are invalid, and duplicates are ambiguous. None of those states can start automatic analysis.
 5. Call the GitHub evidence collector automatically. The repository is fetched first, then 7/30-day commits/releases/contributors. Association time and market time are shown separately from the schema 1 development report.
-6. Show the association state, source, UTC time and age in **Index health**. Market data remains available independently, and Advanced Search offers direct repository analysis. GitHub failures preserve the token panel and verification history with an explicit development error.
+6. Show the association state, source, UTC time and age in **Index health**. Market lookup operates independently, and **Open GitHub analysis** focuses the homepage repository form. GitHub failures preserve the token panel and verification history with an explicit development error.
 
 ## Official API research — 2026-11-11
 

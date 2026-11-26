@@ -1,0 +1,1029 @@
+{
+  "version": "2.6.0",
+  "dateKST": "2026-11-26",
+  "releaseCommit": "2264383fcf8d01b04a0015d1e4f8798e78a3f26e",
+  "baseCommit": "7d196bf6f514ab4f583e16d64af8ee0c848799da",
+  "baseline": {
+    "github": {
+      "atUtc": "2026-11-26T06:42:51.1721488+00:00",
+      "login": "dnfl1999",
+      "name": "dnfl1999/memediff",
+      "description": "Evidence-first GitHub activity reports for meme-token research. Local snapshot comparisons, source links, PNG and JSON exports.",
+      "topics": [],
+      "homepage": "https://dnfl1999.github.io/memediff/",
+      "stars": 0,
+      "forks": 0,
+      "subscribers": 0,
+      "admin": true,
+      "hasIssues": true
+    },
+    "githubTraffic": {
+      "scope": "repository views, 14 days",
+      "http": 200,
+      "count": 3,
+      "unique": 1
+    },
+    "homepageVisitors": null,
+    "beforeHomepage": {
+      "url": "https://dnfl1999.github.io/memediff/",
+      "checkedAtUtc": "2026-11-26T06:37:07.042Z",
+      "before": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "status": 200,
+          "headline": "Less Hype.\nMore Evidence.",
+          "heroActions": [
+            "Analyze a token ↗",
+            "Try Live Demo →",
+            "Open Saved Comparison",
+            "Compare Two Saved Files",
+            "Open Saved Files Comparison"
+          ],
+          "repositoryInputAtLoad": false,
+          "initialApiRequests": 0,
+          "screenshotSha256": "7a69987fd43889e19be0cf1d8af26df11bd6aaf9ab646ce45b9b432afbeb9ee6"
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "status": 200,
+          "headline": "Less Hype.\nMore Evidence.",
+          "heroActions": [
+            "Analyze a token ↗",
+            "Try Live Demo →",
+            "Open Saved Comparison",
+            "Compare Two Saved Files",
+            "Open Saved Files Comparison"
+          ],
+          "repositoryInputAtLoad": false,
+          "initialApiRequests": 0,
+          "screenshotSha256": "05a140bf8c1a59007e1e07d7d9f90a659d078d96db7153770c3b469932483a0a"
+        }
+      ]
+    },
+    "index": {
+      "observedAtUtc": "2026-11-26T06:54:37.2342910+00:00",
+      "retained": 117,
+      "expired": 117,
+      "valid": 0,
+      "dnsAddressAnswers": 0,
+      "operation": {
+        "at": "2026-11-26T04:35:17.603Z",
+        "runId": "45755636807",
+        "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+        "outcome": "retained",
+        "failure": {
+          "stage": "forks-refresh",
+          "endpoint": "https://forks.wiki/api/tokens/recent",
+          "category": "dns",
+          "codes": [
+            "ENOTFOUND"
+          ],
+          "status": null
+        }
+      }
+    },
+    "pages": [
+      {
+        "id": 45755636807,
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45755636807"
+      },
+      {
+        "id": 45750186106,
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45750186106"
+      },
+      {
+        "id": 45708060368,
+        "event": "schedule",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45708060368"
+      }
+    ],
+    "monitor": [
+      {
+        "id": 45761897088,
+        "event": "schedule",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45761897088"
+      },
+      {
+        "id": 45756922112,
+        "event": "workflow_dispatch",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45756922112"
+      }
+    ]
+  },
+  "discovery": {
+    "repoAfter": {
+      "atUtc": "2026-11-26T06:46:20.5314293+00:00",
+      "login": "dnfl1999",
+      "name": "dnfl1999/memediff",
+      "description": "Free GitHub activity analyzer. Inspect public commits and releases, compare observations, and export evidence. Includes a Solana token analyzer.",
+      "topics": [
+        "crypto-research",
+        "data-visualization",
+        "developer-activity",
+        "github",
+        "github-analytics",
+        "open-source",
+        "solana"
+      ],
+      "homepage": "https://dnfl1999.github.io/memediff/",
+      "stars": 0,
+      "forks": 0,
+      "subscribers": 0,
+      "admin": true,
+      "hasIssues": true
+    },
+    "telemetryEnabled": false,
+    "acquisitionPlan": "docs/USER_ACQUISITION.md"
+  },
+  "samples": {
+    "url": "https://dnfl1999.github.io/memediff/",
+    "samples": [
+      {
+        "repo": "vitejs/vite",
+        "branch": "main",
+        "since": "2026-10-27T06:38:20.845Z",
+        "observedAt": "2026-11-26T06:38:20.845Z",
+        "commits": 127,
+        "releases": 14,
+        "authors": 33,
+        "midpoint": "2026-11-11T06:38:20.845Z",
+        "first15": 64,
+        "second15": 63,
+        "coverage": {
+          "commits": true,
+          "releases": false,
+          "maxCommits": 1000,
+          "maxReleases": 500
+        },
+        "responses": [
+          {
+            "url": "https://api.github.com/repos/vitejs/vite",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/vitejs/vite/commits?sha=main&since=2026-10-27T06%3A38%3A20Z&until=2026-11-26T06%3A38%3A21Z&per_page=100&page=1",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/vitejs/vite/commits?sha=main&since=2026-10-27T06%3A38%3A20Z&until=2026-11-26T06%3A38%3A21Z&per_page=100&page=2",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=1",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=2",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=3",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=4",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/vitejs/vite/releases?per_page=100&page=5",
+            "status": 200
+          }
+        ],
+        "json": {
+          "path": "assets/examples/vitejs-vite.json",
+          "bytes": 44448,
+          "sha256": "b00bbbc13329cbee304077a32dd6230c38418c11d11cf450ed80854e742fa230"
+        },
+        "png": {
+          "path": "assets/examples/vitejs-vite.png",
+          "bytes": 197527,
+          "sha256": "8455a0be6e5a51af0a13d6551a4c6ffcf23a4e1148b91812e827a69bc72ac7d2",
+          "width": 1400,
+          "height": 1020
+        }
+      },
+      {
+        "repo": "octocat/hello-world",
+        "branch": "master",
+        "since": "2026-10-27T06:38:27.022Z",
+        "observedAt": "2026-11-26T06:38:27.022Z",
+        "commits": 0,
+        "releases": 0,
+        "authors": 0,
+        "midpoint": "2026-11-11T06:38:27.022Z",
+        "first15": 0,
+        "second15": 0,
+        "coverage": {
+          "commits": true,
+          "releases": true,
+          "maxCommits": 1000,
+          "maxReleases": 500
+        },
+        "responses": [
+          {
+            "url": "https://api.github.com/repos/octocat/hello-world",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/octocat/hello-world/commits?sha=master&since=2026-10-27T06%3A38%3A27Z&until=2026-11-26T06%3A38%3A28Z&per_page=100&page=1",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/octocat/hello-world/releases?per_page=100&page=1",
+            "status": 200
+          }
+        ],
+        "json": {
+          "path": "assets/examples/octocat-hello-world.json",
+          "bytes": 1443,
+          "sha256": "585284e436c541b12128c69683c505acdfc1b680cf46d43074639b6779e209c9"
+        },
+        "png": {
+          "path": "assets/examples/octocat-hello-world.png",
+          "bytes": 194607,
+          "sha256": "40feac6c3aa7f3c1f287865f316e0f6d050e936948ddfa440ffc5a5b8e970b55",
+          "width": 1400,
+          "height": 1020
+        }
+      },
+      {
+        "repo": "dnfl1999/memediff",
+        "branch": "main",
+        "since": "2026-10-27T06:38:28.639Z",
+        "observedAt": "2026-11-26T06:38:28.639Z",
+        "commits": 55,
+        "releases": 0,
+        "authors": 1,
+        "midpoint": "2026-11-11T06:38:28.639Z",
+        "first15": 6,
+        "second15": 49,
+        "coverage": {
+          "commits": true,
+          "releases": true,
+          "maxCommits": 1000,
+          "maxReleases": 500
+        },
+        "responses": [
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-27T06%3A38%3A28Z&until=2026-11-26T06%3A38%3A29Z&per_page=100&page=1",
+            "status": 200
+          },
+          {
+            "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+            "status": 200
+          }
+        ],
+        "json": {
+          "path": "assets/examples/dnfl1999-memediff.json",
+          "bytes": 18878,
+          "sha256": "f5ef2c3feace173cc7a5111449f931d946fb167721c2813b912084eb96b50fc2"
+        },
+        "png": {
+          "path": "assets/examples/dnfl1999-memediff.png",
+          "bytes": 197270,
+          "sha256": "c25d766f3e1d6f24dbc52bf27122b49afe5c2405d945e504d0032a21c5b384fb",
+          "width": 1400,
+          "height": 1020
+        }
+      }
+    ]
+  },
+  "local": {
+    "build": "success",
+    "home": {
+      "checkedAtUtc": "2026-11-26T06:51:34.337Z",
+      "url": "http://127.0.0.1:4173/",
+      "firstScreens": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "status": 200,
+          "title": "MemeDiff — Free GitHub Activity Analyzer",
+          "controls": {
+            "repository": {
+              "x": 128,
+              "y": 397.34375,
+              "width": 552.296875,
+              "height": 52.796875
+            },
+            "analyze": {
+              "x": 688.296875,
+              "y": 397.34375,
+              "width": 131.421875,
+              "height": 52.796875
+            },
+            "sample": {
+              "x": 128,
+              "y": 491.9375,
+              "width": 146.859375,
+              "height": 46
+            },
+            "demo": {
+              "x": 286.859375,
+              "y": 491.9375,
+              "width": 145.953125,
+              "height": 46
+            }
+          },
+          "externalRequestsAtLoad": 0,
+          "heading": "Is your crypto project\nbeing built?",
+          "screenshotSha256": "bd96a8c86a7b26ebd58bc7ccb783c57ac3b0f1aa589fbb4910e5d7a16763c31a"
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "status": 200,
+          "title": "MemeDiff — Free GitHub Activity Analyzer",
+          "controls": {
+            "repository": {
+              "x": 20,
+              "y": 343.96875,
+              "width": 320,
+              "height": 52.796875
+            },
+            "analyze": {
+              "x": 20,
+              "y": 404.765625,
+              "width": 320,
+              "height": 46
+            },
+            "sample": {
+              "x": 20,
+              "y": 492.5625,
+              "width": 155,
+              "height": 46
+            },
+            "demo": {
+              "x": 185,
+              "y": 492.5625,
+              "width": 155,
+              "height": 46
+            }
+          },
+          "externalRequestsAtLoad": 0,
+          "heading": "Is your crypto project\nbeing built?",
+          "screenshotSha256": "63252abec27936f547f78515da07c4059011de6e27a8f8789fc214b52f7a1722"
+        }
+      ],
+      "canonical": "https://dnfl1999.github.io/memediff/",
+      "description": "Analyze public GitHub activity for free. Inspect commits and releases, compare development observations, and download evidence as PNG or JSON. Includes a Solana token analyzer.",
+      "openGraphTitle": "MemeDiff — Free GitHub Activity Analyzer",
+      "feedback": "https://github.com/dnfl1999/memediff/issues/new?template=feedback.md",
+      "sitemapHttp": 200,
+      "projectRobotsHttp": 200,
+      "rootRobotsHttp": 200,
+      "assets": [
+        {
+          "path": "assets/examples/vitejs-vite.json",
+          "bytes": 44448,
+          "sha256": "b00bbbc13329cbee304077a32dd6230c38418c11d11cf450ed80854e742fa230",
+          "status": 200
+        },
+        {
+          "path": "assets/examples/vitejs-vite.png",
+          "bytes": 197527,
+          "sha256": "8455a0be6e5a51af0a13d6551a4c6ffcf23a4e1148b91812e827a69bc72ac7d2",
+          "width": 1400,
+          "height": 1020,
+          "status": 200
+        },
+        {
+          "path": "assets/examples/octocat-hello-world.json",
+          "bytes": 1443,
+          "sha256": "585284e436c541b12128c69683c505acdfc1b680cf46d43074639b6779e209c9",
+          "status": 200
+        },
+        {
+          "path": "assets/examples/octocat-hello-world.png",
+          "bytes": 194607,
+          "sha256": "40feac6c3aa7f3c1f287865f316e0f6d050e936948ddfa440ffc5a5b8e970b55",
+          "width": 1400,
+          "height": 1020,
+          "status": 200
+        },
+        {
+          "path": "assets/examples/dnfl1999-memediff.json",
+          "bytes": 18878,
+          "sha256": "f5ef2c3feace173cc7a5111449f931d946fb167721c2813b912084eb96b50fc2",
+          "status": 200
+        },
+        {
+          "path": "assets/examples/dnfl1999-memediff.png",
+          "bytes": 197270,
+          "sha256": "c25d766f3e1d6f24dbc52bf27122b49afe5c2405d945e504d0032a21c5b384fb",
+          "width": 1400,
+          "height": 1020,
+          "status": 200
+        }
+      ]
+    },
+    "unit": {
+      "counts": {
+        "tests": 192,
+        "failed": 0,
+        "passed": 192,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "topLevel": 192,
+        "suites": 0
+      },
+      "success": true,
+      "startedAt": "2026-11-26T06:49:50.774Z",
+      "completedAt": "2026-11-26T06:49:51.861Z"
+    },
+    "e2e": {
+      "passed": 152,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T06:46:17.025Z",
+      "durationMs": 185813.26
+    },
+    "realBrowser": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 3,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T06:49:26.810Z",
+      "durationMs": 12991.861
+    },
+    "apiLimits": [
+      {
+        "url": "https://api.github.com/repos/dnfl1999/memediff",
+        "status": 403,
+        "remaining": "0",
+        "resetAtUtc": "2026-11-26T07:35:10.000Z"
+      }
+    ],
+    "authenticatedLiveDemo": {
+      "testedAtUtc": "2026-11-26T06:52:49.320Z",
+      "target": "http://127.0.0.1:4173/",
+      "explicitClick": true,
+      "realGitHubApi": true,
+      "authenticatedQaRequestsOnly": true,
+      "forksIndexRequests": 0,
+      "marketRequests": 0,
+      "report": "dnfl1999/memediff",
+      "queryStatus": "Live GitHub query complete · API requests remaining: 4966",
+      "observedMetrics": [
+        "55",
+        "0",
+        "1"
+      ],
+      "responses": [
+        {
+          "url": "https://api.github.com/repos/dnfl1999/memediff",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-27T06%3A52%3A47Z&until=2026-11-26T06%3A52%3A48Z&per_page=100&page=1",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+          "status": 200
+        }
+      ]
+    }
+  },
+  "pages": {
+    "runId": 45771434673,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/45771434673",
+    "attempt": 1,
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 139744746286,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T06:54:19Z",
+        "completed_at": "2026-11-26T07:00:36Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45771434673/job/139744746286"
+      },
+      {
+        "id": 139747113776,
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T07:00:41Z",
+        "completed_at": "2026-11-26T07:00:51Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45771434673/job/139747113776"
+      },
+      {
+        "id": 139747210422,
+        "name": "public-qa",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T07:00:53Z",
+        "completed_at": "2026-11-26T07:05:52Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45771434673/job/139747210422"
+      },
+      {
+        "id": 139749190689,
+        "name": "diagnostics",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-26T07:05:54Z",
+        "completed_at": "2026-11-26T07:06:02Z",
+        "html_url": "https://github.com/dnfl1999/memediff/actions/runs/45771434673/job/139749190689"
+      }
+    ],
+    "diagnosticArtifact": {
+      "id": 15094518149,
+      "sha256": "9f05dcb3602a3cbd396ba5c81f65f91bb4a8f0443a3bd3f09265b74a9852ccf0",
+      "bytes": 761,
+      "record": {
+        "schemaVersion": 2,
+        "runId": "45771434673",
+        "runAttempt": 1,
+        "workflow": "Verify and deploy Pages",
+        "event": "push",
+        "recordedAt": "2026-11-26T07:05:58.872Z",
+        "actionsURL": "https://github.com/dnfl1999/memediff/actions/runs/45771434673",
+        "stages": {
+          "verify": "success",
+          "deploy": "success",
+          "publicQA": "success"
+        },
+        "forks": {
+          "state": "retained",
+          "observedAt": "2026-11-26T07:00:29.088Z",
+          "newlyVerified": 0,
+          "retained": 117,
+          "latestVerifiedAt": "2026-11-18T20:44:01.390Z",
+          "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+          "failure": {
+            "stage": "forks-refresh",
+            "category": "dns",
+            "codes": [
+              "ENOTFOUND"
+            ],
+            "status": null
+          }
+        },
+        "qa": {
+          "unit": {
+            "passed": 192,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T06:54:24.557Z",
+            "completedAt": "2026-11-26T06:54:26.152Z",
+            "failure": null,
+            "http": null,
+            "status": "success",
+            "evidence": "node-test-json",
+            "runId": "45771434673",
+            "runAttempt": 1
+          },
+          "preDeploy": {
+            "passed": 152,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T06:54:44.930Z",
+            "completedAt": "2026-11-26T07:00:28.323Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  7598
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  6
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45771434673",
+            "runAttempt": 1
+          },
+          "publicMock": {
+            "passed": 152,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T07:01:12.746Z",
+            "completedAt": "2026-11-26T07:05:36.368Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  7598
+                ]
+              ],
+              "expected": [
+                [
+                  403,
+                  6
+                ],
+                [
+                  404,
+                  4
+                ],
+                [
+                  429,
+                  8
+                ],
+                [
+                  500,
+                  4
+                ],
+                [
+                  503,
+                  4
+                ]
+              ],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45771434673",
+            "runAttempt": 1
+          },
+          "publicLive": {
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "startedAt": "2026-11-26T07:05:36.961Z",
+            "completedAt": "2026-11-26T07:05:47.014Z",
+            "failure": null,
+            "http": {
+              "ok": [
+                [
+                  200,
+                  270
+                ]
+              ],
+              "expected": [],
+              "unexpected": [],
+              "recovered": 0
+            },
+            "status": "success",
+            "evidence": "playwright-json",
+            "runId": "45771434673",
+            "runAttempt": 1
+          }
+        }
+      }
+    },
+    "historicalSchemas": [
+      {
+        "schemaVersion": 1,
+        "runId": "44685874281",
+        "sha256": "14deadd11302fdeca9b42af7777b3a027b7546f9bf8a735719c1b3572c6fce32"
+      },
+      {
+        "schemaVersion": 2,
+        "runId": "45755636807",
+        "sha256": "5cb15af17a82810590c68ac4d797738638d1b25a0bc78e73bbe594cb4e189792"
+      }
+    ]
+  },
+  "public": {
+    "site": {
+      "checkedAtUtc": "2026-11-26T07:00:48.7020855+00:00",
+      "homeHttp": 200,
+      "indexHttp": 200,
+      "moduleHttp": 200,
+      "onboardingControl": true,
+      "onboardingModule": true,
+      "retained": 117,
+      "expired": 117,
+      "valid": 0,
+      "retainedEvidenceUnchanged": true,
+      "indexCheckedAtUnchanged": true,
+      "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+      "officialVerifiedAt": "2026-11-18T20:43:46.517Z",
+      "officialExpiry": "2026-11-20T20:43:46.5170000+00:00",
+      "operation": {
+        "at": "2026-11-26T07:00:29.084Z",
+        "runId": "45771434673",
+        "indexCheckedAt": "2026-11-18T20:44:01.396Z",
+        "outcome": "retained",
+        "failure": {
+          "stage": "forks-refresh",
+          "endpoint": "https://forks.wiki/api/tokens/recent",
+          "category": "dns",
+          "codes": [
+            "ENOTFOUND"
+          ],
+          "status": null
+        }
+      }
+    },
+    "home": {
+      "checkedAtUtc": "2026-11-26T07:01:01.916Z",
+      "url": "https://dnfl1999.github.io/memediff/",
+      "firstScreens": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "status": 200,
+          "title": "MemeDiff — Free GitHub Activity Analyzer",
+          "controls": {
+            "repository": {
+              "x": 128,
+              "y": 397.34375,
+              "width": 552.296875,
+              "height": 52.796875
+            },
+            "analyze": {
+              "x": 688.296875,
+              "y": 397.34375,
+              "width": 131.421875,
+              "height": 52.796875
+            },
+            "sample": {
+              "x": 128,
+              "y": 491.9375,
+              "width": 146.859375,
+              "height": 46
+            },
+            "demo": {
+              "x": 286.859375,
+              "y": 491.9375,
+              "width": 145.953125,
+              "height": 46
+            }
+          },
+          "externalRequestsAtLoad": 0,
+          "heading": "Is your crypto project\nbeing built?",
+          "screenshotSha256": "bd96a8c86a7b26ebd58bc7ccb783c57ac3b0f1aa589fbb4910e5d7a16763c31a"
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "status": 200,
+          "title": "MemeDiff — Free GitHub Activity Analyzer",
+          "controls": {
+            "repository": {
+              "x": 20,
+              "y": 343.96875,
+              "width": 320,
+              "height": 52.796875
+            },
+            "analyze": {
+              "x": 20,
+              "y": 404.765625,
+              "width": 320,
+              "height": 46
+            },
+            "sample": {
+              "x": 20,
+              "y": 492.5625,
+              "width": 155,
+              "height": 46
+            },
+            "demo": {
+              "x": 185,
+              "y": 492.5625,
+              "width": 155,
+              "height": 46
+            }
+          },
+          "externalRequestsAtLoad": 0,
+          "heading": "Is your crypto project\nbeing built?",
+          "screenshotSha256": "63252abec27936f547f78515da07c4059011de6e27a8f8789fc214b52f7a1722"
+        }
+      ],
+      "canonical": "https://dnfl1999.github.io/memediff/",
+      "description": "Analyze public GitHub activity for free. Inspect commits and releases, compare development observations, and download evidence as PNG or JSON. Includes a Solana token analyzer.",
+      "openGraphTitle": "MemeDiff — Free GitHub Activity Analyzer",
+      "feedback": "https://github.com/dnfl1999/memediff/issues/new?template=feedback.md",
+      "sitemapHttp": 200,
+      "projectRobotsHttp": 200,
+      "rootRobotsHttp": 404,
+      "assets": [
+        {
+          "path": "assets/examples/vitejs-vite.json",
+          "bytes": 44448,
+          "sha256": "b00bbbc13329cbee304077a32dd6230c38418c11d11cf450ed80854e742fa230",
+          "status": 200
+        },
+        {
+          "path": "assets/examples/vitejs-vite.png",
+          "bytes": 197527,
+          "sha256": "8455a0be6e5a51af0a13d6551a4c6ffcf23a4e1148b91812e827a69bc72ac7d2",
+          "width": 1400,
+          "height": 1020,
+          "status": 200
+        },
+        {
+          "path": "assets/examples/octocat-hello-world.json",
+          "bytes": 1443,
+          "sha256": "585284e436c541b12128c69683c505acdfc1b680cf46d43074639b6779e209c9",
+          "status": 200
+        },
+        {
+          "path": "assets/examples/octocat-hello-world.png",
+          "bytes": 194607,
+          "sha256": "40feac6c3aa7f3c1f287865f316e0f6d050e936948ddfa440ffc5a5b8e970b55",
+          "width": 1400,
+          "height": 1020,
+          "status": 200
+        },
+        {
+          "path": "assets/examples/dnfl1999-memediff.json",
+          "bytes": 18878,
+          "sha256": "f5ef2c3feace173cc7a5111449f931d946fb167721c2813b912084eb96b50fc2",
+          "status": 200
+        },
+        {
+          "path": "assets/examples/dnfl1999-memediff.png",
+          "bytes": 197270,
+          "sha256": "c25d766f3e1d6f24dbc52bf27122b49afe5c2405d945e504d0032a21c5b384fb",
+          "width": 1400,
+          "height": 1020,
+          "status": 200
+        }
+      ]
+    },
+    "onboardingBrowser": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T07:01:02.776Z",
+      "durationMs": 5090.023
+    },
+    "onboardingProof": [
+      {
+        "project": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "firstScreenDirect": true,
+        "offlineSamples": 3,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true
+      },
+      {
+        "project": "mobile",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "firstScreenDirect": true,
+        "offlineSamples": 3,
+        "networkRequests": 0,
+        "storageWrites": 0,
+        "storageUnchanged": true
+      }
+    ],
+    "accessibility": {
+      "checkedAtUtc": "2026-11-26T07:03:32.642Z",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "minimumControlHeight": 46,
+      "repositoryToAnalyzeTabOrder": true,
+      "explicitKeyboardDemo": true,
+      "api": [
+        {
+          "path": "/repos/dnfl1999/memediff",
+          "status": 403
+        }
+      ],
+      "message": "GitHub API rate limit or access denied (403). Retry after Nov 26, 2026, 07:35:10 UTC.",
+      "offlineFallback": true,
+      "forksOrMarketRequests": 0,
+      "socialImage": {
+        "url": "https://dnfl1999.github.io/memediff/assets/social-preview.png",
+        "status": 200,
+        "width": 1200,
+        "height": 630
+      }
+    },
+    "independentRealBrowser": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 3,
+      "flaky": 0,
+      "startedAtUtc": "2026-11-26T07:01:09.400Z",
+      "durationMs": 13996.628
+    },
+    "independentLiveDemo": "skipped",
+    "apiLimits": [
+      {
+        "url": "https://api.github.com/repos/dnfl1999/memediff",
+        "status": 403,
+        "remaining": "0",
+        "resetAtUtc": "2026-11-26T07:35:10.000Z"
+      }
+    ],
+    "authenticatedLiveDemo": {
+      "testedAtUtc": "2026-11-26T07:01:43.895Z",
+      "target": "https://dnfl1999.github.io/memediff/",
+      "explicitClick": true,
+      "realGitHubApi": true,
+      "authenticatedQaRequestsOnly": true,
+      "forksIndexRequests": 0,
+      "marketRequests": 0,
+      "report": "dnfl1999/memediff",
+      "queryStatus": "Live GitHub query complete · API requests remaining: 4913",
+      "observedMetrics": [
+        "56",
+        "0",
+        "1"
+      ],
+      "responses": [
+        {
+          "url": "https://api.github.com/repos/dnfl1999/memediff",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/dnfl1999/memediff/commits?sha=main&since=2026-10-27T07%3A01%3A41Z&until=2026-11-26T07%3A01%3A42Z&per_page=100&page=1",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/dnfl1999/memediff/releases?per_page=100&page=1",
+          "status": 200
+        }
+      ]
+    }
+  },
+  "monitor": {
+    "runId": 45772883670,
+    "url": "https://github.com/dnfl1999/memediff/actions/runs/45772883670",
+    "observedAtUtc": "2026-11-26T07:06:50.931Z",
+    "publish": false,
+    "observe": "success",
+    "notify": "skipped",
+    "indexState": "expired",
+    "newlyVerified": 0,
+    "retained": 117,
+    "consecutiveFailedAttemptsInWindow": 10,
+    "lastScheduledFailure": 45708060368,
+    "latestDeploymentDiagnostic": {
+      "runId": 45771434673,
+      "artifactId": 15094518149,
+      "failure": "ENOTFOUND"
+    },
+    "issue": {
+      "number": 1,
+      "state": "open",
+      "comments": 2,
+      "updatedAtUtc": "2026-11-20T21:34:14Z",
+      "url": "https://github.com/dnfl1999/memediff/issues/1",
+      "changedByReadOnlyRun": false
+    }
+  }
+}

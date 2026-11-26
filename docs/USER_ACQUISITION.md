@@ -11,7 +11,7 @@
 | 입력값 없이 결과 확인 | 기존 데모는 공식 CA 조회를 실행했습니다. Forks 연결이 만료된 경우 시장정보는 볼 수 있었지만 자동 GitHub 보고서는 열리지 않았습니다. | Live GitHub Demo는 명시적 클릭으로 MemeDiff 저장소를 직접 조회합니다. Sample Report는 관측 시각과 수집 상태가 표시된 정적 사례를 엽니다. |
 | 결과 활용 | 기본 흐름을 이해하기 전에 파일 종류를 선택하는 버튼이 노출됐습니다. | 사용법을 분석, 근거 확인, 다운로드·비교의 세 단계로 안내합니다. GitHub 검색과 토큰 기록 옵션은 접을 수 있습니다. |
 
-개편 전 공개 화면에서 입력 위치, 버튼 수, 첫 화면을 확인했습니다. 우선 검증할 사용자 과제는 URL을 붙여 첫 보고서를 보거나, 샘플에서 원본 근거를 찾고 PNG·JSON의 사용처를 설명하는 것입니다. 사용자 인터뷰 결과는 아직 없습니다. [개편 전 PC](qa/v26-before-desktop.png) · [개편 전 360px 모바일](qa/v26-before-mobile.png) · [공개 샘플](https://dnfl1999.github.io/memediff/#samples)
+개편 전후 공개 화면에서 입력 위치, 버튼 수, 첫 화면을 확인했습니다. 우선 검증할 사용자 과제는 URL을 붙여 첫 보고서를 보거나, 샘플에서 원본 근거를 찾고 PNG·JSON의 사용처를 설명하는 것입니다. 사용자 인터뷰 결과는 아직 없습니다. [개편 전 PC](qa/v26-before-desktop.png) · [개편 후 PC](qa/v26-after-desktop.png) · [개편 전 360px 모바일](qa/v26-before-mobile.png) · [개편 후 360px 모바일](qa/v26-after-mobile.png) · [공개 샘플](https://dnfl1999.github.io/memediff/#samples)
 
 ## 발견 가능성과 피드백
 

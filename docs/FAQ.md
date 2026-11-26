@@ -36,7 +36,7 @@ Yes. **Analyze Token** validates a 32-byte Base58 address, loads exact-CA public
 
 The token panel stays visible. Available market information appears; missing values are Unknown and API failures are Unavailable. **No verified GitHub repository found.** means no usable verified mapping in the available data, not that no repository exists or that the coin is unsafe. Development receipts are unavailable until a GitHub analysis succeeds.
 
-### Does the optional address in Advanced Search verify a relationship?
+### Does the optional address in Advanced GitHub tools verify a relationship?
 
 No. It remains format-checked, recorded user input. Manually supplying a repository does not create an official token association. Existing JSON schema and storage keys remain unchanged. The separately maintained [official identity and audit](../POST_LAUNCH_AUDIT.md) remain historical evidence.
 
