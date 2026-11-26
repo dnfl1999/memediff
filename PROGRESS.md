@@ -2,6 +2,22 @@
 
 기준일: **2026-11-20 (Asia/Seoul)**. 작업 대상은 이 MemeDiff 폴더와 **dnfl1999/memediff**뿐입니다.
 
+## v2.3 Compare Two Saved Files (2026-11-20)
+
+인증 계정 `dnfl1999`와 로컬·원격 `main`의 기준 SHA `998629a0e2fce574dceebc90fb6c94e181089093`를 확인했습니다. 시작 시 작업 트리는 깨끗했습니다. 이전 Pages·Monitor 실행 결과와 운영 이슈 #1을 확인했습니다.
+
+홈에서 **Compare Two Saved Files**를 열면 최대 2 MiB의 기간 비교 JSON 두 개를 독립 검증합니다. 같은 저장소·브랜치에서만 각 파일에 저장된 A/B 구간의 합집합을 교차 비교합니다. 겹치는 UTC 구간의 밀리초 경계와 비연속 구간을 보존합니다. SHA·릴리스 ID는 각 파일의 시각·내용·GitHub 링크와 함께 표시하고, 수집 불완전으로 확인할 수 없는 건은 `Unknown`으로 표시합니다. 기존 단일 파일 미리보기와 JSON 스냅샷 가져오기는 계속 사용할 수 있습니다.
+
+실제 v2.1 공개 QA 파일과 v2.2 공개 사이트의 실제 API 재검사 파일을 원본 바이트 그대로 사용했습니다. `dnfl1999/memediff`의 `main`에서 각각 `2026-11-20T08:25:25.774Z`, `2026-11-20T09:12:15.748Z`에 관측했습니다. 공통 UTC 구간은 `2026-11-07T00:00:00.000Z`부터 `2026-11-20T08:25:25.775Z` 직전까지입니다. 양쪽 공통 SHA는 45개, 공통 구간 내 한쪽에만 기록된 SHA는 0개, 두 번째 파일의 공통 구간 밖 SHA는 3개였습니다. 저장된 공개 릴리스는 양쪽 모두 0개였습니다. 릴리스 메타데이터 차이는 생성한 테스트 자료로 별도 검증했습니다.
+
+로컬 단위 177건, PC·모바일 모의 E2E 136건, 집중 브라우저 검사 10건을 통과했습니다. 첫 로컬 실제 API 실행은 GitHub HTTP 403·잔여 요청 0건으로 2건 통과·3건 건너뜀을 기록했습니다.
+
+기능 커밋 `b1814f13174e7e52e11793c31db099cae51d4ad1`의 [Pages 실행](https://github.com/dnfl1999/memediff/actions/runs/44713356951)에서 verify, deploy, public-qa, diagnostics가 성공했습니다. 배포 전과 공개 PC·모바일 모의 E2E는 각각 136건, 공개 실제 API는 5건을 통과했습니다. Forks DNS는 `ENOTFOUND`였고 기존 연결 117개와 검증 시각을 유지했습니다. 신규 검증은 0건입니다. [배포 진단 아티팩트](https://github.com/dnfl1999/memediff/actions/runs/44713356951/artifacts/14618871831)
+
+두 QA 원본의 SHA-256은 각각 `a4f840bc9964547da58d6ebace027596d518700a535c81a21fa791853fcdffa5`(15,775바이트)와 `2b67ef1e4411de61aa4c75d52a19ec371eba6ea96c3c973da446fb3ce5f5e301`(16,597바이트)입니다. 첫 파일은 [v2.1 공개 QA 아티팩트](https://github.com/dnfl1999/memediff/actions/runs/44701320792/artifacts/14613052613)에서 추출했고, 두 번째 파일은 [v2.2 공개 사이트 실제 API 재검사](docs/v22-qa.json)에서 내려받았습니다.
+
+11월 26일(KST)에 확인한 [정기 실행](https://github.com/dnfl1999/memediff/actions/runs/45708060368)은 Forks DNS 오류로 갱신에 실패했습니다. 공개 연결 117개가 모두 만료됐고 유효·신규 검증은 각각 0건입니다. [Monitor](https://github.com/dnfl1999/memediff/actions/runs/45716429407)의 확인 범위에서 연속 실패 10회이며, [운영 이슈 #1](https://github.com/dnfl1999/memediff/issues/1)은 열림·댓글 2건입니다.
+
 ## v2.2 Saved Period Comparison (2026-11-20)
 
 인증 계정 `dnfl1999`와 로컬·원격 `main`의 기준 SHA `d4607ef8fe0cc5997c23dee11d88e074b19998a5`를 확인했습니다. 시작 시 미커밋 변경은 0건이었습니다. 공개 홈페이지와 117개 연결이 담긴 인덱스는 HTTP 200을 반환했고 공식 Forks DNS는 `ENOTFOUND`였습니다.
